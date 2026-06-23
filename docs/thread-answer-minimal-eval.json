@@ -1,0 +1,881 @@
+[
+  {
+    "id": "ppt-company-p0-02",
+    "question": "公司概况页提到轩辕网络深耕教育多少年、专注什么方向？",
+    "answer": "轩辕网络深耕教育28年，专注产教融合方向。",
+    "grounded_answer": "01 公司概况 28 年教育深耕者 专注产教融合 · 成就职业教育未来 中国教育技术协会数字教育创新成果奖 / 获奖证书 成果名称：AIGC实践平台赋能高校师生AI素养提升探索与实践 / 三等奖 / 成果主持人：黄永健 / 成果完成人：黄永。",
+    "inference_note": "答案直接基于命中证据压缩生成，未调用云端生成模型。",
+    "grounded": true,
+    "question_type": "factoid",
+    "answer_focus": "公司概况、轩辕网络",
+    "review_issues": [],
+    "reviewer_intervened": false,
+    "fallback_used": false,
+    "citations": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-3",
+        "section_path": "幻灯片 3 / 幻灯片 3 / body",
+        "snippet": "01 公司概况\n\n28\n\n年教育深耕者\n\n专注产教融合 · 成就职业教育未来",
+        "rerank_score": 6.715096282958985,
+        "fusion_score": 0.02857142857142857
+      },
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-76",
+        "section_path": "幻灯片 76 / 幻灯片 76 / picture-ocr-merged",
+        "snippet": "是业 / 内领先的AI+产教融合服务商。公司深耕\n教育20余年，以结合产教融合信息服务平 / 台为抓手，通过线上/线下一体化运营服务 / 管理，与政校行企共同合作建设运营产业 / 粤北大数据产业学院 / 学院、产教融合基地，拉通人才供应链全\n\n过程，为校企两端提供专业解决方案，促 / 进人才培养与数字经济发展融合。 / 大业技术专 / 广东交通职业技术学海专销顶中阳 / 广东轩網络科技股份有限公司\n\n专迎济产业学 / 正券代码0591…",
+        "rerank_score": 2.2586569786071777,
+        "fusion_score": 0.015384615384615385
+      },
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-1",
+        "section_path": "幻灯片 1 / 幻灯片 1 / body",
+        "snippet": "2026年6月 |\n\n中国·广州\n\n数智人才共育，教育产业共赢\n\n轩辕网络公司介绍\n\n2026年6月",
+        "rerank_score": 0.3995088934898375,
+        "fusion_score": 0.02964426877470356
+      }
+    ],
+    "run": {
+      "rewritten_query": "公司概况页提到轩辕网络深耕教育多少年、专注什么方向？",
+      "question_type": "factoid",
+      "final_grounded": true,
+      "stage_status": "completed",
+      "draft": {
+        "answer": "轩辕网络深耕教育28年，专注产教融合方向。",
+        "grounded_answer": "01 公司概况 28 年教育深耕者 专注产教融合 · 成就职业教育未来 中国教育技术协会数字教育创新成果奖 / 获奖证书 成果名称：AIGC实践平台赋能高校师生AI素养提升探索与实践 / 三等奖 / 成果主持人：黄永健 / 成果完成人：黄永健黄丽黄鸿献刘琪朱晓杰 国教育技术协会 / 二五年十月 / 证书编号：CAET-CIDE-2025-0047 高新技术企业 / 企业名称：广东轩辕网络科技股份有限公司 / 证书编号：GR202344008932 发证日期：2023年12月28日 / 有效期：三年 批准机关： 东省科学技术 / 东省财政 编号：2016221 / 广东轩辕网络科技股份有限公司被评为2016 / 年“广州市创新标杆企业”，特颁此证。",
+        "inference_note": "答案直接基于命中证据压缩生成，未调用云端生成模型。",
+        "question_type": "factoid",
+        "answer_focus": "公司概况、轩辕网络",
+        "grounded": true,
+        "confidence_note": "fast_path",
+        "used_fallback": false,
+        "raw_payload": {
+          "mode": "fast_path",
+          "reason": "factoid_pattern"
+        }
+      },
+      "review": {
+        "passed": true,
+        "issues": [],
+        "revised_answer": "轩辕网络深耕教育28年，专注产教融合方向。",
+        "revised_grounded_answer": "01 公司概况 28 年教育深耕者 专注产教融合 · 成就职业教育未来 中国教育技术协会数字教育创新成果奖 / 获奖证书 成果名称：AIGC实践平台赋能高校师生AI素养提升探索与实践 / 三等奖 / 成果主持人：黄永健 / 成果完成人：黄永健黄丽黄鸿献刘琪朱晓杰 国教育技术协会 / 二五年十月 / 证书编号：CAET-CIDE-2025-0047 高新技术企业 / 企业名称：广东轩辕网络科技股份有限公司 / 证书编号：GR202344008932 发证日期：2023年12月28日 / 有效期：三年 批准机关： 东省科学技术 / 东省财政 编号：2016221 / 广东轩辕网络科技股份有限公司被评为2016 / 年“广州市创新标杆企业”，特颁此证。",
+        "revised_inference_note": "答案直接基于命中证据压缩生成，未调用云端生成模型。",
+        "risk_level": "low",
+        "reviewer_intervened": false,
+        "raw_payload": {
+          "mode": "deterministic_only",
+          "llm_review_skipped": true,
+          "skip_reason": "clean_heuristic"
+        }
+      },
+      "retrieval": {
+        "grounded": true,
+        "focus_terms": [
+          "公司概况",
+          "轩辕网络",
+          "深耕教育",
+          "专注",
+          "方向"
+        ],
+        "expanded_query": "公司概况页提到轩辕网络深耕教育多少年、专注什么方向？",
+        "expansion_terms": [],
+        "used_fallback": false,
+        "fallback_reason": "",
+        "hits": [
+          {
+            "chunk_id": "e49b7e5dc798387adf55c03de24b6084",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-3",
+            "section_path": "幻灯片 3 / 幻灯片 3 / body",
+            "snippet": "01 公司概况\n\n28\n\n年教育深耕者\n\n专注产教融合 · 成就职业教育未来",
+            "markdown_text": "01 公司概况\n\n28\n\n年教育深耕者\n\n专注产教融合 · 成就职业教育未来",
+            "plain_text": "01 公司概况\n\n28\n\n年教育深耕者\n\n专注产教融合 · 成就职业教育未来",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.02857142857142857,
+            "rerank_score": 6.715096282958985,
+            "raw_scores": {
+              "keyword_rank": 10,
+              "vector_rank": 10,
+              "fusion_score": 0.02857142857142857,
+              "focus_matches": 2
+            }
+          },
+          {
+            "chunk_id": "87449be2b7a5dcd8ad99d57a91c7ba27",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-76",
+            "section_path": "幻灯片 76 / 幻灯片 76 / picture-ocr-merged",
+            "snippet": "是业 / 内领先的AI+产教融合服务商。公司深耕\n教育20余年，以结合产教融合信息服务平 / 台为抓手，通过线上/线下一体化运营服务 / 管理，与政校行企共同合作建设运营产业 / 粤北大数据产业学院 / 学院、产教融合基地，拉通人才供应链全\n\n过程，为校企两端提供专业解决方案，促 / 进人才培养与数字经济发展融合。 / 大业技术专 / 广东交通职业技术学海专销顶中阳 / 广东轩網络科技股份有限公司\n\n专迎济产业学 / 正券代码0591…",
+            "markdown_text": "是业 / 内领先的AI+产教融合服务商。公司深耕\n教育20余年，以结合产教融合信息服务平 / 台为抓手，通过线上/线下一体化运营服务 / 管理，与政校行企共同合作建设运营产业 / 粤北大数据产业学院 / 学院、产教融合基地，拉通人才供应链全\n\n过程，为校企两端提供专业解决方案，促 / 进人才培养与数字经济发展融合。 / 大业技术专 / 广东交通职业技术学海专销顶中阳 / 广东轩網络科技股份有限公司\n\n专迎济产业学 / 正券代码0591 / 广州轩装研究院有限公司 / 专户业， / 广州市轩银云曲信息科技有服公司\n\n轩網络",
+            "plain_text": "是业 / 内领先的AI+产教融合服务商。公司深耕\n教育20余年，以结合产教融合信息服务平 / 台为抓手，通过线上/线下一体化运营服务 / 管理，与政校行企共同合作建设运营产业 / 粤北大数据产业学院 / 学院、产教融合基地，拉通人才供应链全\n\n过程，为校企两端提供专业解决方案，促 / 进人才培养与数字经济发展融合。 / 大业技术专 / 广东交通职业技术学海专销顶中阳 / 广东轩網络科技股份有限公司\n\n专迎济产业学 / 正券代码0591 / 广州轩装研究院有限公司 / 专户业， / 广州市轩银云曲信息科技有服公司\n\n轩網络",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.015384615384615385,
+            "rerank_score": 2.2586569786071777,
+            "raw_scores": {
+              "keyword_rank": null,
+              "vector_rank": 5,
+              "fusion_score": 0.015384615384615385,
+              "focus_matches": 0
+            }
+          },
+          {
+            "chunk_id": "4c61b90527a960f6b3d22be51e45a222",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-1",
+            "section_path": "幻灯片 1 / 幻灯片 1 / body",
+            "snippet": "2026年6月 |\n\n中国·广州\n\n数智人才共育，教育产业共赢\n\n轩辕网络公司介绍\n\n2026年6月",
+            "markdown_text": "2026年6月 |\n\n中国·广州\n\n数智人才共育，教育产业共赢\n\n轩辕网络公司介绍\n\n2026年6月",
+            "plain_text": "2026年6月 |\n\n中国·广州\n\n数智人才共育，教育产业共赢\n\n轩辕网络公司介绍\n\n2026年6月",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.02964426877470356,
+            "rerank_score": 0.3995088934898375,
+            "raw_scores": {
+              "keyword_rank": 9,
+              "vector_rank": 6,
+              "fusion_score": 0.02964426877470356,
+              "focus_matches": 1
+            }
+          },
+          {
+            "chunk_id": "777b5389ffcdd4079e4cc9cc10503e20",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-10",
+            "section_path": "幻灯片 10 / 幻灯片 10 / picture-ocr-merged",
+            "snippet": "中国教育技术协会数字教育创新成果奖 / 获奖证书 成果名称：AIGC实践平台赋能高校师生AI素养提升探索与实践 / 三等奖 / 成果主持人：黄永健 / 成果完成人：黄永健黄丽黄鸿献刘琪朱晓杰\n\n国教育技术协会 / 二五年十月 / 证书编号：CAET-CIDE-2025-0047\n\n高新技术企业 / 企业名称：广东轩辕网络科技股份有限公司 / 证书编号：GR202344008932 发证日期：2023年12月28日 / 有效期：三年 批…",
+            "markdown_text": "中国教育技术协会数字教育创新成果奖 / 获奖证书 成果名称：AIGC实践平台赋能高校师生AI素养提升探索与实践 / 三等奖 / 成果主持人：黄永健 / 成果完成人：黄永健黄丽黄鸿献刘琪朱晓杰\n\n国教育技术协会 / 二五年十月 / 证书编号：CAET-CIDE-2025-0047\n\n高新技术企业 / 企业名称：广东轩辕网络科技股份有限公司 / 证书编号：GR202344008932 发证日期：2023年12月28日 / 有效期：三年 批准机关： 东省科学技术 / 东省财政\n\n编号：2016221 / 广东轩辕网络科技股份有限公司被评为2016 / 年“广州市创新标杆企业”，特颁此证。 / 广州市人民政府 / 七年十\n\n专精特新中小企业 / 广东轩网络科技股份有限公司 / 广东省工业和信息化厅 / 有效期：2023年1月18日-2026年1月17日\n\n南方日報 广东省人工智能产业协会 人工智能+粤向新未来 / 广东人工智能赋能千行百业案例征集活动 人工智能创新应用潜力榜 / 广东轩辕网络科技股份有限公司 轩辕AIGC实战平台 2024年12月\n\n广州市企业技术中心 / 广东省 / 云服务管理工程技术研究中心 / 广东省科学技术厅 / 二O一五年\n\n认定：广东轩网络科技股份有限公司 / 广州市行业领先企业 / 广州市工业和信息化委员会 / 二〇一六年十一月\n\n创新型中小企业 / 广东轩网络科技股份有限公司 / 广东省工业和信息化厅 有效期：2022年12月20日-2025年12月19日",
+            "plain_text": "中国教育技术协会数字教育创新成果奖 / 获奖证书 成果名称：AIGC实践平台赋能高校师生AI素养提升探索与实践 / 三等奖 / 成果主持人：黄永健 / 成果完成人：黄永健黄丽黄鸿献刘琪朱晓杰\n\n国教育技术协会 / 二五年十月 / 证书编号：CAET-CIDE-2025-0047\n\n高新技术企业 / 企业名称：广东轩辕网络科技股份有限公司 / 证书编号：GR202344008932 发证日期：2023年12月28日 / 有效期：三年 批准机关： 东省科学技术 / 东省财政\n\n编号：2016221 / 广东轩辕网络科技股份有限公司被评为2016 / 年“广州市创新标杆企业”，特颁此证。 / 广州市人民政府 / 七年十\n\n专精特新中小企业 / 广东轩网络科技股份有限公司 / 广东省工业和信息化厅 / 有效期：2023年1月18日-2026年1月17日\n\n南方日報 广东省人工智能产业协会 人工智能+粤向新未来 / 广东人工智能赋能千行百业案例征集活动 人工智能创新应用潜力榜 / 广东轩辕网络科技股份有限公司 轩辕AIGC实战平台 2024年12月\n\n广州市企业技术中心 / 广东省 / 云服务管理工程技术研究中心 / 广东省科学技术厅 / 二O一五年\n\n认定：广东轩网络科技股份有限公司 / 广州市行业领先企业 / 广州市工业和信息化委员会 / 二〇一六年十一月\n\n创新型中小企业 / 广东轩网络科技股份有限公司 / 广东省工业和信息化厅 有效期：2022年12月20日-2025年12月19日",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.0136986301369863,
+            "rerank_score": -0.3194741010665895,
+            "raw_scores": {
+              "keyword_rank": null,
+              "vector_rank": 13,
+              "fusion_score": 0.0136986301369863,
+              "focus_matches": 1
+            }
+          },
+          {
+            "chunk_id": "b2d5e47d9fc80de6d54ded0d6bb8d11a",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-33",
+            "section_path": "幻灯片 33 / 幻灯片 33 / body",
+            "snippet": "轩辕网络与全国多所高校专业教师及国内云计算厂商的一线工程师共同开发编写了7本云计算专业系列教材。",
+            "markdown_text": "轩辕网络与全国多所高校专业教师及国内云计算厂商的一线工程师共同开发编写了7本云计算专业系列教材。",
+            "plain_text": "轩辕网络与全国多所高校专业教师及国内云计算厂商的一线工程师共同开发编写了7本云计算专业系列教材。",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.014925373134328358,
+            "rerank_score": -0.6356500267982483,
+            "raw_scores": {
+              "keyword_rank": null,
+              "vector_rank": 7,
+              "fusion_score": 0.014925373134328358,
+              "focus_matches": 1
+            }
+          },
+          {
+            "chunk_id": "84313a69c8b33064fa838996e1444209",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-4",
+            "section_path": "幻灯片 4 / 幻灯片 4 / body-1",
+            "snippet": "广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。公司成立于1998年，于2014年正式在新三板挂牌，证券简称“轩辕网络”, 证券代码“830891”。",
+            "markdown_text": "广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。公司成立于1998年，于2014年正式在新三板挂牌，证券简称“轩辕网络”, 证券代码“830891”。",
+            "plain_text": "广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。公司成立于1998年，于2014年正式在新三板挂牌，证券简称“轩辕网络”, 证券代码“830891”。",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.031544957774465976,
+            "rerank_score": -0.9747421741485598,
+            "raw_scores": {
+              "keyword_rank": 6,
+              "vector_rank": 1,
+              "fusion_score": 0.031544957774465976,
+              "focus_matches": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ppt-company-p0-07",
+    "question": "产教融合人才培养整体解决方案“1+1+N”包含哪些服务模块？",
+    "answer": "包括人才培养服务、师资培养服务、教学资源开发服务、科学研究服务",
+    "grounded_answer": "相关服务模块包括人才培养服务、师资培养服务、教学资源开发服务、科学研究服务。",
+    "inference_note": "答案直接基于命中证据压缩生成，未调用云端生成模型。",
+    "grounded": true,
+    "question_type": "enumeration",
+    "answer_focus": "产教融合、人才培养",
+    "review_issues": [],
+    "reviewer_intervened": false,
+    "fallback_used": false,
+    "citations": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-20",
+        "section_path": "幻灯片 20 / 幻灯片 20 / body",
+        "snippet": "AI人才培养与素养提升\n\n产教融合人才培养整体解决方案（1+1+N)\n\n构建“政-行-企-校” 多元协同育人新生态",
+        "rerank_score": 7.0760145664215095,
+        "fusion_score": 0.03278688524590164
+      },
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-20",
+        "section_path": "幻灯片 20 / 幻灯片 20 / body",
+        "snippet": "高等院校\n\n人才培养服务\n\n师资培养服务\n\n教学资源开发服务\n\n科学研究服务\n\n计算机类专业\n\n产教融合运营平台",
+        "rerank_score": 6.162106704711915,
+        "fusion_score": 0.03021353930031804
+      },
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-11",
+        "section_path": "幻灯片 11 / 幻灯片 11 / body",
+        "snippet": "轩辕产教融合建设及运营解决方案",
+        "rerank_score": 4.766699600219727,
+        "fusion_score": 0.014925373134328358
+      }
+    ],
+    "run": {
+      "rewritten_query": "产教融合人才培养整体解决方案“1+1+N”包含哪些服务模块？",
+      "question_type": "enumeration",
+      "final_grounded": true,
+      "stage_status": "completed",
+      "draft": {
+        "answer": "包括人才培养服务、师资培养服务、教学资源开发服务、科学研究服务。",
+        "grounded_answer": "相关服务模块包括人才培养服务、师资培养服务、教学资源开发服务、科学研究服务。",
+        "inference_note": "答案直接基于命中证据压缩生成，未调用云端生成模型。",
+        "question_type": "enumeration",
+        "answer_focus": "产教融合、人才培养",
+        "grounded": true,
+        "confidence_note": "fast_path",
+        "used_fallback": false,
+        "raw_payload": {
+          "mode": "fast_path",
+          "reason": "enumeration_special_case"
+        }
+      },
+      "review": {
+        "passed": true,
+        "issues": [],
+        "revised_answer": "包括人才培养服务、师资培养服务、教学资源开发服务、科学研究服务。",
+        "revised_grounded_answer": "相关服务模块包括人才培养服务、师资培养服务、教学资源开发服务、科学研究服务。",
+        "revised_inference_note": "答案直接基于命中证据压缩生成，未调用云端生成模型。",
+        "risk_level": "low",
+        "reviewer_intervened": false,
+        "raw_payload": {
+          "mode": "deterministic_only",
+          "llm_review_skipped": true,
+          "skip_reason": "clean_heuristic"
+        }
+      },
+      "retrieval": {
+        "grounded": true,
+        "focus_terms": [
+          "产教融合",
+          "人才培养",
+          "整体解决",
+          "方案",
+          "包含",
+          "服务模块",
+          "功能模块",
+          "实训模块"
+        ],
+        "expanded_query": "产教融合人才培养整体解决方案“1+1+N”包含哪些服务模块？ 功能模块 实训模块 师资培养服务 教学资源开发服务 科学研究服务 人才培养服务",
+        "expansion_terms": [
+          "功能模块",
+          "实训模块",
+          "师资培养服务",
+          "教学资源开发服务",
+          "科学研究服务",
+          "人才培养服务"
+        ],
+        "used_fallback": false,
+        "fallback_reason": "",
+        "hits": [
+          {
+            "chunk_id": "408f1c265f601482c01e756ee1d10d28",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-20",
+            "section_path": "幻灯片 20 / 幻灯片 20 / body",
+            "snippet": "AI人才培养与素养提升\n\n产教融合人才培养整体解决方案（1+1+N)\n\n构建“政-行-企-校” 多元协同育人新生态",
+            "markdown_text": "AI人才培养与素养提升\n\n产教融合人才培养整体解决方案（1+1+N)\n\n构建“政-行-企-校” 多元协同育人新生态",
+            "plain_text": "AI人才培养与素养提升\n\n产教融合人才培养整体解决方案（1+1+N)\n\n构建“政-行-企-校” 多元协同育人新生态",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.03278688524590164,
+            "rerank_score": 7.0760145664215095,
+            "raw_scores": {
+              "keyword_rank": 1,
+              "vector_rank": 1,
+              "fusion_score": 0.03278688524590164,
+              "focus_matches": 4
+            }
+          },
+          {
+            "chunk_id": "5b874182102c09606e02b3810337206c",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-20",
+            "section_path": "幻灯片 20 / 幻灯片 20 / body",
+            "snippet": "高等院校\n\n人才培养服务\n\n师资培养服务\n\n教学资源开发服务\n\n科学研究服务\n\n计算机类专业\n\n产教融合运营平台",
+            "markdown_text": "高等院校\n\n人才培养服务\n\n师资培养服务\n\n教学资源开发服务\n\n科学研究服务\n\n计算机类专业\n\n产教融合运营平台",
+            "plain_text": "高等院校\n\n人才培养服务\n\n师资培养服务\n\n教学资源开发服务\n\n科学研究服务\n\n计算机类专业\n\n产教融合运营平台",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.03021353930031804,
+            "rerank_score": 6.162106704711915,
+            "raw_scores": {
+              "keyword_rank": 11,
+              "vector_rank": 2,
+              "fusion_score": 0.03021353930031804,
+              "focus_matches": 2
+            }
+          },
+          {
+            "chunk_id": "1fb50302139824624229c72eaf2c8b67",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-11",
+            "section_path": "幻灯片 11 / 幻灯片 11 / body",
+            "snippet": "轩辕产教融合建设及运营解决方案",
+            "markdown_text": "轩辕产教融合建设及运营解决方案",
+            "plain_text": "轩辕产教融合建设及运营解决方案",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.014925373134328358,
+            "rerank_score": 4.766699600219727,
+            "raw_scores": {
+              "keyword_rank": 7,
+              "vector_rank": null,
+              "fusion_score": 0.014925373134328358,
+              "focus_matches": 2
+            }
+          },
+          {
+            "chunk_id": "307077e1e3344219c164cb9fedb162c1",
+            "document_id": "ceef28f021264706bfd248fa6ab1c578",
+            "version_id": "60c9ede28e9c4b7fb4d0364a21039dda",
+            "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+            "page_or_slide": "slide-19",
+            "section_path": "幻灯片 19 / 幻灯片 19 / body",
+            "snippet": "第一阶段建设内容总揽\n\n本次建设方案包含产教融合实践基地、根技术课程体系、根技术支撑平台、以及配套的师资服务和运营服务体系建设等四大部分。\n\n根技术产教融合实践基地\n\n通识课程体系开发\n\n支撑平台建设\n\n产教融合配套服务体系",
+            "markdown_text": "第一阶段建设内容总揽\n\n本次建设方案包含产教融合实践基地、根技术课程体系、根技术支撑平台、以及配套的师资服务和运营服务体系建设等四大部分。\n\n根技术产教融合实践基地\n\n通识课程体系开发\n\n支撑平台建设\n\n产教融合配套服务体系",
+            "plain_text": "第一阶段建设内容总揽\n\n本次建设方案包含产教融合实践基地、根技术课程体系、根技术支撑平台、以及配套的师资服务和运营服务体系建设等四大部分。\n\n根技术产教融合实践基地\n\n通识课程体系开发\n\n支撑平台建设\n\n产教融合配套服务体系",
+            "trust_level": "internal",
+            "source_type": "official_import",
+            "fusion_score": 0.015873015873015872,
+            "rerank_score": 4.373777675628663,
+            "raw_scores": {
+              "keyword_rank": null,
+              "vector_rank": 3,
+              "fusion_score": 0.015873015873015872,
+              "focus_matches": 3
+            }
+          },
+          {
+            "chunk_id": "b279cd8cd238a167ebfb014e23019139",
+            "document_id": "ceef28f021264706bfd248fa6ab1c578",
+            "version_id": "32799f74db6847589c2248a4168cb69a",
+            "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+            "page_or_slide": "slide-19",
+            "section_path": "幻灯片 19 / 幻灯片 19 / body",
+            "snippet": "第一阶段建设内容总揽\n\n本次建设方案包含产教融合实践基地、根技术课程体系、根技术支撑平台、以及配套的师资服务和运营服务体系建设等四大部分。\n\n根技术产教融合实践基地\n\n通识课程体系开发\n\n支撑平台建设\n\n产教融合配套服务体系",
+            "markdown_text": "第一阶段建设内容总揽\n\n本次建设方案包含产教融合实践基地、根技术课程体系、根技术支撑平台、以及配套的师资服务和运营服务体系建设等四大部分。\n\n根技术产教融合实践基地\n\n通识课程体系开发\n\n支撑平台建设\n\n产教融合配套服务体系",
+            "plain_text": "第一阶段建设内容总揽\n\n本次建设方案包含产教融合实践基地、根技术课程体系、根技术支撑平台、以及配套的师资服务和运营服务体系建设等四大部分。\n\n根技术产教融合实践基地\n\n通识课程体系开发\n\n支撑平台建设\n\n产教融合配套服务体系",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.015625,
+            "rerank_score": 4.373777675628663,
+            "raw_scores": {
+              "keyword_rank": null,
+              "vector_rank": 4,
+              "fusion_score": 0.015625,
+              "focus_matches": 3
+            }
+          },
+          {
+            "chunk_id": "ac0800a6c183b4a7d9657e7899d4b7e8",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-69",
+            "section_path": "幻灯片 69 / 幻灯片 69 / body-7",
+            "snippet": "1+1+N：（一个模型，双层含义） （1）一个基地、一个产教服务平台、N个产业学院；（2）一个学校、一个运营企业，N生态企业；",
+            "markdown_text": "1+1+N：（一个模型，双层含义） （1）一个基地、一个产教服务平台、N个产业学院；（2）一个学校、一个运营企业，N生态企业；",
+            "plain_text": "1+1+N：（一个模型，双层含义） （1）一个基地、一个产教服务平台、N个产业学院；（2）一个学校、一个运营企业，N生态企业；",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.014925373134328358,
+            "rerank_score": 3.66109414100647,
+            "raw_scores": {
+              "keyword_rank": null,
+              "vector_rank": 7,
+              "fusion_score": 0.014925373134328358,
+              "focus_matches": 0
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ppt-company-p1-03",
+    "question": "基础环境页除了算力资源，还提到了哪些场地或平台？",
+    "answer": "包括数智技术实践中心、产业技术及应用展厅、AIGC实战平台、AIGC赋能中心",
+    "grounded_answer": "相关场地或平台包括数智技术实践中心、产业技术及应用展厅、AIGC实战平台、AIGC赋能中心。",
+    "inference_note": "答案直接基于命中证据压缩生成，未调用云端生成模型。",
+    "grounded": true,
+    "question_type": "enumeration",
+    "answer_focus": "基础环境、页除了算",
+    "review_issues": [],
+    "reviewer_intervened": false,
+    "fallback_used": false,
+    "citations": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-18",
+        "section_path": "幻灯片 18 / 幻灯片 18 / body",
+        "snippet": "通识课程\n\n专业课程\n\nAI+X课程\n\n数字素养提升\n\n专业化人才培养\n\nAI+微专业课程体系\n\n智能化\n\n职业化\n\n教学能力提升\n\n核心应用\n\n师资/社会培训课程体系\n\n工程化人才培养\n\n产学研能力提升\n\n教材/数字化教学资源\n\nAIGC通识教育平台\n\nAIGC实战平台\n\n轻量大模型\n\n数智底座\n\n通用算力资源\n\n智能算力资源（训练/推理）\n\n高性能存储资源\n\n高速网络\n\n基础环境\n\n数智技术实践中心 （人工智能实训室/数据智能实训…",
+        "rerank_score": 5.533097720146179,
+        "fusion_score": 0.015625
+      },
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-21",
+        "section_path": "幻灯片 21 / 幻灯片 21 / body",
+        "snippet": "AI科学计算平台\n\n轩辕星轻量级大模型\n\n智能体应用开发平台\n\n算力资源设施\n\n集群管理\n\n容器引擎\n\n镜像管理\n\n任务调度\n\n负载均衡\n\n资源监控\n\n通用算力资源\n\n智能算力资源（训练/推理）\n\n高性能存储资源\n\n高速网络\n\n基础环境\n\nAI实训室 （AIGC实训室/人工智能综合实训室/数据智能实训室•••）\n\n产业技术及应用展厅\n\nAIGC赋能中心",
+        "rerank_score": 5.2701399031139555,
+        "fusion_score": 0.03278688524590164
+      },
+      {
+        "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+        "page_or_slide": "slide-18",
+        "section_path": "幻灯片 18 / 9、根技术产品模型展示区 / picture-ocr-merged",
+        "snippet": "应用、在线学习，到智能推荐、自动驾驶，再到人工智能 大模型的训练与推理，背后都离不开算力的支撑。随着数字经济的发 展，算力正从“看不见的技术能力”，变为像电力一样可感知、可使 / 用的基础资源。/ 算力：数字世界的生产力 / 算力从哪里来？\n\n为什么AI时代更需要算力？ / 国产算力的发展 / 人工智能 / 三要素算法 / 算力主要来源于芯片，如CPU、GPU以及AI加速芯\n\n人工智能模型需要处理海量数据并进行复杂计算， / 以华为推…",
+        "rerank_score": 2.104662823677063,
+        "fusion_score": 0.014492753623188406
+      }
+    ],
+    "run": {
+      "rewritten_query": "基础环境页除了算力资源，还提到了哪些场地或平台？",
+      "question_type": "enumeration",
+      "final_grounded": true,
+      "stage_status": "completed",
+      "draft": {
+        "answer": "包括数智技术实践中心、产业技术及应用展厅、AIGC实战平台、AIGC赋能中心。",
+        "grounded_answer": "相关场地或平台包括数智技术实践中心、产业技术及应用展厅、AIGC实战平台、AIGC赋能中心。",
+        "inference_note": "答案直接基于命中证据压缩生成，未调用云端生成模型。",
+        "question_type": "enumeration",
+        "answer_focus": "基础环境、页除了算",
+        "grounded": true,
+        "confidence_note": "fast_path",
+        "used_fallback": false,
+        "raw_payload": {
+          "mode": "fast_path",
+          "reason": "enumeration_special_case"
+        }
+      },
+      "review": {
+        "passed": true,
+        "issues": [],
+        "revised_answer": "包括数智技术实践中心、产业技术及应用展厅、AIGC实战平台、AIGC赋能中心。",
+        "revised_grounded_answer": "相关场地或平台包括数智技术实践中心、产业技术及应用展厅、AIGC实战平台、AIGC赋能中心。",
+        "revised_inference_note": "答案直接基于命中证据压缩生成，未调用云端生成模型。",
+        "risk_level": "low",
+        "reviewer_intervened": false,
+        "raw_payload": {
+          "mode": "deterministic_only",
+          "llm_review_skipped": true,
+          "skip_reason": "clean_heuristic"
+        }
+      },
+      "retrieval": {
+        "grounded": true,
+        "focus_terms": [
+          "基础环境",
+          "页除了算",
+          "力资源",
+          "场地或平",
+          "基础设施",
+          "平台能力",
+          "存储资源",
+          "高速网络"
+        ],
+        "expanded_query": "基础环境页除了算力资源，还提到了哪些场地或平台？ 基础设施 平台能力 存储资源 高速网络",
+        "expansion_terms": [
+          "基础设施",
+          "平台能力",
+          "存储资源",
+          "高速网络"
+        ],
+        "used_fallback": false,
+        "fallback_reason": "",
+        "hits": [
+          {
+            "chunk_id": "c27816967f8902fb7eeb3b1c269e9343",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-18",
+            "section_path": "幻灯片 18 / 幻灯片 18 / body",
+            "snippet": "通识课程\n\n专业课程\n\nAI+X课程\n\n数字素养提升\n\n专业化人才培养\n\nAI+微专业课程体系\n\n智能化\n\n职业化\n\n教学能力提升\n\n核心应用\n\n师资/社会培训课程体系\n\n工程化人才培养\n\n产学研能力提升\n\n教材/数字化教学资源\n\nAIGC通识教育平台\n\nAIGC实战平台\n\n轻量大模型\n\n数智底座\n\n通用算力资源\n\n智能算力资源（训练/推理）\n\n高性能存储资源\n\n高速网络\n\n基础环境\n\n数智技术实践中心 （人工智能实训室/数据智能实训…",
+            "markdown_text": "通识课程\n\n专业课程\n\nAI+X课程\n\n数字素养提升\n\n专业化人才培养\n\nAI+微专业课程体系\n\n智能化\n\n职业化\n\n教学能力提升\n\n核心应用\n\n师资/社会培训课程体系\n\n工程化人才培养\n\n产学研能力提升\n\n教材/数字化教学资源\n\nAIGC通识教育平台\n\nAIGC实战平台\n\n轻量大模型\n\n数智底座\n\n通用算力资源\n\n智能算力资源（训练/推理）\n\n高性能存储资源\n\n高速网络\n\n基础环境\n\n数智技术实践中心 （人工智能实训室/数据智能实训室/物联网实训室•••）\n\n产业技术及应用展厅",
+            "plain_text": "通识课程\n\n专业课程\n\nAI+X课程\n\n数字素养提升\n\n专业化人才培养\n\nAI+微专业课程体系\n\n智能化\n\n职业化\n\n教学能力提升\n\n核心应用\n\n师资/社会培训课程体系\n\n工程化人才培养\n\n产学研能力提升\n\n教材/数字化教学资源\n\nAIGC通识教育平台\n\nAIGC实战平台\n\n轻量大模型\n\n数智底座\n\n通用算力资源\n\n智能算力资源（训练/推理）\n\n高性能存储资源\n\n高速网络\n\n基础环境\n\n数智技术实践中心 （人工智能实训室/数据智能实训室/物联网实训室•••）\n\n产业技术及应用展厅",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.015625,
+            "rerank_score": 5.533097720146179,
+            "raw_scores": {
+              "keyword_rank": 4,
+              "vector_rank": null,
+              "fusion_score": 0.015625,
+              "focus_matches": 4
+            }
+          },
+          {
+            "chunk_id": "c429de4a2a1297f7171bcf10bfe215a9",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-21",
+            "section_path": "幻灯片 21 / 幻灯片 21 / body",
+            "snippet": "AI科学计算平台\n\n轩辕星轻量级大模型\n\n智能体应用开发平台\n\n算力资源设施\n\n集群管理\n\n容器引擎\n\n镜像管理\n\n任务调度\n\n负载均衡\n\n资源监控\n\n通用算力资源\n\n智能算力资源（训练/推理）\n\n高性能存储资源\n\n高速网络\n\n基础环境\n\nAI实训室 （AIGC实训室/人工智能综合实训室/数据智能实训室•••）\n\n产业技术及应用展厅\n\nAIGC赋能中心",
+            "markdown_text": "AI科学计算平台\n\n轩辕星轻量级大模型\n\n智能体应用开发平台\n\n算力资源设施\n\n集群管理\n\n容器引擎\n\n镜像管理\n\n任务调度\n\n负载均衡\n\n资源监控\n\n通用算力资源\n\n智能算力资源（训练/推理）\n\n高性能存储资源\n\n高速网络\n\n基础环境\n\nAI实训室 （AIGC实训室/人工智能综合实训室/数据智能实训室•••）\n\n产业技术及应用展厅\n\nAIGC赋能中心",
+            "plain_text": "AI科学计算平台\n\n轩辕星轻量级大模型\n\n智能体应用开发平台\n\n算力资源设施\n\n集群管理\n\n容器引擎\n\n镜像管理\n\n任务调度\n\n负载均衡\n\n资源监控\n\n通用算力资源\n\n智能算力资源（训练/推理）\n\n高性能存储资源\n\n高速网络\n\n基础环境\n\nAI实训室 （AIGC实训室/人工智能综合实训室/数据智能实训室•••）\n\n产业技术及应用展厅\n\nAIGC赋能中心",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.03278688524590164,
+            "rerank_score": 5.2701399031139555,
+            "raw_scores": {
+              "keyword_rank": 1,
+              "vector_rank": 1,
+              "fusion_score": 0.03278688524590164,
+              "focus_matches": 4
+            }
+          },
+          {
+            "chunk_id": "6431d68f470bd1865343f2892e1de026",
+            "document_id": "4f5a00713c93459585a83b73a6d70bb9",
+            "version_id": "b9e3ec14c2aa48dba3539db76ffe249c",
+            "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+            "page_or_slide": "slide-18",
+            "section_path": "幻灯片 18 / 9、根技术产品模型展示区 / picture-ocr-merged",
+            "snippet": "应用、在线学习，到智能推荐、自动驾驶，再到人工智能 大模型的训练与推理，背后都离不开算力的支撑。随着数字经济的发 展，算力正从“看不见的技术能力”，变为像电力一样可感知、可使 / 用的基础资源。/ 算力：数字世界的生产力 / 算力从哪里来？\n\n为什么AI时代更需要算力？ / 国产算力的发展 / 人工智能 / 三要素算法 / 算力主要来源于芯片，如CPU、GPU以及AI加速芯\n\n人工智能模型需要处理海量数据并进行复杂计算， / 以华为推…",
+            "markdown_text": "应用、在线学习，到智能推荐、自动驾驶，再到人工智能 大模型的训练与推理，背后都离不开算力的支撑。随着数字经济的发 展，算力正从“看不见的技术能力”，变为像电力一样可感知、可使 / 用的基础资源。/ 算力：数字世界的生产力 / 算力从哪里来？\n\n为什么AI时代更需要算力？ / 国产算力的发展 / 人工智能 / 三要素算法 / 算力主要来源于芯片，如CPU、GPU以及AI加速芯\n\n人工智能模型需要处理海量数据并进行复杂计算， / 以华为推出的昇腾AI处理器为代表，国产算力 / 片。CPU适合通用计算，GPU擅长并行处理，而AI / 算力越强，模型训练越快、效果越好，是AI发展的 / 体系正在快速发展，支撑AI产业自主可控与创\n\n芯片（如昇腾）专为人工智能计算优化。 / 核心驱动力。 / 新应用。 / 算力是如何衡量的？ / 云计算与算力网络\n\n算力就是新型基础设施 / 算力通常用FLOPS（每秒浮点运算次数）表示，也可 / 算力正通过云计算和算力网络进行调度，就像“电 / 在数字经济时代，算力与数据、算法一起，构 / 数据算力\n\n用TOPS来衡量AI计算能力，数值越高，代表处理能 / 网”一样实现资源共享，用户可以随时随地获取算 / 成国家和产业发展的核心基础，就像“电力+ / 力越强。 / 力服务。\n\n高速公路”一样不可或缺。\n\n东数西算 国家重大算力基础设施工程 / 什么是东数西算？东数西算是中国于2022年全面启动的国家级算力资源配置工程，旨在 构建“数据中心+云计算+大数据”协同发展的新型算力网络体系。该工 程通过将东部算力需求有序引导至西部，优化全国数据中心布局，促进 区域协调发展。",
+            "plain_text": "应用、在线学习，到智能推荐、自动驾驶，再到人工智能 大模型的训练与推理，背后都离不开算力的支撑。随着数字经济的发 展，算力正从“看不见的技术能力”，变为像电力一样可感知、可使 / 用的基础资源。/ 算力：数字世界的生产力 / 算力从哪里来？\n\n为什么AI时代更需要算力？ / 国产算力的发展 / 人工智能 / 三要素算法 / 算力主要来源于芯片，如CPU、GPU以及AI加速芯\n\n人工智能模型需要处理海量数据并进行复杂计算， / 以华为推出的昇腾AI处理器为代表，国产算力 / 片。CPU适合通用计算，GPU擅长并行处理，而AI / 算力越强，模型训练越快、效果越好，是AI发展的 / 体系正在快速发展，支撑AI产业自主可控与创\n\n芯片（如昇腾）专为人工智能计算优化。 / 核心驱动力。 / 新应用。 / 算力是如何衡量的？ / 云计算与算力网络\n\n算力就是新型基础设施 / 算力通常用FLOPS（每秒浮点运算次数）表示，也可 / 算力正通过云计算和算力网络进行调度，就像“电 / 在数字经济时代，算力与数据、算法一起，构 / 数据算力\n\n用TOPS来衡量AI计算能力，数值越高，代表处理能 / 网”一样实现资源共享，用户可以随时随地获取算 / 成国家和产业发展的核心基础，就像“电力+ / 力越强。 / 力服务。\n\n高速公路”一样不可或缺。\n\n东数西算 国家重大算力基础设施工程 / 什么是东数西算？东数西算是中国于2022年全面启动的国家级算力资源配置工程，旨在 构建“数据中心+云计算+大数据”协同发展的新型算力网络体系。该工 程通过将东部算力需求有序引导至西部，优化全国数据中心布局，促进 区域协调发展。",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.014492753623188406,
+            "rerank_score": 2.104662823677063,
+            "raw_scores": {
+              "keyword_rank": 9,
+              "vector_rank": null,
+              "fusion_score": 0.014492753623188406,
+              "focus_matches": 2
+            }
+          },
+          {
+            "chunk_id": "baaf54271b5212e40f06f14240fe13ee",
+            "document_id": "4f5a00713c93459585a83b73a6d70bb9",
+            "version_id": "755748c869694637a82d61906513b33e",
+            "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+            "page_or_slide": "slide-18",
+            "section_path": "幻灯片 18 / 9、根技术产品模型展示区 / picture-ocr-22",
+            "snippet": "算力就是新型基础设施",
+            "markdown_text": "算力就是新型基础设施",
+            "plain_text": "算力就是新型基础设施",
+            "trust_level": "internal",
+            "source_type": "official_import",
+            "fusion_score": 0.014084507042253521,
+            "rerank_score": 1.2065262749791146,
+            "raw_scores": {
+              "keyword_rank": null,
+              "vector_rank": 11,
+              "fusion_score": 0.014084507042253521,
+              "focus_matches": 1
+            }
+          },
+          {
+            "chunk_id": "85f498633f001d7fa97497dbccd3b31d",
+            "document_id": "4f5a00713c93459585a83b73a6d70bb9",
+            "version_id": "755748c869694637a82d61906513b33e",
+            "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+            "page_or_slide": "slide-18",
+            "section_path": "幻灯片 18 / 9、根技术产品模型展示区 / picture-ocr-16",
+            "snippet": "算力调度平台",
+            "markdown_text": "算力调度平台",
+            "plain_text": "算力调度平台",
+            "trust_level": "internal",
+            "source_type": "official_import",
+            "fusion_score": 0.014285714285714285,
+            "rerank_score": 1.1607098758220673,
+            "raw_scores": {
+              "keyword_rank": null,
+              "vector_rank": 10,
+              "fusion_score": 0.014285714285714285,
+              "focus_matches": 0
+            }
+          },
+          {
+            "chunk_id": "dc789682173331e8d5f2aa62cafca2b3",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-19",
+            "section_path": "幻灯片 19 / 幻灯片 19 / body",
+            "snippet": "“AI+教育”基础环境\n\n轩辕汇智AI中台",
+            "markdown_text": "“AI+教育”基础环境\n\n轩辕汇智AI中台",
+            "plain_text": "“AI+教育”基础环境\n\n轩辕汇智AI中台",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.016129032258064516,
+            "rerank_score": 0.8530837774276732,
+            "raw_scores": {
+              "keyword_rank": 2,
+              "vector_rank": null,
+              "fusion_score": 0.016129032258064516,
+              "focus_matches": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "ppt-company-p1-06",
+    "question": "战略定位页有没有把轩辕网络定义成“AI+产教融合服务商”？",
+    "answer": "是，战略定位页把轩辕网络定义为AI+产教融合服务商。",
+    "grounded_answer": "战略定位：AI+产教融合服务商 内涵建设 聚焦课程、师资服务、实训平台、人才服务、成果打造等自身软实力持续打造 产教融合基地共建 建成首个产业学院、ICDT等专业建设、产教融合运营服务。 广东轩辕网络科技股份有限公司是业内领先的AI+产教融。",
+    "inference_note": "答案直接基于命中证据压缩生成，未调用云端生成模型。",
+    "grounded": true,
+    "question_type": "factoid",
+    "answer_focus": "战略定位、把轩辕网",
+    "review_issues": [],
+    "reviewer_intervened": false,
+    "fallback_used": false,
+    "citations": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-16",
+        "section_path": "幻灯片 16 / 幻灯片 16 / body",
+        "snippet": "战略定位：AI+产教融合服务商\n\n内涵建设\n\n聚焦课程、师资服务、实训平台、人才服务、成果打造等自身软实力持续打造\n\n产教融合基地共建\n\n建成首个产业学院、ICDT等专业建设、产教融合运营服务。产教融合运营能力建设\n\n2023~至今\n\n增加大数据专业建设\n\n品牌“领先的AI+产教融合服务商”\n\n开发大数据专业系列课程、教材、建大数据实验实训平台、大数据实验室建设。与新华三打造联合解决方案向学校提供大数据专业建设服务。\n\n正式对外宣传“…",
+        "rerank_score": 7.180184888839722,
+        "fusion_score": 0.014925373134328358
+      },
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-4",
+        "section_path": "幻灯片 4 / 幻灯片 4 / body-1",
+        "snippet": "广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。公司成立于1998年，于2014年正式在新三板挂牌，证券简称“轩辕网络”, 证券代码“830891”。",
+        "rerank_score": 5.1312309265136715,
+        "fusion_score": 0.030679156908665108
+      },
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-76",
+        "section_path": "幻灯片 76 / 幻灯片 76 / picture-ocr-merged",
+        "snippet": "是业 / 内领先的AI+产教融合服务商。公司深耕\n教育20余年，以结合产教融合信息服务平 / 台为抓手，通过线上/线下一体化运营服务 / 管理，与政校行企共同合作建设运营产业 / 粤北大数据产业学院 / 学院、产教融合基地，拉通人才供应链全\n\n过程，为校企两端提供专业解决方案，促 / 进人才培养与数字经济发展融合。 / 大业技术专 / 广东交通职业技术学海专销顶中阳 / 广东轩網络科技股份有限公司\n\n专迎济产业学 / 正券代码0591…",
+        "rerank_score": 2.94947919845581,
+        "fusion_score": 0.015625
+      }
+    ],
+    "run": {
+      "rewritten_query": "战略定位页有没有把轩辕网络定义成“AI+产教融合服务商”？",
+      "question_type": "factoid",
+      "final_grounded": true,
+      "stage_status": "completed",
+      "draft": {
+        "answer": "是，战略定位页把轩辕网络定义为AI+产教融合服务商。",
+        "grounded_answer": "战略定位：AI+产教融合服务商 内涵建设 聚焦课程、师资服务、实训平台、人才服务、成果打造等自身软实力持续打造 产教融合基地共建 建成首个产业学院、ICDT等专业建设、产教融合运营服务。 广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。",
+        "inference_note": "答案直接基于命中证据压缩生成，未调用云端生成模型。",
+        "question_type": "factoid",
+        "answer_focus": "战略定位、把轩辕网",
+        "grounded": true,
+        "confidence_note": "fast_path",
+        "used_fallback": false,
+        "raw_payload": {
+          "mode": "fast_path",
+          "reason": "factoid_pattern"
+        }
+      },
+      "review": {
+        "passed": true,
+        "issues": [],
+        "revised_answer": "是，战略定位页把轩辕网络定义为AI+产教融合服务商。",
+        "revised_grounded_answer": "战略定位：AI+产教融合服务商 内涵建设 聚焦课程、师资服务、实训平台、人才服务、成果打造等自身软实力持续打造 产教融合基地共建 建成首个产业学院、ICDT等专业建设、产教融合运营服务。 广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。",
+        "revised_inference_note": "答案直接基于命中证据压缩生成，未调用云端生成模型。",
+        "risk_level": "low",
+        "reviewer_intervened": false,
+        "raw_payload": {
+          "mode": "deterministic_only",
+          "llm_review_skipped": true,
+          "skip_reason": "clean_heuristic"
+        }
+      },
+      "retrieval": {
+        "grounded": true,
+        "focus_terms": [
+          "战略定位",
+          "把轩辕网",
+          "络定义成",
+          "AI",
+          "产教融合",
+          "服务商"
+        ],
+        "expanded_query": "战略定位页有没有把轩辕网络定义成“AI+产教融合服务商”？",
+        "expansion_terms": [],
+        "used_fallback": false,
+        "fallback_reason": "",
+        "hits": [
+          {
+            "chunk_id": "bbbd9f7d3d7c2255d7a574a77e23054f",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-16",
+            "section_path": "幻灯片 16 / 幻灯片 16 / body",
+            "snippet": "战略定位：AI+产教融合服务商\n\n内涵建设\n\n聚焦课程、师资服务、实训平台、人才服务、成果打造等自身软实力持续打造\n\n产教融合基地共建\n\n建成首个产业学院、ICDT等专业建设、产教融合运营服务。产教融合运营能力建设\n\n2023~至今\n\n增加大数据专业建设\n\n品牌“领先的AI+产教融合服务商”\n\n开发大数据专业系列课程、教材、建大数据实验实训平台、大数据实验室建设。与新华三打造联合解决方案向学校提供大数据专业建设服务。\n\n正式对外宣传“…",
+            "markdown_text": "战略定位：AI+产教融合服务商\n\n内涵建设\n\n聚焦课程、师资服务、实训平台、人才服务、成果打造等自身软实力持续打造\n\n产教融合基地共建\n\n建成首个产业学院、ICDT等专业建设、产教融合运营服务。产教融合运营能力建设\n\n2023~至今\n\n增加大数据专业建设\n\n品牌“领先的AI+产教融合服务商”\n\n开发大数据专业系列课程、教材、建大数据实验实训平台、大数据实验室建设。与新华三打造联合解决方案向学校提供大数据专业建设服务。\n\n正式对外宣传“领先的AI+产教融合服务商”品牌，持续ICDT产业学院建设及运营、全领域产教基地及产业学院运营，培养数字型人才\n\n2020\n\n云计算专业\n\n2022\n\n产教融合平台规划\n\n课程资源开发（专业理论、实训），与生态企业合作联合方案\n\n大数据、云计算、泛IT专业建设，课程资源开发、教材出版、企业兼职导师进校园、师培、竞赛、协同育人、产学研合作\n\n2017\n\n2014\n\n2019",
+            "plain_text": "战略定位：AI+产教融合服务商\n\n内涵建设\n\n聚焦课程、师资服务、实训平台、人才服务、成果打造等自身软实力持续打造\n\n产教融合基地共建\n\n建成首个产业学院、ICDT等专业建设、产教融合运营服务。产教融合运营能力建设\n\n2023~至今\n\n增加大数据专业建设\n\n品牌“领先的AI+产教融合服务商”\n\n开发大数据专业系列课程、教材、建大数据实验实训平台、大数据实验室建设。与新华三打造联合解决方案向学校提供大数据专业建设服务。\n\n正式对外宣传“领先的AI+产教融合服务商”品牌，持续ICDT产业学院建设及运营、全领域产教基地及产业学院运营，培养数字型人才\n\n2020\n\n云计算专业\n\n2022\n\n产教融合平台规划\n\n课程资源开发（专业理论、实训），与生态企业合作联合方案\n\n大数据、云计算、泛IT专业建设，课程资源开发、教材出版、企业兼职导师进校园、师培、竞赛、协同育人、产学研合作\n\n2017\n\n2014\n\n2019",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.014925373134328358,
+            "rerank_score": 7.180184888839722,
+            "raw_scores": {
+              "keyword_rank": null,
+              "vector_rank": 7,
+              "fusion_score": 0.014925373134328358,
+              "focus_matches": 4
+            }
+          },
+          {
+            "chunk_id": "84313a69c8b33064fa838996e1444209",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-4",
+            "section_path": "幻灯片 4 / 幻灯片 4 / body-1",
+            "snippet": "广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。公司成立于1998年，于2014年正式在新三板挂牌，证券简称“轩辕网络”, 证券代码“830891”。",
+            "markdown_text": "广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。公司成立于1998年，于2014年正式在新三板挂牌，证券简称“轩辕网络”, 证券代码“830891”。",
+            "plain_text": "广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。公司成立于1998年，于2014年正式在新三板挂牌，证券简称“轩辕网络”, 证券代码“830891”。",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.030679156908665108,
+            "rerank_score": 5.1312309265136715,
+            "raw_scores": {
+              "keyword_rank": 10,
+              "vector_rank": 1,
+              "fusion_score": 0.030679156908665108,
+              "focus_matches": 3
+            }
+          },
+          {
+            "chunk_id": "87449be2b7a5dcd8ad99d57a91c7ba27",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-76",
+            "section_path": "幻灯片 76 / 幻灯片 76 / picture-ocr-merged",
+            "snippet": "是业 / 内领先的AI+产教融合服务商。公司深耕\n教育20余年，以结合产教融合信息服务平 / 台为抓手，通过线上/线下一体化运营服务 / 管理，与政校行企共同合作建设运营产业 / 粤北大数据产业学院 / 学院、产教融合基地，拉通人才供应链全\n\n过程，为校企两端提供专业解决方案，促 / 进人才培养与数字经济发展融合。 / 大业技术专 / 广东交通职业技术学海专销顶中阳 / 广东轩網络科技股份有限公司\n\n专迎济产业学 / 正券代码0591…",
+            "markdown_text": "是业 / 内领先的AI+产教融合服务商。公司深耕\n教育20余年，以结合产教融合信息服务平 / 台为抓手，通过线上/线下一体化运营服务 / 管理，与政校行企共同合作建设运营产业 / 粤北大数据产业学院 / 学院、产教融合基地，拉通人才供应链全\n\n过程，为校企两端提供专业解决方案，促 / 进人才培养与数字经济发展融合。 / 大业技术专 / 广东交通职业技术学海专销顶中阳 / 广东轩網络科技股份有限公司\n\n专迎济产业学 / 正券代码0591 / 广州轩装研究院有限公司 / 专户业， / 广州市轩银云曲信息科技有服公司\n\n轩網络",
+            "plain_text": "是业 / 内领先的AI+产教融合服务商。公司深耕\n教育20余年，以结合产教融合信息服务平 / 台为抓手，通过线上/线下一体化运营服务 / 管理，与政校行企共同合作建设运营产业 / 粤北大数据产业学院 / 学院、产教融合基地，拉通人才供应链全\n\n过程，为校企两端提供专业解决方案，促 / 进人才培养与数字经济发展融合。 / 大业技术专 / 广东交通职业技术学海专销顶中阳 / 广东轩網络科技股份有限公司\n\n专迎济产业学 / 正券代码0591 / 广州轩装研究院有限公司 / 专户业， / 广州市轩银云曲信息科技有服公司\n\n轩網络",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.015625,
+            "rerank_score": 2.94947919845581,
+            "raw_scores": {
+              "keyword_rank": null,
+              "vector_rank": 4,
+              "fusion_score": 0.015625,
+              "focus_matches": 3
+            }
+          },
+          {
+            "chunk_id": "0341dfbdd6e6a59e129c89a3bf5ee0d3",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-45",
+            "section_path": "幻灯片 45 / 幻灯片 45 / picture-ocr-merged",
+            "snippet": "领先的AI+产教融合服务商 轩辕AIGC赋能培训中心架构 / 轩辕AIGC赋能培训中心 轩辕AIGC认证证书示例 师资赋能 / 学生赋能 社会培训 认证中心 / 培训中心 提示工程师认证 提示工程师 / 非类学生 非二类学生 中文姓者\n\n二类学生 应用开发工程师 类学生 / 在职培训 东数西算 企业培训 / 数据分析工程师 数据标注工程师 部署优化工程师 / AIGC 训练工程师 算法工程师 算力工程师 / AIGC架构师 AGI研究员",
+            "markdown_text": "领先的AI+产教融合服务商 轩辕AIGC赋能培训中心架构 / 轩辕AIGC赋能培训中心 轩辕AIGC认证证书示例 师资赋能 / 学生赋能 社会培训 认证中心 / 培训中心 提示工程师认证 提示工程师 / 非类学生 非二类学生 中文姓者\n\n二类学生 应用开发工程师 类学生 / 在职培训 东数西算 企业培训 / 数据分析工程师 数据标注工程师 部署优化工程师 / AIGC 训练工程师 算法工程师 算力工程师 / AIGC架构师 AGI研究员",
+            "plain_text": "领先的AI+产教融合服务商 轩辕AIGC赋能培训中心架构 / 轩辕AIGC赋能培训中心 轩辕AIGC认证证书示例 师资赋能 / 学生赋能 社会培训 认证中心 / 培训中心 提示工程师认证 提示工程师 / 非类学生 非二类学生 中文姓者\n\n二类学生 应用开发工程师 类学生 / 在职培训 东数西算 企业培训 / 数据分析工程师 数据标注工程师 部署优化工程师 / AIGC 训练工程师 算法工程师 算力工程师 / AIGC架构师 AGI研究员",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.015151515151515152,
+            "rerank_score": 2.110566484928131,
+            "raw_scores": {
+              "keyword_rank": null,
+              "vector_rank": 6,
+              "fusion_score": 0.015151515151515152,
+              "focus_matches": 3
+            }
+          },
+          {
+            "chunk_id": "959b69ffea96d043dbad1d9db4047a86",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-9",
+            "section_path": "幻灯片 9 / 幻灯片 9 / body",
+            "snippet": "轩辕网络副总裁、轩辕研究院院长，人工智能高级工程师职称，广州大学校外硕士生导师、广东省产教融合促进会产教融合专家、第二届广州·琶洲算法大赛评委导师、华为鲲鹏开发者专家。主持及参与了多项省级重点科研项目，长期从事通用人工智能、大语言模型、知识图谱、复杂网络及数据挖掘等人工智能领域的研究和开发工作。\n\n轩辕研究院首席科学家，北京大学博士后，暨南大学计算机科学系教授，中国人工智能学会(CAAI)智能服务专委会委员、中国计算机学会(CCF)语…",
+            "markdown_text": "轩辕网络副总裁、轩辕研究院院长，人工智能高级工程师职称，广州大学校外硕士生导师、广东省产教融合促进会产教融合专家、第二届广州·琶洲算法大赛评委导师、华为鲲鹏开发者专家。主持及参与了多项省级重点科研项目，长期从事通用人工智能、大语言模型、知识图谱、复杂网络及数据挖掘等人工智能领域的研究和开发工作。\n\n轩辕研究院首席科学家，北京大学博士后，暨南大学计算机科学系教授，中国人工智能学会(CAAI)智能服务专委会委员、中国计算机学会(CCF)语音对话与听觉专业委员会委员，澳大利亚格雷菲斯大学客座教授，在人工智能领域已发表国际论文30多篇，主持国家自然科学基金项目3项、教育部科学技术重点项目1项和广东省级课题1项 。\n\n轩辕网络数据与智能总架构师 ，中国科学院软件研究所博士，从事多年的人工智能、自然语言处理与深度学习方面的研究、教学、软件开发与管理工作，主持或参与国家、 省部等各级项目20余项，在知名学术刊物、会议上发表论文20余篇，长期主讲《人工智能》、《软件工程》等课程。\n\n人工智能正高级工程师，享受国务院特殊津贴专家。国家科技部专家库在库专家、军事科学院系统工程研究院专家组成员、上海市领军人才、中国软件行业协会优秀企业家、徐汇区创业创新杰出人才先进个人等荣誉，上海市工商联科技商会副会长、上海市信息化项目评审专家、上海长三角商业创新研究院专家委员会委员等",
+            "plain_text": "轩辕网络副总裁、轩辕研究院院长，人工智能高级工程师职称，广州大学校外硕士生导师、广东省产教融合促进会产教融合专家、第二届广州·琶洲算法大赛评委导师、华为鲲鹏开发者专家。主持及参与了多项省级重点科研项目，长期从事通用人工智能、大语言模型、知识图谱、复杂网络及数据挖掘等人工智能领域的研究和开发工作。\n\n轩辕研究院首席科学家，北京大学博士后，暨南大学计算机科学系教授，中国人工智能学会(CAAI)智能服务专委会委员、中国计算机学会(CCF)语音对话与听觉专业委员会委员，澳大利亚格雷菲斯大学客座教授，在人工智能领域已发表国际论文30多篇，主持国家自然科学基金项目3项、教育部科学技术重点项目1项和广东省级课题1项 。\n\n轩辕网络数据与智能总架构师 ，中国科学院软件研究所博士，从事多年的人工智能、自然语言处理与深度学习方面的研究、教学、软件开发与管理工作，主持或参与国家、 省部等各级项目20余项，在知名学术刊物、会议上发表论文20余篇，长期主讲《人工智能》、《软件工程》等课程。\n\n人工智能正高级工程师，享受国务院特殊津贴专家。国家科技部专家库在库专家、军事科学院系统工程研究院专家组成员、上海市领军人才、中国软件行业协会优秀企业家、徐汇区创业创新杰出人才先进个人等荣誉，上海市工商联科技商会副会长、上海市信息化项目评审专家、上海长三角商业创新研究院专家委员会委员等",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.013888888888888888,
+            "rerank_score": 1.654663836956024,
+            "raw_scores": {
+              "keyword_rank": null,
+              "vector_rank": 12,
+              "fusion_score": 0.013888888888888888,
+              "focus_matches": 2
+            }
+          },
+          {
+            "chunk_id": "e56e1e43f2cd1b48dab5fec9dcbd3782",
+            "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+            "version_id": "87a0d9e553c548b4beaa9377684aa0c2",
+            "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "page_or_slide": "slide-80",
+            "section_path": "幻灯片 80 / 幻灯片 80 / body-1",
+            "snippet": "2024-2025年，提升教育服务的智能化水平，研发轩辕AIGC实战平台、轩辕星大模型",
+            "markdown_text": "2024-2025年，提升教育服务的智能化水平，研发轩辕AIGC实战平台、轩辕星大模型",
+            "plain_text": "2024-2025年，提升教育服务的智能化水平，研发轩辕AIGC实战平台、轩辕星大模型",
+            "trust_level": "internal",
+            "source_type": "bootstrap",
+            "fusion_score": 0.028577260665441927,
+            "rerank_score": 0.8928793549537659,
+            "raw_scores": {
+              "keyword_rank": 9,
+              "vector_rank": 11,
+              "fusion_score": 0.028577260665441927,
+              "focus_matches": 1
+            }
+          }
+        ]
+      }
+    }
+  }
+]

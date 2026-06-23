@@ -1,0 +1,494 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Serif+SC:wght@500;700&display=swap");
+
+:root {
+  --bg: #f1ece3;
+  --bg-strong: #e7dece;
+  --panel: rgba(255, 251, 244, 0.86);
+  --ink: #161817;
+  --muted: #5d5f59;
+  --accent: #b4492a;
+  --accent-soft: rgba(180, 73, 42, 0.14);
+  --line: rgba(22, 24, 23, 0.12);
+  --shadow: 0 24px 60px rgba(48, 31, 19, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(180, 73, 42, 0.08), transparent 34%),
+    linear-gradient(135deg, rgba(22, 24, 23, 0.035) 0 1px, transparent 1px 100%),
+    linear-gradient(45deg, rgba(22, 24, 23, 0.03) 0 1px, transparent 1px 100%),
+    var(--bg);
+  background-size: auto, 26px 26px, 26px 26px, auto;
+  color: var(--ink);
+  font-family: "IBM Plex Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(0, 0, 0, 0.2) 0 1px, transparent 1px),
+    radial-gradient(circle at 80% 70%, rgba(0, 0, 0, 0.16) 0 1px, transparent 1px);
+  background-size: 12px 12px, 18px 18px;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: rgba(241, 236, 227, 0.84);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand,
+.topnav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.brand {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.brand-kicker,
+.eyebrow,
+.meta-label {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+
+.brand-title,
+h1,
+h2 {
+  font-family: "Noto Serif SC", serif;
+}
+
+.brand-title {
+  font-size: 1.1rem;
+}
+
+.topnav {
+  display: flex;
+  gap: 1rem;
+}
+
+.topnav a {
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid transparent;
+}
+
+.topnav a:hover {
+  border-color: var(--accent);
+}
+
+.page {
+  padding: 1.5rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.95fr) minmax(320px, 1.35fr);
+  gap: 1.25rem;
+}
+
+.hero-panel,
+.chat-card,
+.citation-panel,
+.admin-card,
+.admin-toolbar {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  border-radius: 28px;
+}
+
+.hero-panel {
+  padding: 2rem;
+  display: grid;
+  gap: 1.3rem;
+}
+
+h1 {
+  font-size: clamp(2.3rem, 6vw, 4.8rem);
+  line-height: 0.96;
+  margin: 0;
+}
+
+h2,
+.panel-header h1 {
+  font-size: 1.6rem;
+  margin: 0.2rem 0 0;
+}
+
+.lede,
+.lede-short,
+.message-body,
+.citation-list,
+.job-row p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.meta-strip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.meta-strip > div,
+.alert-card,
+.doc-pill,
+.message,
+.citation-item,
+.job-row {
+  padding: 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.meta-strip strong {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 1.1rem;
+}
+
+.alert-card {
+  background: linear-gradient(135deg, rgba(180, 73, 42, 0.12), rgba(255, 255, 255, 0.52));
+}
+
+.alert-title {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-weight: 600;
+}
+
+.doc-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.doc-pill {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.doc-pill small,
+.message-role,
+.hint,
+.toolbar-note,
+.job-row small,
+.doc-table small {
+  color: var(--muted);
+}
+
+.chat-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(250px, 0.9fr);
+  gap: 1.2rem;
+}
+
+.chat-card,
+.citation-panel,
+.admin-card {
+  padding: 1.25rem;
+}
+
+.panel-header,
+.chat-actions,
+.admin-toolbar,
+.panel-header-wide {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.badge-stack,
+.action-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.badge,
+.job-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.78rem;
+}
+
+.message-feed,
+.citation-list,
+.job-list {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.message {
+  position: relative;
+  overflow: hidden;
+}
+
+.message::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--accent);
+}
+
+.message-user::before {
+  background: #263f53;
+}
+
+.message-role {
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+}
+
+.chat-form {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+textarea,
+input[type="file"],
+select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 0.9rem 1rem;
+  font: inherit;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+textarea:focus,
+select:focus,
+input:focus {
+  outline: 2px solid rgba(180, 73, 42, 0.18);
+  border-color: rgba(180, 73, 42, 0.3);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.primary-button,
+.secondary-button,
+.ghost-button {
+  border-radius: 999px;
+  padding: 0.75rem 1.1rem;
+  border: 1px solid transparent;
+}
+
+.primary-button {
+  background: var(--ink);
+  color: #fff;
+}
+
+.secondary-button {
+  background: var(--accent);
+  color: #fff;
+}
+
+.ghost-button {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: var(--line);
+}
+
+.ghost-button.danger {
+  color: #912b12;
+}
+
+.admin-wrap {
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-shell {
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-toolbar {
+  padding: 1rem 1.2rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr);
+  gap: 1rem;
+}
+
+.quality-nested-card {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: none;
+}
+
+.upload-form,
+.inline-fields {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.inline-fields {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.doc-table th,
+.doc-table td {
+  text-align: left;
+  padding: 0.9rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.doc-table td strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.job-row {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.failure-row {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.job-status-running {
+  background: rgba(49, 116, 182, 0.12);
+  color: #225b8f;
+}
+
+.job-status-completed {
+  background: rgba(45, 140, 73, 0.12);
+  color: #22643a;
+}
+
+.job-status-failed {
+  background: rgba(172, 52, 34, 0.12);
+  color: #8f2c1c;
+}
+
+.empty-state {
+  color: var(--muted);
+  margin: 0;
+}
+
+.answer-sections {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.answer-sections section {
+  padding: 0.8rem 0.9rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.48);
+  border: 1px solid var(--line);
+}
+
+.answer-sections h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.92rem;
+}
+
+.eval-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.metric-card {
+  padding: 1rem;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.metric-card strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.12rem;
+}
+
+.quality-issues {
+  margin-top: 1rem;
+}
+
+.citation-item h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .hero-grid,
+  .chat-stage,
+  .admin-grid,
+  .eval-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .page,
+  .topbar {
+    padding: 1rem;
+  }
+
+  .inline-fields,
+  .meta-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-actions,
+  .topbar,
+  .topnav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

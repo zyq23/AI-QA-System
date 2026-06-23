@@ -1,0 +1,3259 @@
+{
+  "run_date": "2026-06-17T11:28:04.489465",
+  "dataset_version": {
+    "P0": "data/evals/ppt_company_p0_8.json",
+    "P1": "data/evals/ppt_company_p1_8.json"
+  },
+  "p0_summary": {
+    "total_cases": 8,
+    "answer_ready_cases": 5,
+    "failure_counts": {
+      "none": 5,
+      "parser_upstream": 3
+    },
+    "answer_stage_blocker_counts": {
+      "none": 5,
+      "parser_upstream": 2,
+      "grounding_insufficient": 1
+    },
+    "answer_ready_question_ids": [
+      "ppt-company-p0-01",
+      "ppt-company-p0-05",
+      "ppt-company-p0-06",
+      "ppt-company-p0-07",
+      "ppt-company-p0-08"
+    ],
+    "blocked_question_ids": [
+      "ppt-company-p0-02",
+      "ppt-company-p0-03",
+      "ppt-company-p0-04"
+    ]
+  },
+  "p1_summary": {
+    "total_cases": 8,
+    "answer_ready_cases": 7,
+    "failure_counts": {
+      "none": 8
+    },
+    "answer_stage_blocker_counts": {
+      "none": 7,
+      "grounding_insufficient": 1
+    },
+    "answer_ready_question_ids": [
+      "ppt-company-p1-01",
+      "ppt-company-p1-02",
+      "ppt-company-p1-03",
+      "ppt-company-p1-04",
+      "ppt-company-p1-06",
+      "ppt-company-p1-07",
+      "ppt-company-p1-08"
+    ],
+    "blocked_question_ids": [
+      "ppt-company-p1-05"
+    ]
+  },
+  "answer_stage_recommendation": {
+    "answer_ready_question_ids": [
+      "ppt-company-p0-01",
+      "ppt-company-p0-05",
+      "ppt-company-p0-06",
+      "ppt-company-p0-07",
+      "ppt-company-p0-08",
+      "ppt-company-p1-01",
+      "ppt-company-p1-02",
+      "ppt-company-p1-03",
+      "ppt-company-p1-04",
+      "ppt-company-p1-06",
+      "ppt-company-p1-07",
+      "ppt-company-p1-08"
+    ],
+    "blocked_question_ids": [
+      "ppt-company-p0-02",
+      "ppt-company-p0-03",
+      "ppt-company-p0-04",
+      "ppt-company-p1-05"
+    ],
+    "answer_ready_case_count": 12,
+    "blocked_case_count": 4,
+    "dataset_breakdown": {
+      "P0": {
+        "answer_ready_question_ids": [
+          "ppt-company-p0-01",
+          "ppt-company-p0-05",
+          "ppt-company-p0-06",
+          "ppt-company-p0-07",
+          "ppt-company-p0-08"
+        ],
+        "blocked_question_ids": [
+          "ppt-company-p0-02",
+          "ppt-company-p0-03",
+          "ppt-company-p0-04"
+        ]
+      },
+      "P1": {
+        "answer_ready_question_ids": [
+          "ppt-company-p1-01",
+          "ppt-company-p1-02",
+          "ppt-company-p1-03",
+          "ppt-company-p1-04",
+          "ppt-company-p1-06",
+          "ppt-company-p1-07",
+          "ppt-company-p1-08"
+        ],
+        "blocked_question_ids": [
+          "ppt-company-p1-05"
+        ]
+      }
+    },
+    "answer_ready_case_details": [
+      {
+        "dataset": "P0",
+        "question_id": "ppt-company-p0-01",
+        "question": "这份轩辕网络公司介绍 PPT 的目录分成哪四个部分？",
+        "failure_type": "none",
+        "answer_stage_blocker": "none",
+        "grounded_judgement": "grounded_supported",
+        "coverage_judgement": "sufficient"
+      },
+      {
+        "dataset": "P0",
+        "question_id": "ppt-company-p0-05",
+        "question": "基础环境页提到了哪些基础设施或平台能力？请列举至少4项。",
+        "failure_type": "none",
+        "answer_stage_blocker": "none",
+        "grounded_judgement": "grounded_supported",
+        "coverage_judgement": "sufficient"
+      },
+      {
+        "dataset": "P0",
+        "question_id": "ppt-company-p0-06",
+        "question": "基础模型页提到的平台能力包含哪些模型或数据治理能力？",
+        "failure_type": "none",
+        "answer_stage_blocker": "none",
+        "grounded_judgement": "grounded_supported",
+        "coverage_judgement": "sufficient"
+      },
+      {
+        "dataset": "P0",
+        "question_id": "ppt-company-p0-07",
+        "question": "产教融合人才培养整体解决方案“1+1+N”包含哪些服务模块？",
+        "failure_type": "none",
+        "answer_stage_blocker": "none",
+        "grounded_judgement": "grounded_supported",
+        "coverage_judgement": "sufficient"
+      },
+      {
+        "dataset": "P0",
+        "question_id": "ppt-company-p0-08",
+        "question": "PPT 是否明确给出了轩辕网络的营收规模或员工总数？",
+        "failure_type": "parser_upstream",
+        "answer_stage_blocker": "none",
+        "grounded_judgement": "correct_negative",
+        "coverage_judgement": "not_applicable"
+      },
+      {
+        "dataset": "P1",
+        "question_id": "ppt-company-p1-01",
+        "question": "这份轩辕网络公司介绍 PPT 的目录中是否包含“与华为同行”这一部分？",
+        "failure_type": "none",
+        "answer_stage_blocker": "none",
+        "grounded_judgement": "grounded_supported",
+        "coverage_judgement": "not_applicable"
+      },
+      {
+        "dataset": "P1",
+        "question_id": "ppt-company-p1-02",
+        "question": "目录页除了公司概况，还列出了哪三部分？",
+        "failure_type": "none",
+        "answer_stage_blocker": "none",
+        "grounded_judgement": "grounded_supported",
+        "coverage_judgement": "sufficient"
+      },
+      {
+        "dataset": "P1",
+        "question_id": "ppt-company-p1-03",
+        "question": "基础环境页除了算力资源，还提到了哪些场地或平台？",
+        "failure_type": "none",
+        "answer_stage_blocker": "none",
+        "grounded_judgement": "grounded_supported",
+        "coverage_judgement": "sufficient"
+      },
+      {
+        "dataset": "P1",
+        "question_id": "ppt-company-p1-04",
+        "question": "基础模型页除了通用大模型，还列了哪些感知或解析能力？",
+        "failure_type": "none",
+        "answer_stage_blocker": "none",
+        "grounded_judgement": "grounded_supported",
+        "coverage_judgement": "sufficient"
+      },
+      {
+        "dataset": "P1",
+        "question_id": "ppt-company-p1-06",
+        "question": "战略定位页有没有把轩辕网络定义成“AI+产教融合服务商”？",
+        "failure_type": "none",
+        "answer_stage_blocker": "none",
+        "grounded_judgement": "grounded_supported",
+        "coverage_judgement": "not_applicable"
+      },
+      {
+        "dataset": "P1",
+        "question_id": "ppt-company-p1-07",
+        "question": "“1+1+N”整体解决方案里，PPT 至少列出的四项服务是什么？",
+        "failure_type": "none",
+        "answer_stage_blocker": "none",
+        "grounded_judgement": "grounded_supported",
+        "coverage_judgement": "sufficient"
+      },
+      {
+        "dataset": "P1",
+        "question_id": "ppt-company-p1-08",
+        "question": "这份 PPT 有没有明确给出公司员工总数、门店数量或营收金额？",
+        "failure_type": "none",
+        "answer_stage_blocker": "none",
+        "grounded_judgement": "correct_negative",
+        "coverage_judgement": "not_applicable"
+      }
+    ],
+    "blocked_case_details": [
+      {
+        "dataset": "P0",
+        "question_id": "ppt-company-p0-02",
+        "question": "公司概况页提到轩辕网络深耕教育多少年、专注什么方向？",
+        "failure_type": "parser_upstream",
+        "answer_stage_blocker": "parser_upstream",
+        "grounded_judgement": "grounded_supported",
+        "coverage_judgement": "not_applicable"
+      },
+      {
+        "dataset": "P0",
+        "question_id": "ppt-company-p0-03",
+        "question": "轩辕网络的业务架构在 PPT 中是如何概括的？",
+        "failure_type": "none",
+        "answer_stage_blocker": "grounding_insufficient",
+        "grounded_judgement": "not_grounded",
+        "coverage_judgement": "not_applicable"
+      },
+      {
+        "dataset": "P0",
+        "question_id": "ppt-company-p0-04",
+        "question": "战略定位页如何定义轩辕网络的定位？",
+        "failure_type": "parser_upstream",
+        "answer_stage_blocker": "parser_upstream",
+        "grounded_judgement": "grounded_supported",
+        "coverage_judgement": "not_applicable"
+      },
+      {
+        "dataset": "P1",
+        "question_id": "ppt-company-p1-05",
+        "question": "如果只根据 PPT 内容概括，轩辕网络的业务架构主线是什么？",
+        "failure_type": "none",
+        "answer_stage_blocker": "grounding_insufficient",
+        "grounded_judgement": "not_grounded",
+        "coverage_judgement": "not_applicable"
+      }
+    ],
+    "blocked_by_answer_stage_blocker": {
+      "parser_upstream": 2,
+      "grounding_insufficient": 2
+    },
+    "blocked_by_failure_type": {
+      "parser_upstream": 2,
+      "none": 2
+    },
+    "blocked_question_ids_by_answer_stage_blocker": {
+      "parser_upstream": [
+        "ppt-company-p0-02",
+        "ppt-company-p0-04"
+      ],
+      "grounding_insufficient": [
+        "ppt-company-p0-03",
+        "ppt-company-p1-05"
+      ]
+    },
+    "blocked_question_ids_by_failure_type": {
+      "parser_upstream": [
+        "ppt-company-p0-02",
+        "ppt-company-p0-04"
+      ],
+      "none": [
+        "ppt-company-p0-03",
+        "ppt-company-p1-05"
+      ]
+    }
+  },
+  "datasets": [
+    {
+      "name": "P0",
+      "source": "data/evals/ppt_company_p0_8.json",
+      "summary": {
+        "total_cases": 8,
+        "answer_ready_cases": 5,
+        "failure_counts": {
+          "none": 5,
+          "parser_upstream": 3
+        },
+        "answer_stage_blocker_counts": {
+          "none": 5,
+          "parser_upstream": 2,
+          "grounding_insufficient": 1
+        },
+        "answer_ready_question_ids": [
+          "ppt-company-p0-01",
+          "ppt-company-p0-05",
+          "ppt-company-p0-06",
+          "ppt-company-p0-07",
+          "ppt-company-p0-08"
+        ],
+        "blocked_question_ids": [
+          "ppt-company-p0-02",
+          "ppt-company-p0-03",
+          "ppt-company-p0-04"
+        ]
+      },
+      "questions": [
+        {
+          "dataset": "P0",
+          "question_id": "ppt-company-p0-01",
+          "question": "这份轩辕网络公司介绍 PPT 的目录分成哪四个部分？",
+          "question_type": "enumeration",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [
+            "CONTENTS",
+            "公司概况",
+            "产教融合业务及实践分享",
+            "标杆案例",
+            "与华为同行"
+          ],
+          "expected_hit_pages_or_sections": [
+            "CONTENTS",
+            "公司概况",
+            "产教融合业务及实践分享",
+            "标杆案例",
+            "与华为同行"
+          ],
+          "rewritten_query": "这份轩辕网络公司介绍 PPT 的目录分成哪四个部分？",
+          "expanded_query": "这份轩辕网络公司介绍 PPT 的目录分成哪四个部分？ CONTENTS",
+          "focus_terms": [
+            "CONTENTS"
+          ],
+          "expansion_terms": [
+            "CONTENTS"
+          ],
+          "grounded": true,
+          "grounded_judgement": "grounded_supported",
+          "coverage_judgement": "sufficient",
+          "expected_answer_keywords": [
+            "公司概况",
+            "产教融合业务及实践分享",
+            "标杆案例",
+            "与华为同行"
+          ],
+          "coverage_matched_keywords": [
+            "公司概况",
+            "产教融合业务及实践分享",
+            "标杆案例",
+            "与华为同行"
+          ],
+          "coverage_missing_keywords": [],
+          "grounded_matched_keywords": [
+            "公司概况",
+            "产教融合业务及实践分享",
+            "标杆案例",
+            "与华为同行"
+          ],
+          "grounded_missing_keywords": [],
+          "failure_type": "none",
+          "answer_stage_blocker": "none",
+          "allow_answer_stage": true,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "根技术体验中心展厅内涵建设v2-cx.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx"
+          ],
+          "top_k_hit_sections": [
+            "幻灯片 2 / 幻灯片 2 / body",
+            "幻灯片 4 / 幻灯片 4 / body-1",
+            "幻灯片 2 / 幻灯片 2 / picture-ocr-50",
+            "幻灯片 1 / 幻灯片 1 / body",
+            "幻灯片 6 / 幻灯片 6 / table",
+            "幻灯片 80 / 幻灯片 80 / body-1"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-2",
+              "section_path": "幻灯片 2 / 幻灯片 2 / body",
+              "snippet": "01\n\n公司概况\n\n02\n\n产教融合业务及实践分享\n\nCONTENTS\n\n03\n\n标杆案例\n\n04\n\n与华为同行",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 1.43090443611145,
+              "keyword_rank": null,
+              "vector_rank": 11,
+              "fusion_score": 0.014084507042253521,
+              "rerank_score": 1.43090443611145,
+              "focus_matches": 1
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-4",
+              "section_path": "幻灯片 4 / 幻灯片 4 / body-1",
+              "snippet": "广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。公司成立于1998年，于2014年正式在新三板挂牌，证券简称“轩辕网络”, 证券代码“830891”。",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 0.429874289035797,
+              "keyword_rank": 3,
+              "vector_rank": 3,
+              "fusion_score": 0.031746031746031744,
+              "rerank_score": 0.429874289035797,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "4f5a00713c93459585a83b73a6d70bb9",
+              "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+              "page_or_slide": "slide-2",
+              "section_path": "幻灯片 2 / 幻灯片 2 / picture-ocr-50",
+              "snippet": "目录，结合产业发展新趋势，持续迭代人",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -0.3813418388366703,
+              "keyword_rank": null,
+              "vector_rank": 13,
+              "fusion_score": 0.0136986301369863,
+              "rerank_score": -0.3813418388366703,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-1",
+              "section_path": "幻灯片 1 / 幻灯片 1 / body",
+              "snippet": "2026年6月 |\n\n中国·广州\n\n数智人才共育，教育产业共赢\n\n轩辕网络公司介绍\n\n2026年6月",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -0.939727807044983,
+              "keyword_rank": 2,
+              "vector_rank": 7,
+              "fusion_score": 0.031054405392392875,
+              "rerank_score": -0.939727807044983,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-6",
+              "section_path": "幻灯片 6 / 幻灯片 6 / table",
+              "snippet": "| 序号 | 名称 | 著作权人 | 登记号 | 发证日期 |\n| --- | --- | --- | --- | --- |\n| 1 | 轩辕轻量级大模型软件[简称：轩辕GPT]V1.0 | 广东轩辕网络科技股份有限公司；广州轩辕研究院有限公司 | 2024SR1451864 | 2024 |\n| 2 | 轩辕AI科学计算平台[简称：轩辕DATALAB]V1.6 | 广东轩辕网络科技股份有限公司；广州轩辕研究院有限公司 | 2023…",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -1.6421041727066041,
+              "keyword_rank": 1,
+              "vector_rank": 6,
+              "fusion_score": 0.031544957774465976,
+              "rerank_score": -1.6421041727066041,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-80",
+              "section_path": "幻灯片 80 / 幻灯片 80 / body-1",
+              "snippet": "2024-2025年，提升教育服务的智能化水平，研发轩辕AIGC实战平台、轩辕星大模型",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -2.303861904144287,
+              "keyword_rank": 11,
+              "vector_rank": null,
+              "fusion_score": 0.014084507042253521,
+              "rerank_score": -2.303861904144287,
+              "focus_matches": 0
+            }
+          ]
+        },
+        {
+          "dataset": "P0",
+          "question_id": "ppt-company-p0-02",
+          "question": "公司概况页提到轩辕网络深耕教育多少年、专注什么方向？",
+          "question_type": "factoid",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [
+            "公司概况",
+            "28年教育深耕者",
+            "专注产教融合"
+          ],
+          "expected_hit_pages_or_sections": [
+            "公司概况",
+            "28年教育深耕者",
+            "专注产教融合"
+          ],
+          "rewritten_query": "公司概况页提到轩辕网络深耕教育多少年、专注什么方向？",
+          "expanded_query": "公司概况页提到轩辕网络深耕教育多少年、专注什么方向？",
+          "focus_terms": [],
+          "expansion_terms": [],
+          "grounded": true,
+          "grounded_judgement": "grounded_supported",
+          "coverage_judgement": "not_applicable",
+          "expected_answer_keywords": [
+            "28年",
+            "产教融合"
+          ],
+          "coverage_matched_keywords": [
+            "28年",
+            "产教融合"
+          ],
+          "coverage_missing_keywords": [],
+          "grounded_matched_keywords": [
+            "28年",
+            "产教融合"
+          ],
+          "grounded_missing_keywords": [],
+          "failure_type": "parser_upstream",
+          "answer_stage_blocker": "parser_upstream",
+          "allow_answer_stage": false,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx"
+          ],
+          "top_k_hit_sections": [
+            "幻灯片 3 / 幻灯片 3 / body",
+            "幻灯片 80 / 幻灯片 80 / body-1",
+            "幻灯片 4 / 幻灯片 4 / body",
+            "幻灯片 1 / 幻灯片 1 / body",
+            "幻灯片 47 / 幻灯片 47 / body",
+            "幻灯片 9 / 幻灯片 9 / body"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-3",
+              "section_path": "幻灯片 3 / 幻灯片 3 / body",
+              "snippet": "01 公司概况\n\n28\n\n年教育深耕者\n\n专注产教融合 · 成就职业教育未来",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 5.215098667144775,
+              "keyword_rank": 4,
+              "vector_rank": 6,
+              "fusion_score": 0.030776515151515152,
+              "rerank_score": 5.215098667144775,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-80",
+              "section_path": "幻灯片 80 / 幻灯片 80 / body-1",
+              "snippet": "2024-2025年，提升教育服务的智能化水平，研发轩辕AIGC实战平台、轩辕星大模型",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 0.8193460822105407,
+              "keyword_rank": 7,
+              "vector_rank": 12,
+              "fusion_score": 0.028814262023217248,
+              "rerank_score": 0.8193460822105407,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-4",
+              "section_path": "幻灯片 4 / 幻灯片 4 / body",
+              "snippet": "行业先行者\n\n28年\n\nAI+产教融合服务商\n\n专注深耕教育行业\n\n1000+\n\n全学段覆盖\n\n成功交付客户案例\n\n本科 / 高职 / 中职",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 0.5638917207717895,
+              "keyword_rank": null,
+              "vector_rank": 14,
+              "fusion_score": 0.013513513513513514,
+              "rerank_score": 0.5638917207717895,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-1",
+              "section_path": "幻灯片 1 / 幻灯片 1 / body",
+              "snippet": "2026年6月 |\n\n中国·广州\n\n数智人才共育，教育产业共赢\n\n轩辕网络公司介绍\n\n2026年6月",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 0.3995064496994017,
+              "keyword_rank": 3,
+              "vector_rank": 5,
+              "fusion_score": 0.03125763125763126,
+              "rerank_score": 0.3995064496994017,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-47",
+              "section_path": "幻灯片 47 / 幻灯片 47 / body",
+              "snippet": "专业人才培养_连续4年承办华为ICT大赛\n\n轩辕网络连续承办2021-2024年华为ICT大赛的初赛、决赛及颁奖典礼，作为连续四年的赛事承办方，获得承办校、主办方华为技术有限公司的一致好评，展现了公司在ICT领域与产教融合的卓越组织能力与深厚底蕴，促进了新质ICT人才的深度挖掘与培养。。\n\n舞台布景赛项",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -0.5072290698687238,
+              "keyword_rank": 19,
+              "vector_rank": 13,
+              "fusion_score": 0.026356857985087564,
+              "rerank_score": -0.5072290698687238,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-9",
+              "section_path": "幻灯片 9 / 幻灯片 9 / body",
+              "snippet": "轩辕网络副总裁、轩辕研究院院长，人工智能高级工程师职称，广州大学校外硕士生导师、广东省产教融合促进会产教融合专家、第二届广州·琶洲算法大赛评委导师、华为鲲鹏开发者专家。主持及参与了多项省级重点科研项目，长期从事通用人工智能、大语言模型、知识图谱、复杂网络及数据挖掘等人工智能领域的研究和开发工作。\n\n轩辕研究院首席科学家，北京大学博士后，暨南大学计算机科学系教授，中国人工智能学会(CAAI)智能服务专委会委员、中国计算机学会(CCF)语…",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -0.5695858101050062,
+              "keyword_rank": null,
+              "vector_rank": 11,
+              "fusion_score": 0.014084507042253521,
+              "rerank_score": -0.5695858101050062,
+              "focus_matches": 0
+            }
+          ]
+        },
+        {
+          "dataset": "P0",
+          "question_id": "ppt-company-p0-03",
+          "question": "轩辕网络的业务架构在 PPT 中是如何概括的？",
+          "question_type": "factoid",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [
+            "业务架构",
+            "有产懂教，双轮驱动",
+            "轩辕科教基座建设解决方案",
+            "轩辕产教融合建设及运营解决方案"
+          ],
+          "expected_hit_pages_or_sections": [
+            "业务架构",
+            "有产懂教，双轮驱动",
+            "轩辕科教基座建设解决方案",
+            "轩辕产教融合建设及运营解决方案"
+          ],
+          "rewritten_query": "轩辕网络的业务架构在 PPT 中是如何概括的？",
+          "expanded_query": "轩辕网络的业务架构在 PPT 中是如何概括的？ 双轮驱动 解决方案",
+          "focus_terms": [
+            "双轮驱动",
+            "解决方案"
+          ],
+          "expansion_terms": [
+            "双轮驱动",
+            "解决方案"
+          ],
+          "grounded": false,
+          "grounded_judgement": "not_grounded",
+          "coverage_judgement": "not_applicable",
+          "expected_answer_keywords": [
+            "双轮驱动",
+            "科教基座建设解决方案",
+            "产教融合建设及运营解决方案"
+          ],
+          "coverage_matched_keywords": [
+            "双轮驱动",
+            "产教融合建设及运营解决方案"
+          ],
+          "coverage_missing_keywords": [
+            "科教基座建设解决方案"
+          ],
+          "grounded_matched_keywords": [
+            "双轮驱动",
+            "产教融合建设及运营解决方案"
+          ],
+          "grounded_missing_keywords": [
+            "科教基座建设解决方案"
+          ],
+          "failure_type": "none",
+          "answer_stage_blocker": "grounding_insufficient",
+          "allow_answer_stage": false,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx"
+          ],
+          "top_k_hit_sections": [
+            "幻灯片 11 / 幻灯片 11 / body",
+            "幻灯片 11 / 幻灯片 11 / body",
+            "幻灯片 9 / 幻灯片 9 / body",
+            "幻灯片 4 / 幻灯片 4 / body-1",
+            "幻灯片 1 / 幻灯片 1 / body",
+            "幻灯片 89 / 幻灯片 89 / body"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-11",
+              "section_path": "幻灯片 11 / 幻灯片 11 / body",
+              "snippet": "业务架构：有产懂教，双轮驱动",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 7.312081742286683,
+              "keyword_rank": 16,
+              "vector_rank": 1,
+              "fusion_score": 0.029551337359792925,
+              "rerank_score": 7.312081742286683,
+              "focus_matches": 1
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-11",
+              "section_path": "幻灯片 11 / 幻灯片 11 / body",
+              "snippet": "轩辕产教融合建设及运营解决方案",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 2.52550300359726,
+              "keyword_rank": null,
+              "vector_rank": 3,
+              "fusion_score": 0.015873015873015872,
+              "rerank_score": 2.52550300359726,
+              "focus_matches": 1
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-9",
+              "section_path": "幻灯片 9 / 幻灯片 9 / body",
+              "snippet": "轩辕网络副总裁、轩辕研究院院长，人工智能高级工程师职称，广州大学校外硕士生导师、广东省产教融合促进会产教融合专家、第二届广州·琶洲算法大赛评委导师、华为鲲鹏开发者专家。主持及参与了多项省级重点科研项目，长期从事通用人工智能、大语言模型、知识图谱、复杂网络及数据挖掘等人工智能领域的研究和开发工作。\n\n轩辕研究院首席科学家，北京大学博士后，暨南大学计算机科学系教授，中国人工智能学会(CAAI)智能服务专委会委员、中国计算机学会(CCF)语…",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 0.5851590633392332,
+              "keyword_rank": null,
+              "vector_rank": 13,
+              "fusion_score": 0.0136986301369863,
+              "rerank_score": 0.5851590633392332,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-4",
+              "section_path": "幻灯片 4 / 幻灯片 4 / body-1",
+              "snippet": "广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。公司成立于1998年，于2014年正式在新三板挂牌，证券简称“轩辕网络”, 证券代码“830891”。",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 0.2784693539142607,
+              "keyword_rank": 1,
+              "vector_rank": 6,
+              "fusion_score": 0.031544957774465976,
+              "rerank_score": 0.2784693539142607,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-1",
+              "section_path": "幻灯片 1 / 幻灯片 1 / body",
+              "snippet": "2026年6月 |\n\n中国·广州\n\n数智人才共育，教育产业共赢\n\n轩辕网络公司介绍\n\n2026年6月",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -0.20987743665190312,
+              "keyword_rank": 7,
+              "vector_rank": 11,
+              "fusion_score": 0.02900988017658188,
+              "rerank_score": -0.20987743665190312,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-89",
+              "section_path": "幻灯片 89 / 幻灯片 89 / body",
+              "snippet": "广东技术师范大学华为根技术人工智能现代产业学院\n\n“广师大+华为+赛尔网络+轩辕网络 ” 四方联合创新运营模式\n\n产业学院组织架构示意图",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -0.5955756783485413,
+              "keyword_rank": 4,
+              "vector_rank": null,
+              "fusion_score": 0.015625,
+              "rerank_score": -0.5955756783485413,
+              "focus_matches": 0
+            }
+          ]
+        },
+        {
+          "dataset": "P0",
+          "question_id": "ppt-company-p0-04",
+          "question": "战略定位页如何定义轩辕网络的定位？",
+          "question_type": "factoid",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [
+            "战略定位",
+            "AI+产教融合服务商",
+            "领先的AI+产教融合服务商"
+          ],
+          "expected_hit_pages_or_sections": [
+            "战略定位",
+            "AI+产教融合服务商",
+            "领先的AI+产教融合服务商"
+          ],
+          "rewritten_query": "战略定位页如何定义轩辕网络的定位？",
+          "expanded_query": "战略定位页如何定义轩辕网络的定位？",
+          "focus_terms": [],
+          "expansion_terms": [],
+          "grounded": true,
+          "grounded_judgement": "grounded_supported",
+          "coverage_judgement": "not_applicable",
+          "expected_answer_keywords": [
+            "AI+产教融合服务商"
+          ],
+          "coverage_matched_keywords": [
+            "AI+产教融合服务商"
+          ],
+          "coverage_missing_keywords": [],
+          "grounded_matched_keywords": [
+            "AI+产教融合服务商"
+          ],
+          "grounded_missing_keywords": [],
+          "failure_type": "parser_upstream",
+          "answer_stage_blocker": "parser_upstream",
+          "allow_answer_stage": false,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx"
+          ],
+          "top_k_hit_sections": [
+            "幻灯片 4 / 幻灯片 4 / body-1",
+            "幻灯片 33 / 幻灯片 33 / body",
+            "幻灯片 33 / 幻灯片 33 / body",
+            "幻灯片 9 / 幻灯片 9 / body",
+            "幻灯片 9 / 幻灯片 9 / body",
+            "幻灯片 1 / 幻灯片 1 / body"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-4",
+              "section_path": "幻灯片 4 / 幻灯片 4 / body-1",
+              "snippet": "广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。公司成立于1998年，于2014年正式在新三板挂牌，证券简称“轩辕网络”, 证券代码“830891”。",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -2.231259850355295,
+              "keyword_rank": 17,
+              "vector_rank": 3,
+              "fusion_score": 0.02886002886002886,
+              "rerank_score": -2.231259850355295,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-33",
+              "section_path": "幻灯片 33 / 幻灯片 33 / body",
+              "snippet": "2025年轩辕网络联合全国多所高校专业教师及国内人工智能厂商的一线工程师共同开发编写人工智能专业系列教材。\n\n轩辕网络与全国多所高校专业教师及国内大数据厂商的一线工程师共同开发编写了6本大数据系列教材。\n\n已出版\n\n十四五规划教材\n\n2024年轩辕网络将联合全国多所高校专业教师及国内大数据厂商的一线工程师共同开发编写8本大数据专业系列教材。",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -2.3576569832288303,
+              "keyword_rank": null,
+              "vector_rank": 15,
+              "fusion_score": 0.013333333333333334,
+              "rerank_score": -2.3576569832288303,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-33",
+              "section_path": "幻灯片 33 / 幻灯片 33 / body",
+              "snippet": "轩辕网络与全国多所高校专业教师及国内云计算厂商的一线工程师共同开发编写了7本云计算专业系列教材。\n\n已出版\n\n2024年轩辕网络将联合全国多所高校专业教师及国内云计算厂商的一线工程师共同开发编写8本云计算专业系列教材。",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -3.075911668630747,
+              "keyword_rank": null,
+              "vector_rank": 11,
+              "fusion_score": 0.014084507042253521,
+              "rerank_score": -3.075911668630747,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-9",
+              "section_path": "幻灯片 9 / 幻灯片 9 / body",
+              "snippet": "轩辕研究院专家团队\n\n陈统\n\n管震\n\n黄永健\n\n陈清亮\n\n冯元勇\n\n谢赟\n\n轩辕网络 董事长\n\n智用研究院 CEO\n\n轩辕研究院院长、博士\n\n教授、博士\n\n高级工程师、博士\n\n上海德拓 董事长\n\n轩辕网络董事长、天河区政协第七八九届委员会委员。广东科技创业领军人才、广州市优秀专家、天河区优秀人才、广东省和广州市软件风云人物。主持及参与了10余项国家、省市级科研项目，获得了授权发明专利8件，参与制定多项国家/行业标准，策划出版云计算大数…",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -3.127247461905846,
+              "keyword_rank": null,
+              "vector_rank": 6,
+              "fusion_score": 0.015151515151515152,
+              "rerank_score": -3.127247461905846,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-9",
+              "section_path": "幻灯片 9 / 幻灯片 9 / body",
+              "snippet": "轩辕网络副总裁、轩辕研究院院长，人工智能高级工程师职称，广州大学校外硕士生导师、广东省产教融合促进会产教融合专家、第二届广州·琶洲算法大赛评委导师、华为鲲鹏开发者专家。主持及参与了多项省级重点科研项目，长期从事通用人工智能、大语言模型、知识图谱、复杂网络及数据挖掘等人工智能领域的研究和开发工作。\n\n轩辕研究院首席科学家，北京大学博士后，暨南大学计算机科学系教授，中国人工智能学会(CAAI)智能服务专委会委员、中国计算机学会(CCF)语…",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -3.3661471880399265,
+              "keyword_rank": null,
+              "vector_rank": 10,
+              "fusion_score": 0.014285714285714285,
+              "rerank_score": -3.3661471880399265,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-1",
+              "section_path": "幻灯片 1 / 幻灯片 1 / body",
+              "snippet": "2026年6月 |\n\n中国·广州\n\n数智人才共育，教育产业共赢\n\n轩辕网络公司介绍\n\n2026年6月",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -4.151159286499023,
+              "keyword_rank": null,
+              "vector_rank": 8,
+              "fusion_score": 0.014705882352941176,
+              "rerank_score": -4.151159286499023,
+              "focus_matches": 0
+            }
+          ]
+        },
+        {
+          "dataset": "P0",
+          "question_id": "ppt-company-p0-05",
+          "question": "基础环境页提到了哪些基础设施或平台能力？请列举至少4项。",
+          "question_type": "enumeration",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [
+            "基础环境",
+            "数智技术实践中心",
+            "产业技术及应用展厅",
+            "通用算力资源",
+            "智能算力资源",
+            "高性能存储资源",
+            "高速网络",
+            "AIGC实战平台"
+          ],
+          "expected_hit_pages_or_sections": [
+            "基础环境",
+            "数智技术实践中心",
+            "产业技术及应用展厅",
+            "通用算力资源",
+            "智能算力资源",
+            "高性能存储资源",
+            "高速网络",
+            "AIGC实战平台"
+          ],
+          "rewritten_query": "基础环境页提到了哪些基础设施或平台能力？请列举至少4项。",
+          "expanded_query": "基础环境页提到了哪些基础设施或平台能力？请列举至少4项。 算力资源 存储资源 高速网络",
+          "focus_terms": [
+            "算力资源",
+            "存储资源",
+            "高速网络"
+          ],
+          "expansion_terms": [
+            "算力资源",
+            "存储资源",
+            "高速网络"
+          ],
+          "grounded": true,
+          "grounded_judgement": "grounded_supported",
+          "coverage_judgement": "sufficient",
+          "expected_answer_keywords": [
+            "数智技术实践中心",
+            "产业技术及应用展厅",
+            "通用算力资源",
+            "智能算力资源"
+          ],
+          "coverage_matched_keywords": [
+            "产业技术及应用展厅",
+            "通用算力资源",
+            "智能算力资源"
+          ],
+          "coverage_missing_keywords": [
+            "数智技术实践中心"
+          ],
+          "grounded_matched_keywords": [
+            "产业技术及应用展厅",
+            "通用算力资源",
+            "智能算力资源"
+          ],
+          "grounded_missing_keywords": [
+            "数智技术实践中心"
+          ],
+          "failure_type": "none",
+          "answer_stage_blocker": "none",
+          "allow_answer_stage": true,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "华为ICT学院手册 2024-2025.pdf",
+            "华为ICT学院手册 2024-2025.pdf",
+            "华为ICT学院手册 2024-2025.pdf"
+          ],
+          "top_k_hit_sections": [
+            "幻灯片 21 / 幻灯片 21 / body",
+            "幻灯片 19 / 幻灯片 19 / body",
+            "幻灯片 55 / 高校人工智能通识课案例 / body-2",
+            "第 6 页 / OCR 127",
+            "第 8 页 / 区块 62",
+            "第 6 页 / 图片 OCR 2-22"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-21",
+              "section_path": "幻灯片 21 / 幻灯片 21 / body",
+              "snippet": "AI科学计算平台\n\n轩辕星轻量级大模型\n\n智能体应用开发平台\n\n算力资源设施\n\n集群管理\n\n容器引擎\n\n镜像管理\n\n任务调度\n\n负载均衡\n\n资源监控\n\n通用算力资源\n\n智能算力资源（训练/推理）\n\n高性能存储资源\n\n高速网络\n\n基础环境\n\nAI实训室 （AIGC实训室/人工智能综合实训室/数据智能实训室•••）\n\n产业技术及应用展厅\n\nAIGC赋能中心",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 4.62794102827708,
+              "keyword_rank": null,
+              "vector_rank": 7,
+              "fusion_score": 0.014925373134328358,
+              "rerank_score": 4.62794102827708,
+              "focus_matches": 3
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-19",
+              "section_path": "幻灯片 19 / 幻灯片 19 / body",
+              "snippet": "“AI+教育”基础环境\n\n轩辕汇智AI中台",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -0.07396168708801287,
+              "keyword_rank": 1,
+              "vector_rank": null,
+              "fusion_score": 0.01639344262295082,
+              "rerank_score": -0.07396168708801287,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-55",
+              "section_path": "幻灯片 55 / 高校人工智能通识课案例 / body-2",
+              "snippet": "课程+平台+算力设施+实训室建设",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -0.6628624677658081,
+              "keyword_rank": null,
+              "vector_rank": 8,
+              "fusion_score": 0.014705882352941176,
+              "rerank_score": -0.6628624677658081,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "51cda55bc92048168878c32cd4582278",
+              "file_name": "华为ICT学院手册 2024-2025.pdf",
+              "page_or_slide": "page-6",
+              "section_path": "第 6 页 / OCR 127",
+              "snippet": "基础软硬件",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -0.9458091855049133,
+              "keyword_rank": null,
+              "vector_rank": 5,
+              "fusion_score": 0.015384615384615385,
+              "rerank_score": -0.9458091855049133,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "51cda55bc92048168878c32cd4582278",
+              "file_name": "华为ICT学院手册 2024-2025.pdf",
+              "page_or_slide": "page-8",
+              "section_path": "第 8 页 / 区块 62",
+              "snippet": "基础软硬件",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -0.9458107352256775,
+              "keyword_rank": null,
+              "vector_rank": 4,
+              "fusion_score": 0.015625,
+              "rerank_score": -0.9458107352256775,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "51cda55bc92048168878c32cd4582278",
+              "file_name": "华为ICT学院手册 2024-2025.pdf",
+              "page_or_slide": "page-6",
+              "section_path": "第 6 页 / 图片 OCR 2-22",
+              "snippet": "基础软硬件",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -0.9458107352256775,
+              "keyword_rank": null,
+              "vector_rank": 6,
+              "fusion_score": 0.015151515151515152,
+              "rerank_score": -0.9458107352256775,
+              "focus_matches": 0
+            }
+          ]
+        },
+        {
+          "dataset": "P0",
+          "question_id": "ppt-company-p0-06",
+          "question": "基础模型页提到的平台能力包含哪些模型或数据治理能力？",
+          "question_type": "enumeration",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [
+            "基础模型",
+            "通用大模型",
+            "deepseek",
+            "通义千问",
+            "文心一言",
+            "OCR",
+            "语音识别",
+            "文档增强解析",
+            "知识元数据"
+          ],
+          "expected_hit_pages_or_sections": [
+            "基础模型",
+            "通用大模型",
+            "deepseek",
+            "通义千问",
+            "文心一言",
+            "OCR",
+            "语音识别",
+            "文档增强解析",
+            "知识元数据"
+          ],
+          "rewritten_query": "基础模型页提到的平台能力包含哪些模型或数据治理能力？",
+          "expanded_query": "基础模型页提到的平台能力包含哪些模型或数据治理能力？ 通用大模型 deepseek 通义千问 文心一言 OCR 语音识别 文档增强解析 知识元数据",
+          "focus_terms": [
+            "通用大模型",
+            "deepseek",
+            "通义千问",
+            "文心一言",
+            "OCR",
+            "语音识别",
+            "文档增强解析",
+            "知识元数据"
+          ],
+          "expansion_terms": [
+            "通用大模型",
+            "deepseek",
+            "通义千问",
+            "文心一言",
+            "OCR",
+            "语音识别",
+            "文档增强解析",
+            "知识元数据"
+          ],
+          "grounded": true,
+          "grounded_judgement": "grounded_supported",
+          "coverage_judgement": "sufficient",
+          "expected_answer_keywords": [
+            "deepseek",
+            "通义千问",
+            "文心一言",
+            "OCR"
+          ],
+          "coverage_matched_keywords": [
+            "deepseek",
+            "通义千问",
+            "文心一言"
+          ],
+          "coverage_missing_keywords": [
+            "OCR"
+          ],
+          "grounded_matched_keywords": [
+            "deepseek",
+            "通义千问",
+            "文心一言"
+          ],
+          "grounded_missing_keywords": [
+            "OCR"
+          ],
+          "failure_type": "none",
+          "answer_stage_blocker": "none",
+          "allow_answer_stage": true,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+            "根技术体验中心展厅内涵建设v2-cx.pptx",
+            "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+            "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+          ],
+          "top_k_hit_sections": [
+            "幻灯片 19 / 幻灯片 19 / body",
+            "幻灯片 19 / 幻灯片 19 / body-2",
+            "三、功能与应用场景 / 3.部署本地大模型",
+            "幻灯片 18 / 9、根技术产品模型展示区 / picture-ocr-2",
+            "四、主要硬件参数 / 6.实训与功能模块",
+            "四、主要硬件参数 / 1.运算单元"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-19",
+              "section_path": "幻灯片 19 / 幻灯片 19 / body",
+              "snippet": "用户空间1（知识空间、智能体空间）\n\n用户空间2（知识空间、智能体空间）\n\n展现层\n\n智能体广场\n\n问答智能体\n\n交互智能体\n\n工作流智能体\n\n第三方智能体\n\n应用层\n\n多模态数据治理\n\n智能体应用开发与编排\n\n应用与安全管控\n\n数据采集\n\n智能目录\n\n低代码脚手架\n\nAgent交互组件\n\n应用接入\n\n组织架构\n\n文档增强解析\n\n知识元数据\n\n工作流编排\n\nMCP插件\n\n应用管理\n\n空间管理\n\n音视频增强识别\n\n知识空间/AI检索…",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 4.614923429489135,
+              "keyword_rank": null,
+              "vector_rank": 8,
+              "fusion_score": 0.014705882352941176,
+              "rerank_score": 4.614923429489135,
+              "focus_matches": 2
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-19",
+              "section_path": "幻灯片 19 / 幻灯片 19 / body-2",
+              "snippet": "（deepseek、通义千问、文心一言等）",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 4.402967023849488,
+              "keyword_rank": null,
+              "vector_rank": 6,
+              "fusion_score": 0.015151515151515152,
+              "rerank_score": 4.402967023849488,
+              "focus_matches": 3
+            },
+            {
+              "document_id": "f9fe9826c8b94cd9b17d60943ee7b7a2",
+              "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+              "page_or_slide": "docx",
+              "section_path": "三、功能与应用场景 / 3.部署本地大模型",
+              "snippet": "完成了DeepSeek、Qwen等开源大模型的本地化部署，即部署于本机的运算单元中，除了可以开展大模型基础应用的学习外，还可以利用大模型和配置的视觉、语音、机器人、传感器等设备进行交互，面向如智能制造、智能家居、智慧农业等典型场景，开展应用实践。",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -0.35549819469451904,
+              "keyword_rank": null,
+              "vector_rank": 1,
+              "fusion_score": 0.01639344262295082,
+              "rerank_score": -0.35549819469451904,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "4f5a00713c93459585a83b73a6d70bb9",
+              "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+              "page_or_slide": "slide-18",
+              "section_path": "幻灯片 18 / 9、根技术产品模型展示区 / picture-ocr-2",
+              "snippet": "类复杂程序算法、应用系统的高效稳定运行。 从手机应用、在线学习，到智能推荐、自动驾驶，再到人工智能 大模型的训练与推理，背后都离不开算力的支撑。随着数字经济的发 展，算力正从“看不见的技术能力”，变为像电力一样可感知、可使",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -0.8378285646438599,
+              "keyword_rank": 13,
+              "vector_rank": 16,
+              "fusion_score": 0.026856524873828405,
+              "rerank_score": -0.8378285646438599,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "f9fe9826c8b94cd9b17d60943ee7b7a2",
+              "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+              "page_or_slide": "docx",
+              "section_path": "四、主要硬件参数 / 6.实训与功能模块",
+              "snippet": "该平台在功能设计上，既满足基础的机器人控制教学的需要，同时也满足视觉识别、手眼协同，以及更高层次的大模型+机器人应用的需求。因此，设计有如下实训与功能模块：\n\n（1）仓储模块，支持进行零部件仓储、拆码垛等操作；\n\n（2）视觉识别与分拣模块，支持进行零部件识别与缺陷检测、物体无序抓取与分类等操作；\n\n（3）语音交互模块，支持通过语音方式控制机器人运动，以及与大模型的交互。",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -1.1859701871871948,
+              "keyword_rank": null,
+              "vector_rank": 7,
+              "fusion_score": 0.014925373134328358,
+              "rerank_score": -1.1859701871871948,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "f9fe9826c8b94cd9b17d60943ee7b7a2",
+              "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+              "page_or_slide": "docx",
+              "section_path": "四、主要硬件参数 / 1.运算单元",
+              "snippet": "采用一台高性能计算机，预装Linux或Windows操作系统，部署DeepSeek、Qwen等开源大模型，并集成Python、OpenCV等运行环境，以及产品运行所需的全部软件框架和SDK，支持数字图像处理、机器视觉、机器人、大模型等硬件或应用的开发和学习。\n\n主要技术参数和特点如下：\n\n（1）处理器：64位四核以上CPU；内存：16GB以上；存储：512GB以上；显存：12G以上，接口：USB3.0×4、HDMI×1、RJ45×2；…",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -1.40525598526001,
+              "keyword_rank": null,
+              "vector_rank": 9,
+              "fusion_score": 0.014492753623188406,
+              "rerank_score": -1.40525598526001,
+              "focus_matches": 0
+            }
+          ]
+        },
+        {
+          "dataset": "P0",
+          "question_id": "ppt-company-p0-07",
+          "question": "产教融合人才培养整体解决方案“1+1+N”包含哪些服务模块？",
+          "question_type": "enumeration",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [
+            "产教融合人才培养整体解决方案",
+            "师资培养服务",
+            "教学资源开发服务",
+            "科学研究服务",
+            "人才培养服务"
+          ],
+          "expected_hit_pages_or_sections": [
+            "产教融合人才培养整体解决方案",
+            "师资培养服务",
+            "教学资源开发服务",
+            "科学研究服务",
+            "人才培养服务"
+          ],
+          "rewritten_query": "产教融合人才培养整体解决方案“1+1+N”包含哪些服务模块？",
+          "expanded_query": "产教融合人才培养整体解决方案“1+1+N”包含哪些服务模块？ 功能模块 实训模块 师资培养服务 教学资源开发服务 科学研究服务 人才培养服务",
+          "focus_terms": [
+            "功能模块",
+            "实训模块",
+            "师资培养服务",
+            "教学资源开发服务",
+            "科学研究服务",
+            "人才培养服务"
+          ],
+          "expansion_terms": [
+            "功能模块",
+            "实训模块",
+            "师资培养服务",
+            "教学资源开发服务",
+            "科学研究服务",
+            "人才培养服务"
+          ],
+          "grounded": true,
+          "grounded_judgement": "grounded_supported",
+          "coverage_judgement": "sufficient",
+          "expected_answer_keywords": [
+            "师资培养服务",
+            "教学资源开发服务",
+            "科学研究服务",
+            "人才培养服务"
+          ],
+          "coverage_matched_keywords": [
+            "师资培养服务",
+            "教学资源开发服务",
+            "科学研究服务",
+            "人才培养服务"
+          ],
+          "coverage_missing_keywords": [],
+          "grounded_matched_keywords": [
+            "师资培养服务",
+            "教学资源开发服务",
+            "科学研究服务",
+            "人才培养服务"
+          ],
+          "grounded_missing_keywords": [],
+          "failure_type": "none",
+          "answer_stage_blocker": "none",
+          "allow_answer_stage": true,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+            "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx"
+          ],
+          "top_k_hit_sections": [
+            "幻灯片 20 / 幻灯片 20 / body",
+            "幻灯片 69 / 幻灯片 69 / body-7",
+            "幻灯片 11 / 幻灯片 11 / body",
+            "幻灯片 19 / 幻灯片 19 / body",
+            "运营思路及核心运营模块 / 社会服务运营",
+            "幻灯片 82 / 幻灯片 82 / body"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-20",
+              "section_path": "幻灯片 20 / 幻灯片 20 / body",
+              "snippet": "AI人才培养与素养提升\n\n产教融合人才培养整体解决方案（1+1+N)\n\n构建“政-行-企-校” 多元协同育人新生态\n\n高等院校\n\n人才培养服务\n\n师资培养服务\n\n教学资源开发服务\n\n科学研究服务\n\n计算机类专业\n\n产教融合运营平台",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 8.79112367630005,
+              "keyword_rank": 1,
+              "vector_rank": 1,
+              "fusion_score": 0.03278688524590164,
+              "rerank_score": 8.79112367630005,
+              "focus_matches": 4
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-69",
+              "section_path": "幻灯片 69 / 幻灯片 69 / body-7",
+              "snippet": "1+1+N：（一个模型，双层含义） （1）一个基地、一个产教服务平台、N个产业学院；（2）一个学校、一个运营企业，N生态企业；",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 3.66109414100647,
+              "keyword_rank": null,
+              "vector_rank": 4,
+              "fusion_score": 0.015625,
+              "rerank_score": 3.66109414100647,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-11",
+              "section_path": "幻灯片 11 / 幻灯片 11 / body",
+              "snippet": "轩辕产教融合建设及运营解决方案",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 3.4166996002197267,
+              "keyword_rank": 3,
+              "vector_rank": null,
+              "fusion_score": 0.015873015873015872,
+              "rerank_score": 3.4166996002197267,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "ceef28f021264706bfd248fa6ab1c578",
+              "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+              "page_or_slide": "slide-19",
+              "section_path": "幻灯片 19 / 幻灯片 19 / body",
+              "snippet": "第一阶段建设内容总揽\n\n本次建设方案包含产教融合实践基地、根技术课程体系、根技术支撑平台、以及配套的师资服务和运营服务体系建设等四大部分。\n\n根技术产教融合实践基地\n\n通识课程体系开发\n\n支撑平台建设\n\n产教融合配套服务体系",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": 3.0237776756286623,
+              "keyword_rank": null,
+              "vector_rank": 2,
+              "fusion_score": 0.016129032258064516,
+              "rerank_score": 3.0237776756286623,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "719a2a768cd148c08925617cf1ddf3cf",
+              "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+              "page_or_slide": "docx",
+              "section_path": "运营思路及核心运营模块 / 社会服务运营",
+              "snippet": "。\n1. 企业员工技能培训\n聚焦企业数字化转型中人才技能升级需求，合作期内，校企共同开展≥30人次的企业内训服务。校企双方共同负责培训推广招生、培训组织及交付，助力企业快速培育适配产业发展的技术人才，强化核心竞争力。\n1. 政府智慧办公培训\n\n合作期内， 校企共同为政府人员开展≥30人次的AI赋能培训服务。校企双方共同负责培训推广招生、培训组织及交付，助力提升政府人员的智慧办公实操能力，赋能政务工作的数字化效率升级。\n\n1. 社会人员…",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": 2.751017141342163,
+              "keyword_rank": null,
+              "vector_rank": 3,
+              "fusion_score": 0.015873015873015872,
+              "rerank_score": 2.751017141342163,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-82",
+              "section_path": "幻灯片 82 / 幻灯片 82 / body",
+              "snippet": "产业学院建设总体思路V1.0\n\n总体思路“１＋１＋N”\n\n企业\n\n政府\n\n政策支持\n\n资金支持\n\n激励补助\n\n行业\n\n标准制定\n\n行业咨询\n\n华为、海康、腾讯、探迹、商汤、科大讯飞…\n\n产教头部企业\n\n学校\n\n产教融合信息服务平台\n\n资源导入",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 2.5785667419433596,
+              "keyword_rank": null,
+              "vector_rank": 5,
+              "fusion_score": 0.015384615384615385,
+              "rerank_score": 2.5785667419433596,
+              "focus_matches": 0
+            }
+          ]
+        },
+        {
+          "dataset": "P0",
+          "question_id": "ppt-company-p0-08",
+          "question": "PPT 是否明确给出了轩辕网络的营收规模或员工总数？",
+          "question_type": "factoid",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [],
+          "expected_hit_pages_or_sections": [],
+          "rewritten_query": "PPT 是否明确给出了轩辕网络的营收规模或员工总数？",
+          "expanded_query": "PPT 是否明确给出了轩辕网络的营收规模或员工总数？",
+          "focus_terms": [],
+          "expansion_terms": [],
+          "grounded": false,
+          "grounded_judgement": "correct_negative",
+          "coverage_judgement": "not_applicable",
+          "expected_answer_keywords": [
+            "未直接提到"
+          ],
+          "coverage_matched_keywords": [],
+          "coverage_missing_keywords": [
+            "未直接提到"
+          ],
+          "grounded_matched_keywords": [],
+          "grounded_missing_keywords": [
+            "未直接提到"
+          ],
+          "failure_type": "parser_upstream",
+          "answer_stage_blocker": "none",
+          "allow_answer_stage": true,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx"
+          ],
+          "top_k_hit_sections": [
+            "幻灯片 9 / 幻灯片 9 / body",
+            "幻灯片 9 / 幻灯片 9 / body",
+            "幻灯片 33 / 幻灯片 33 / body",
+            "幻灯片 4 / 幻灯片 4 / body-1",
+            "幻灯片 33 / 幻灯片 33 / body-1",
+            "幻灯片 33 / 幻灯片 33 / body"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-9",
+              "section_path": "幻灯片 9 / 幻灯片 9 / body",
+              "snippet": "轩辕网络副总裁、轩辕研究院院长，人工智能高级工程师职称，广州大学校外硕士生导师、广东省产教融合促进会产教融合专家、第二届广州·琶洲算法大赛评委导师、华为鲲鹏开发者专家。主持及参与了多项省级重点科研项目，长期从事通用人工智能、大语言模型、知识图谱、复杂网络及数据挖掘等人工智能领域的研究和开发工作。\n\n轩辕研究院首席科学家，北京大学博士后，暨南大学计算机科学系教授，中国人工智能学会(CAAI)智能服务专委会委员、中国计算机学会(CCF)语…",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -0.8989621520042421,
+              "keyword_rank": null,
+              "vector_rank": 10,
+              "fusion_score": 0.014285714285714285,
+              "rerank_score": -0.8989621520042421,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-9",
+              "section_path": "幻灯片 9 / 幻灯片 9 / body",
+              "snippet": "轩辕研究院专家团队\n\n陈统\n\n管震\n\n黄永健\n\n陈清亮\n\n冯元勇\n\n谢赟\n\n轩辕网络 董事长\n\n智用研究院 CEO\n\n轩辕研究院院长、博士\n\n教授、博士\n\n高级工程师、博士\n\n上海德拓 董事长\n\n轩辕网络董事长、天河区政协第七八九届委员会委员。广东科技创业领军人才、广州市优秀专家、天河区优秀人才、广东省和广州市软件风云人物。主持及参与了10余项国家、省市级科研项目，获得了授权发明专利8件，参与制定多项国家/行业标准，策划出版云计算大数…",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -2.368071985244751,
+              "keyword_rank": 13,
+              "vector_rank": 6,
+              "fusion_score": 0.028850145288501453,
+              "rerank_score": -2.368071985244751,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-33",
+              "section_path": "幻灯片 33 / 幻灯片 33 / body",
+              "snippet": "2025年轩辕网络联合全国多所高校专业教师及国内人工智能厂商的一线工程师共同开发编写人工智能专业系列教材。\n\n轩辕网络与全国多所高校专业教师及国内大数据厂商的一线工程师共同开发编写了6本大数据系列教材。\n\n已出版\n\n十四五规划教材\n\n2024年轩辕网络将联合全国多所高校专业教师及国内大数据厂商的一线工程师共同开发编写8本大数据专业系列教材。",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -2.641363269632513,
+              "keyword_rank": 14,
+              "vector_rank": 9,
+              "fusion_score": 0.028006267136701922,
+              "rerank_score": -2.641363269632513,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-4",
+              "section_path": "幻灯片 4 / 幻灯片 4 / body-1",
+              "snippet": "广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。公司成立于1998年，于2014年正式在新三板挂牌，证券简称“轩辕网络”, 证券代码“830891”。",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -2.660513859987259,
+              "keyword_rank": 2,
+              "vector_rank": 3,
+              "fusion_score": 0.03200204813108039,
+              "rerank_score": -2.660513859987259,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-33",
+              "section_path": "幻灯片 33 / 幻灯片 33 / body-1",
+              "snippet": "轩辕大数据",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -3.2040798664093018,
+              "keyword_rank": 4,
+              "vector_rank": 1,
+              "fusion_score": 0.032018442622950824,
+              "rerank_score": -3.2040798664093018,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-33",
+              "section_path": "幻灯片 33 / 幻灯片 33 / body",
+              "snippet": "轩辕网络与全国多所高校专业教师及国内云计算厂商的一线工程师共同开发编写了7本云计算专业系列教材。\n\n已出版\n\n2024年轩辕网络将联合全国多所高校专业教师及国内云计算厂商的一线工程师共同开发编写8本云计算专业系列教材。",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -3.2936315493150192,
+              "keyword_rank": 5,
+              "vector_rank": 8,
+              "fusion_score": 0.030090497737556562,
+              "rerank_score": -3.2936315493150192,
+              "focus_matches": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "P1",
+      "source": "data/evals/ppt_company_p1_8.json",
+      "summary": {
+        "total_cases": 8,
+        "answer_ready_cases": 7,
+        "failure_counts": {
+          "none": 8
+        },
+        "answer_stage_blocker_counts": {
+          "none": 7,
+          "grounding_insufficient": 1
+        },
+        "answer_ready_question_ids": [
+          "ppt-company-p1-01",
+          "ppt-company-p1-02",
+          "ppt-company-p1-03",
+          "ppt-company-p1-04",
+          "ppt-company-p1-06",
+          "ppt-company-p1-07",
+          "ppt-company-p1-08"
+        ],
+        "blocked_question_ids": [
+          "ppt-company-p1-05"
+        ]
+      },
+      "questions": [
+        {
+          "dataset": "P1",
+          "question_id": "ppt-company-p1-01",
+          "question": "这份轩辕网络公司介绍 PPT 的目录中是否包含“与华为同行”这一部分？",
+          "question_type": "factoid",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [
+            "CONTENTS",
+            "与华为同行"
+          ],
+          "expected_hit_pages_or_sections": [
+            "CONTENTS",
+            "与华为同行"
+          ],
+          "rewritten_query": "这份轩辕网络公司介绍 PPT 的目录中是否包含“与华为同行”这一部分？",
+          "expanded_query": "这份轩辕网络公司介绍 PPT 的目录中是否包含“与华为同行”这一部分？ CONTENTS",
+          "focus_terms": [
+            "CONTENTS"
+          ],
+          "expansion_terms": [
+            "CONTENTS"
+          ],
+          "grounded": true,
+          "grounded_judgement": "grounded_supported",
+          "coverage_judgement": "not_applicable",
+          "expected_answer_keywords": [
+            "与华为同行"
+          ],
+          "coverage_matched_keywords": [
+            "与华为同行"
+          ],
+          "coverage_missing_keywords": [],
+          "grounded_matched_keywords": [
+            "与华为同行"
+          ],
+          "grounded_missing_keywords": [],
+          "failure_type": "none",
+          "answer_stage_blocker": "none",
+          "allow_answer_stage": true,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "华为ICT学院手册 2024-2025.pdf",
+            "华为ICT学院手册 2024-2025.pdf",
+            "华为ICT学院手册 2024-2025.pdf",
+            "华为ICT学院手册 2024-2025.pdf"
+          ],
+          "top_k_hit_sections": [
+            "幻灯片 2 / 幻灯片 2 / body",
+            "幻灯片 4 / 幻灯片 4 / body-1",
+            "第 9 页 / 图片 OCR 7-2",
+            "第 9 页 / 图片 OCR 8-2",
+            "第 9 页 / 图片 OCR 9-2",
+            "第 10 页 / 图片 OCR 3-2"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-2",
+              "section_path": "幻灯片 2 / 幻灯片 2 / body",
+              "snippet": "01\n\n公司概况\n\n02\n\n产教融合业务及实践分享\n\nCONTENTS\n\n03\n\n标杆案例\n\n04\n\n与华为同行",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 3.7703950881958006,
+              "keyword_rank": null,
+              "vector_rank": 1,
+              "fusion_score": 0.01639344262295082,
+              "rerank_score": 3.7703950881958006,
+              "focus_matches": 1
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-4",
+              "section_path": "幻灯片 4 / 幻灯片 4 / body-1",
+              "snippet": "广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。公司成立于1998年，于2014年正式在新三板挂牌，证券简称“轩辕网络”, 证券代码“830891”。",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -3.1810617446899414,
+              "keyword_rank": 3,
+              "vector_rank": 5,
+              "fusion_score": 0.03125763125763126,
+              "rerank_score": -3.1810617446899414,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "51cda55bc92048168878c32cd4582278",
+              "file_name": "华为ICT学院手册 2024-2025.pdf",
+              "page_or_slide": "page-9",
+              "section_path": "第 9 页 / 图片 OCR 7-2",
+              "snippet": "华为信息与网络",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -3.3747951984405518,
+              "keyword_rank": null,
+              "vector_rank": 6,
+              "fusion_score": 0.015151515151515152,
+              "rerank_score": -3.3747951984405518,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "51cda55bc92048168878c32cd4582278",
+              "file_name": "华为ICT学院手册 2024-2025.pdf",
+              "page_or_slide": "page-9",
+              "section_path": "第 9 页 / 图片 OCR 8-2",
+              "snippet": "华为信息与网络",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -3.3747951984405518,
+              "keyword_rank": null,
+              "vector_rank": 7,
+              "fusion_score": 0.014925373134328358,
+              "rerank_score": -3.3747951984405518,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "51cda55bc92048168878c32cd4582278",
+              "file_name": "华为ICT学院手册 2024-2025.pdf",
+              "page_or_slide": "page-9",
+              "section_path": "第 9 页 / 图片 OCR 9-2",
+              "snippet": "华为信息与网络",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -3.3747951984405518,
+              "keyword_rank": null,
+              "vector_rank": 8,
+              "fusion_score": 0.014705882352941176,
+              "rerank_score": -3.3747951984405518,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "51cda55bc92048168878c32cd4582278",
+              "file_name": "华为ICT学院手册 2024-2025.pdf",
+              "page_or_slide": "page-10",
+              "section_path": "第 10 页 / 图片 OCR 3-2",
+              "snippet": "华为信息与网络",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -3.3747951984405518,
+              "keyword_rank": null,
+              "vector_rank": 9,
+              "fusion_score": 0.014492753623188406,
+              "rerank_score": -3.3747951984405518,
+              "focus_matches": 0
+            }
+          ]
+        },
+        {
+          "dataset": "P1",
+          "question_id": "ppt-company-p1-02",
+          "question": "目录页除了公司概况，还列出了哪三部分？",
+          "question_type": "enumeration",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [
+            "CONTENTS",
+            "产教融合业务及实践分享",
+            "标杆案例",
+            "与华为同行"
+          ],
+          "expected_hit_pages_or_sections": [
+            "CONTENTS",
+            "产教融合业务及实践分享",
+            "标杆案例",
+            "与华为同行"
+          ],
+          "rewritten_query": "目录页除了公司概况，还列出了哪三部分？",
+          "expanded_query": "目录页除了公司概况，还列出了哪三部分？ CONTENTS",
+          "focus_terms": [
+            "CONTENTS"
+          ],
+          "expansion_terms": [
+            "CONTENTS"
+          ],
+          "grounded": true,
+          "grounded_judgement": "grounded_supported",
+          "coverage_judgement": "sufficient",
+          "expected_answer_keywords": [
+            "产教融合业务及实践分享",
+            "标杆案例",
+            "与华为同行"
+          ],
+          "coverage_matched_keywords": [
+            "产教融合业务及实践分享",
+            "标杆案例",
+            "与华为同行"
+          ],
+          "coverage_missing_keywords": [],
+          "grounded_matched_keywords": [
+            "产教融合业务及实践分享",
+            "标杆案例",
+            "与华为同行"
+          ],
+          "grounded_missing_keywords": [],
+          "failure_type": "none",
+          "answer_stage_blocker": "none",
+          "allow_answer_stage": true,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "根技术体验中心展厅内涵建设v2-cx.pptx",
+            "根技术体验中心展厅内涵建设v2-cx.pptx",
+            "华为ICT学院手册 2024-2025.pdf",
+            "华为ICT学院手册 2024-2025.pdf"
+          ],
+          "top_k_hit_sections": [
+            "幻灯片 2 / 幻灯片 2 / body",
+            "幻灯片 3 / 幻灯片 3 / body",
+            "幻灯片 2 / 幻灯片 2 / picture-ocr-50",
+            "幻灯片 11 / 4、产业学院合作成果（电子屏1个，灯箱1个） / body",
+            "第 9 页 / 图片 OCR 26-6",
+            "第 11 页 / OCR 53"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-2",
+              "section_path": "幻灯片 2 / 幻灯片 2 / body",
+              "snippet": "01\n\n公司概况\n\n02\n\n产教融合业务及实践分享\n\nCONTENTS\n\n03\n\n标杆案例\n\n04\n\n与华为同行",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 3.3947107911109926,
+              "keyword_rank": 2,
+              "vector_rank": 2,
+              "fusion_score": 0.03225806451612903,
+              "rerank_score": 3.3947107911109926,
+              "focus_matches": 1
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-3",
+              "section_path": "幻灯片 3 / 幻灯片 3 / body",
+              "snippet": "01 公司概况\n\n28\n\n年教育深耕者\n\n专注产教融合 · 成就职业教育未来",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -0.41755290031433123,
+              "keyword_rank": 1,
+              "vector_rank": null,
+              "fusion_score": 0.01639344262295082,
+              "rerank_score": -0.41755290031433123,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "4f5a00713c93459585a83b73a6d70bb9",
+              "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+              "page_or_slide": "slide-2",
+              "section_path": "幻灯片 2 / 幻灯片 2 / picture-ocr-50",
+              "snippet": "目录，结合产业发展新趋势，持续迭代人",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -1.2743331432342533,
+              "keyword_rank": null,
+              "vector_rank": 1,
+              "fusion_score": 0.01639344262295082,
+              "rerank_score": -1.2743331432342533,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "4f5a00713c93459585a83b73a6d70bb9",
+              "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+              "page_or_slide": "slide-11",
+              "section_path": "幻灯片 11 / 4、产业学院合作成果（电子屏1个，灯箱1个） / body",
+              "snippet": "说明：产业学院组织架构、产业学院简介、产业学院建设三个部分的内容，需要广师大领导提供文案和配图",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -3.291828441619873,
+              "keyword_rank": null,
+              "vector_rank": 12,
+              "fusion_score": 0.013888888888888888,
+              "rerank_score": -3.291828441619873,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "51cda55bc92048168878c32cd4582278",
+              "file_name": "华为ICT学院手册 2024-2025.pdf",
+              "page_or_slide": "page-9",
+              "section_path": "第 9 页 / 图片 OCR 26-6",
+              "snippet": "为技术南限公司编",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -4.3939738273620605,
+              "keyword_rank": 12,
+              "vector_rank": null,
+              "fusion_score": 0.013888888888888888,
+              "rerank_score": -4.3939738273620605,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "51cda55bc92048168878c32cd4582278",
+              "file_name": "华为ICT学院手册 2024-2025.pdf",
+              "page_or_slide": "page-11",
+              "section_path": "第 11 页 / OCR 53",
+              "snippet": "明细",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -4.462160587310791,
+              "keyword_rank": null,
+              "vector_rank": 11,
+              "fusion_score": 0.014084507042253521,
+              "rerank_score": -4.462160587310791,
+              "focus_matches": 0
+            }
+          ]
+        },
+        {
+          "dataset": "P1",
+          "question_id": "ppt-company-p1-03",
+          "question": "基础环境页除了算力资源，还提到了哪些场地或平台？",
+          "question_type": "enumeration",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [
+            "基础环境",
+            "数智技术实践中心",
+            "产业技术及应用展厅",
+            "AIGC实战平台"
+          ],
+          "expected_hit_pages_or_sections": [
+            "基础环境",
+            "数智技术实践中心",
+            "产业技术及应用展厅",
+            "AIGC实战平台"
+          ],
+          "rewritten_query": "基础环境页除了算力资源，还提到了哪些场地或平台？",
+          "expanded_query": "基础环境页除了算力资源，还提到了哪些场地或平台？ 基础设施 平台能力 存储资源 高速网络",
+          "focus_terms": [
+            "基础设施",
+            "平台能力",
+            "存储资源",
+            "高速网络"
+          ],
+          "expansion_terms": [
+            "基础设施",
+            "平台能力",
+            "存储资源",
+            "高速网络"
+          ],
+          "grounded": true,
+          "grounded_judgement": "grounded_supported",
+          "coverage_judgement": "sufficient",
+          "expected_answer_keywords": [
+            "数智技术实践中心",
+            "产业技术及应用展厅",
+            "AIGC实战平台"
+          ],
+          "coverage_matched_keywords": [
+            "数智技术实践中心",
+            "产业技术及应用展厅",
+            "AIGC实战平台"
+          ],
+          "coverage_missing_keywords": [],
+          "grounded_matched_keywords": [
+            "数智技术实践中心",
+            "产业技术及应用展厅",
+            "AIGC实战平台"
+          ],
+          "grounded_missing_keywords": [],
+          "failure_type": "none",
+          "answer_stage_blocker": "none",
+          "allow_answer_stage": true,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "根技术体验中心展厅内涵建设v2-cx.pptx",
+            "根技术体验中心展厅内涵建设v2-cx.pptx"
+          ],
+          "top_k_hit_sections": [
+            "幻灯片 18 / 幻灯片 18 / body",
+            "幻灯片 21 / 幻灯片 21 / body",
+            "幻灯片 19 / 幻灯片 19 / body",
+            "幻灯片 55 / 高校人工智能通识课案例 / body-2",
+            "幻灯片 18 / 9、根技术产品模型展示区 / picture-ocr-22",
+            "幻灯片 18 / 9、根技术产品模型展示区 / picture-ocr-16"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-18",
+              "section_path": "幻灯片 18 / 幻灯片 18 / body",
+              "snippet": "通识课程\n\n专业课程\n\nAI+X课程\n\n数字素养提升\n\n专业化人才培养\n\nAI+微专业课程体系\n\n智能化\n\n职业化\n\n教学能力提升\n\n核心应用\n\n师资/社会培训课程体系\n\n工程化人才培养\n\n产学研能力提升\n\n教材/数字化教学资源\n\nAIGC通识教育平台\n\nAIGC实战平台\n\n轻量大模型\n\n数智底座\n\n通用算力资源\n\n智能算力资源（训练/推理）\n\n高性能存储资源\n\n高速网络\n\n基础环境\n\n数智技术实践中心 （人工智能实训室/数据智能实训…",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 5.033097720146179,
+              "keyword_rank": 7,
+              "vector_rank": 20,
+              "fusion_score": 0.027425373134328357,
+              "rerank_score": 5.033097720146179,
+              "focus_matches": 2
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-21",
+              "section_path": "幻灯片 21 / 幻灯片 21 / body",
+              "snippet": "AI科学计算平台\n\n轩辕星轻量级大模型\n\n智能体应用开发平台\n\n算力资源设施\n\n集群管理\n\n容器引擎\n\n镜像管理\n\n任务调度\n\n负载均衡\n\n资源监控\n\n通用算力资源\n\n智能算力资源（训练/推理）\n\n高性能存储资源\n\n高速网络\n\n基础环境\n\nAI实训室 （AIGC实训室/人工智能综合实训室/数据智能实训室•••）\n\n产业技术及应用展厅\n\nAIGC赋能中心",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 4.7701399031139555,
+              "keyword_rank": 2,
+              "vector_rank": 1,
+              "fusion_score": 0.03252247488101534,
+              "rerank_score": 4.7701399031139555,
+              "focus_matches": 2
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-19",
+              "section_path": "幻灯片 19 / 幻灯片 19 / body",
+              "snippet": "“AI+教育”基础环境\n\n轩辕汇智AI中台",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 0.8530837774276732,
+              "keyword_rank": 3,
+              "vector_rank": null,
+              "fusion_score": 0.015873015873015872,
+              "rerank_score": 0.8530837774276732,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-55",
+              "section_path": "幻灯片 55 / 高校人工智能通识课案例 / body-2",
+              "snippet": "课程+平台+算力设施+实训室建设",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 0.41677453815937043,
+              "keyword_rank": null,
+              "vector_rank": 2,
+              "fusion_score": 0.016129032258064516,
+              "rerank_score": 0.41677453815937043,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "4f5a00713c93459585a83b73a6d70bb9",
+              "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+              "page_or_slide": "slide-18",
+              "section_path": "幻灯片 18 / 9、根技术产品模型展示区 / picture-ocr-22",
+              "snippet": "算力就是新型基础设施",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": 0.10652329474687577,
+              "keyword_rank": 4,
+              "vector_rank": 8,
+              "fusion_score": 0.030330882352941176,
+              "rerank_score": 0.10652329474687577,
+              "focus_matches": 1
+            },
+            {
+              "document_id": "4f5a00713c93459585a83b73a6d70bb9",
+              "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+              "page_or_slide": "slide-18",
+              "section_path": "幻灯片 18 / 9、根技术产品模型展示区 / picture-ocr-16",
+              "snippet": "算力调度平台",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": 0.06071012914180757,
+              "keyword_rank": null,
+              "vector_rank": 7,
+              "fusion_score": 0.014925373134328358,
+              "rerank_score": 0.06071012914180757,
+              "focus_matches": 0
+            }
+          ]
+        },
+        {
+          "dataset": "P1",
+          "question_id": "ppt-company-p1-04",
+          "question": "基础模型页除了通用大模型，还列了哪些感知或解析能力？",
+          "question_type": "enumeration",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [
+            "基础模型",
+            "OCR",
+            "语音识别",
+            "文档增强解析",
+            "知识元数据"
+          ],
+          "expected_hit_pages_or_sections": [
+            "基础模型",
+            "OCR",
+            "语音识别",
+            "文档增强解析",
+            "知识元数据"
+          ],
+          "rewritten_query": "基础模型页除了通用大模型，还列了哪些感知或解析能力？",
+          "expanded_query": "基础模型页除了通用大模型，还列了哪些感知或解析能力？ OCR 语音识别 文档增强解析 知识元数据",
+          "focus_terms": [
+            "OCR",
+            "语音识别",
+            "文档增强解析",
+            "知识元数据"
+          ],
+          "expansion_terms": [
+            "OCR",
+            "语音识别",
+            "文档增强解析",
+            "知识元数据"
+          ],
+          "grounded": true,
+          "grounded_judgement": "grounded_supported",
+          "coverage_judgement": "sufficient",
+          "expected_answer_keywords": [
+            "OCR",
+            "语音识别",
+            "文档增强解析",
+            "知识元数据"
+          ],
+          "coverage_matched_keywords": [
+            "OCR",
+            "语音识别",
+            "文档增强解析",
+            "知识元数据"
+          ],
+          "coverage_missing_keywords": [],
+          "grounded_matched_keywords": [
+            "OCR",
+            "语音识别",
+            "文档增强解析",
+            "知识元数据"
+          ],
+          "grounded_missing_keywords": [],
+          "failure_type": "none",
+          "answer_stage_blocker": "none",
+          "allow_answer_stage": true,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "根技术体验中心展厅内涵建设v2-cx.pptx",
+            "广东技术师范大学-根技术人才培养合作汇报-0.pptx"
+          ],
+          "top_k_hit_sections": [
+            "幻灯片 19 / 幻灯片 19 / body",
+            "幻灯片 19 / 幻灯片 19 / body-2",
+            "幻灯片 19 / 幻灯片 19 / body-1",
+            "幻灯片 19 / 幻灯片 19 / body",
+            "幻灯片 8 / 幻灯片 8 / picture-ocr-69",
+            "幻灯片 28 / 幻灯片 28 / body-19"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-19",
+              "section_path": "幻灯片 19 / 幻灯片 19 / body",
+              "snippet": "用户空间1（知识空间、智能体空间）\n\n用户空间2（知识空间、智能体空间）\n\n展现层\n\n智能体广场\n\n问答智能体\n\n交互智能体\n\n工作流智能体\n\n第三方智能体\n\n应用层\n\n多模态数据治理\n\n智能体应用开发与编排\n\n应用与安全管控\n\n数据采集\n\n智能目录\n\n低代码脚手架\n\nAgent交互组件\n\n应用接入\n\n组织架构\n\n文档增强解析\n\n知识元数据\n\n工作流编排\n\nMCP插件\n\n应用管理\n\n空间管理\n\n音视频增强识别\n\n知识空间/AI检索…",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 5.552968448684329,
+              "keyword_rank": null,
+              "vector_rank": 12,
+              "fusion_score": 0.013888888888888888,
+              "rerank_score": 5.552968448684329,
+              "focus_matches": 2
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-19",
+              "section_path": "幻灯片 19 / 幻灯片 19 / body-2",
+              "snippet": "（OCR、语音识别等）",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 3.768442314863205,
+              "keyword_rank": null,
+              "vector_rank": 1,
+              "fusion_score": 0.01639344262295082,
+              "rerank_score": 3.768442314863205,
+              "focus_matches": 2
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-19",
+              "section_path": "幻灯片 19 / 幻灯片 19 / body-1",
+              "snippet": "通用大模型",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 1.5399011492729189,
+              "keyword_rank": 2,
+              "vector_rank": 17,
+              "fusion_score": 0.029116045245077504,
+              "rerank_score": 1.5399011492729189,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-19",
+              "section_path": "幻灯片 19 / 幻灯片 19 / body",
+              "snippet": "训练专属大模型",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 0.5491374254226685,
+              "keyword_rank": 8,
+              "vector_rank": null,
+              "fusion_score": 0.014705882352941176,
+              "rerank_score": 0.5491374254226685,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "4f5a00713c93459585a83b73a6d70bb9",
+              "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+              "page_or_slide": "slide-8",
+              "section_path": "幻灯片 8 / 幻灯片 8 / picture-ocr-69",
+              "snippet": "大模型基础应用",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -0.48061337471008314,
+              "keyword_rank": 1,
+              "vector_rank": 3,
+              "fusion_score": 0.032266458495966696,
+              "rerank_score": -0.48061337471008314,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "ceef28f021264706bfd248fa6ab1c578",
+              "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+              "page_or_slide": "slide-28",
+              "section_path": "幻灯片 28 / 幻灯片 28 / body-19",
+              "snippet": "语音处理中语音理解、语音识别等概念",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -0.5678608894348143,
+              "keyword_rank": null,
+              "vector_rank": 7,
+              "fusion_score": 0.014925373134328358,
+              "rerank_score": -0.5678608894348143,
+              "focus_matches": 1
+            }
+          ]
+        },
+        {
+          "dataset": "P1",
+          "question_id": "ppt-company-p1-05",
+          "question": "如果只根据 PPT 内容概括，轩辕网络的业务架构主线是什么？",
+          "question_type": "factoid",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [
+            "业务架构",
+            "有产懂教，双轮驱动",
+            "轩辕科教基座建设解决方案",
+            "轩辕产教融合建设及运营解决方案"
+          ],
+          "expected_hit_pages_or_sections": [
+            "业务架构",
+            "有产懂教，双轮驱动",
+            "轩辕科教基座建设解决方案",
+            "轩辕产教融合建设及运营解决方案"
+          ],
+          "rewritten_query": "如果只根据 PPT 内容概括，轩辕网络的业务架构主线是什么？",
+          "expanded_query": "如果只根据 PPT 内容概括，轩辕网络的业务架构主线是什么？ 双轮驱动 解决方案",
+          "focus_terms": [
+            "双轮驱动",
+            "解决方案"
+          ],
+          "expansion_terms": [
+            "双轮驱动",
+            "解决方案"
+          ],
+          "grounded": false,
+          "grounded_judgement": "not_grounded",
+          "coverage_judgement": "not_applicable",
+          "expected_answer_keywords": [
+            "双轮驱动",
+            "科教基座建设解决方案",
+            "产教融合建设及运营解决方案"
+          ],
+          "coverage_matched_keywords": [
+            "双轮驱动",
+            "产教融合建设及运营解决方案"
+          ],
+          "coverage_missing_keywords": [
+            "科教基座建设解决方案"
+          ],
+          "grounded_matched_keywords": [
+            "双轮驱动",
+            "产教融合建设及运营解决方案"
+          ],
+          "grounded_missing_keywords": [
+            "科教基座建设解决方案"
+          ],
+          "failure_type": "none",
+          "answer_stage_blocker": "grounding_insufficient",
+          "allow_answer_stage": false,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx"
+          ],
+          "top_k_hit_sections": [
+            "幻灯片 11 / 幻灯片 11 / body",
+            "幻灯片 11 / 幻灯片 11 / body",
+            "幻灯片 9 / 幻灯片 9 / body",
+            "幻灯片 4 / 幻灯片 4 / body-1",
+            "幻灯片 33 / 幻灯片 33 / body",
+            "幻灯片 15 / 幻灯片 15 / body"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-11",
+              "section_path": "幻灯片 11 / 幻灯片 11 / body",
+              "snippet": "业务架构：有产懂教，双轮驱动",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 7.037164497375489,
+              "keyword_rank": null,
+              "vector_rank": 1,
+              "fusion_score": 0.01639344262295082,
+              "rerank_score": 7.037164497375489,
+              "focus_matches": 1
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-11",
+              "section_path": "幻灯片 11 / 幻灯片 11 / body",
+              "snippet": "轩辕产教融合建设及运营解决方案",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 1.696758770942688,
+              "keyword_rank": 11,
+              "vector_rank": 3,
+              "fusion_score": 0.029957522915269395,
+              "rerank_score": 1.696758770942688,
+              "focus_matches": 1
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-9",
+              "section_path": "幻灯片 9 / 幻灯片 9 / body",
+              "snippet": "轩辕网络副总裁、轩辕研究院院长，人工智能高级工程师职称，广州大学校外硕士生导师、广东省产教融合促进会产教融合专家、第二届广州·琶洲算法大赛评委导师、华为鲲鹏开发者专家。主持及参与了多项省级重点科研项目，长期从事通用人工智能、大语言模型、知识图谱、复杂网络及数据挖掘等人工智能领域的研究和开发工作。\n\n轩辕研究院首席科学家，北京大学博士后，暨南大学计算机科学系教授，中国人工智能学会(CAAI)智能服务专委会委员、中国计算机学会(CCF)语…",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -0.4893588225046796,
+              "keyword_rank": null,
+              "vector_rank": 11,
+              "fusion_score": 0.014084507042253521,
+              "rerank_score": -0.4893588225046796,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-4",
+              "section_path": "幻灯片 4 / 幻灯片 4 / body-1",
+              "snippet": "广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。公司成立于1998年，于2014年正式在新三板挂牌，证券简称“轩辕网络”, 证券代码“830891”。",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -0.9840162098407748,
+              "keyword_rank": 12,
+              "vector_rank": 7,
+              "fusion_score": 0.028814262023217248,
+              "rerank_score": -0.9840162098407748,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-33",
+              "section_path": "幻灯片 33 / 幻灯片 33 / body",
+              "snippet": "2025年轩辕网络联合全国多所高校专业教师及国内人工智能厂商的一线工程师共同开发编写人工智能专业系列教材。\n\n轩辕网络与全国多所高校专业教师及国内大数据厂商的一线工程师共同开发编写了6本大数据系列教材。\n\n已出版\n\n十四五规划教材\n\n2024年轩辕网络将联合全国多所高校专业教师及国内大数据厂商的一线工程师共同开发编写8本大数据专业系列教材。",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -1.0450512766838076,
+              "keyword_rank": 10,
+              "vector_rank": null,
+              "fusion_score": 0.014285714285714285,
+              "rerank_score": -1.0450512766838076,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-15",
+              "section_path": "幻灯片 15 / 幻灯片 15 / body",
+              "snippet": "02 产教融合业务及实践分享\n\n双轮驱动，构建核心优势\n\nDUAL-CORE ENGINE DRIVING CORE BARRIERS",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -1.310763645172119,
+              "keyword_rank": null,
+              "vector_rank": 5,
+              "fusion_score": 0.015384615384615385,
+              "rerank_score": -1.310763645172119,
+              "focus_matches": 1
+            }
+          ]
+        },
+        {
+          "dataset": "P1",
+          "question_id": "ppt-company-p1-06",
+          "question": "战略定位页有没有把轩辕网络定义成“AI+产教融合服务商”？",
+          "question_type": "factoid",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [
+            "战略定位",
+            "AI+产教融合服务商"
+          ],
+          "expected_hit_pages_or_sections": [
+            "战略定位",
+            "AI+产教融合服务商"
+          ],
+          "rewritten_query": "战略定位页有没有把轩辕网络定义成“AI+产教融合服务商”？",
+          "expanded_query": "战略定位页有没有把轩辕网络定义成“AI+产教融合服务商”？",
+          "focus_terms": [],
+          "expansion_terms": [],
+          "grounded": true,
+          "grounded_judgement": "grounded_supported",
+          "coverage_judgement": "not_applicable",
+          "expected_answer_keywords": [
+            "AI+产教融合服务商"
+          ],
+          "coverage_matched_keywords": [
+            "AI+产教融合服务商"
+          ],
+          "coverage_missing_keywords": [],
+          "grounded_matched_keywords": [
+            "AI+产教融合服务商"
+          ],
+          "grounded_missing_keywords": [],
+          "failure_type": "none",
+          "answer_stage_blocker": "none",
+          "allow_answer_stage": true,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx"
+          ],
+          "top_k_hit_sections": [
+            "幻灯片 16 / 幻灯片 16 / body",
+            "幻灯片 4 / 幻灯片 4 / body-1",
+            "幻灯片 9 / 幻灯片 9 / body",
+            "幻灯片 64 / 幻灯片 64 / body",
+            "幻灯片 19 / 幻灯片 19 / body",
+            "幻灯片 80 / 幻灯片 80 / body-1"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-16",
+              "section_path": "幻灯片 16 / 幻灯片 16 / body",
+              "snippet": "战略定位：AI+产教融合服务商\n\n内涵建设\n\n聚焦课程、师资服务、实训平台、人才服务、成果打造等自身软实力持续打造\n\n产教融合基地共建\n\n建成首个产业学院、ICDT等专业建设、产教融合运营服务。产教融合运营能力建设\n\n2023~至今\n\n增加大数据专业建设\n\n品牌“领先的AI+产教融合服务商”\n\n开发大数据专业系列课程、教材、建大数据实验实训平台、大数据实验室建设。与新华三打造联合解决方案向学校提供大数据专业建设服务。\n\n正式对外宣传“…",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 5.1801848888397215,
+              "keyword_rank": null,
+              "vector_rank": 5,
+              "fusion_score": 0.015384615384615385,
+              "rerank_score": 5.1801848888397215,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-4",
+              "section_path": "幻灯片 4 / 幻灯片 4 / body-1",
+              "snippet": "广东轩辕网络科技股份有限公司是业内领先的AI+产教融合服务商。公司成立于1998年，于2014年正式在新三板挂牌，证券简称“轩辕网络”, 证券代码“830891”。",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 3.7812347412109375,
+              "keyword_rank": 3,
+              "vector_rank": 1,
+              "fusion_score": 0.032266458495966696,
+              "rerank_score": 3.7812347412109375,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-9",
+              "section_path": "幻灯片 9 / 幻灯片 9 / body",
+              "snippet": "轩辕网络副总裁、轩辕研究院院长，人工智能高级工程师职称，广州大学校外硕士生导师、广东省产教融合促进会产教融合专家、第二届广州·琶洲算法大赛评委导师、华为鲲鹏开发者专家。主持及参与了多项省级重点科研项目，长期从事通用人工智能、大语言模型、知识图谱、复杂网络及数据挖掘等人工智能领域的研究和开发工作。\n\n轩辕研究院首席科学家，北京大学博士后，暨南大学计算机科学系教授，中国人工智能学会(CAAI)智能服务专委会委员、中国计算机学会(CCF)语…",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 0.554663836956024,
+              "keyword_rank": null,
+              "vector_rank": 9,
+              "fusion_score": 0.014492753623188406,
+              "rerank_score": 0.554663836956024,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-64",
+              "section_path": "幻灯片 64 / 幻灯片 64 / body",
+              "snippet": "产业学院建设部分案例\n\n产业学院（高职）\n\n科学城产业学院\n\n松山粤北大数据学院\n\n以“线上/线下”一体化运营能力为底座，采用“校联校”、“企联企”合作模式，联合华为、联想、轩辕网络、华韶数智等多家企业共建的现代产业学院。\n\n产业学院深入贯彻“把专业建在产业链上、把学校建在产业园区里”的“产教融合、校企合作”改革理念。 以轩辕网络产教融合信息服务平台为线上运营技术支撑，通过1+1+N模式，打造全国一流的优质产教融合示范基地。\n\n产业学…",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 0.553537845611572,
+              "keyword_rank": null,
+              "vector_rank": 14,
+              "fusion_score": 0.013513513513513514,
+              "rerank_score": 0.553537845611572,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-19",
+              "section_path": "幻灯片 19 / 幻灯片 19 / body",
+              "snippet": "“AI+教育”基础环境\n\n轩辕汇智AI中台",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 0.0002360910177230946,
+              "keyword_rank": 12,
+              "vector_rank": null,
+              "fusion_score": 0.013888888888888888,
+              "rerank_score": 0.0002360910177230946,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-80",
+              "section_path": "幻灯片 80 / 幻灯片 80 / body-1",
+              "snippet": "2024-2025年，提升教育服务的智能化水平，研发轩辕AIGC实战平台、轩辕星大模型",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -0.20712064504623412,
+              "keyword_rank": 2,
+              "vector_rank": 8,
+              "fusion_score": 0.030834914611005692,
+              "rerank_score": -0.20712064504623412,
+              "focus_matches": 0
+            }
+          ]
+        },
+        {
+          "dataset": "P1",
+          "question_id": "ppt-company-p1-07",
+          "question": "“1+1+N”整体解决方案里，PPT 至少列出的四项服务是什么？",
+          "question_type": "enumeration",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [
+            "产教融合人才培养整体解决方案",
+            "师资培养服务",
+            "教学资源开发服务",
+            "科学研究服务",
+            "人才培养服务"
+          ],
+          "expected_hit_pages_or_sections": [
+            "产教融合人才培养整体解决方案",
+            "师资培养服务",
+            "教学资源开发服务",
+            "科学研究服务",
+            "人才培养服务"
+          ],
+          "rewritten_query": "“1+1+N”整体解决方案里，PPT 至少列出的四项服务是什么？",
+          "expanded_query": "“1+1+N”整体解决方案里，PPT 至少列出的四项服务是什么？ 师资培养服务 教学资源开发服务 科学研究服务 人才培养服务",
+          "focus_terms": [
+            "师资培养服务",
+            "教学资源开发服务",
+            "科学研究服务",
+            "人才培养服务"
+          ],
+          "expansion_terms": [
+            "师资培养服务",
+            "教学资源开发服务",
+            "科学研究服务",
+            "人才培养服务"
+          ],
+          "grounded": true,
+          "grounded_judgement": "grounded_supported",
+          "coverage_judgement": "sufficient",
+          "expected_answer_keywords": [
+            "师资培养服务",
+            "教学资源开发服务",
+            "科学研究服务",
+            "人才培养服务"
+          ],
+          "coverage_matched_keywords": [
+            "师资培养服务",
+            "教学资源开发服务",
+            "科学研究服务",
+            "人才培养服务"
+          ],
+          "coverage_missing_keywords": [],
+          "grounded_matched_keywords": [
+            "师资培养服务",
+            "教学资源开发服务",
+            "科学研究服务",
+            "人才培养服务"
+          ],
+          "grounded_missing_keywords": [],
+          "failure_type": "none",
+          "answer_stage_blocker": "none",
+          "allow_answer_stage": true,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+            "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "【公司介绍】轩辕网络公司介绍202606.pptx"
+          ],
+          "top_k_hit_sections": [
+            "幻灯片 20 / 幻灯片 20 / body",
+            "幻灯片 35 / 幻灯片 35 / body",
+            "幻灯片 36 / 幻灯片 36 / body",
+            "幻灯片 69 / 幻灯片 69 / body-5",
+            "幻灯片 69 / 幻灯片 69 / body-7",
+            "幻灯片 82 / 幻灯片 82 / body-1"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-20",
+              "section_path": "幻灯片 20 / 幻灯片 20 / body",
+              "snippet": "AI人才培养与素养提升\n\n产教融合人才培养整体解决方案（1+1+N)\n\n构建“政-行-企-校” 多元协同育人新生态\n\n高等院校\n\n人才培养服务\n\n师资培养服务\n\n教学资源开发服务\n\n科学研究服务\n\n计算机类专业\n\n产教融合运营平台",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 4.095160341262817,
+              "keyword_rank": 7,
+              "vector_rank": 1,
+              "fusion_score": 0.03131881575727918,
+              "rerank_score": 4.095160341262817,
+              "focus_matches": 4
+            },
+            {
+              "document_id": "ceef28f021264706bfd248fa6ab1c578",
+              "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+              "page_or_slide": "slide-35",
+              "section_path": "幻灯片 35 / 幻灯片 35 / body",
+              "snippet": "‌人才培养服务",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": 0.8719192743301392,
+              "keyword_rank": null,
+              "vector_rank": 3,
+              "fusion_score": 0.015873015873015872,
+              "rerank_score": 0.8719192743301392,
+              "focus_matches": 1
+            },
+            {
+              "document_id": "ceef28f021264706bfd248fa6ab1c578",
+              "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+              "page_or_slide": "slide-36",
+              "section_path": "幻灯片 36 / 幻灯片 36 / body",
+              "snippet": "‌人才培养服务",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": 0.8719192743301392,
+              "keyword_rank": null,
+              "vector_rank": 4,
+              "fusion_score": 0.015625,
+              "rerank_score": 0.8719192743301392,
+              "focus_matches": 1
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-69",
+              "section_path": "幻灯片 69 / 幻灯片 69 / body-5",
+              "snippet": "培养服务。",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 0.8240284323692322,
+              "keyword_rank": null,
+              "vector_rank": 7,
+              "fusion_score": 0.014925373134328358,
+              "rerank_score": 0.8240284323692322,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-69",
+              "section_path": "幻灯片 69 / 幻灯片 69 / body-7",
+              "snippet": "1+1+N：（一个模型，双层含义） （1）一个基地、一个产教服务平台、N个产业学院；（2）一个学校、一个运营企业，N生态企业；",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": 0.46690261363983154,
+              "keyword_rank": 11,
+              "vector_rank": 13,
+              "fusion_score": 0.027783137179239824,
+              "rerank_score": 0.46690261363983154,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-82",
+              "section_path": "幻灯片 82 / 幻灯片 82 / body-1",
+              "snippet": "企业资源服务、教学资源服务、",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -0.005137048661708832,
+              "keyword_rank": null,
+              "vector_rank": 5,
+              "fusion_score": 0.015384615384615385,
+              "rerank_score": -0.005137048661708832,
+              "focus_matches": 0
+            }
+          ]
+        },
+        {
+          "dataset": "P1",
+          "question_id": "ppt-company-p1-08",
+          "question": "这份 PPT 有没有明确给出公司员工总数、门店数量或营收金额？",
+          "question_type": "factoid",
+          "expected_file": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "expected_section_keywords": [],
+          "expected_hit_pages_or_sections": [],
+          "rewritten_query": "这份 PPT 有没有明确给出公司员工总数、门店数量或营收金额？",
+          "expanded_query": "这份 PPT 有没有明确给出公司员工总数、门店数量或营收金额？",
+          "focus_terms": [],
+          "expansion_terms": [],
+          "grounded": false,
+          "grounded_judgement": "correct_negative",
+          "coverage_judgement": "not_applicable",
+          "expected_answer_keywords": [
+            "未直接提到"
+          ],
+          "coverage_matched_keywords": [],
+          "coverage_missing_keywords": [
+            "未直接提到"
+          ],
+          "grounded_matched_keywords": [],
+          "grounded_missing_keywords": [
+            "未直接提到"
+          ],
+          "failure_type": "none",
+          "answer_stage_blocker": "none",
+          "allow_answer_stage": true,
+          "used_fallback": false,
+          "fallback_reason": "",
+          "backend_path": "local",
+          "route_reason": "local_direct",
+          "remote_attempted": false,
+          "local_top_score": null,
+          "local_quality_score": null,
+          "remote_quality_score": null,
+          "local_grounded_score_threshold": null,
+          "top_k_hit_files": [
+            "华为ICT学院手册 2024-2025.pdf",
+            "华为ICT学院手册 2024-2025.pdf",
+            "【公司介绍】轩辕网络公司介绍202606.pptx",
+            "根技术体验中心展厅内涵建设v2-cx.pptx",
+            "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+            "华为ICT学院手册 2024-2025.pdf"
+          ],
+          "top_k_hit_sections": [
+            "第 6 页 / OCR 75",
+            "第 11 页 / OCR 53",
+            "幻灯片 63 / 幻灯片 63 / body-2",
+            "幻灯片 2 / 幻灯片 2 / picture-ocr-8",
+            "幻灯片 12 / 幻灯片 12 / body-1",
+            "第 11 页 / 图片 OCR 2-18"
+          ],
+          "top_k_hits": [
+            {
+              "document_id": "51cda55bc92048168878c32cd4582278",
+              "file_name": "华为ICT学院手册 2024-2025.pdf",
+              "page_or_slide": "page-6",
+              "section_path": "第 6 页 / OCR 75",
+              "snippet": "授课PPT",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -4.4964919090271,
+              "keyword_rank": null,
+              "vector_rank": 1,
+              "fusion_score": 0.01639344262295082,
+              "rerank_score": -4.4964919090271,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "51cda55bc92048168878c32cd4582278",
+              "file_name": "华为ICT学院手册 2024-2025.pdf",
+              "page_or_slide": "page-11",
+              "section_path": "第 11 页 / OCR 53",
+              "snippet": "明细",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -4.577870845794678,
+              "keyword_rank": null,
+              "vector_rank": 3,
+              "fusion_score": 0.015873015873015872,
+              "rerank_score": -4.577870845794678,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+              "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+              "page_or_slide": "slide-63",
+              "section_path": "幻灯片 63 / 幻灯片 63 / body-2",
+              "snippet": "个真实企业案例 份PPT 课件 分钟原创二维动画",
+              "trust_level": "internal",
+              "source_type": "bootstrap",
+              "score": -4.7792792320251465,
+              "keyword_rank": null,
+              "vector_rank": 2,
+              "fusion_score": 0.016129032258064516,
+              "rerank_score": -4.7792792320251465,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "4f5a00713c93459585a83b73a6d70bb9",
+              "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+              "page_or_slide": "slide-2",
+              "section_path": "幻灯片 2 / 幻灯片 2 / picture-ocr-8",
+              "snippet": "企业",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -4.787858963012695,
+              "keyword_rank": null,
+              "vector_rank": 5,
+              "fusion_score": 0.015384615384615385,
+              "rerank_score": -4.787858963012695,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "ceef28f021264706bfd248fa6ab1c578",
+              "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+              "page_or_slide": "slide-12",
+              "section_path": "幻灯片 12 / 幻灯片 12 / body-1",
+              "snippet": "企业",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -4.7878618240356445,
+              "keyword_rank": null,
+              "vector_rank": 4,
+              "fusion_score": 0.015625,
+              "rerank_score": -4.7878618240356445,
+              "focus_matches": 0
+            },
+            {
+              "document_id": "51cda55bc92048168878c32cd4582278",
+              "file_name": "华为ICT学院手册 2024-2025.pdf",
+              "page_or_slide": "page-11",
+              "section_path": "第 11 页 / 图片 OCR 2-18",
+              "snippet": "广联达科技股份有限公司",
+              "trust_level": "internal",
+              "source_type": "official_import",
+              "score": -5.862105369567871,
+              "keyword_rank": 3,
+              "vector_rank": null,
+              "fusion_score": 0.015873015873015872,
+              "rerank_score": -5.862105369567871,
+              "focus_matches": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "assumptions": [
+    "本轮属于能力判断层，不是正式回归验收。",
+    "RAGFlow 现象不作为能力结论；本诊断强制使用本地 hybrid 链路。",
+    "新增 PPT 当前正式库未入链，本诊断通过隔离运行态 bootstrap 新 PPT 做本地召回验证。",
+    "route_probe 仅记录按正式后端配置运行时的选路现象或异常，不把远端现象直接写成能力结论。"
+  ],
+  "parser_anomaly_source": "docs/thread-parser-anomaly-list.md",
+  "official_runtime_has_new_ppt": true,
+  "isolation_runtime_bootstrapped_new_ppt": true,
+  "runtime_retrieval_config": {
+    "retrieval_backend": "ragflow",
+    "retrieval_mode": "hybrid",
+    "ragflow_prefer_local_grounded": true,
+    "ragflow_local_grounded_score_threshold": 0.15,
+    "ragflow_fallback_timeout_ms": 6000,
+    "ragflow_timeout_seconds": 20
+  },
+  "bootstrap_payload": {
+    "document_ids": [
+      "69eb3a72378c4b15b95591a5e2b7ff27"
+    ],
+    "versions": [
+      "c3f9af5c074945278589c0d7761888a6"
+    ],
+    "job_ids": [
+      "af45eb9b9d7c4c37a19f5191abbc1874"
+    ]
+  },
+  "bootstrap_document": {
+    "document_id": "69eb3a72378c4b15b95591a5e2b7ff27",
+    "title": "【公司介绍】轩辕网络公司介绍202606",
+    "source_type": "bootstrap",
+    "trust_level": "internal",
+    "current_version": "c3f9af5c074945278589c0d7761888a6",
+    "original_filename": "【公司介绍】轩辕网络公司介绍202606.pptx",
+    "parser_status": "completed",
+    "index_status": "completed",
+    "chunk_count": 633,
+    "created_at": "2026-06-17T03:23:02.896309+00:00",
+    "updated_at": "2026-06-17T03:25:43.029749+00:00",
+    "disabled_at": null
+  },
+  "route_probe": {
+    "summary": {
+      "total_cases": 5,
+      "status_counts": {
+        "ok": 5
+      },
+      "backend_path_counts": {
+        "ragflow": 1,
+        "local": 4
+      },
+      "remote_selected_cases": 1,
+      "remote_selected_old_doc_dominant_cases": 1,
+      "target_file_topk_covered_cases": 4
+    },
+    "questions": [
+      {
+        "status": "ok",
+        "question_id": "route-probe-p0-01",
+        "question": "这份轩辕网络公司介绍 PPT 的目录分成哪四个部分？",
+        "top_k": 4,
+        "backend_path": "ragflow",
+        "route_reason": "remote_quality_better_than_local",
+        "used_fallback": true,
+        "fallback_reason": "remote_selected_after_local_compare",
+        "remote_attempted": true,
+        "local_top_score": 0.429874289035797,
+        "local_quality_score": 0.189874289035797,
+        "remote_quality_score": 0.46539788246154784,
+        "local_grounded_score_threshold": 0.15,
+        "grounded": false,
+        "hit_files": [
+          "华为ICT学院手册 2024-2025.pdf",
+          "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "华为ICT学院手册 2024-2025.pdf"
+        ],
+        "configured_backend": "ragflow",
+        "configured_mode": "hybrid"
+      },
+      {
+        "status": "ok",
+        "question_id": "route-probe-p0-05",
+        "question": "基础环境页提到了哪些基础设施或平台能力？请列举至少4项。",
+        "top_k": 4,
+        "backend_path": "local",
+        "route_reason": "local_grounded_above_threshold",
+        "used_fallback": false,
+        "fallback_reason": "",
+        "remote_attempted": false,
+        "local_top_score": 4.62794102827708,
+        "local_quality_score": 4.76794102827708,
+        "remote_quality_score": null,
+        "local_grounded_score_threshold": 0.15,
+        "grounded": true,
+        "hit_files": [
+          "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "华为ICT学院手册 2024-2025.pdf",
+          "华为ICT学院手册 2024-2025.pdf"
+        ],
+        "configured_backend": "ragflow",
+        "configured_mode": "hybrid"
+      },
+      {
+        "status": "ok",
+        "question_id": "route-probe-p0-06",
+        "question": "基础模型页提到的平台能力包含哪些模型或数据治理能力？",
+        "top_k": 4,
+        "backend_path": "local",
+        "route_reason": "local_grounded_above_threshold",
+        "used_fallback": false,
+        "fallback_reason": "",
+        "remote_attempted": false,
+        "local_top_score": 3.7529670238494877,
+        "local_quality_score": 4.252967023849488,
+        "remote_quality_score": null,
+        "local_grounded_score_threshold": 0.15,
+        "grounded": true,
+        "hit_files": [
+          "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+        ],
+        "configured_backend": "ragflow",
+        "configured_mode": "hybrid"
+      },
+      {
+        "status": "ok",
+        "question_id": "route-probe-p1-05",
+        "question": "如果只根据 PPT 内容概括，轩辕网络的业务架构主线是什么？",
+        "top_k": 4,
+        "backend_path": "local",
+        "route_reason": "local_quality_within_margin",
+        "used_fallback": false,
+        "fallback_reason": "",
+        "remote_attempted": true,
+        "local_top_score": 7.037164497375489,
+        "local_quality_score": 7.037164497375489,
+        "remote_quality_score": 0.35115733861923215,
+        "local_grounded_score_threshold": 0.15,
+        "grounded": false,
+        "hit_files": [
+          "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "【公司介绍】轩辕网络公司介绍202606.pptx"
+        ],
+        "configured_backend": "ragflow",
+        "configured_mode": "hybrid"
+      },
+      {
+        "status": "ok",
+        "question_id": "route-probe-p1-06",
+        "question": "战略定位页有没有把轩辕网络定义成“AI+产教融合服务商”？",
+        "top_k": 4,
+        "backend_path": "local",
+        "route_reason": "local_grounded_above_threshold",
+        "used_fallback": false,
+        "fallback_reason": "",
+        "remote_attempted": false,
+        "local_top_score": 5.1801848888397215,
+        "local_quality_score": 5.560184888839721,
+        "remote_quality_score": null,
+        "local_grounded_score_threshold": 0.15,
+        "grounded": true,
+        "hit_files": [
+          "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "【公司介绍】轩辕网络公司介绍202606.pptx"
+        ],
+        "configured_backend": "ragflow",
+        "configured_mode": "hybrid"
+      }
+    ]
+  },
+  "route_probe_vs_local": {
+    "conflict_cases": [
+      {
+        "route_question_id": "route-probe-p0-01",
+        "diagnosed_question_id": "ppt-company-p0-01",
+        "question": "这份轩辕网络公司介绍 PPT 的目录分成哪四个部分？",
+        "local_allow_answer_stage": true,
+        "local_failure_type": "none",
+        "local_grounded_judgement": "grounded_supported",
+        "route_backend_path": "ragflow",
+        "route_reason": "remote_quality_better_than_local",
+        "route_fallback_reason": "remote_selected_after_local_compare",
+        "route_hit_files": [
+          "华为ICT学院手册 2024-2025.pdf",
+          "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "华为ICT学院手册 2024-2025.pdf"
+        ]
+      }
+    ],
+    "conflict_case_count": 1,
+    "answer_ready_conflicts": [
+      {
+        "route_question_id": "route-probe-p0-01",
+        "diagnosed_question_id": "ppt-company-p0-01",
+        "question": "这份轩辕网络公司介绍 PPT 的目录分成哪四个部分？",
+        "local_allow_answer_stage": true,
+        "local_failure_type": "none",
+        "local_grounded_judgement": "grounded_supported",
+        "route_backend_path": "ragflow",
+        "route_reason": "remote_quality_better_than_local",
+        "route_fallback_reason": "remote_selected_after_local_compare",
+        "route_hit_files": [
+          "华为ICT学院手册 2024-2025.pdf",
+          "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "华为ICT学院手册 2024-2025.pdf"
+        ]
+      }
+    ],
+    "answer_ready_conflict_count": 1,
+    "blocked_conflicts": [],
+    "blocked_conflict_count": 0
+  }
+}

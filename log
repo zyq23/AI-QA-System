@@ -1,0 +1,29 @@
+[33mcommit 7b0b32f97469973ea201a3a6493544f90f896f2d[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: zyq23 <2501311528@qq.com>
+Date:   Wed Jun 17 14:51:34 2026 +0800
+
+    the first
+
+[33mcommit 3a1c55c8dc4a99cc400fb2c6e23adf3a00a62e10[m
+Author: zyq23 <2501311528@qq.com>
+Date:   Tue Jun 16 17:08:56 2026 +0800
+
+    Improve PPT parser ordering and OCR chunk hygiene
+
+[33mcommit 3c1ca968e75912c9ca224bd1ca847385611d85a6[m
+Author: zyq23 <2501311528@qq.com>
+Date:   Tue Jun 16 16:56:49 2026 +0800
+
+    Filter PPT placeholder template text
+
+[33mcommit 21cc4ca10686653e8679f29f9afc3aec82080661[m
+Author: zyq23 <2501311528@qq.com>
+Date:   Tue Jun 16 16:54:46 2026 +0800
+
+    Harden PPTX parser and sync main-thread coordination docs
+
+[33mcommit 0b32d31a40a5a487a025a7087b52882a03da94d2[m
+Author: zyq23 <2501311528@qq.com>
+Date:   Tue Jun 16 10:08:11 2026 +0800
+
+    The first

@@ -1,0 +1,805 @@
+[
+  {
+    "id": "ppt-company-p0-01",
+    "question": "这份轩辕网络公司介绍 PPT 的目录分成哪四个部分？",
+    "category": "new_ppt_structure",
+    "group": "new_ppt_acceptance",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "CONTENTS",
+      "公司概况",
+      "产教融合业务及实践分享",
+      "标杆案例",
+      "与华为同行"
+    ],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "华为ICT学院",
+      "协作式机械臂",
+      "根技术体验中心"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "route_conflict",
+    "required_before_freeze": "no",
+    "scoring_notes": "目录题在正式 ragflow/hybrid 路由下仍属 direct route conflict；本轮正确结果应为保持阻塞而非给出旧资料答案。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "ppt-company-p0-02",
+    "question": "公司概况页提到轩辕网络深耕教育多少年、专注什么方向？",
+    "category": "new_ppt_factoid",
+    "group": "new_ppt_acceptance",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "公司概况",
+      "28年教育深耕者",
+      "专注产教融合"
+    ],
+    "expected_answer_keywords": [
+      "28年",
+      "产教融合"
+    ],
+    "forbidden_answer_keywords": [
+      "华为ICT学院",
+      "根技术",
+      "协作式机械臂"
+    ],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "事实题，当前正式运行态已验证可稳定短答收口到“28年+产教融合”。",
+    "max_answer_length": 50
+  },
+  {
+    "id": "ppt-company-p0-03",
+    "question": "轩辕网络的业务架构在 PPT 中是如何概括的？",
+    "category": "new_ppt_summary",
+    "group": "new_ppt_acceptance",
+    "question_type": "summary",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "业务架构",
+      "有产懂教，双轮驱动",
+      "轩辕科教基座建设解决方案",
+      "轩辕产教融合建设及运营解决方案"
+    ],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "领先全球",
+      "行业第一",
+      "全面领先"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "grounding_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "概括题当前只允许在完整主线证据足够时放行；现阶段正确结果应为 grounded 不足下保持阻塞。",
+    "max_answer_length": 90
+  },
+  {
+    "id": "ppt-company-p0-04",
+    "question": "战略定位页如何定义轩辕网络的定位？",
+    "category": "new_ppt_positioning",
+    "group": "new_ppt_acceptance",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "战略定位",
+      "AI+产教融合服务商",
+      "领先的AI+产教融合服务商"
+    ],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "全球领先",
+      "行业第一",
+      "绝对优势"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "route_conflict",
+    "required_before_freeze": "no",
+    "scoring_notes": "正式路由下仍会被旧资料吸走；本轮正确结果应为保持阻塞，不能被旧资料伪正例放行。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "ppt-company-p0-05",
+    "question": "基础环境页提到了哪些基础设施或平台能力？请列举至少4项。",
+    "category": "new_ppt_enumeration",
+    "group": "new_ppt_acceptance",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "基础环境",
+      "数智技术实践中心",
+      "产业技术及应用展厅",
+      "通用算力资源",
+      "智能算力资源",
+      "高性能存储资源",
+      "高速网络",
+      "AIGC实战平台"
+    ],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "华为ICT学院",
+      "协作式机械臂",
+      "根技术体验中心"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "route_conflict",
+    "required_before_freeze": "no",
+    "scoring_notes": "基础环境枚举题在正式路由下仍不稳定落在新 PPT；首轮正式单组中应视为正确阻塞题。",
+    "max_answer_length": 130
+  },
+  {
+    "id": "ppt-company-p0-06",
+    "question": "基础模型页提到的平台能力包含哪些模型或数据治理能力？",
+    "category": "new_ppt_enumeration",
+    "group": "new_ppt_acceptance",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "基础模型",
+      "通用大模型",
+      "deepseek",
+      "通义千问",
+      "文心一言",
+      "OCR",
+      "语音识别",
+      "文档增强解析",
+      "知识元数据"
+    ],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "华为ICT学院",
+      "协作式机械臂",
+      "根技术体验中心"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "coverage_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "模型/数据治理能力当前 coverage 不完整；本轮正式单组中应维持阻塞，不应把局部命中误记为通过。",
+    "max_answer_length": 140
+  },
+  {
+    "id": "ppt-company-p0-07",
+    "question": "产教融合人才培养整体解决方案“1+1+N”包含哪些服务模块？",
+    "category": "new_ppt_enumeration",
+    "group": "new_ppt_acceptance",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "产教融合人才培养整体解决方案",
+      "师资培养服务",
+      "教学资源开发服务",
+      "科学研究服务",
+      "人才培养服务"
+    ],
+    "expected_answer_keywords": [
+      "师资培养服务",
+      "教学资源开发服务",
+      "科学研究服务",
+      "人才培养服务"
+    ],
+    "forbidden_answer_keywords": [
+      "华为ICT学院",
+      "协作式机械臂",
+      "根技术体验中心"
+    ],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "枚举题，当前正式运行态已验证可稳定只列四项服务模块。",
+    "max_answer_length": 120
+  },
+  {
+    "id": "ppt-company-p0-08",
+    "question": "PPT 是否明确给出了轩辕网络的营收规模或员工总数？",
+    "category": "new_ppt_negative",
+    "group": "new_ppt_acceptance",
+    "question_type": "negative",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "未直接提到"
+    ],
+    "forbidden_answer_keywords": [
+      "1000人",
+      "上万人",
+      "数亿元",
+      "营收规模为"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "route_conflict",
+    "required_before_freeze": "no",
+    "scoring_notes": "否定题在正式路由下仍会被旧资料远端接管；本轮正确结果应是保持阻塞而非给出伪正例。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "ppt-company-p1-03",
+    "question": "基础环境页除了算力资源，还提到了哪些场地或平台？",
+    "category": "table_or_image_suppression",
+    "group": "new_ppt_acceptance",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "基础环境",
+      "数智技术实践中心",
+      "产业技术及应用展厅",
+      "AIGC实战平台"
+    ],
+    "expected_answer_keywords": [
+      "数智技术实践中心",
+      "产业技术及应用展厅",
+      "AIGC实战平台"
+    ],
+    "forbidden_answer_keywords": [
+      "华为ICT学院",
+      "根技术体验中心"
+    ],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "场地/平台枚举题，当前正式运行态已验证可稳定短答收口。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "ppt-company-p1-04",
+    "question": "基础模型页除了通用大模型，还列了哪些感知或解析能力？",
+    "category": "table_or_image_suppression",
+    "group": "new_ppt_acceptance",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "基础模型",
+      "OCR",
+      "语音识别",
+      "文档增强解析",
+      "知识元数据"
+    ],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "华为ICT学院",
+      "协作式机械臂"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "coverage_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "感知/解析能力枚举当前 coverage 不足；本轮正式单组中应继续阻塞。",
+    "max_answer_length": 110
+  },
+  {
+    "id": "ppt-company-p1-05",
+    "question": "如果只根据 PPT 内容概括，轩辕网络的业务架构主线是什么？",
+    "category": "fake_grounded_summary",
+    "group": "new_ppt_acceptance",
+    "question_type": "summary",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "业务架构",
+      "有产懂教，双轮驱动",
+      "轩辕科教基座建设解决方案",
+      "轩辕产教融合建设及运营解决方案"
+    ],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "全球领先",
+      "行业第一",
+      "全面领先"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "grounding_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "业务架构主线概括题当前仍只有局部支撑；首轮正式单组应按正确阻塞计。",
+    "max_answer_length": 90
+  },
+  {
+    "id": "ppt-company-p1-06",
+    "question": "战略定位页有没有把轩辕网络定义成“AI+产教融合服务商”？",
+    "category": "old_doc_attraction",
+    "group": "new_ppt_acceptance",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "战略定位",
+      "AI+产教融合服务商"
+    ],
+    "expected_answer_keywords": [
+      "AI+产教融合服务商"
+    ],
+    "forbidden_answer_keywords": [
+      "华为ICT学院",
+      "院长负责制"
+    ],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "定位事实题，当前正式运行态已验证可稳定收口为 AI+产教融合服务商。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "ppt-company-p1-07",
+    "question": "“1+1+N”整体解决方案里，PPT 至少列出的四项服务是什么？",
+    "category": "coverage_enumeration",
+    "group": "new_ppt_acceptance",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "产教融合人才培养整体解决方案",
+      "师资培养服务",
+      "教学资源开发服务",
+      "科学研究服务",
+      "人才培养服务"
+    ],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "华为ICT学院",
+      "根技术认证运营"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "coverage_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "四项服务当前在正式 top 命中中仍不稳定完整覆盖；首轮正式单组应维持阻塞。",
+    "max_answer_length": 120
+  },
+  {
+    "id": "old-ict-handbook-01",
+    "question": "华为ICT学院是什么？",
+    "category": "old_docs_regression",
+    "group": "old_docs_regression",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "华为",
+      "校企"
+    ],
+    "forbidden_answer_keywords": [
+      "轩辕网络",
+      "根技术体验中心",
+      "协作式机械臂"
+    ],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "事实题，华为ICT学院是华为主导、面向全球的校企合作项目；答案必须落在华为ICT学院手册中，不能串到轩辕网络公司介绍PPT。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "old-ict-handbook-02",
+    "question": "华为ICT学院是否提供本科学位授予权？",
+    "category": "old_docs_regression",
+    "group": "old_docs_regression",
+    "question_type": "negative",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "本科学位",
+      "学位授予权",
+      "授予学位"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "grounding_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "否定题，华为ICT学院手册未提及学位授予权；系统应保持阻塞，不能把校企合作项目包装成学位授权机构。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "old-arm-product-01",
+    "question": "协作式机械臂的额定负载是多少？",
+    "category": "old_docs_regression",
+    "group": "old_docs_regression",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "3kg"
+    ],
+    "forbidden_answer_keywords": [
+      "华为ICT学院",
+      "根技术",
+      "轩辕网络"
+    ],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "事实题，协作式机械臂额定负载为3kg；答案必须落在机械臂产品介绍文档中，不能串到其他文档。",
+    "max_answer_length": 50
+  },
+  {
+    "id": "old-arm-product-02",
+    "question": "协作式机械臂是否支持水下作业？",
+    "category": "old_docs_regression",
+    "group": "old_docs_regression",
+    "question_type": "negative",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "防水",
+      "水下",
+      "潜水"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "grounding_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "否定题，机械臂产品介绍未提及水下作业能力；系统应保持阻塞，不能自行推断产品防护等级。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "old-gpnu-report-01",
+    "question": "华为根技术是什么？",
+    "category": "old_docs_regression",
+    "group": "old_docs_regression",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学-根技术人才培养合作汇报-0.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "ICT",
+      "核心底层"
+    ],
+    "forbidden_answer_keywords": [
+      "轩辕网络",
+      "协作式机械臂"
+    ],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "事实题，华为根技术是ICT领域自主研发的核心底层技术；答案必须落在根技术人才培养合作汇报PPT中。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "old-gpnu-report-02",
+    "question": "华为的三个重构是什么？",
+    "category": "old_docs_regression",
+    "group": "old_docs_regression",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "广东技术师范大学-根技术人才培养合作汇报-0.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "理论重构",
+      "架构重构",
+      "软件重构"
+    ],
+    "forbidden_answer_keywords": [
+      "轩辕网络",
+      "协作式机械臂"
+    ],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "枚举题，华为三个重构为理论重构、架构重构、软件重构；答案必须落在根技术人才培养合作汇报PPT中。",
+    "max_answer_length": 120
+  },
+  {
+    "id": "old-gpnu-report-03",
+    "question": "根技术体验中心的建设总投资金额是多少？",
+    "category": "old_docs_regression",
+    "group": "old_docs_regression",
+    "question_type": "negative",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学-根技术人才培养合作汇报-0.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "万元",
+      "亿元",
+      "投资额",
+      "总投资"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "grounding_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "否定题，汇报PPT未提及具体投资金额；系统应保持阻塞，不能从其他文档或自行推断金额。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "old-academy-plan-01",
+    "question": "产业学院采用什么治理模式？",
+    "category": "old_docs_regression",
+    "group": "old_docs_regression",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "理事会",
+      "院长负责"
+    ],
+    "forbidden_answer_keywords": [
+      "轩辕网络",
+      "华为ICT学院",
+      "协作式机械臂"
+    ],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "事实题，产业学院采用理事会领导下的院长负责制；答案必须落在产业学院运营实施方案文档中。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "old-academy-plan-02",
+    "question": "产业学院的年度预算总额是多少万元？",
+    "category": "old_docs_regression",
+    "group": "old_docs_regression",
+    "question_type": "negative",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "万元",
+      "预算总额",
+      "年度预算"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "grounding_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "否定题，运营实施方案未提及具体预算金额；系统应保持阻塞，不能从其他文档或自行推断预算。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "old-iot-manual-01",
+    "question": "摄像头出现虚焦时该怎么处理？",
+    "category": "old_docs_regression",
+    "group": "old_docs_regression",
+    "question_type": "procedure",
+    "expected_question_type": "procedure",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "螺丝",
+      "旋转"
+    ],
+    "forbidden_answer_keywords": [
+      "华为ICT学院",
+      "根技术",
+      "轩辕网络"
+    ],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "流程题，虚焦处理步骤为松开固定螺丝后左右旋转镜头调焦再拧紧；答案必须落在实训套件用户手册中。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "old-iot-manual-02",
+    "question": "实训套件是否支持蓝牙5.0连接？",
+    "category": "old_docs_regression",
+    "group": "old_docs_regression",
+    "question_type": "negative",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "蓝牙",
+      "Bluetooth",
+      "5.0"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "grounding_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "否定题，用户手册未提及蓝牙连接能力；系统应保持阻塞，不能自行推断通信协议。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "old-exhibit-01",
+    "question": "展厅的核心标语是什么？",
+    "category": "old_docs_regression",
+    "group": "old_docs_regression",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "根生万物",
+      "智育未来"
+    ],
+    "forbidden_answer_keywords": [
+      "轩辕网络",
+      "华为ICT学院",
+      "协作式机械臂"
+    ],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "事实题，展厅核心标语为根生万物·智育未来；答案必须落在展厅内涵建设PPT中。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "old-exhibit-02",
+    "question": "文化建设核心定位主线是哪三句话？",
+    "category": "old_docs_regression",
+    "group": "old_docs_regression",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "根技术筑基",
+      "产教融育人",
+      "师范践初心"
+    ],
+    "forbidden_answer_keywords": [
+      "轩辕网络",
+      "华为ICT学院"
+    ],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "枚举题，核心定位主线为根技术筑基、产教融育人、师范践初心；答案必须落在展厅内涵建设PPT中。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "old-exhibit-03",
+    "question": "展厅智能照明系统的供应商是哪家公司？",
+    "category": "old_docs_regression",
+    "group": "old_docs_regression",
+    "question_type": "negative",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "欧普",
+      "雷士",
+      "飞利浦"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "grounding_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "否定题，展厅PPT未提及照明系统供应商；系统应保持阻塞，不能从其他文档或自行推断供应商。",
+    "max_answer_length": 60
+  }
+]

@@ -1,0 +1,31 @@
+# Secrets
+.env
+
+# Python cache / env
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+robot_bridge/__pycache__/
+scripts/__pycache__/
+
+# Local Codex / editor noise
+.codex
+.codex/
+.DS_Store
+log
+
+# Knowledge base raw source documents
+/宇树科技知识库/
+
+# Large runtime / model / index artifacts
+/data/models/
+/data/chroma/
+/data/uploads/
+/data/runtime/
+/data/app.db
+
+# Keep eval datasets and eval results in git; ignore only ad-hoc binary/runtime files under data
+/data/**/*.png
+/data/**/*.log
+/data/**/*.out

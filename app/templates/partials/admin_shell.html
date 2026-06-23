@@ -1,0 +1,521 @@
+<div id="admin-shell" class="admin-shell">
+  <section class="admin-toolbar">
+    <form
+      hx-post="/admin/actions/bootstrap"
+      hx-target="#admin-shell"
+      hx-swap="outerHTML"
+    >
+      <button class="secondary-button" type="submit">导入本地知识库目录</button>
+    </form>
+    <form
+      hx-post="/admin/actions/reindex-all"
+      hx-target="#admin-shell"
+      hx-swap="outerHTML"
+    >
+      <button class="secondary-button" type="submit">全量重建索引</button>
+    </form>
+    <form
+      hx-post="/admin/actions/evals/run"
+      hx-target="#admin-shell"
+      hx-swap="outerHTML"
+    >
+      <input type="hidden" name="dataset" value="data/evals/image_ocr_quick_cases.json" />
+      <button class="secondary-button" type="submit">快速回归</button>
+    </form>
+    <form
+      hx-post="/admin/actions/evals/run"
+      hx-target="#admin-shell"
+      hx-swap="outerHTML"
+    >
+      <input type="hidden" name="dataset" value="data/evals/knowledge_base_eval_cases.json" />
+      <button class="secondary-button" type="submit">全量验收</button>
+    </form>
+    <form
+      hx-post="/admin/actions/evals/run-failures"
+      hx-target="#admin-shell"
+      hx-swap="outerHTML"
+    >
+      <button class="secondary-button" type="submit">失败样例回归</button>
+    </form>
+    <form
+      hx-post="/admin/actions/ragflow/sync"
+      hx-target="#admin-shell"
+      hx-swap="outerHTML"
+    >
+      <button class="secondary-button" type="submit">同步 RAGFlow 分块</button>
+    </form>
+    <form
+      hx-post="/admin/actions/ragflow/cleanup"
+      hx-target="#admin-shell"
+      hx-swap="outerHTML"
+    >
+      <button class="secondary-button" type="submit">清理重复 RAGFlow 版本</button>
+    </form>
+    <button
+      class="ghost-button"
+      hx-get="/admin/actions/documents"
+      hx-target="#admin-shell"
+      hx-swap="outerHTML"
+    >
+      刷新状态
+    </button>
+    <span class="toolbar-note">本地目录：{{ knowledge_dir }}</span>
+  </section>
+
+  <section class="admin-grid">
+    <div class="admin-card">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">Upload</p>
+          <h2>上传资料</h2>
+        </div>
+      </div>
+      <form
+        class="upload-form"
+        hx-post="/admin/actions/upload"
+        hx-target="#admin-shell"
+        hx-swap="outerHTML"
+        hx-encoding="multipart/form-data"
+      >
+        <label>
+          <span>选择文件</span>
+          <input type="file" name="files" accept=".pdf,.docx,.pptx" multiple required />
+        </label>
+        <div class="inline-fields">
+          <label>
+            <span>来源类型</span>
+            <select name="source_type">
+              <option value="upload">upload</option>
+              <option value="official_import">official_import</option>
+              <option value="bootstrap">bootstrap</option>
+            </select>
+          </label>
+          <label>
+            <span>信任级别</span>
+            <select name="trust_level">
+              <option value="internal">internal</option>
+              <option value="official">official</option>
+            </select>
+          </label>
+        </div>
+        <button class="primary-button" type="submit">上传并入队</button>
+      </form>
+    </div>
+
+    <div class="admin-card">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">Retrieval</p>
+          <h2>检索测试</h2>
+        </div>
+      </div>
+      <form
+        class="upload-form"
+        hx-post="/admin/actions/retrieval/test"
+        hx-target="#admin-shell"
+        hx-swap="outerHTML"
+      >
+        <label>
+          <span>测试问题</span>
+          <input type="text" name="question" placeholder="输入一个真实问题，查看命中的块" required />
+        </label>
+        <div class="inline-fields">
+          <label>
+            <span>Top K</span>
+            <input type="number" name="top_k" min="1" max="20" value="6" />
+          </label>
+        </div>
+        <button class="primary-button" type="submit">运行检索测试</button>
+      </form>
+    </div>
+
+    <div class="admin-card">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">Jobs</p>
+          <h2>最近作业</h2>
+        </div>
+      </div>
+      <div class="job-list">
+        {% if jobs %}
+          {% for job in jobs %}
+            <article class="job-row">
+              <div>
+                <strong>{{ job.job_type }}</strong>
+                <small>{{ job.id[:8] }}</small>
+              </div>
+              <span class="job-status job-status-{{ job.status }}">{{ job.status }}</span>
+              <p>{{ job.message or "无附加信息" }}</p>
+            </article>
+          {% endfor %}
+        {% else %}
+          <p class="empty-state">还没有作业记录。</p>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section class="admin-card">
+    <div class="panel-header">
+      <div>
+        <p class="eyebrow">Retrieval Debug</p>
+        <h2>最近一次检索测试</h2>
+      </div>
+    </div>
+    {% if retrieval_debug %}
+      <div class="badge-stack">
+        <span class="badge">grounded={{ retrieval_debug.grounded }}</span>
+        <span class="badge">path={{ retrieval_debug.backend_path }}</span>
+        <span class="badge">route={{ retrieval_debug.route_reason }}</span>
+        <span class="badge">remote_attempted={{ retrieval_debug.remote_attempted }}</span>
+        {% if retrieval_debug.used_fallback %}
+          <span class="badge">fallback={{ retrieval_debug.fallback_reason or "yes" }}</span>
+        {% endif %}
+      </div>
+      {% if retrieval_debug.local_top_score is not none or retrieval_debug.local_quality_score is not none %}
+        <p class="toolbar-note">
+          local_top={{ "%.3f"|format(retrieval_debug.local_top_score) if retrieval_debug.local_top_score is not none else "-" }}
+          · local_quality={{ "%.3f"|format(retrieval_debug.local_quality_score) if retrieval_debug.local_quality_score is not none else "-" }}
+          · remote_quality={{ "%.3f"|format(retrieval_debug.remote_quality_score) if retrieval_debug.remote_quality_score is not none else "-" }}
+          · threshold={{ "%.3f"|format(retrieval_debug.local_grounded_score_threshold) if retrieval_debug.local_grounded_score_threshold is not none else "-" }}
+        </p>
+      {% endif %}
+      <p><strong>问题：</strong>{{ retrieval_debug.question }}</p>
+      <p><strong>检索问题：</strong>{{ retrieval_debug.expanded_query }}</p>
+      {% if retrieval_debug.expansion_terms %}
+        <p class="toolbar-note">扩展词：{{ retrieval_debug.expansion_terms | join("、") }}</p>
+      {% endif %}
+      {% if retrieval_debug.focus_terms %}
+        <p class="toolbar-note">焦点词：{{ retrieval_debug.focus_terms | join("、") }}</p>
+      {% endif %}
+      <div class="job-list">
+        {% for hit in retrieval_debug.hits %}
+          <article class="job-row">
+            <div>
+              <strong>{{ hit.file_name }}</strong>
+              <small>{{ hit.page_or_slide }} · {{ "%.3f"|format(hit.score) }}</small>
+            </div>
+            <p>{{ hit.section_path }}</p>
+            <p>{{ hit.snippet }}</p>
+            <p class="toolbar-note">
+              keyword_rank={{ hit.keyword_rank if hit.keyword_rank is not none else "-" }}
+              · vector_rank={{ hit.vector_rank if hit.vector_rank is not none else "-" }}
+              · fusion={{ "%.3f"|format(hit.fusion_score) if hit.fusion_score is not none else "-" }}
+              · rerank={{ "%.3f"|format(hit.rerank_score) if hit.rerank_score is not none else "-" }}
+              · focus={{ hit.focus_matches if hit.focus_matches is not none else "-" }}
+            </p>
+            <div class="badge-stack">
+              <span class="badge">{{ hit.trust_level }}</span>
+              <span class="badge">{{ hit.source_type }}</span>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="empty-state">运行一次检索测试后，这里会显示命中块与得分。</p>
+    {% endif %}
+  </section>
+
+  <section class="admin-card">
+    <div class="panel-header">
+      <div>
+        <p class="eyebrow">Evaluation</p>
+        <h2>最新验收结果</h2>
+      </div>
+    </div>
+    {% if latest_eval and latest_eval.result %}
+      {% set summary = latest_eval.result.summary %}
+      <div class="eval-summary-grid">
+        <article class="metric-card">
+          <span class="meta-label">作业状态</span>
+          <strong>{{ latest_eval.status }}</strong>
+        </article>
+        <article class="metric-card">
+          <span class="meta-label">通过率</span>
+          <strong>{{ "%.2f%%"|format(summary.pass_rate * 100) }}</strong>
+        </article>
+        <article class="metric-card">
+          <span class="meta-label">通过 Turn</span>
+          <strong>{{ summary.passed_turns }} / {{ summary.total_turns }}</strong>
+        </article>
+        <article class="metric-card">
+          <span class="meta-label">直接回答率</span>
+          <strong>{{ "%.2f%%"|format(summary.direct_answer_rate * 100) }}</strong>
+        </article>
+        <article class="metric-card">
+          <span class="meta-label">无泄露率</span>
+          <strong>{{ "%.2f%%"|format(summary.no_leak_rate * 100) }}</strong>
+        </article>
+        <article class="metric-card">
+          <span class="meta-label">简洁率</span>
+          <strong>{{ "%.2f%%"|format(summary.concise_rate * 100) }}</strong>
+        </article>
+        <article class="metric-card">
+          <span class="meta-label">追问解决率</span>
+          <strong>{{ "%.2f%%"|format((summary.followup_resolution_rate or 0) * 100) }}</strong>
+        </article>
+        <article class="metric-card">
+          <span class="meta-label">Fallback 率</span>
+          <strong>{{ "%.2f%%"|format(summary.fallback_rate * 100) }}</strong>
+        </article>
+        <article class="metric-card">
+          <span class="meta-label">评审介入率</span>
+          <strong>{{ "%.2f%%"|format(summary.reviewer_intervention_rate * 100) }}</strong>
+        </article>
+        <article class="metric-card">
+          <span class="meta-label">平均耗时</span>
+          <strong>{{ summary.avg_latency_ms }} ms</strong>
+        </article>
+      </div>
+      <p class="toolbar-note">
+        报告文件：{{ latest_eval.result.report_path }}
+      </p>
+      <div class="admin-grid">
+        <div class="admin-card quality-nested-card">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Failures</p>
+              <h2>失败样例直达</h2>
+            </div>
+          </div>
+          <div class="job-list">
+            {% if latest_eval_failures %}
+              {% for failure in latest_eval_failures %}
+                <article class="job-row failure-row">
+                  <div>
+                    <strong>{{ failure.question }}</strong>
+                    <small>{{ failure.case_id }}#{{ failure.turn_index }} · {{ failure.failure_label }}</small>
+                  </div>
+                  <span class="job-status job-status-{{ 'failed' if failure.failure_bucket != 'answer' else 'running' }}">
+                    {{ failure.failure_label }}
+                  </span>
+                  <p>{{ failure.answer }}</p>
+                  <div class="badge-stack">
+                    {% for check in failure.failed_checks %}
+                      <span class="badge">{{ check }}</span>
+                    {% endfor %}
+                  </div>
+                  {% if failure.top_citation_file %}
+                    <p class="toolbar-note">当前首条命中：{{ failure.top_citation_file }}</p>
+                  {% endif %}
+                  <p>
+                    {% if failure.answer_run_link %}
+                      <a href="{{ failure.answer_run_link }}">查看本次链路</a>
+                    {% else %}
+                      <span class="toolbar-note">本条没有链路详情。</span>
+                    {% endif %}
+                  </p>
+                </article>
+              {% endfor %}
+            {% else %}
+              <p class="empty-state">最近一次评测没有失败样例。</p>
+            {% endif %}
+          </div>
+        </div>
+        <div class="admin-card quality-nested-card">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Breakdown</p>
+              <h2>失败维度统计</h2>
+            </div>
+          </div>
+          <div class="badge-stack quality-issues">
+            {% for name, count in summary.failed_check_breakdown.items() %}
+              {% if count %}
+                <span class="badge">{{ name }} × {{ count }}</span>
+              {% endif %}
+            {% endfor %}
+            {% if not latest_eval_failures %}
+              <p class="empty-state">当前没有失败维度。</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <p class="empty-state">还没有问答验收结果，点击上方“快速回归”“失败样例回归”或“全量验收”即可生成。</p>
+    {% endif %}
+  </section>
+
+  <section class="admin-card">
+    <div class="panel-header">
+      <div>
+        <p class="eyebrow">Quality</p>
+        <h2>最近问答质检</h2>
+      </div>
+    </div>
+    <div class="eval-summary-grid">
+      <article class="metric-card">
+        <span class="meta-label">最近记录</span>
+        <strong>{{ answer_run_stats.total }}</strong>
+      </article>
+      <article class="metric-card">
+        <span class="meta-label">评审介入</span>
+        <strong>{{ answer_run_stats.reviewer_intervened }}</strong>
+      </article>
+      <article class="metric-card">
+        <span class="meta-label">LLM 评审调用</span>
+        <strong>{{ answer_run_stats.llm_reviewer_called }}</strong>
+      </article>
+      <article class="metric-card">
+        <span class="meta-label">Fallback 次数</span>
+        <strong>{{ answer_run_stats.fallback_used }}</strong>
+      </article>
+      <article class="metric-card">
+        <span class="meta-label">合规拦截</span>
+        <strong>{{ answer_run_stats.content_policy_blocked }}</strong>
+      </article>
+      <article class="metric-card">
+        <span class="meta-label">平均耗时</span>
+        <strong>{{ answer_run_stats.avg_latency_ms }} ms</strong>
+      </article>
+    </div>
+    <div class="admin-grid">
+      <div class="admin-card quality-nested-card">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Issues</p>
+            <h2>高频问题标签</h2>
+          </div>
+        </div>
+        <div class="badge-stack quality-issues">
+          {% if top_issues %}
+            {% for issue, count in top_issues %}
+              <span class="badge">{{ issue }} × {{ count }}</span>
+            {% endfor %}
+          {% else %}
+            <p class="empty-state">最近问答没有触发评审问题标签。</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="admin-card quality-nested-card">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Runs</p>
+            <h2>最近问答记录</h2>
+          </div>
+        </div>
+        <div class="job-list">
+          {% if answer_runs %}
+            {% for run in answer_runs %}
+              <article class="job-row">
+                <div>
+                  <strong>{{ run.question }}</strong>
+                  <small>{{ run.question_type }} · {{ run.answer_run_id[:8] }}</small>
+                </div>
+                <span class="job-status job-status-{{ 'completed' if run.final_grounded else 'failed' }}">
+                  {{ 'grounded' if run.final_grounded else 'insufficient' }}
+                </span>
+                <p>{{ run.final_answer }}</p>
+                <div class="badge-stack">
+                  <span class="badge">总耗时 {{ run.latency_total_ms }} ms</span>
+                  <span class="badge">检索 {{ run.latency_retrieval_ms }} ms</span>
+                  <span class="badge">生成 {{ run.latency_generate_ms }} ms</span>
+                  <span class="badge">评审 {{ run.latency_review_ms }} ms</span>
+                  {% if run.review.get("reviewer_intervened") %}
+                    <span class="badge">reviewer 介入</span>
+                  {% endif %}
+                  {% if run.review.get("raw_payload", {}).get("llm_review_skipped") %}
+                    <span class="badge">跳过 LLM 评审</span>
+                  {% elif run.review.get("raw_payload", {}).get("mode") != "deterministic" %}
+                    <span class="badge">调用 LLM 评审</span>
+                  {% endif %}
+                  {% if run.draft.get("used_fallback") %}
+                    <span class="badge">fallback</span>
+                  {% endif %}
+                  {% if run.content_policy_blocked %}
+                    <span class="badge">10019 拦截</span>
+                  {% endif %}
+                  {% if run.expansion_terms %}
+                    <span class="badge">query 扩展</span>
+                  {% endif %}
+                </div>
+                {% if run.expansion_terms %}
+                  <p class="toolbar-note">扩展词：{{ run.expansion_terms | join("、") }}</p>
+                {% endif %}
+                {% if run.expanded_query and run.expanded_query != run.rewritten_query %}
+                  <p class="toolbar-note">扩展检索：{{ run.expanded_query }}</p>
+                {% endif %}
+                {% if run.review.get("raw_payload", {}).get("skip_reason") %}
+                  <p class="toolbar-note">评审跳过原因：{{ run.review.get("raw_payload", {}).get("skip_reason") }}</p>
+                {% endif %}
+                {% if run.review.get("issues") %}
+                  <div class="badge-stack">
+                    {% for issue in run.review.get("issues") %}
+                      <span class="badge">{{ issue }}</span>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+                <p>
+                  <a href="/api/admin/answer-runs/{{ run.answer_run_id }}">查看详情</a>
+                </p>
+              </article>
+            {% endfor %}
+          {% else %}
+            <p class="empty-state">还没有问答质量记录。</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="admin-card">
+    <div class="panel-header">
+      <div>
+        <p class="eyebrow">Documents</p>
+        <h2>文档状态</h2>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th>标题</th>
+            <th>信任级别</th>
+            <th>来源</th>
+            <th>解析</th>
+            <th>索引</th>
+            <th>分块数</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for document in documents %}
+            <tr>
+              <td>
+                <strong>{{ document.title }}</strong>
+                <small>{{ document.original_filename or document.document_id }}</small>
+              </td>
+              <td>{{ document.trust_level }}</td>
+              <td>{{ document.source_type }}</td>
+              <td>{{ document.parser_status or "pending" }}</td>
+              <td>{{ document.index_status or "pending" }}</td>
+              <td>{{ document.chunk_count }}</td>
+              <td>
+                <div class="action-stack">
+                  <form
+                    hx-post="/admin/actions/documents/{{ document.document_id }}/reindex"
+                    hx-target="#admin-shell"
+                    hx-swap="outerHTML"
+                  >
+                    <button class="ghost-button" type="submit">重建</button>
+                  </form>
+                  <form
+                    hx-post="/admin/actions/documents/{{ document.document_id }}/disable"
+                    hx-target="#admin-shell"
+                    hx-swap="outerHTML"
+                  >
+                    <button class="ghost-button danger" type="submit">停用</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="7"><p class="empty-state">暂无文档。</p></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

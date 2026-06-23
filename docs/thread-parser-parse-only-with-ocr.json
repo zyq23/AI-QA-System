@@ -1,0 +1,1772 @@
+{
+  "file": "宇树科技知识库/【公司介绍】轩辕网络公司介绍202606.pptx",
+  "title": "高校人工智能通识课案例",
+  "parser_name": "python-pptx",
+  "enable_ocr_fallback": true,
+  "ocr_used": true,
+  "warning_count": 1,
+  "warnings": [
+    "第 27 页图片 OCR 失败: cannot find loader for this WMF file"
+  ],
+  "slide_count": 91,
+  "block_count": 2150,
+  "chunk_count": 1197,
+  "slides": [
+    {
+      "slide": "slide-1",
+      "block_count": 7,
+      "image_ocr_count": 2,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 3,
+      "first_text_preview": "軒網"
+    },
+    {
+      "slide": "slide-2",
+      "block_count": 9,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 1,
+      "first_text_preview": "01"
+    },
+    {
+      "slide": "slide-3",
+      "block_count": 4,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 1,
+      "first_text_preview": "01 公司概况"
+    },
+    {
+      "slide": "slide-4",
+      "block_count": 23,
+      "image_ocr_count": 6,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 16,
+      "first_text_preview": "軒網"
+    },
+    {
+      "slide": "slide-5",
+      "block_count": 41,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 14,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 29,
+      "first_text_preview": "发明专利"
+    },
+    {
+      "slide": "slide-6",
+      "block_count": 24,
+      "image_ocr_count": 21,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 8,
+      "first_text_preview": "软件著作"
+    },
+    {
+      "slide": "slide-7",
+      "block_count": 12,
+      "image_ocr_count": 9,
+      "image_ocr_low_conf_count": 1,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 4,
+      "first_text_preview": "中华人民共和国电子行业标准 / 5/T 149130717 / 信息技术服务服务级别协议指南 / 中华人民共和国工业和售息化部 / 中华人民共和国国家标准"
+    },
+    {
+      "slide": "slide-8",
+      "block_count": 29,
+      "image_ocr_count": 28,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 29,
+      "first_text_preview": "科技项目"
+    },
+    {
+      "slide": "slide-9",
+      "block_count": 24,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 8,
+      "first_text_preview": "轩辕研究院专家团队"
+    },
+    {
+      "slide": "slide-10",
+      "block_count": 41,
+      "image_ocr_count": 32,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 9,
+      "first_text_preview": "科技创新荣誉（部分）"
+    },
+    {
+      "slide": "slide-11",
+      "block_count": 9,
+      "image_ocr_count": 5,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 6,
+      "first_text_preview": "业务架构：有产懂教，双轮驱动"
+    },
+    {
+      "slide": "slide-12",
+      "block_count": 27,
+      "image_ocr_count": 11,
+      "image_ocr_low_conf_count": 1,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 17,
+      "first_text_preview": "合作生态"
+    },
+    {
+      "slide": "slide-13",
+      "block_count": 9,
+      "image_ocr_count": 6,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 2,
+      "first_text_preview": "合作生态-市域产教融合联合体"
+    },
+    {
+      "slide": "slide-14",
+      "block_count": 2,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 2,
+      "first_text_preview": "合作生态-行业产教融合共同体"
+    },
+    {
+      "slide": "slide-15",
+      "block_count": 3,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 1,
+      "first_text_preview": "02 产教融合业务及实践分享"
+    },
+    {
+      "slide": "slide-16",
+      "block_count": 19,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 1,
+      "first_text_preview": "战略定位：AI+产教融合服务商"
+    },
+    {
+      "slide": "slide-17",
+      "block_count": 20,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 1,
+      "first_text_preview": "战略布局"
+    },
+    {
+      "slide": "slide-18",
+      "block_count": 54,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 11,
+      "first_text_preview": "“AI+教育”基础环境"
+    },
+    {
+      "slide": "slide-19",
+      "block_count": 46,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 10,
+      "first_text_preview": "“AI+教育”基础环境"
+    },
+    {
+      "slide": "slide-20",
+      "block_count": 69,
+      "image_ocr_count": 1,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 33,
+      "first_text_preview": "AI人才培养与素养提升"
+    },
+    {
+      "slide": "slide-21",
+      "block_count": 79,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 5,
+      "first_text_preview": "AI人才培养与素养提升"
+    },
+    {
+      "slide": "slide-22",
+      "block_count": 5,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 3,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 5,
+      "first_text_preview": "专业建设服务（人工智能）"
+    },
+    {
+      "slide": "slide-23",
+      "block_count": 52,
+      "image_ocr_count": 48,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 52,
+      "first_text_preview": "专业建设服务（具身智能）"
+    },
+    {
+      "slide": "slide-24",
+      "block_count": 31,
+      "image_ocr_count": 24,
+      "image_ocr_low_conf_count": 5,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 31,
+      "first_text_preview": "专业建设服务（大数据）"
+    },
+    {
+      "slide": "slide-25",
+      "block_count": 33,
+      "image_ocr_count": 23,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 32,
+      "first_text_preview": "精品课程"
+    },
+    {
+      "slide": "slide-26",
+      "block_count": 6,
+      "image_ocr_count": 5,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 2,
+      "first_text_preview": "专业建设服务（软件工程）"
+    },
+    {
+      "slide": "slide-27",
+      "block_count": 1,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 1,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 1,
+      "first_text_preview": "专业建设服务_首创大模型技术与应用六级进阶课程体系"
+    },
+    {
+      "slide": "slide-28",
+      "block_count": 15,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 6,
+      "first_text_preview": "专业建设服务_微专业"
+    },
+    {
+      "slide": "slide-29",
+      "block_count": 12,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 4,
+      "first_text_preview": "专业建设服务_ AI+学科"
+    },
+    {
+      "slide": "slide-30",
+      "block_count": 13,
+      "image_ocr_count": 10,
+      "image_ocr_low_conf_count": 1,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 5,
+      "first_text_preview": "专业建设服务_ AI+学科"
+    },
+    {
+      "slide": "slide-31",
+      "block_count": 19,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 1,
+      "first_text_preview": "课程建设服务_人工智能通识课程体系"
+    },
+    {
+      "slide": "slide-32",
+      "block_count": 43,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 34,
+      "first_text_preview": "课程建设服务_人工智能通识课程"
+    },
+    {
+      "slide": "slide-33",
+      "block_count": 54,
+      "image_ocr_count": 36,
+      "image_ocr_low_conf_count": 4,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 16,
+      "first_text_preview": "申时全上 / 大数据开发技术 / 清华大学出版社 / 大数系列丛书 / 大数据技术基础"
+    },
+    {
+      "slide": "slide-34",
+      "block_count": 23,
+      "image_ocr_count": 17,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 23,
+      "first_text_preview": "教师队伍建设服务"
+    },
+    {
+      "slide": "slide-35",
+      "block_count": 19,
+      "image_ocr_count": 15,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 6,
+      "first_text_preview": "教师队伍建设服务"
+    },
+    {
+      "slide": "slide-36",
+      "block_count": 18,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 13,
+      "first_text_preview": "教师队伍建设服务"
+    },
+    {
+      "slide": "slide-37",
+      "block_count": 22,
+      "image_ocr_count": 7,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 12,
+      "first_text_preview": "教师队伍建设服务"
+    },
+    {
+      "slide": "slide-38",
+      "block_count": 18,
+      "image_ocr_count": 8,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 4,
+      "first_text_preview": "专业人才培养_授课服务"
+    },
+    {
+      "slide": "slide-39",
+      "block_count": 51,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 5,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 18,
+      "first_text_preview": "专业人才培养_轩辕汇课AIGC实战平台"
+    },
+    {
+      "slide": "slide-40",
+      "block_count": 8,
+      "image_ocr_count": 7,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 3,
+      "first_text_preview": "专业人才培养_轩辕汇课AIGC实战平台（本地部署+轻量版）"
+    },
+    {
+      "slide": "slide-41",
+      "block_count": 18,
+      "image_ocr_count": 10,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 12,
+      "first_text_preview": "专业人才培养_轩辕星Regulus®轻量级大模型能力支撑"
+    },
+    {
+      "slide": "slide-42",
+      "block_count": 18,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 6,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 17,
+      "first_text_preview": "专业人才培养_AI实验实训套件"
+    },
+    {
+      "slide": "slide-43",
+      "block_count": 12,
+      "image_ocr_count": 5,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 10,
+      "first_text_preview": "专业人才培养_AI实验实训套件"
+    },
+    {
+      "slide": "slide-44",
+      "block_count": 16,
+      "image_ocr_count": 9,
+      "image_ocr_low_conf_count": 3,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 3,
+      "chunk_count": 11,
+      "first_text_preview": "专业人才培养_培训认证"
+    },
+    {
+      "slide": "slide-45",
+      "block_count": 11,
+      "image_ocr_count": 5,
+      "image_ocr_low_conf_count": 1,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 7,
+      "first_text_preview": "专业人才培养_培训认证"
+    },
+    {
+      "slide": "slide-46",
+      "block_count": 26,
+      "image_ocr_count": 20,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 25,
+      "first_text_preview": "专业人才培养_职业技能大赛服务"
+    },
+    {
+      "slide": "slide-47",
+      "block_count": 13,
+      "image_ocr_count": 7,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 5,
+      "first_text_preview": "专业人才培养_连续4年承办华为ICT大赛"
+    },
+    {
+      "slide": "slide-48",
+      "block_count": 26,
+      "image_ocr_count": 8,
+      "image_ocr_low_conf_count": 4,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 6,
+      "first_text_preview": "专业人才培养_职业技能大赛服务"
+    },
+    {
+      "slide": "slide-49",
+      "block_count": 17,
+      "image_ocr_count": 9,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 15,
+      "first_text_preview": "专业人才培养_创新创业服务OPC"
+    },
+    {
+      "slide": "slide-50",
+      "block_count": 21,
+      "image_ocr_count": 15,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 16,
+      "first_text_preview": "实习就业服务"
+    },
+    {
+      "slide": "slide-51",
+      "block_count": 46,
+      "image_ocr_count": 36,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 45,
+      "first_text_preview": "应用研发与成果转化服务"
+    },
+    {
+      "slide": "slide-52",
+      "block_count": 55,
+      "image_ocr_count": 33,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 54,
+      "first_text_preview": "对外合作"
+    },
+    {
+      "slide": "slide-53",
+      "block_count": 35,
+      "image_ocr_count": 10,
+      "image_ocr_low_conf_count": 2,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 23,
+      "first_text_preview": "社会服务"
+    },
+    {
+      "slide": "slide-54",
+      "block_count": 3,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 1,
+      "first_text_preview": "03 标杆案例"
+    },
+    {
+      "slide": "slide-55",
+      "block_count": 25,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 25,
+      "first_text_preview": "广东外语外贸大学"
+    },
+    {
+      "slide": "slide-56",
+      "block_count": 32,
+      "image_ocr_count": 26,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 11,
+      "first_text_preview": "高校人工智能通识课案例"
+    },
+    {
+      "slide": "slide-57",
+      "block_count": 9,
+      "image_ocr_count": 4,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 3,
+      "first_text_preview": "AI通识案例_华南理工大学未来技术学院"
+    },
+    {
+      "slide": "slide-58",
+      "block_count": 5,
+      "image_ocr_count": 2,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 2,
+      "first_text_preview": "AI通识案例_广州大学"
+    },
+    {
+      "slide": "slide-59",
+      "block_count": 13,
+      "image_ocr_count": 7,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 4,
+      "first_text_preview": "AI通识案例_广东技术师范大学"
+    },
+    {
+      "slide": "slide-60",
+      "block_count": 12,
+      "image_ocr_count": 2,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 12,
+      "first_text_preview": "AI通识案例_广东交通职业技术学院"
+    },
+    {
+      "slide": "slide-61",
+      "block_count": 23,
+      "image_ocr_count": 9,
+      "image_ocr_low_conf_count": 9,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 23,
+      "first_text_preview": "AI通识案例_广州科技贸易职业学院"
+    },
+    {
+      "slide": "slide-62",
+      "block_count": 22,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 22,
+      "first_text_preview": "AI+学科_广州科技贸易职业学院财经商贸学院"
+    },
+    {
+      "slide": "slide-63",
+      "block_count": 15,
+      "image_ocr_count": 8,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 8,
+      "first_text_preview": "专业建设案例_广州城市职业学院"
+    },
+    {
+      "slide": "slide-64",
+      "block_count": 30,
+      "image_ocr_count": 17,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 21,
+      "first_text_preview": "产业学院建设部分案例"
+    },
+    {
+      "slide": "slide-65",
+      "block_count": 29,
+      "image_ocr_count": 12,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 25,
+      "first_text_preview": "产业学院建设部分案例"
+    },
+    {
+      "slide": "slide-66",
+      "block_count": 15,
+      "image_ocr_count": 8,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 12,
+      "first_text_preview": "产业学院建设部分案例"
+    },
+    {
+      "slide": "slide-67",
+      "block_count": 8,
+      "image_ocr_count": 1,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 7,
+      "first_text_preview": "产业学院建设部分案例"
+    },
+    {
+      "slide": "slide-68",
+      "block_count": 13,
+      "image_ocr_count": 6,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 5,
+      "first_text_preview": "科学城产业学院"
+    },
+    {
+      "slide": "slide-69",
+      "block_count": 22,
+      "image_ocr_count": 7,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 14,
+      "first_text_preview": "科学城产业学院_建设主题"
+    },
+    {
+      "slide": "slide-70",
+      "block_count": 36,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 30,
+      "first_text_preview": "科学城产业学院＿运营成果（人才培养）"
+    },
+    {
+      "slide": "slide-71",
+      "block_count": 34,
+      "image_ocr_count": 16,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 18,
+      "first_text_preview": "科学城产业学院"
+    },
+    {
+      "slide": "slide-72",
+      "block_count": 50,
+      "image_ocr_count": 8,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 34,
+      "first_text_preview": "粤北大数据产业学院"
+    },
+    {
+      "slide": "slide-73",
+      "block_count": 25,
+      "image_ocr_count": 17,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 20,
+      "first_text_preview": "粤北大数据产业学院"
+    },
+    {
+      "slide": "slide-74",
+      "block_count": 38,
+      "image_ocr_count": 12,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 29,
+      "first_text_preview": "粤北大数据产业学院"
+    },
+    {
+      "slide": "slide-75",
+      "block_count": 23,
+      "image_ocr_count": 18,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 5,
+      "first_text_preview": "粤北大数据产业学院"
+    },
+    {
+      "slide": "slide-76",
+      "block_count": 11,
+      "image_ocr_count": 9,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 3,
+      "first_text_preview": "广梅园数智产业学院"
+    },
+    {
+      "slide": "slide-77",
+      "block_count": 38,
+      "image_ocr_count": 28,
+      "image_ocr_low_conf_count": 1,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 13,
+      "first_text_preview": "广梅园数智产业学院"
+    },
+    {
+      "slide": "slide-78",
+      "block_count": 26,
+      "image_ocr_count": 17,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 5,
+      "first_text_preview": "广梅园数智产业学院"
+    },
+    {
+      "slide": "slide-79",
+      "block_count": 15,
+      "image_ocr_count": 4,
+      "image_ocr_low_conf_count": 1,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 4,
+      "first_text_preview": "广师大：产业学院+科产教融合中心"
+    },
+    {
+      "slide": "slide-80",
+      "block_count": 55,
+      "image_ocr_count": 23,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 35,
+      "first_text_preview": "AI赋能阶段"
+    },
+    {
+      "slide": "slide-81",
+      "block_count": 45,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 35,
+      "first_text_preview": "价值形成阶段"
+    },
+    {
+      "slide": "slide-82",
+      "block_count": 46,
+      "image_ocr_count": 1,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 16,
+      "first_text_preview": "产业学院建设总体思路V1.0"
+    },
+    {
+      "slide": "slide-83",
+      "block_count": 31,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 7,
+      "first_text_preview": "轩辕产业学院建设和运营总体思路V2.0"
+    },
+    {
+      "slide": "slide-84",
+      "block_count": 17,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 1,
+      "first_text_preview": "产教融合服务商核心能力总结"
+    },
+    {
+      "slide": "slide-85",
+      "block_count": 3,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 1,
+      "first_text_preview": "04 与华为同行"
+    },
+    {
+      "slide": "slide-86",
+      "block_count": 10,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 1,
+      "first_text_preview": "战略合作伙伴：与华为的深度融合之路"
+    },
+    {
+      "slide": "slide-87",
+      "block_count": 10,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 1,
+      "first_text_preview": "未来合作展望"
+    },
+    {
+      "slide": "slide-88",
+      "block_count": 10,
+      "image_ocr_count": 2,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 6,
+      "first_text_preview": "广东技术师范大学华为根技术人工智能现代产业学院"
+    },
+    {
+      "slide": "slide-89",
+      "block_count": 20,
+      "image_ocr_count": 8,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 16,
+      "first_text_preview": "广东技术师范大学华为根技术人工智能现代产业学院"
+    },
+    {
+      "slide": "slide-90",
+      "block_count": 21,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 10,
+      "first_text_preview": "携手共赢：以广师大模式赋能东莞现场工程师项目"
+    },
+    {
+      "slide": "slide-91",
+      "block_count": 2,
+      "image_ocr_count": 0,
+      "image_ocr_low_conf_count": 0,
+      "warning_count": 0,
+      "placeholder_hits": 0,
+      "low_quality_short_noise_hits": 0,
+      "chunk_count": 1,
+      "first_text_preview": "携手华为，以AI赋能教育，以根技驱动创新，共筑教育数字化新生态"
+    }
+  ],
+  "focus_slide_details": [
+    {
+      "slide": "slide-21",
+      "summary": {
+        "slide": "slide-21",
+        "block_count": 79,
+        "image_ocr_count": 0,
+        "image_ocr_low_conf_count": 0,
+        "warning_count": 0,
+        "placeholder_hits": 0,
+        "low_quality_short_noise_hits": 0,
+        "chunk_count": 5,
+        "first_text_preview": "AI人才培养与素养提升"
+      },
+      "block_previews": [
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "AI人才培养与素养提升"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "轩辕AI人才培养解决方案"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "运营服务"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "专业建设"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "师资赋能/互聘"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "学生训练营"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "技能大赛"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "科研课题"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "创新创业"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "培训与认证"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "实习就业"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "课程体系"
+        }
+      ],
+      "chunk_previews": [
+        "AI人才培养与素养提升\n\n轩辕AI人才培养解决方案\n\n运营服务\n\n专业建设\n\n师资赋能/互聘\n\n学生训练营\n\n技能大赛\n\n科研课题\n\n创新创业\n\n培训与认证\n\n实习就业\n\n课程体系\n\nAIGC技术实战课\n\nAI+行业案例\n\nAI微专业课\n\nAI基础设施创新课\n\nAI通识课\n\nA…",
+        "•••\n\n•••\n\n•••\n\n•••\n\n•••\n\n•••\n\n•••",
+        "实验实训产品\n\nAIGC实验箱\n\n视觉检测产线\n\n六轴机械臂\n\n智慧农业机器人\n\nAI通识教育平台\n\nAI综合实训平台\n\nAIGC实战平台\n\n开源鸿蒙机器人\n\n具身智能机器人\n\n智能网联车",
+        "•••",
+        "AI科学计算平台\n\n轩辕星轻量级大模型\n\n智能体应用开发平台\n\n算力资源设施\n\n集群管理\n\n容器引擎\n\n镜像管理\n\n任务调度\n\n负载均衡\n\n资源监控\n\n通用算力资源\n\n智能算力资源（训练/推理）\n\n高性能存储资源\n\n高速网络\n\n基础环境\n\nAI实训室 （AIGC实训室/人工智能…"
+      ]
+    },
+    {
+      "slide": "slide-33",
+      "summary": {
+        "slide": "slide-33",
+        "block_count": 54,
+        "image_ocr_count": 36,
+        "image_ocr_low_conf_count": 4,
+        "warning_count": 0,
+        "placeholder_hits": 0,
+        "low_quality_short_noise_hits": 0,
+        "chunk_count": 16,
+        "first_text_preview": "申时全上 / 大数据开发技术 / 清华大学出版社 / 大数系列丛书 / 大数据技术基础"
+      },
+      "block_previews": [
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.965,
+          "content_preview": "申时全上 / 大数据开发技术 / 清华大学出版社 / 大数系列丛书 / 大数据技术基础"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.965,
+          "content_preview": "应用教程 / 周张线填/苏、邱新羽主演 / 清华次学出版社 / 数据采集技术 / 清华大学出版社"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.957,
+          "content_preview": "大数据人冰泌材 / 程序设计基础 / 绕永路/主到伟/司主特子/主年 / 中国工信出服团 / 人民邮电中版社"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 1.0,
+          "content_preview": "清华大学出版社 / 大款指实战敢行来列 / 程序设计基础 / 除统王士先主编 / 人民邮电出版社"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.938,
+          "content_preview": "数据清洗与 / ETL技术 / 冯广主 / 清华大学出版社 / 大数据可视化"
+        },
+        {
+          "kind": "image_ocr_low_conf",
+          "quality_score": 0.737,
+          "content_preview": "云计算 / A民邮电击版社 / 21世纪商等配校 / 技术与应用基础 / 云计算"
+        },
+        {
+          "kind": "image_ocr_low_conf",
+          "quality_score": 0.748,
+          "content_preview": "21型纪润导R性 / 虚拟化技术与应用 / 云计算 / AR电版社 / 元计算和大5界2."
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.81,
+          "content_preview": "平台管理与应用 / 云计算 / 联名高应乐、工用外 / 中中国工信售 / 人民邮电出版社"
+        },
+        {
+          "kind": "image_ocr_low_conf",
+          "quality_score": 0.737,
+          "content_preview": "计大人对心收 / 基础架构与实践 / 云计算 / 219纪高8旗校 / 安全防护技术"
+        },
+        {
+          "kind": "image_ocr_low_conf",
+          "quality_score": 0.748,
+          "content_preview": "容器技术与应用 / 云计算 / 大理列丛节 / 华叶海 / 云计算数据中心"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 1.0,
+          "content_preview": "运维管理 / 清华大学出版社"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 1.0,
+          "content_preview": "大货活实设教材票列 / 数据标注 / 除统王士先主编 / 人民邮电出版社 / 大款指实战敢行系列"
+        }
+      ],
+      "chunk_previews": [
+        "申时全上 / 大数据开发技术 / 清华大学出版社 / 大数系列丛书 / 大数据技术基础\n\n应用教程 / 周张线填/苏、邱新羽主演 / 清华次学出版社 / 数据采集技术 / 清华大学出版社\n\n大数据人冰泌材 / 程序设计基础 / 绕永路/主到伟/司主特子/主年 / 中国工信出服团…",
+        "21型纪润导R性 / 虚拟化技术与应用 / 云计算 / AR电版社 / 元计算和大5界2.\n\n平台管理与应用 / 云计算 / 联名高应乐、工用外 / 中中国工信售 / 人民邮电出版社\n\n计大人对心收 / 基础架构与实践 / 云计算 / 219纪高8旗校 / 安全防护技术\n\n容器…",
+        "教材建设服务",
+        "| 第一版 | |\n| --- | --- |\n| 第二版（升级版） | |\n| 第一版 | |\n| 第二版（升级版） | |",
+        "轩辕网络与全国多所高校专业教师及国内云计算厂商的一线工程师共同开发编写了7本云计算专业系列教材。",
+        "智能系统规划、智能系统需求分析、智能系统架构设计的方法； / 智能系统算力平台、数据平台和算法设计的方法； / 异步图书 人工智能工程设计 / 陈统黄永健冯元勇陈清亮彭凌西李媛婷张英◎编著 陈统黄永健冯元勇陈清亮 / 彭凌西李媛婷张英 人民邮电出版社溪 人民邮电出版社\n\n中国工…"
+      ]
+    },
+    {
+      "slide": "slide-48",
+      "summary": {
+        "slide": "slide-48",
+        "block_count": 26,
+        "image_ocr_count": 8,
+        "image_ocr_low_conf_count": 4,
+        "warning_count": 0,
+        "placeholder_hits": 0,
+        "low_quality_short_noise_hits": 0,
+        "chunk_count": 6,
+        "first_text_preview": "专业人才培养_职业技能大赛服务"
+      },
+      "block_previews": [
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "专业人才培养_职业技能大赛服务"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "对照国家、行业企业举办的竞赛活动，积极申报、参加以及举办竞赛活动，组织学校和学生参赛，同时对学生开展赛前辅导和技能辅导工作，开展以赛促教和以赛促学工作。"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "舞台布景赛项"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "2025年省大学生设计大赛—AI大模型技术实践大赛"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "人力资源管理技能"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "短视频创作与运营赛项"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "舞台布景赛项"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "大数据技术与应用赛项"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.97,
+          "content_preview": "2022-2023年度 / 广东省职业院校学生专业技能大赛（高 / 大数据技术与应用"
+        },
+        {
+          "kind": "image_ocr_low_conf",
+          "quality_score": 0.733,
+          "content_preview": "2022-2023年度 / 广东省职业院校学生专业技能大赛（高职组） / 短视频创作与运营费顶 / 度 / 只组）"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.955,
+          "content_preview": "广东业所校学生专业续能大宾（高 / 2022-2023年次"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.913,
+          "content_preview": "2022-2023年度 / 业院校技能大赛（高职组）人力烫源管理技能赛项竞赛"
+        }
+      ],
+      "chunk_previews": [
+        "专业人才培养_职业技能大赛服务\n\n对照国家、行业企业举办的竞赛活动，积极申报、参加以及举办竞赛活动，组织学校和学生参赛，同时对学生开展赛前辅导和技能辅导工作，开展以赛促教和以赛促学工作。\n\n舞台布景赛项\n\n2025年省大学生设计大赛—AI大模型技术实践大赛\n\n人力资源管理技能\n…",
+        "2022-2023年度 / 广东省职业院校学生专业技能大赛（高 / 大数据技术与应用\n\n2022-2023年度 / 广东省职业院校学生专业技能大赛（高职组） / 短视频创作与运营费顶 / 度 / 只组）\n\n广东业所校学生专业续能大宾（高 / 2022-2023年次\n\n2022-…",
+        "连续3年承办华为ICT大赛",
+        "中国区广东省实践赛及颁奖典礼",
+        "工业互联网省赛\n\n协同智能大数据竞赛\n\n区块链应用与开发赛项\n\n智能视觉专项挑战赛",
+        "年广东省大学生计机设计大赛区块链应用与升\n\n技术技能大赛 / （联品安全）赛项\n\n为CT人222中京台客4 / 10TA买2022202号东2\n\n023年广东省大生计量辆说计大赛区块链应用与开发大赛高联\n\n2023年广东省大学生计算机设计大赛登第16届中国大学生计算机 设计大赛…"
+      ]
+    },
+    {
+      "slide": "slide-70",
+      "summary": {
+        "slide": "slide-70",
+        "block_count": 36,
+        "image_ocr_count": 0,
+        "image_ocr_low_conf_count": 0,
+        "warning_count": 0,
+        "placeholder_hits": 0,
+        "low_quality_short_noise_hits": 0,
+        "chunk_count": 30,
+        "first_text_preview": "科学城产业学院＿运营成果（人才培养）"
+      },
+      "block_previews": [
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "科学城产业学院＿运营成果（人才培养）"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "基地运营(V4.0)"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "人才培养提升"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "教学就业渠道拉通"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "产业学院升级"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "精英班、学徒制实施"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "技能大师工作室、产业导师工作室"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "产、学、研、用内涵升级"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "基地运营(v3.0)"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "2024"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "基地运营(V5.0)"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "2025"
+        }
+      ],
+      "chunk_previews": [
+        "科学城产业学院＿运营成果（人才培养）\n\n基地运营(V4.0)",
+        "人才培养提升",
+        "教学就业渠道拉通",
+        "产业学院升级",
+        "精英班、学徒制实施",
+        "技能大师工作室、产业导师工作室"
+      ]
+    },
+    {
+      "slide": "slide-74",
+      "summary": {
+        "slide": "slide-74",
+        "block_count": 38,
+        "image_ocr_count": 12,
+        "image_ocr_low_conf_count": 0,
+        "warning_count": 0,
+        "placeholder_hits": 0,
+        "low_quality_short_noise_hits": 0,
+        "chunk_count": 29,
+        "first_text_preview": "粤北大数据产业学院"
+      },
+      "block_previews": [
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "粤北大数据产业学院"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.961,
+          "content_preview": "留关市“广东技工”新职业、新工种"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.961,
+          "content_preview": "畅宁刘达峰赵常红"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.912,
+          "content_preview": "广东松山职业技术学院"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.912,
+          "content_preview": "粤北大数据产业学院开班仪式"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.912,
+          "content_preview": "2022年10月25日"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.912,
+          "content_preview": "张林庆"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "粤北大数据产业学院"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "揭牌"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "粤北大数据产业学院开班"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "（入驻248人）"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "产业孵化落地"
+        }
+      ],
+      "chunk_previews": [
+        "粤北大数据产业学院",
+        "留关市“广东技工”新职业、新工种",
+        "畅宁刘达峰赵常红",
+        "广东松山职业技术学院",
+        "粤北大数据产业学院开班仪式",
+        "2022年10月25日"
+      ]
+    },
+    {
+      "slide": "slide-79",
+      "summary": {
+        "slide": "slide-79",
+        "block_count": 15,
+        "image_ocr_count": 4,
+        "image_ocr_low_conf_count": 1,
+        "warning_count": 0,
+        "placeholder_hits": 0,
+        "low_quality_short_noise_hits": 0,
+        "chunk_count": 4,
+        "first_text_preview": "广师大：产业学院+科产教融合中心"
+      },
+      "block_previews": [
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "广师大：产业学院+科产教融合中心"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "产教融合，科教融汇"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "2023"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "2023"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "2023~2026"
+        },
+        {
+          "kind": "list",
+          "quality_score": 1.0,
+          "content_preview": "2025.06"
+        },
+        {
+          "kind": "image_ocr_low_conf",
+          "quality_score": 0.742,
+          "content_preview": "广东技术师范大学-广东轩辕网络科技股份有限公司 / 研究生联合培养基地揭牌仪式 / 研究生联合培养基地"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.941,
+          "content_preview": "热烈欢迎轩辕科技 / 莅临广东省知识产权大数据重点实验室 / 研讨AI+信创"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.95,
+          "content_preview": "设为首页」联系我们」加入收藏 廣東技术师范大学 计算机科学学院 / 输入关键字搜索 学院介绍 师资科研本科生 / IEET认证 研究生 创新实践 / 学生工作 党建思政 校友下载 / 当前位置：首页〉人工智能创新实验班〉正文"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.95,
+          "content_preview": "计算机科学学院人工智能创新实验班特色介绍 / 作者：时间：2023-06-20点击数：484 / 一、专业设置 人工智能创新实验班（简称实验班）是广东技术师范大学计算机科学学院（简称学院）在学校支持下，为主动适应新技术、新产业、新业态、新…"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 1.0,
+          "content_preview": "房東技街师范大业 / 授牌仪式"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "研究生联合培养基地"
+        }
+      ],
+      "chunk_previews": [
+        "广师大：产业学院+科产教融合中心\n\n产教融合，科教融汇\n\n2023\n\n2023\n\n2023~2026",
+        "2025.06",
+        "广东技术师范大学-广东轩辕网络科技股份有限公司 / 研究生联合培养基地揭牌仪式 / 研究生联合培养基地\n\n热烈欢迎轩辕科技 / 莅临广东省知识产权大数据重点实验室 / 研讨AI+信创\n\n设为首页」联系我们」加入收藏 廣東技术师范大学 计算机科学学院 / 输入关键字搜索 学院介绍…",
+        "研究生联合培养基地\n\n校企合作AI创新实验班\n\n共同研讨AI+信创\n\n参与科产教融合实践中心授牌仪式"
+      ]
+    },
+    {
+      "slide": "slide-80",
+      "summary": {
+        "slide": "slide-80",
+        "block_count": 55,
+        "image_ocr_count": 23,
+        "image_ocr_low_conf_count": 0,
+        "warning_count": 0,
+        "placeholder_hits": 0,
+        "low_quality_short_noise_hits": 0,
+        "chunk_count": 35,
+        "first_text_preview": "AI赋能阶段"
+      },
+      "block_previews": [
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "AI赋能阶段"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "轩辕产教融合实践探索历程回顾"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "深入产业阶段"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "2024-2025年，提升教育服务的智能化水平，研发轩辕AIGC实战平台、轩辕星大模型"
+        },
+        {
+          "kind": "list",
+          "quality_score": 1.0,
+          "content_preview": "1、轩辕AIGC实战平台上榜2025年广东软件风云录优秀软件产品"
+        },
+        {
+          "kind": "list",
+          "quality_score": 1.0,
+          "content_preview": "2、连续2年协办广东省大学生计算机设计大赛-AI大模型技术实践大赛"
+        },
+        {
+          "kind": "list",
+          "quality_score": 1.0,
+          "content_preview": "3、人工智能赋能教师全场景教学能力提升线上训练营"
+        },
+        {
+          "kind": "list",
+          "quality_score": 1.0,
+          "content_preview": "4、荣登2024广州人工智能创新发展榜单最具发展潜力企业榜及应用场景创新榜单"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "标准开发阶段"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "进一步加强与各行业的合作，推动产教融合的深度发展。推动教育内容与产业需求的紧密结合"
+        },
+        {
+          "kind": "list",
+          "quality_score": 1.0,
+          "content_preview": "1、深入交通、船舶、电池、医疗、大健康等行业，乡村振兴"
+        },
+        {
+          "kind": "list",
+          "quality_score": 1.0,
+          "content_preview": "2、与广东梅州职业技术学院共筑数智产业学院"
+        }
+      ],
+      "chunk_previews": [
+        "AI赋能阶段\n\n轩辕产教融合实践探索历程回顾\n\n深入产业阶段",
+        "2024-2025年，提升教育服务的智能化水平，研发轩辕AIGC实战平台、轩辕星大模型",
+        "1、轩辕AIGC实战平台上榜2025年广东软件风云录优秀软件产品",
+        "2、连续2年协办广东省大学生计算机设计大赛-AI大模型技术实践大赛",
+        "3、人工智能赋能教师全场景教学能力提升线上训练营",
+        "4、荣登2024广州人工智能创新发展榜单最具发展潜力企业榜及应用场景创新榜单"
+      ]
+    },
+    {
+      "slide": "slide-89",
+      "summary": {
+        "slide": "slide-89",
+        "block_count": 20,
+        "image_ocr_count": 8,
+        "image_ocr_low_conf_count": 0,
+        "warning_count": 0,
+        "placeholder_hits": 0,
+        "low_quality_short_noise_hits": 0,
+        "chunk_count": 16,
+        "first_text_preview": "广东技术师范大学华为根技术人工智能现代产业学院"
+      },
+      "block_previews": [
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "广东技术师范大学华为根技术人工智能现代产业学院"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "“广师大+华为+赛尔网络+轩辕网络 ” 四方联合创新运营模式"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.867,
+          "content_preview": "师范術"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 1.0,
+          "content_preview": "赛尔网络"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.9,
+          "content_preview": "網軒絡"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.9,
+          "content_preview": "证券代码"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "发建设思路："
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "“一个创新，两个转化”"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "建设内容："
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.981,
+          "content_preview": "理事会 产业学院 院长：广东技术师范大学"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.981,
+          "content_preview": "执行院长：广东技术师范大学 副院长：华为/赛尔/轩辑"
+        },
+        {
+          "kind": "image_ocr",
+          "quality_score": 0.981,
+          "content_preview": "应用研发与成果转化中心 人才培养中心 社会服务中心"
+        }
+      ],
+      "chunk_previews": [
+        "广东技术师范大学华为根技术人工智能现代产业学院\n\n“广师大+华为+赛尔网络+轩辕网络 ” 四方联合创新运营模式",
+        "师范術\n\n赛尔网络",
+        "網軒絡",
+        "证券代码",
+        "发建设思路：",
+        "“一个创新，两个转化”"
+      ]
+    },
+    {
+      "slide": "slide-90",
+      "summary": {
+        "slide": "slide-90",
+        "block_count": 21,
+        "image_ocr_count": 0,
+        "image_ocr_low_conf_count": 0,
+        "warning_count": 0,
+        "placeholder_hits": 0,
+        "low_quality_short_noise_hits": 0,
+        "chunk_count": 10,
+        "first_text_preview": "携手共赢：以广师大模式赋能东莞现场工程师项目"
+      },
+      "block_previews": [
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "携手共赢：以广师大模式赋能东莞现场工程师项目"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "广师大核心优势：“职教母机”"
+        },
+        {
+          "kind": "list",
+          "quality_score": 1.0,
+          "content_preview": "• 1957年创办，是全国首批学士学位授予高校；1998年转型职业技术师范教育，2018年升格为广东技术师范大学。"
+        },
+        {
+          "kind": "list",
+          "quality_score": 1.0,
+          "content_preview": "• 学校是“职业学校教师在职攻读硕士专业学位”研究生招生培养单位和教育硕士（职业技术教育）专业学位研究生教育试点单位； ·与地方政府共建了 顺德现代职业教育研究院 和 河源市广师大研究院； ·先后被教育部、人社部、省教育厅等选定为“全国重…"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "合作升级路径"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "STEP 1 · 现有合作基础"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "共建华为根技术人工智能现代产业学院，(即将)挂牌华为AIPL，在人才培养与科研创新上已见成效。"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "强大师资赋能"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "深度课程定制"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "官方认证定位"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "STEP 2 · 沉淀“广师大模式”"
+        },
+        {
+          "kind": "paragraph",
+          "quality_score": 1.0,
+          "content_preview": "依托近30年职教经验，深度参与职业教育课程标准制定，具备强大的课程开发与定制能力。"
+        }
+      ],
+      "chunk_previews": [
+        "携手共赢：以广师大模式赋能东莞现场工程师项目",
+        "广师大核心优势：“职教母机”",
+        "• 1957年创办，是全国首批学士学位授予高校；1998年转型职业技术师范教育，2018年升格为广东技术师范大学。",
+        "• 学校是“职业学校教师在职攻读硕士专业学位”研究生招生培养单位和教育硕士（职业技术教育）专业学位研究生教育试点单位； ·与地方政府共建了 顺德现代职业教育研究院 和 河源市广师大研究院； ·先后被教育部、人社部、省教育厅等选定为“全国重点建设职教师资培养培训基地” “国家技能…",
+        "合作升级路径\n\nSTEP 1 · 现有合作基础\n\n共建华为根技术人工智能现代产业学院，(即将)挂牌华为AIPL，在人才培养与科研创新上已见成效。\n\n强大师资赋能\n\n深度课程定制\n\n官方认证定位\n\nSTEP 2 · 沉淀“广师大模式”\n\n依托近30年职教经验，深度参与职业教育课程…",
+        "合作共赢价值"
+      ]
+    }
+  ]
+}

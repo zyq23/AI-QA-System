@@ -1,0 +1,10 @@
+name: yushu-qa
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - sqlite
+  - poppler
+  - pip:
+      - uv>=0.8.0

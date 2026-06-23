@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="admin-wrap">
+    <div class="panel-header panel-header-wide">
+      <div>
+        <p class="eyebrow">Admin Console</p>
+        <h1>知识库管理台</h1>
+      </div>
+      <p class="lede-short">上传、导入、重建索引和查看作业状态都在这里完成。</p>
+    </div>
+    {% include "partials/admin_shell.html" %}
+  </section>
+{% endblock %}

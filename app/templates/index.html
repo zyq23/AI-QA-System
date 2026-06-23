@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="hero-grid">
+    <div class="hero-panel">
+      <p class="eyebrow">Grounded Prototype</p>
+      <h1>先把资料吃透，再让系统回答。</h1>
+      <p class="lede">
+        当前版本是面向你本地知识库资料的问答系统。它会优先依据上传和导入的文档回答，并把来源片段展示出来。
+        现在的目标就是把这批资料变成一个可检索、可引用、可持续更新的 AI 问答系统。
+      </p>
+      <div class="meta-strip">
+        <div>
+          <span class="meta-label">已登记文档</span>
+          <strong>{{ document_count }}</strong>
+        </div>
+        <div>
+          <span class="meta-label">资料目录</span>
+          <strong>{{ source_dir }}</strong>
+        </div>
+      </div>
+      <div class="alert-card">
+        <span class="alert-title">回答策略</span>
+        <p>如果知识库没有直接证据，系统会明确提示资料不足，并把额外推断单独标记。</p>
+      </div>
+      <div class="doc-list">
+        {% for document in documents[:5] %}
+          <article class="doc-pill">
+            <span>{{ document.title }}</span>
+            <small>{{ document.trust_level }} / {{ document.index_status or "pending" }}</small>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="chat-stage" data-chat-root data-api-url="/api/chat/query">
+      <div class="chat-card">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Q&A Console</p>
+            <h2>资料问答</h2>
+          </div>
+          <div class="badge-stack">
+            <span class="badge">中文回答</span>
+            <span class="badge">默认带引用</span>
+          </div>
+        </div>
+        <div class="message-feed" data-message-feed>
+          <article class="message message-assistant">
+            <div class="message-role">系统</div>
+            <div class="message-body">
+              提问示例：<br />
+              1. 这套资料里提到的机器人相关功能有哪些？<br />
+              2. 哪份文档提到了本地部署大模型？<br />
+              3. 当前知识库里有哪些和教学平台建设相关的内容？
+            </div>
+          </article>
+        </div>
+        <form class="chat-form" data-chat-form>
+          <textarea name="question" rows="4" maxlength="4000" placeholder="输入你的问题，系统会优先基于本地资料回答。"></textarea>
+          <div class="chat-actions">
+            <p class="hint">多轮提问已开启，系统会保留最近 4 轮上下文。</p>
+            <button type="submit" class="primary-button">提交问题</button>
+          </div>
+        </form>
+      </div>
+
+      <aside class="citation-panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Evidence</p>
+            <h2>来源引用</h2>
+          </div>
+        </div>
+        <div class="citation-list" data-citation-list>
+          <p class="empty-state">提交问题后，这里会显示命中的资料片段、页码/页号和信任级别。</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+{% endblock %}
