@@ -1,74 +1,121 @@
-# 知识库 AI 问答系统
+# AI-QA-System
 
-基于 `FastAPI + Jinja2/HTMX + SQLite FTS5 + ChromaDB` 的知识库问答系统。当前仓库面向你本地 `宇树科技知识库/` 里的现有资料工作，不依赖宇树 G1 官方资料。
+一个面向本地知识库的可追溯 AI 问答系统，适合把 `PDF / DOCX / PPTX` 等资料接入统一问答链路，并提供引用、检索、评测与运维能力。
 
-## 主要能力
+本项目当前以 `FastAPI + SQLite FTS5 + ChromaDB` 为核心底座，支持本地检索优先、`RAGFlow` 可选增强，以及多种大模型接入方式。
 
-- 支持 `pdf / docx / pptx` 上传、解析、分块和本地持久化索引
-- SQLite FTS5 + 向量检索 + RRF 融合 + reranker 重排
-- 可选接入 `RAGFlow` 作为外部解析/检索底座，保留现有回答收口与评测链路
-- 支持 OpenAI 兼容接口和讯飞 Spark X2 WebSocket 生成答案
-- 默认展示来源引用、页码/页号和信任级别
-- 管理台支持上传、目录导入、单文档重建索引、全量重建、停用文档
-- 当前目录 `宇树科技知识库/` 可直接作为系统语料导入
+## 项目目标
 
-## 环境要求
+- 面向私有知识库做问答，而不是通用聊天
+- 支持复杂文档接入，包括 `pptx`、OCR 页、图片页等
+- 生成回答时尽量给出来源证据与可追溯引用
+- 保留评测、回归、重建索引、机器人接入等工程化能力
+- 在不破坏已有可用链路的前提下逐步提升解析、检索和回答质量
+
+## 核心特性
+
+- 文档接入：支持上传和目录导入 `pdf / docx / pptx`
+- 解析与分块：内置多格式解析器，支持复杂 PPT 与 OCR 回退
+- 混合检索：`SQLite FTS5 + 向量检索 + RRF 融合 + reranker`
+- 回答生成：支持 OpenAI 兼容接口和讯飞 Spark WebSocket
+- 证据引用：回答可附带来源片段、页码和可信度信号
+- 管理能力：支持单文档重建、全量重建、停用文档、评测执行
+- 机器人接入：提供简化的 HTTP 问答接口和桥接示例
+- 可扩展后端：支持将 `RAGFlow` 接为可选检索/解析增强链路
+
+## 技术栈
+
+- Backend: `FastAPI`
+- Template/UI: `Jinja2`
+- Database: `SQLite`
+- Lexical Retrieval: `SQLite FTS5`
+- Vector Store: `ChromaDB`
+- Embedding / Rerank: `BGE` 系列模型
+- LLM Access: `OpenAI-compatible API` / `Spark WebSocket`
+- Optional Enhancement: `RAGFlow`
+- Test / Eval: `pytest` + repo 内置回归脚本
+
+## 系统架构
+
+```text
+Documents
+  -> Parsers (PDF / DOCX / PPTX / OCR)
+  -> Chunking
+  -> SQLite metadata + FTS5 index
+  -> Chroma vector index
+
+User Question
+  -> Query rewrite / retrieval pipeline
+  -> FTS recall + vector recall
+  -> Fusion / rerank
+  -> LLM answer generation
+  -> Evidence-grounded response
+```
+
+默认策略是“本地检索优先，外部增强可选接入”，这样既能保持离线可控，也方便后续逐步升级复杂文档能力。
+
+## 仓库结构
+
+```text
+app/                FastAPI 应用、解析、检索、回答、服务编排
+docs/               协作记录、设计决策、阶段报告、验收材料
+scripts/            启动、评测、重建索引、诊断脚本
+tests/              单测与接口/检索相关测试
+robot_bridge/       机器人或外部设备接入示例
+data/evals/         评测集与历史评测结果
+```
+
+说明：
+
+- 原始知识库文档目录和本地模型文件默认不随仓库上传
+- 本仓库更关注“系统代码、评测资产、运行脚本和工程留痕”
+
+## 快速开始
+
+### 1. 环境要求
 
 - Python `3.11`
-- 推荐使用 `conda + uv`
+- 推荐使用 `uv`
+- 可选使用 `conda`
 
-## Conda 初始化
+### 2. 安装依赖
+
+```bash
+uv sync --python 3.11 --inexact
+python -m pip install --index-url https://download.pytorch.org/whl/cpu torch
+python -m pip install "transformers<5" FlagEmbedding
+```
+
+如果需要 OCR 回退：
+
+```bash
+uv sync --python 3.11 --extra ocr
+```
+
+也可以直接使用仓库提供的 conda 初始化脚本：
 
 ```bash
 bash scripts/setup_conda_env.sh
 conda activate yushu-qa
 ```
 
-如果你已经在现有 conda 环境中工作，也可以直接执行：
-
-```bash
-uv sync --python 3.11 --inexact
-python -m pip install --index-url https://download.pytorch.org/whl/cpu torch
-python -m pip install "transformers<5" FlagEmbedding
-```
-
-## 安装
-
-```bash
-uv sync --python 3.11 --inexact
-python -m pip install --index-url https://download.pytorch.org/whl/cpu torch
-python -m pip install "transformers<5" FlagEmbedding
-```
-
-如果要启用 PaddleOCR 回退：
-
-```bash
-uv sync --python 3.11 --extra ocr
-```
-
-复制环境变量模板：
+### 3. 配置环境变量
 
 ```bash
 cp .env.example .env
 ```
 
-至少建议配置：
+最小配置示例：
 
 ```env
 ADMIN_TOKEN=your-admin-token
-LLM_PROVIDER=spark_ws
-```
-
-如果走 OpenAI 兼容接口：
-
-```env
 LLM_PROVIDER=openai_compatible
 LLM_BASE_URL=https://your-openai-compatible-endpoint/v1
-LLM_API_KEY=your-key
+LLM_API_KEY=your-api-key
 LLM_MODEL=your-model
 ```
 
-如果走讯飞 Spark X2 WebSocket：
+如果使用讯飞 Spark：
 
 ```env
 LLM_PROVIDER=spark_ws
@@ -80,50 +127,93 @@ SPARK_MODEL=x2
 SPARK_DOMAIN=spark-x
 ```
 
-当前代码会按顺序读取 `.env` 和 `../qianliyan/.env`。如果 `../qianliyan/.env` 已经配置过 Spark 凭据，这里可以不重复填写。
-
-如果要把 `RAGFlow` 接到现有系统中，作为检索后端：
-
-```env
-RETRIEVAL_BACKEND=ragflow
-RAGFLOW_BASE_URL=http://127.0.0.1:9380
-RAGFLOW_API_KEY=your-ragflow-api-key
-RAGFLOW_DATASET_IDS=dataset_id_1,dataset_id_2
-RAGFLOW_DOCUMENT_IDS=
-RAGFLOW_SOURCE_MODE=false
-RAGFLOW_SOURCE_ROOT=ragflow
-RAGFLOW_FALLBACK_TO_LOCAL=true
-```
-
-说明：
-
-- `RETRIEVAL_BACKEND=local` 时，继续使用当前 `SQLite FTS5 + ChromaDB` 本地检索。
-- `RETRIEVAL_BACKEND=ragflow` 时，`/api/chat/query` 仍保持不变，只是底层证据改由 `RAGFlow /api/v1/retrieval` 提供。
-- `RAGFLOW_FALLBACK_TO_LOCAL=true` 时，如果 `ragflow` 服务不可用或检索报错，会自动回退到本地索引，不会中断对外问答。
-- 推荐先把 `ragflow` 用于“复杂文档解析、OCR、分块、检索”，继续保留当前系统的回答收口、双智能体质检和评测接口。
-- `RAGFLOW_SOURCE_MODE` 和 `RAGFLOW_SOURCE_ROOT` 当前主要用于约定本机 `ragflow/` 源码服务位置，便于运维。
-
-如果暂时没有本地 BGE 模型或云端 LLM，可先用：
+如果你暂时只想验证流程、不接真实模型：
 
 ```env
 USE_STUB_ML=true
 DISABLE_LLM=true
 ```
 
-## 运行
+### 4. 启动服务
 
 ```bash
 uv run --python 3.11 uvicorn app.main:app --reload
 ```
 
-访问：
+访问地址：
 
-- 问答页：`http://127.0.0.1:8000/`
-- 管理页：`http://127.0.0.1:8000/admin?token=你的ADMIN_TOKEN`
+- 首页：`http://127.0.0.1:8000/`
+- 管理台：`http://127.0.0.1:8000/admin?token=你的ADMIN_TOKEN`
 
-## 机器人接入
+## 文档导入
 
-如果 G1 EDU 端只需要“发问题、拿短答案播报”，直接接：
+可以通过两种方式接入本地知识库：
+
+### 管理台导入
+
+- 上传单个文档
+- 导入本地目录
+- 对单文档或全量数据执行重建索引
+
+### 命令行导入
+
+```bash
+uv run --python 3.11 python -m app.cli bootstrap
+```
+
+## 模型准备
+
+如果需要下载本地 BGE 相关模型，可执行：
+
+```bash
+uv run --python 3.11 python -m app.cli download-models
+```
+
+`download-models` 只下载运行必需文件，不拉取整仓库附加资源。
+
+## 检索与回答说明
+
+当前主链路大致如下：
+
+1. 文档解析为结构化文本块
+2. 写入 SQLite 元数据与 FTS5 索引
+3. 写入 Chroma 向量索引
+4. 查询阶段执行词法召回与向量召回
+5. 使用融合与重排策略缩小候选范围
+6. 把候选证据交给 LLM 生成最终答案
+7. 返回回答及相关引用信息
+
+这套设计的重点不是“尽量回答所有问题”，而是“尽量基于知识库证据回答问题”。
+
+## 评测与回归
+
+仓库内已经提供评测资产与脚本：
+
+```bash
+uv run --python 3.11 python scripts/run_eval.py
+```
+
+评测数据位于：
+
+```text
+data/evals/
+```
+
+评测结果默认输出到：
+
+```text
+data/evals/results/
+```
+
+如果你要做检索链路排查，也可以使用：
+
+```bash
+uv run --python 3.11 python scripts/run_retrieval_diagnosis.py
+```
+
+## 机器人 / 外部系统接入
+
+如果外部系统只需要“提交问题并获取可播报短答案”，可以直接调用：
 
 - `POST /api/robot/query`
 
@@ -134,141 +224,72 @@ uv run --python 3.11 uvicorn app.main:app --reload
   "question": "系统在资料不足时应该怎么回答？",
   "conversation_id": null,
   "top_k": 6,
-  "client_id": "g1-edu-dock",
-  "voice_session_id": "optional"
+  "client_id": "robot-client"
 }
 ```
 
-响应示例：
-
-```json
-{
-  "answer": "当前知识库没有直接证据时，系统会明确说明证据不足，不把推断当成事实。",
-  "conversation_id": "5f0c7f4e-7a0d-4ef0-b18c-6d7bc3a8b4a2",
-  "latency_ms": 812,
-  "grounded": true,
-  "should_speak": true,
-  "tts_text": "当前知识库没有直接证据时，系统会明确说明证据不足，不把推断当成事实。",
-  "answer_run_id": "c8b5d6f2-9f28-4d36-9f6d-6b6a2cf38a26",
-  "question_type": "factoid",
-  "answer_focus": "资料不足时的回答策略"
-}
-```
-
-目录 [robot_bridge](robot_bridge/README.md) 里提供了一个最小 Python 示例，可直接用于机器人端 HTTP 桥接：
+`robot_bridge/` 目录下提供了最小桥接示例：
 
 ```bash
 python robot_bridge/bridge.py --base-url http://127.0.0.1:8000
 ```
 
-如果你要更接近 G1 EDU 端的落地接法，可以直接用：
+## RAGFlow 可选集成
 
-```bash
-python robot_bridge/g1_client.py --base-url http://127.0.0.1:8000
-```
+本项目支持把 `RAGFlow` 作为增强解析/检索后端接入，同时保留当前应用层接口与回答收口逻辑。
 
-这个示例已经包含会话复用、打断后丢弃过期回答、`jsonl` 运行日志，适合后续嵌到你现有的 ASR/TTS 客户端里。
-
-## 问答验收
-
-仓库内已经提供一套基于当前 `宇树科技知识库/` 资料的测试集与验收脚本：
-
-```bash
-.venv/bin/python scripts/run_eval.py
-```
-
-默认测试集位置：
-
-```text
-data/evals/knowledge_base_eval_cases.json
-```
-
-执行后会生成带时间戳的报告到：
-
-```text
-data/evals/results/
-```
-
-## 导入本地知识库
-
-方式一：管理台点击“导入本地知识库目录”。
-
-方式二：命令行：
-
-```bash
-uv run --python 3.11 python -m app.cli bootstrap
-```
-
-## RAGFlow 集成建议
-
-当前仓库已经支持把 `RAGFlow` 接成可选检索后端，适合逐步迁移：
-
-1. 用 `ragflow/` 跑文档解析、OCR、分块和检索。
-2. 把目标数据集 ID 配到 `RAGFLOW_DATASET_IDS`。
-3. 保留现有 `/api/chat/query`、`/api/admin/evals/run`、`answer_runs` 质检留痕不变。
-
-这样可以先用 `RAGFlow` 提升复杂文档召回能力，尤其是 PPT/PDF 图片知识点，再继续复用当前系统已经做好的机器人回答风格控制。
-
-### 在当前机器上启动 RAGFlow 源码服务
-
-当前环境下更推荐“源码跑后端 + Docker 只跑基础依赖”的方式，而不是直接拉 `infiniflow/ragflow` 主镜像。
-
-1. 启动依赖并安装源码环境：
-
-```bash
-bash scripts/start_ragflow_source.sh
-```
-
-脚本会自动完成这些事情：
-
-- 通过 `docker.m.daocloud.io` 代理镜像启动 `mysql/minio/redis/infinity`
-- 下载 `en_core_web_sm` 轮子到 `ragflow/vendor/`
-- 用 `uv` 创建 `ragflow/.venv`
-- 启动 `rag/svr/task_executor.py` 和 `api/ragflow_server.py`
-
-常用控制命令：
-
-```bash
-bash scripts/stop_ragflow_source.sh
-```
-
-服务日志位置：
-
-```text
-ragflow/logs/task_executor.log
-ragflow/logs/ragflow_server.log
-```
-
-基础依赖 compose 覆盖文件：
-
-```text
-ragflow/docker/docker-compose-base.mirror.yml
-```
-
-如果 `RAGFlow` 启动成功，再把你创建好的 `dataset_id` 填到 `.env`：
+示例配置：
 
 ```env
 RETRIEVAL_BACKEND=ragflow
 RAGFLOW_BASE_URL=http://127.0.0.1:9380
 RAGFLOW_API_KEY=your-ragflow-api-key
-RAGFLOW_DATASET_IDS=dataset_id_1
-RAGFLOW_SOURCE_MODE=true
-RAGFLOW_SOURCE_ROOT=ragflow
+RAGFLOW_DATASET_IDS=dataset_id_1,dataset_id_2
 RAGFLOW_FALLBACK_TO_LOCAL=true
 ```
 
-## 下载本地 BGE 模型
+集成思路：
+
+- `local` 模式继续走本地 `FTS5 + ChromaDB`
+- `ragflow` 模式把底层检索交给 `RAGFlow`
+- 如果开启 `RAGFLOW_FALLBACK_TO_LOCAL=true`，RAGFlow 异常时会回退到本地链路
+
+相关脚本：
 
 ```bash
-uv sync --python 3.11 --inexact
-python -m pip install --index-url https://download.pytorch.org/whl/cpu torch
-python -m pip install "transformers<5" FlagEmbedding
-uv run --python 3.11 python -m app.cli download-models
+bash scripts/start_ragflow_source.sh
+bash scripts/stop_ragflow_source.sh
 ```
 
-`download-models` 现在只下载运行所需文件，不再拉取整仓库的 `onnx`/图片等附加内容。这里刻意走 CPU 版 `torch`，避免 `uv` 默认把 CUDA 依赖一并装下来；后续如果再次同步依赖，也请继续使用 `uv sync --inexact`。
+## 测试
 
-## 注意
+运行测试：
 
-- 当前系统就是围绕这批本地知识库资料构建问答，不要求语料必须来自宇树 G1 官方文档。
-- 如果后续要增加其他资料来源，只需要继续通过管理台上传或从固定目录导入。
+```bash
+pytest
+```
+
+或者：
+
+```bash
+uv run --python 3.11 pytest
+```
+
+## 已知限制
+
+- 复杂 PPT、图片页、OCR 页仍然是高风险区域
+- 公开仓库默认不包含原始知识库资料和本地模型文件
+- 完整效果依赖你实际接入的知识库质量、检索配置和大模型能力
+- 某些本地路径或脚本默认面向当前开发环境，二次部署时可能需要调整
+
+## 适用场景
+
+- 企业内部知识库问答
+- 课程资料 / 项目资料问答
+- 机器人讲解 / 展示终端问答
+- 本地私有文档检索增强问答
+
+## License
+
+如果你准备公开长期维护，建议补充正式 `LICENSE` 文件。
+当前仓库若未附带 License，默认不等于开源授权。
