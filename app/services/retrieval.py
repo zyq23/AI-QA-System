@@ -546,55 +546,35 @@ class RetrievalService:
             token in question
             for token in ("列举", "哪些", "哪四个", "哪三部分", "至少列出", "至少4项", "至少列出的", "四项服务", "服务模块")
         )
-        if any(token in question for token in ("文化建设", "展厅文化")) and any(
-            token in question for token in ("哪三句", "三句话", "主线")
-        ):
-            if all(marker in combined_text for marker in ("根技术筑基", "产教融育人", "师范践初心")):
-                return True
-        if any(token in question for token in ("3个重构", "三个重构", "5大方向", "五大方向", "三大重构")):
-            has_restructures = all(marker in combined_text_top5 for marker in ("理论重构", "架构重构", "软件重构"))
-            has_directions = sum(
-                1
-                for marker in ("基础理论", "基础硬件", "基础软件", "开发工具", "运营系统")
-                if marker in combined_text_top5
-            ) >= 2
-            if has_restructures and (has_directions or "5大方向突围" in combined_text_top5 or "五大方向突围" in combined_text_top5):
-                return True
-        if any(token in question for token in ("根技术研发布局", "研发布局")) and "华为" in question:
-            if any(marker in combined_text_top5 for marker in ("强力投入研究与开发", "创新驱动未来发展")):
-                return True
-        if "展厅" in question and "口号" in question and "根生万物" in combined_text and "智育未来" in combined_text:
-            return True
-        if "鸿蒙" in question and any(token in question for token in ("展品", "设备", "展示")) and all(
-            marker in combined_text for marker in ("鸿蒙智联场景应用实训箱", "atlas智能小车")
-        ):
-            return True
-        if any(token in question for token in ("四个支柱", "支柱方向", "支柱领域")):
-            pillars = [p for p in ("智慧农业", "智能制造", "健康卫生", "智能教育") if p in combined_text_top5]
-            if len(pillars) >= 2:
-                return True
-            # OCR-garbled variant
-            has_agriculture = "智慧农业" in combined_text_top5
-            has_garble = any(g in combined_text_top5 for g in ("智能支居", "智能交息", "智度工厂"))
-            if has_agriculture and has_garble:
-                return True
-        if "教学资料" in question:
-            materials = [m for m in ("教学大纲", "MOOC", "授课PPT", "电子教材", "实验手册", "实验室搭建指南") if m in combined_text_top5]
-            if len(materials) >= 2:
-                return True
-        if "课程资源" in question or "资源类型" in question:
-            resources = [r for r in ("通识课", "专业课", "认证课") if r in combined_text_top5]
-            if len(resources) >= 2:
-                return True
-        if any(token in question for token in ("目录", "CONTENTS", "部分")):
-            toc_markers = [marker for marker in ("公司概况", "产教融合业务及实践分享", "标杆案例", "与华为同行") if marker in combined_text_top5]
-            if ("contents" in combined_text_top5 or "目录" in combined_text_top5) and len(toc_markers) >= 2:
-                return True
+        # Evidence-driven grounding: the query was expanded with rule phrases
+        # (entity aliases + rule expansions). If the top-5 evidence collectively
+        # covers the core expansion phrases, the question IS answerable from the
+        # KB — regardless of which fixed question triggered the expansion.
+        rule_phrases = [term.lower() for term in expansion_terms_for(question) if len(term) >= 2]
+        alias_phrases: list[str] = []
+        for entity, aliases in entity_aliases().items():
+            if entity in question or any(alias in question for alias in aliases):
+                alias_phrases.extend(alias.lower() for alias in aliases)
         strict_tokens = re.findall(r"[a-z0-9][a-z0-9._/-]{1,}", question.lower())
+        # Source-format self-references ("根据PPT概括…") are not content terms;
+        # they must not veto grounding.
+        source_format_tokens = {"ppt", "pptx", "pdf", "docx", "doc", "xlsx", "word", "excel"}
         if enumeration_question:
-            strict_tokens = [token for token in strict_tokens if token not in {"ppt"}]
+            source_format_tokens.add("ppt")
+        strict_tokens = [token for token in strict_tokens if token not in source_format_tokens]
         if strict_tokens and any(token not in combined_text for token in strict_tokens):
             return False
+        grounding_phrases = list(dict.fromkeys([*rule_phrases, *alias_phrases]))
+        if grounding_phrases:
+            covered = sum(1 for phrase in grounding_phrases if phrase in combined_text_top5)
+            # Summary-style questions (概括/总结/主线/整体/综述) demand FULL
+            # coverage of the expected concept phrases — a partial slide hit
+            # must not count as grounded evidence for a whole-topic summary.
+            summary_question = any(token in question for token in ("概括", "总结", "主线", "整体", "综述"))
+            required = len(grounding_phrases) if summary_question else min(3, len(grounding_phrases))
+            floor = len(grounding_phrases) if summary_question else max(1, len(grounding_phrases) // 2)
+            if covered >= required and covered >= floor:
+                return True
         if focus_terms:
             key_terms = [term.lower() for term in focus_terms if len(term) >= 2]
             normalized_terms: list[str] = []
@@ -615,14 +595,39 @@ class RetrievalService:
         if not query_tokens:
             return bool(hits)
         required_overlap = min(2, max(1, len(query_tokens) // 2))
+        # Summary-style questions need evidence that covers the summary SUBJECT
+        # plus multiple query tokens — a single headline chunk with token overlap
+        # but no supporting structure is not enough to ground a whole-topic summary.
+        # Intent words anchor the detection; bare nouns like 架构/布局 also appear
+        # in plain factoid questions ("研发布局是什么？") and must not trigger this.
+        summary_question = any(token in question for token in ("概括", "总结", "主线", "整体", "综述")) or (
+            any(token in question for token in ("架构", "布局")) and any(token in question for token in ("概括", "总结", "主线", "整体", "综述"))
+        )
+        summary_min_hits = 2 if summary_question else 1
+        supporting_hits = 0
         for hit in hits[:5]:
             hit_tokens = set(tokenize(hit.plain_text))
             overlap = len(query_tokens & hit_tokens)
             keyword_rank = hit.raw_scores.get("keyword_rank")
             if overlap >= required_overlap:
-                return True
-            if keyword_rank is not None and keyword_rank <= 5 and overlap >= 1 and hit.rerank_score > -2.5:
-                return True
+                supporting_hits += 1
+                if supporting_hits >= summary_min_hits:
+                    return True
+            elif keyword_rank is not None and keyword_rank <= 5 and overlap >= 1 and hit.rerank_score > -2.5:
+                supporting_hits += 1
+                if supporting_hits >= summary_min_hits:
+                    return True
+        if summary_question:
+            # A single headline chunk with token overlap is NOT enough evidence
+            # to ground a whole-topic summary — require multiple supporting hits
+            # or a genuinely score-dominant chunk with section-title alignment.
+            multiple_support = supporting_hits >= 2
+            single_dominant = (
+                len(hits) >= 2
+                and first.rerank_score >= 6.0
+                and first.rerank_score >= hits[1].rerank_score + 3.0
+            )
+            return multiple_support or single_dominant
         return first.rerank_score >= 0.75
 
     @staticmethod
