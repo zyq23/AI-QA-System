@@ -34,7 +34,12 @@ def _table_to_markdown(table: Tag) -> str:
 
 
 def _extract_image_ocr_texts(path: Path, ocr_adapter) -> list[tuple[str, float]]:
-    """OCR embedded raster images (word/media/*) inside a DOCX package."""
+    """OCR embedded raster images (word/media/*) inside a DOCX package.
+
+    Screenshots of app UIs (buttons, log panels, dialogs) produce mostly
+    low-quality noise chunks, so only images whose OCR output survives the
+    quality gate with a decent score are kept, and per-image output is capped.
+    """
     results: list[tuple[str, float]] = []
     try:
         archive = zipfile.ZipFile(path)
@@ -54,8 +59,19 @@ def _extract_image_ocr_texts(path: Path, ocr_adapter) -> list[tuple[str, float]]
             except Exception:
                 continue
             cleaned_text, quality_score = clean_ocr_text(raw_ocr_text)
-            if cleaned_text:
-                results.append((cleaned_text, quality_score))
+            if not cleaned_text or quality_score < 0.55:
+                continue
+            parts = split_visual_text(cleaned_text) or [cleaned_text]
+            substantive = [
+                part
+                for part in parts
+                if len(part) >= 8 and sum(1 for ch in part if "\u4e00" <= ch <= "\u9fff") + sum(
+                    1 for ch in part if ch.isascii() and ch.isalpha()
+                ) >= 6
+            ]
+            if not substantive:
+                continue
+            results.append((" ".join(substantive[:4]), quality_score))
     return results
 
 
@@ -133,17 +149,15 @@ class DocxParser:
             try:
                 for image_text, quality_score in _extract_image_ocr_texts(path, ocr_adapter):
                     kind = "image_ocr" if quality_score >= 0.8 else "image_ocr_low_conf"
-                    parts = split_visual_text(image_text) or [image_text]
-                    for part_index, part in enumerate(parts, start=1):
-                        blocks.append(
-                            SourceBlock(
-                                page_or_slide="docx",
-                                section_path=f"{title} / 图片 OCR {part_index}",
-                                content=part,
-                                kind=kind,
-                                quality_score=quality_score,
-                            )
+                    blocks.append(
+                        SourceBlock(
+                            page_or_slide="docx",
+                            section_path=f"{title} / 图片 OCR",
+                            content=image_text,
+                            kind=kind,
+                            quality_score=quality_score,
                         )
+                    )
                     ocr_used = True
             except Exception as exc:  # pragma: no cover - optional dependency
                 warnings.append(f"图片 OCR 失败: {exc}")
