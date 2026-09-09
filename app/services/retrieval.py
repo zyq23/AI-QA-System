@@ -9,70 +9,20 @@ from app.domain import RetrievalHit
 from app.repositories import Repository
 from app.services.ml import EmbeddingService, RerankerService, tokenize
 from app.services.ragflow import RagflowClient, RagflowError
+from app.services.retrieval_rules import (
+    base_expansion_terms_for,
+    entity_aliases,
+    expansion_terms_for,
+    query_synonyms,
+)
 from app.services.vector_store import VectorStoreService
 from app.utils import build_search_text, shorten_snippet
 
 logger = logging.getLogger(__name__)
 
-QUERY_SYNONYM_HINTS: dict[str, tuple[str, ...]] = {
-    "治理模式": ("管理模式", "运行模式"),
-    "管理模式": ("治理模式", "运行模式"),
-    "决策机构": ("决策层", "决策单位"),
-    "最高决策机构": ("最高决策单位", "决策层"),
-    "最高决策单位": ("最高决策机构", "决策层"),
-    "决策层": ("决策机构", "最高决策机构"),
-    "核心设备": ("关键设备", "主要设备"),
-    "技术架构": ("技术应用架构", "架构设计"),
-    "技术应用架构": ("技术架构", "架构设计"),
-    "课程资源": ("课程类型", "课程体系"),
-    "课程类型": ("课程资源", "课程体系"),
-    "课程体系": ("课程资源", "课程类型"),
-    "教学资料": ("教学资源", "教学材料"),
-    "教学资源": ("教学资料", "教学材料"),
-    "实验环境": ("开放性实验环境", "编程环境"),
-    "编程环境": ("开放性实验环境", "实验环境"),
-    "本地部署": ("本地化部署", "私有化部署"),
-    "本地化部署": ("本地部署", "私有化部署"),
-    "私有化部署": ("本地部署", "本地化部署"),
-    "沟通制度": ("沟通机制", "协同机制"),
-    "沟通机制": ("沟通制度", "协同机制"),
-    "协同机制": ("沟通制度", "沟通机制"),
-    "功能区域": ("展区", "规划区域"),
-    "展区": ("功能区域", "规划区域"),
-    "规划区域": ("功能区域", "展区"),
-    "融合路径": ("融合方向", "融合方式"),
-    "融合方向": ("融合路径", "融合方式"),
-    "融合方式": ("融合路径", "融合方向"),
-    "展品": ("设备", "展示内容"),
-    "适用课程": ("课程", "适配课程"),
-    "级别": ("等级",),
-    "等级": ("级别",),
-    "绑定失败": ("无法绑定", "绑定设备"),
-    "无法绑定": ("绑定失败", "绑定设备"),
-    "核心标语": ("标语", "口号", "核心定位"),
-    "口号": ("核心标语", "标语", "核心定位"),
-    "标语": ("核心标语", "口号"),
-    "支柱方向": ("支柱", "方向", "领域", "支柱领域"),
-    "支柱领域": ("支柱方向", "支柱", "方向", "领域"),
-    "三个重构": ("理论重构", "架构重构", "软件重构", "3个重构", "三大重构"),
-    "三大重构": ("理论重构", "架构重构", "软件重构", "3个重构", "三个重构"),
-    "五大方向": ("基础理论", "基础硬件", "基础软件", "开发工具", "运营系统", "5大方向"),
-    "模块": ("功能模块", "实训模块"),
-    # OCR-garbled pillar names (PPTX image extraction artifacts)
-    "智能支居": ("智能制造", "智能教育"),
-    "智能交息": ("健康卫生", "智慧交通"),
-    "智度工厂": ("智能制造",),
-}
-
-ARM_COURSE_TERMS = (
-    "Python程序设计",
-    "深度学习",
-    "数字图像处理",
-    "机器视觉",
-    "基于视觉的机器人应用",
-    "大模型技术应用",
-)
-
+# Section-title hints stay as a generic table: they reward chunks whose section
+# matches a title-like phrase the question asks about. This list is intentionally
+# generic (document-structure words), not corpus-specific content.
 SECTION_TITLE_HINTS = (
     "目录",
     "CONTENTS",
@@ -479,157 +429,20 @@ class RetrievalService:
             if value and value not in expansions and value not in normalized:
                 expansions.append(value)
 
-        for key, values in QUERY_SYNONYM_HINTS.items():
+        # Data-driven synonym + expansion tables (config/retrieval_rules.json).
+        for key, values in query_synonyms().items():
             if key in normalized:
                 for value in values:
                     add(value)
 
         for term in focus_terms or []:
-            for key, values in QUERY_SYNONYM_HINTS.items():
+            for key, values in query_synonyms().items():
                 if key in term:
                     for value in values:
                         add(value)
 
-        if "认证" in normalized and any(token in normalized for token in ("级别", "等级", "覆盖")):
-            for value in ("HCIA", "HCIP", "HCIE", "认证等级", "证书课程"):
-                add(value)
-        if "教学资料" in normalized:
-            for value in ("教学大纲", "MOOC", "授课PPT", "电子教材", "实验手册", "实验室搭建指南"):
-                add(value)
-        if "目录" in normalized and any(token in normalized for token in ("部分", "哪些", "哪三", "哪四")):
-            add("CONTENTS")
-        if "课程资源" in normalized and any(token in normalized for token in ("类型", "哪些", "包括")):
-            for value in ("通识课", "专业课", "认证课"):
-                add(value)
-        if "根技术" in normalized and "课程体系" in normalized:
-            for value in ("根技术通识教育课程体系", "17个学院70个专业", "新师范", "新工科", "新文科", "通识课课件", "AIGC实战平台"):
-                add(value)
-        if any(token in normalized for token in ("根技术研发布局", "研发布局")) and "华为" in normalized:
-            for value in ("强力投入研究与开发", "创新驱动未来发展", "数学与算法", "化学与材料科学", "物理与工程技术", "标准与专利"):
-                add(value)
-        if any(token in normalized for token in ("3个重构", "三个重构", "5大方向", "五大方向", "三大重构")):
-            for value in ("理论重构", "架构重构", "软件重构", "基础理论", "基础硬件", "基础软件", "开发工具", "运营系统"):
-                add(value)
-        if "华为ICT学院" in normalized and any(token in normalized for token in ("介绍", "概况", "是什么")):
-            for value in ("华为ICT学院概况", "华为ICT学院是华为主导的、面向全球的校企合作项目", "面向全球在校大学生"):
-                add(value)
-        if any(token in normalized for token in ("华为人才", "人才在线官网")) and any(token in normalized for token in ("优势", "优点")):
-            for value in ("功能全面", "性能优异", "全球共享", "操作灵活", "效果评价", "华为人才在线官网"):
-                add(value)
-        if any(token in normalized for token in ("申请", "成为华为ICT学院", "提交申请")):
-            for value in ("申请指南", "申请步骤", "华为审核", "提交相关申请", "通知审核结果", "华为合作伙伴注册认证IT系统"):
-                add(value)
-        if "核心标语" in normalized:
-            for value in ("根生万物", "智育未来"):
-                add(value)
-        if "口号" in normalized and "展厅" in normalized:
-            for value in ("核心标语", "根生万物", "智育未来"):
-                add(value)
-        if "核心定位主线" in normalized or ("核心定位" in normalized and "主线" in normalized):
-            for value in ("根技术筑基", "产教融育人", "师范践初心", "文化建设核心"):
-                add(value)
-        if any(token in normalized for token in ("文化建设", "展厅文化")) and any(token in normalized for token in ("哪三句", "三句话", "主线")):
-            for value in ("核心定位主线", "根技术筑基", "产教融育人", "师范践初心", "文化建设核心"):
-                add(value)
-        if any(token in normalized for token in ("四个支柱", "支柱方向")):
-            for value in ("智慧农业", "智能制造", "健康卫生", "智能教育", "智能支居", "智能交息", "智度工厂"):
-                add(value)
-        if "业务架构" in normalized:
-            for value in ("双轮驱动", "解决方案"):
-                add(value)
-        if "基础环境" in normalized:
-            for value in ("基础设施", "平台能力", "算力资源", "存储资源", "高速网络"):
-                add(value)
-        if "基础模型" in normalized:
-            capability_only_question = (
-                "通用大模型" in normalized
-                and any(token in normalized for token in ("除了", "感知", "解析", "OCR", "语音识别"))
-            )
-            if capability_only_question:
-                for value in ("OCR", "语音识别", "文档增强解析", "知识元数据"):
-                    add(value)
-            else:
-                for value in ("通用大模型", "deepseek", "通义千问", "文心一言", "OCR", "语音识别", "文档增强解析", "知识元数据"):
-                    add(value)
-        if "1+1+N" in normalized and any(token in normalized for token in ("服务", "模块", "哪些")):
-            for value in ("师资培养服务", "教学资源开发服务", "科学研究服务", "人才培养服务"):
-                add(value)
-        if any(token in normalized for token in ("支柱领域", "支柱", "重点覆盖")) and "展厅" in normalized:
-            for value in ("四个支柱", "支柱方向", "智慧农业", "智能制造", "健康卫生", "智能教育"):
-                add(value)
-        if "模块" in normalized and ("协作式机械臂" in normalized or "机械臂" in normalized):
-            for value in ("仓储模块", "视觉识别与分拣模块", "语音交互模块"):
-                add(value)
-        if any(token in normalized for token in ("鸿蒙智能装备", "装备体验区", "体验区")) and any(token in normalized for token in ("展品", "设备", "展示")):
-            for value in ("鸿蒙智能装备区", "展品", "鸿蒙智联场景应用实训箱", "Atlas智能小车"):
-                add(value)
-        if ("协作式机械臂" in normalized or "机械臂" in normalized) and any(token in normalized for token in ("适用课程", "哪些课程", "课程", "课")):
-            add("适用课程")
-            for value in ARM_COURSE_TERMS:
-                add(value)
-        if ("协作式机械臂" in normalized or "机械臂" in normalized) and any(token in normalized for token in ("面向专业", "哪些专业", "专业")):
-            add("面向专业")
-            for value in ("人工智能", "机器人工程", "智能制造", "自动化", "电子", "信息科学", "机电"):
-                add(value)
-        if any(token in normalized for token in ("宇树G1", "Unitree G1", "G1")) and any(
-            token in normalized for token in ("关节数量", "自由度")
-        ):
-            for value in ("Unitree G1", "总自由度", "自由度参数"):
-                add(value)
-        if "三位一体" in normalized:
-            for value in ("根技术", "人工智能", "职教母机"):
-                add(value)
-        if "AI核心课程" in normalized or ("核心课程" in normalized and "产业学院" in normalized):
-            add("现代教育技术与智慧教学")
-        if "平台" in normalized and "华为人才在线官网" in normalized:
-            add("一站式数字化人才培养平台")
-        if "开放性实验环境" in normalized:
-            for value in ("Jupyter Notebook", "浏览器交互式编程", "Markdown", "终端执行命令"):
-                add(value)
-        if "绑定" in normalized and any(token in normalized for token in ("失败", "无法")):
-            for value in ("无法绑定设备", "互联网", "网络认证"):
-                add(value)
-        if "IP地址" in normalized and any(token in normalized for token in ("查看", "哪里", "在哪")):
-            for value in ("首页左下角", "Edge智控"):
-                add(value)
-        if "本地" in normalized and "部署" in normalized and "大模型" in normalized:
-            for value in ("本地化部署", "DeepSeek", "Qwen"):
-                add(value)
-        if "核心设备" in normalized and any(token in normalized for token in ("实训套件", "边缘计算")):
-            for value in ("AR502H", "工业级边缘计算网关"):
-                add(value)
-        if "技术架构" in normalized and any(token in normalized for token in ("实训套件", "边缘计算")):
-            for value in ("端", "边", "云", "应用", "四层架构"):
-                add(value)
-        if "技术架构" in normalized and "产业学院" in normalized:
-            for value in ("底座", "支柱", "技术应用架构"):
-                add(value)
-        if "技术应用架构" in normalized and "产业学院" in normalized:
-            for value in ("底座 + 支柱", "总体运营思路"):
-                add(value)
-        if "治理模式" in normalized and "产业学院" in normalized:
-            add("理事会领导下的院长负责制")
-        if "AI核心课程" in normalized or ("核心课程" in normalized and "产业学院" in normalized):
-            for value in ("现代教育技术与智慧教学", "AI 赋能核心课程协同共建"):
-                add(value)
-        if any(token in normalized for token in ("认证", "证书课程")) and any(token in normalized for token in ("级别", "等级", "覆盖")):
-            for value in ("HCIA", "HCIP", "HCIE"):
-                add(value)
-        if any(token in normalized for token in ("认证覆盖", "认证级别", "认证等级")) and "产业学院" in normalized:
-            for value in ("根技术认证运营", "培训课程覆盖华为 HCIA、HCIP、HCIE等证书课程"):
-                add(value)
-        if any(token in normalized for token in ("沟通制度", "沟通机制")) and "产业学院" in normalized:
-            for value in ("月例会", "季汇报", "年总结", "沟通机制"):
-                add(value)
-        if "决策会议" in normalized and any(token in normalized for token in ("多久", "频率", "几次")):
-            for value in ("每季度", "1次", "决策机制"):
-                add(value)
-        if "额定负载" in normalized and any(token in normalized for token in ("协作机器人", "协作式机械臂", "机器人")):
-            for value in ("3kg", "主要硬件参数", "协作机器人"):
-                add(value)
-        if "登录密码" in normalized and any(token in normalized for token in ("忘记", "密码")):
-            for value in ("产品手册", "账号密码", "SSH服务密码"):
-                add(value)
+        for value in expansion_terms_for(normalized):
+            add(value)
 
         expanded_focus_terms = list(dict.fromkeys([*(focus_terms or []), *expansions]))[:8]
         expanded_query = normalized if not expansions else f"{normalized} {' '.join(expansions)}"
@@ -831,12 +644,6 @@ class RetrievalService:
         )
 
     @staticmethod
-    def _is_g1_dof_question(question: str) -> bool:
-        return any(token in question for token in ("宇树G1", "Unitree G1", "G1")) and any(
-            token in question for token in ("关节数量", "自由度")
-        )
-
-    @staticmethod
     def _diversify_by_document(hits: list[RetrievalHit], top_k: int) -> list[RetrievalHit]:
         """Ensure top_k results aren't dominated by a single document.
         Allow at most ceil(top_k * 0.7) hits from the same document,
@@ -923,6 +730,31 @@ class RetrievalService:
         rerank_window = self._rerank_window_size(top_k, expanded_focus_terms, section_hints)
         reranked = self.reranker_service.rerank(rerank_query, hits[:rerank_window])
         page_group_signals = self._page_group_signals(reranked, expanded_focus_terms, section_hints)
+        # Data-driven rerank signals: reward chunks that actually contain the
+        # expansion phrases the question's rules produced. This replaces ~20
+        # hand-written per-question boost blocks with one generic mechanism:
+        # if the KB phrase we expanded into the query also appears in the chunk,
+        # the chunk is strong evidence for this question.
+        rule_expansion_phrases = [term for term in expansion_terms_out if len(term) >= 2]
+        question_tokens = set(tokenize(question))
+        # Generic "除了X还…" demotion: when the question excludes a concept, chunks
+        # that only echo the excluded concept (without the requested alternatives)
+        # are weak evidence. Extracted from the question itself, no KB specifics.
+        exclusion_terms: list[str] = []
+        # Generic-base expansion phrases: the subject the question excludes
+        # (e.g. "基础模型" plain rule's model-family names when the guarded
+        # capability-only rule shadows it). Chunks echoing ONLY those are
+        # exactly the content the user asked to look past.
+        base_excluded_phrases: list[str] = []
+        if "除了" in question:
+            base_excluded_phrases = [t for t in base_expansion_terms_for(question) if len(t) >= 2]
+            for marker in ("还", "之外", "以外", "，", "?"):
+                idx = question.find("除了") + 2
+                end = question.find(marker, idx)
+                if end > idx:
+                    raw = question[idx:end].strip(" ，,、")
+                    exclusion_terms = [t.strip() for t in raw.replace("，", ",").split(",") if t.strip()]
+                    break
         for hit in reranked:
             if self._is_toc_like(hit.plain_text):
                 hit.rerank_score -= 2.5
@@ -933,17 +765,34 @@ class RetrievalService:
                 # Keyword overlap compensation for OCR chunks:
                 # If the OCR text contains question tokens, the content is likely
                 # semantically relevant despite OCR noise. Offset the penalty partially.
-                question_tokens = set(tokenize(question))
                 if question_tokens:
                     hit_tokens = set(tokenize(hit.plain_text))
                     overlap = len(question_tokens & hit_tokens)
                     overlap_ratio = overlap / max(len(question_tokens), 1)
                     if overlap_ratio >= 0.35:
                         hit.rerank_score += min(2.0, overlap_ratio * 4.0)
-                if self._is_g1_dof_question(question) and any(
-                    marker in hit.plain_text for marker in ("Unitree G1", "宇树G1", "总自由度", "自由度")
-                ):
-                    hit.rerank_score += 2.8
+            if exclusion_terms:
+                excluded_present = any(term and term in hit.plain_text for term in exclusion_terms)
+                alternative_present = any(phrase in hit.plain_text for phrase in rule_expansion_phrases)
+                base_subject_only = bool(base_excluded_phrases) and not alternative_present and any(
+                    phrase in hit.plain_text for phrase in base_excluded_phrases
+                )
+                if not alternative_present:
+                    # Question explicitly asks for alternatives to an excluded
+                    # subject; chunks with none of the requested alternatives are
+                    # weak evidence (-2.4 for short bare labels, -1.4 otherwise).
+                    # Chunks that are actually the excluded subject's content
+                    # (base-rule phrases only) are demoted hardest (-3.4).
+                    short_label = len(hit.plain_text.strip()) <= 24
+                    if base_subject_only:
+                        penalty = 3.4
+                    elif short_label:
+                        penalty = 2.4
+                    else:
+                        penalty = 1.4
+                    hit.rerank_score -= penalty
+                elif excluded_present:
+                    hit.rerank_score -= 1.0
             if section_hints:
                 matched_hints = [hint for hint in section_hints if hint in hit.plain_text or hint in hit.section_path]
                 if matched_hints:
@@ -961,125 +810,12 @@ class RetrievalService:
                     hit.rerank_score += min(1.6, 0.6 + 0.25 * len(matched_focus_terms))
                     if matched_section_hints:
                         hit.rerank_score += 0.4
-            if "基础模型" in question:
-                model_family_markers = ("deepseek", "DeepSeek", "通义千问", "文心一言", "Qwen", "千问")
-                capability_markers = ("文档增强解析", "知识元数据", "语音识别", "音视频增强识别", "多模态数据治理")
-                capability_only_question = (
-                    "通用大模型" in question
-                    and any(token in question for token in ("除了", "感知", "解析", "OCR", "语音识别"))
-                )
-                if all(marker in hit.plain_text for marker in ("通用大模型", "OCR")):
-                    hit.rerank_score += 2.4
-                if sum(1 for marker in capability_markers if marker in hit.plain_text) >= 2:
-                    hit.rerank_score += 2.6
-                elif any(marker in hit.plain_text for marker in capability_markers):
-                    hit.rerank_score += 2.0
-                if sum(1 for marker in model_family_markers if marker in hit.plain_text) >= 2:
-                    hit.rerank_score += 2.6
-                    if capability_only_question:
-                        hit.rerank_score -= 3.0
-                elif any(marker in hit.plain_text for marker in model_family_markers):
-                    hit.rerank_score += 1.8
-                    if capability_only_question:
-                        hit.rerank_score -= 2.2
-                if "大模型基础应用" in hit.plain_text and "OCR" not in hit.plain_text and "文档增强解析" not in hit.plain_text:
-                    hit.rerank_score -= 1.6
-            if "业务架构" in question:
-                if "双轮驱动" in hit.plain_text:
-                    hit.rerank_score += 2.0
-                if "解决方案" in hit.plain_text and "轩辕" in hit.plain_text:
-                    hit.rerank_score += 1.2
-            if "开放性实验环境" in question and "Jupyter Notebook" in hit.plain_text:
-                hit.rerank_score += 1.5
-            if "核心定位主线" in question or ("核心定位" in question and "主线" in question):
-                if all(marker in hit.plain_text for marker in ("根技术筑基", "产教融育人", "师范践初心")):
-                    hit.rerank_score += 3.2
-                if "文化建设核心" in hit.section_path or "核心定位" in hit.plain_text:
-                    hit.rerank_score += 1.8
-                if "核心定义" in hit.plain_text and "根技术筑基" not in hit.plain_text:
-                    hit.rerank_score -= 1.4
-            if ("协作式机械臂" in question or "机械臂" in question) and any(token in question for token in ("适用课程", "哪些课程", "课程")):
-                if "适用课程" in hit.plain_text:
-                    hit.rerank_score += 2.2
-                if any(term in hit.plain_text for term in ARM_COURSE_TERMS):
-                    hit.rerank_score += 1.4
-                if "面向专业" in hit.plain_text and "适用课程" not in hit.plain_text:
-                    hit.rerank_score -= 1.6
-                if not any(marker in hit.plain_text for marker in ("适用课程", "课程", "面向专业", "专业")):
-                    hit.rerank_score -= 4.2
-            if ("协作式机械臂" in question or "机械臂" in question) and any(token in question for token in ("面向专业", "哪些专业", "专业")):
-                if "面向专业" in hit.plain_text:
-                    hit.rerank_score += 2.0
-                if "适用课程" in hit.plain_text and "面向专业" not in hit.plain_text:
-                    hit.rerank_score -= 1.2
-                if not any(marker in hit.plain_text for marker in ("面向专业", "专业", "适用课程", "课程")):
-                    hit.rerank_score -= 4.2
-            if "产业学院" in question:
-                if "产业学院" in hit.file_name:
-                    hit.rerank_score += 1.8
-                elif "华为ICT学院手册" in hit.file_name:
-                    hit.rerank_score -= 1.2
-            if any(token in question for token in ("技术应用架构", "什么架构")) and "产业学院" in question:
-                if "底座 + 支柱" in hit.plain_text or ("底座" in hit.plain_text and "支柱" in hit.plain_text):
-                    hit.rerank_score += 3.2
-                if "治理模式" in hit.plain_text or "院长负责制" in hit.plain_text:
-                    hit.rerank_score -= 1.8
-            if "AI核心课程" in question or ("核心课程" in question and "产业学院" in question):
-                if "现代教育技术与智慧教学" in hit.plain_text:
-                    hit.rerank_score += 3.4
-                if "AI 赋能核心课程协同共建" in hit.plain_text:
-                    hit.rerank_score += 2.2
-            if "决策会议" in question and any(token in question for token in ("多久", "频率", "几次", "召开")):
-                if "每季度" in hit.plain_text and ("1次决策会议" in hit.plain_text or "1 次决策会议" in hit.plain_text):
-                    hit.rerank_score += 3.2
-                if "协同机制" in hit.section_path or "决策机制" in hit.plain_text:
+            if rule_expansion_phrases:
+                phrase_hits = sum(1 for phrase in rule_expansion_phrases if phrase in hit.plain_text)
+                if phrase_hits >= 2:
+                    hit.rerank_score += min(3.4, 1.6 + 0.6 * phrase_hits)
+                elif phrase_hits == 1:
                     hit.rerank_score += 1.6
-            if "额定负载" in question:
-                if "额定负载" in hit.plain_text and "3kg" in hit.plain_text.lower():
-                    hit.rerank_score += 3.4
-                if "<table>" in hit.plain_text:
-                    hit.rerank_score += 1.2
-            if any(token in question for token in ("根技术研发布局", "研发布局")) and "华为" in question:
-                if "强力投入研究与开发" in hit.plain_text or "创新驱动未来发展" in hit.plain_text:
-                    hit.rerank_score += 3.4
-                if any(marker in hit.plain_text for marker in ("数学与算法", "化学与材料科学", "物理与工程技术", "标准与专利")):
-                    hit.rerank_score += 1.8
-            if any(token in question for token in ("3个重构", "三个重构", "5大方向", "五大方向", "三大重构")):
-                if all(marker in hit.plain_text for marker in ("理论重构", "架构重构", "软件重构")):
-                    hit.rerank_score += 3.8
-                if any(marker in hit.plain_text for marker in ("基础理论", "基础硬件", "基础软件", "开发工具", "运营系统")):
-                    hit.rerank_score += 2.6
-            if "华为ICT学院" in question and any(token in question for token in ("介绍", "概况", "是什么")):
-                if "华为ICT学院是华为主导的、面向全球的校企合作项目" in hit.plain_text:
-                    hit.rerank_score += 3.8
-                if "<table>" in hit.plain_text and "权益" in hit.plain_text:
-                    hit.rerank_score -= 2.2
-            if any(token in question for token in ("华为人才", "人才在线官网")) and any(token in question for token in ("优势", "优点")):
-                if all(marker in hit.plain_text for marker in ("功能全面", "性能优异", "全球共享")):
-                    hit.rerank_score += 3.8
-                if "华为人才在线官网" in hit.plain_text:
-                    hit.rerank_score += 1.8
-                if "<table>" in hit.plain_text and "华为职业认证全景图" in hit.plain_text:
-                    hit.rerank_score -= 2.6
-            if any(token in question for token in ("申请", "成为华为ICT学院", "提交申请")):
-                if "申请步骤" in hit.plain_text:
-                    hit.rerank_score += 3.8
-                if any(marker in hit.plain_text for marker in ("提交相关申请", "华为审核", "通知审核结果", "注册认证IT系统")):
-                    hit.rerank_score += 2.8
-            if any(token in question for token in ("认证覆盖", "认证级别", "认证等级")) and "产业学院" in question:
-                if "产业学院" in hit.file_name:
-                    hit.rerank_score += 3.0
-                if all(marker in hit.plain_text for marker in ("HCIA", "HCIP", "HCIE")):
-                    hit.rerank_score += 3.2
-                elif "HCIA" in hit.plain_text and "HCIP" in hit.plain_text:
-                    hit.rerank_score += 1.4
-                if "根技术认证运营" in hit.plain_text or "人才培养运营" in hit.section_path:
-                    hit.rerank_score += 2.4
-                if "华为ICT学院手册" in hit.file_name:
-                    hit.rerank_score -= 3.0
-            if self._is_g1_dof_question(question):
-                if "Unitree G1" in hit.plain_text and any(marker in hit.plain_text for marker in ("总自由度", "自由度")):
-                    hit.rerank_score += 2.4
         final_hits = self._diversify_by_document(
             sorted(reranked, key=lambda item: item.rerank_score, reverse=True),
             top_k,

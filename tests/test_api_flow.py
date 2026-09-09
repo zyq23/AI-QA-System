@@ -422,8 +422,9 @@ def test_query_expansion_adds_domain_synonyms():
     assert "深度学习" in expanded_query10
 
     expanded_query11, expansion_terms11, _ = RetrievalService._expand_query("宇树G1机器人的关节数量是多少？", None)
-    assert "Unitree G1" in expansion_terms11
-    assert "总自由度" in expanded_query11
+    # The G1/Unitree rule was intentionally not carried to the data table: it
+    # hard-codes a specific product not present in the current knowledge base.
+    assert "Unitree G1" not in expansion_terms11
 
     expanded_query12, expansion_terms12, _ = RetrievalService._expand_query("华为根技术体验中心的核心定位主线是什么？", None)
     assert "根技术筑基" in expansion_terms12
