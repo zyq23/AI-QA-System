@@ -30,10 +30,11 @@
 - 当前系统不是从零开始，已具备完整的本地问答骨架
 - 代码栈以 `FastAPI + SQLite FTS5 + ChromaDB + BGE + 可选 RAGFlow` 为主
 - 实际运行策略是“本地检索优先，RAGFlow 作为增强或兜底”
-- 当前数据库中已有 6 份已入库文档、12 个版本、7050 个 chunk、1268 条 answer runs
-- `宇树科技知识库/` 目录中新增了 `【公司介绍】轩辕网络公司介绍202606.pptx`，但尚未进入现有索引链路
+- 当前数据库中已有 7 份已入库文档、19 个版本、10839 个 chunk（其中仅 3789 个属于当前版本，存在 7050 个过期残留）、1871 条 answer runs
+- `宇树科技知识库/` 目录中的 `【公司介绍】轩辕网络公司介绍202606.pptx` 已完成接入（document_id=69eb3a72378c4b15b95591a5e2b7ff27，1197 chunks）
 - 现有已入库资料主要是 PDF、DOCX、PPTX，复杂 PPT 已经暴露 OCR 和阅读顺序问题
-- 历史验收结果显示旧语料已达到较高通过率，但新资料接入后能力尚未验证
+- 全库最小回归（27 题）最终 12 answer_pass + 15 correct_block = 27/27；但其中 9 题为按设计正确拒答，摘要类问题尚无正向可答样例
+- 已知数据卫生问题：SQLite 当前版本 chunks / Chroma 向量数 / 总 chunks 三处计数失配；jobs 表存在 2 个永久 running、6 个永久 queued 的残留任务
 
 ## Collaboration Model
 

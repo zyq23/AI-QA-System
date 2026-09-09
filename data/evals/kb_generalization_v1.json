@@ -1,0 +1,1282 @@
+[
+  {
+    "id": "gen-ict-01",
+    "question": "截至2024年底，华为共与全球多少所院校合作共建华为ICT学院？累计培养了多少名学生？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "3000",
+      "130万"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "规则未覆盖的新事实题：抽查数字召回能力（page-4）。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-ict-02",
+    "question": "华为ICT大赛已连续举办多少届？累计吸引了多少学生参赛？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "九届",
+      "96万"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "规则未覆盖事实题（page-14）。“九届”与“96万”需同时出现在答案中。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-ict-03",
+    "question": "华为职业认证体系包含哪三类认证？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "ICT基础设施",
+      "基础软硬件",
+      "云平台及云服务"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "枚举召回（page-5）。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-ict-04",
+    "question": "华为职业认证按学习和进阶需求分为哪三个等级？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "工程师",
+      "高级工程师",
+      "专家"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "枚举召回（page-5）。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-ict-05",
+    "question": "华为ICT学院支持中心的简称是什么？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "IASC"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "简称类事实题（page-4）。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "gen-ict-06",
+    "question": "上海交通大学与华为在哪一年签约成立华为ICT学院创新人才中心？双方采用了什么样的人才培养模式？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "2017",
+      "课赛创"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "案例页细节题（page-16），无任何硬编码规则覆盖。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-ict-07",
+    "question": "马来亚大学与华为共建华为ICT学院是在哪一年？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "2018"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "案例页细节题（page-17）。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "gen-ict-08",
+    "question": "深圳职业技术大学与华为产教联动的育人模式被概括为什么？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "课证共生"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "案例页概括题（page-17）。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "gen-ict-09",
+    "question": "来自巴林的HishamBarakat在华为ICT大赛中获得了什么名次？他申请到了哪所大学的奖学金？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "三等奖",
+      "北京大学"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "案例页细节题（page-19），考验人名与数字的跨句证据。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-ict-10",
+    "question": "华为ICT大赛2024-2025赛季的全球总决赛是在哪个城市举办的？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "negative",
+    "expected_question_type": "negative",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "coverage_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "负面题：手册只记录到2023-2024赛季，2024-2025赛季无信息，应正确拒答。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-arm-01",
+    "question": "机器人视觉技术在实际应用中通常有哪三个方向？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "定位",
+      "检测",
+      "识别"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "枚举召回（视觉技术三个方向）。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-arm-02",
+    "question": "手眼标定有哪两种方式？对大范围多个目标抓取应优先采用哪种？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "眼在手外",
+      "眼在手上"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "枚举+条件选择的组合题，无硬编码覆盖。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-arm-03",
+    "question": "协作式机械臂产品搭载的深度视觉系统采用多少万像素的深度体感摄像头？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "200万"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "技术参数事实题。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "gen-arm-04",
+    "question": "该产品完成了哪些开源大模型的本地化部署？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "DeepSeek",
+      "Qwen"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "本地化部署事实题（双模型名）。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "gen-arm-05",
+    "question": "协作式机械臂产品采用几台协作机器人和几套视觉系统？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "两台",
+      "两套"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "产品概述数字题。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "gen-arm-06",
+    "question": "该产品面向哪些本科专业？请列出至少三个。",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "人工智能",
+      "机器人工程",
+      "智能制造"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "面向专业枚举题（文档列出7个专业，任取3个关键词）。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-arm-07",
+    "question": "该机械臂产品支持5G蜂窝网络通信吗？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "negative",
+    "expected_question_type": "negative",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "支持5G"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "coverage_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "负面题：产品介绍未提及5G通信能力，应正确拒答。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-arm-08",
+    "question": "该机械臂产品的出厂售价是多少元？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "negative",
+    "expected_question_type": "negative",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "coverage_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "负面题：文档无价格信息。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-arm-09",
+    "question": "该机器人大模型产品的生产厂家是哪家公司？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "湖南比邻星"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "厂家信息事实题（位于产品介绍封面页）。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "gen-iot-01",
+    "question": "实训套件采用哪四层架构设计？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "端",
+      "边",
+      "云",
+      "应用"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "四层架构枚举题。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-iot-02",
+    "question": "实训套件的核心设备选用华为哪款工业级边缘计算网关？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "AR502H"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "核心组件事实题。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "gen-iot-03",
+    "question": "实验时发现平板设备未开机，应该如何处理？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "procedure",
+    "expected_question_type": "procedure",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "开机键"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "故障处理流程题（情况1），程序性回答。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-iot-04",
+    "question": "实训套件设备允许的工作温度范围是多少？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "0℃",
+      "40℃"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "环境参数事实题。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "gen-iot-05",
+    "question": "实训套件配套课程采用什么三层递进结构？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "基础理论",
+      "核心技术",
+      "综合实战"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "课程结构枚举题。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-iot-06",
+    "question": "电子秤在空盘状态下如何执行清零操作后再称重？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "procedure",
+    "expected_question_type": "procedure",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "清零"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "程序性回答；注意避免直接照抄原文的过度抽取。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-iot-07",
+    "question": "实训套件整套设备的采购价格是多少？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "negative",
+    "expected_question_type": "negative",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "coverage_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "负面题：用户手册不含价格。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-iot-08",
+    "question": "实训套件的整机重量是多少千克？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "negative",
+    "expected_question_type": "negative",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "coverage_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "负面题：手册仅提示设备较重，未给出重量。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-iot-09",
+    "question": "LED灯带设备可以通过RS485接口执行哪些操作？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "开灯",
+      "关灯"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "设备操作枚举题。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-aca-01",
+    "question": "产业学院总体定位强调的“三位一体”是哪三方面？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "根技术",
+      "人工智能",
+      "职教母机"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "总体定位枚举题（第2节）。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-aca-02",
+    "question": "合作期内校企双方共同开展的面向企业员工的培训规模目标是多少？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "30人次"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "量化指标事实题。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-aca-03",
+    "question": "赛事运营中，企业在此期间需要提供不少于多少课时的专项培训？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "60"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "量化指标事实题（原文为≥60课时）。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "gen-aca-04",
+    "question": "产业学院构建的“决策-执行-监督-改进”全闭环管理体系中，理事会多久召开一次决策会议？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "每季度"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "管理制度事实题（与既有硬编码题表述不同：侧重全闭环体系语境）。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-aca-05",
+    "question": "产业学院采用什么样的评价体系来保证运营质量可控？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "成熟度评估",
+      "量化指标"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "评价体系事实题。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-aca-06",
+    "question": "产业学院构建的五大创收体系包括哪些方向？请至少列出三个。",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "定制化人才培养",
+      "认证",
+      "培训"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "创收体系枚举题（多方向列举）。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-aca-07",
+    "question": "产业学院的年度运营成本是多少万元？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "negative",
+    "expected_question_type": "negative",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "coverage_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "负面题：方案未披露运营成本。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-gpnu-01",
+    "question": "华为根技术融合的三阶段递进式发展路径遵循什么样的路线图？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "广东技术师范大学-根技术人才培养合作汇报-0.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "从通识到专业",
+      "从校内辐射到社会",
+      "从实践到标准"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "路线图枚举题（slide-2），与既有“三个重构”无重叠。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-gpnu-02",
+    "question": "华为在根技术研发布局中在全球部署了多少个研究所？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学-根技术人才培养合作汇报-0.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "10大研究所"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "研发布局事实题（slide-4）。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "gen-gpnu-03",
+    "question": "广师大第一阶段产教融合平台建设内容包含哪四大部分？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "广东技术师范大学-根技术人才培养合作汇报-0.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "产教融合实践基地",
+      "根技术课程体系",
+      "根技术支撑平台"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "建设内容枚举题（slide-2）。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-gpnu-04",
+    "question": "华为根技术体验中心的门票价格是多少？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "negative",
+    "expected_question_type": "negative",
+    "expected_files": [
+      "广东技术师范大学-根技术人才培养合作汇报-0.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "coverage_insufficient",
+    "required_before_freeze": "no",
+    "scoring_notes": "负面题：汇报材料无门票信息。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-exh-01",
+    "question": "根技术体验中心的主要参观对象包括哪些？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "领导",
+      "院校",
+      "企业"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "对象枚举题（slide-1）。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-exh-02",
+    "question": "展厅文化建设中第7项“鸿蒙万物互联体验区”配置了哪些展品？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "鸿蒙智联场景应用实训箱",
+      "Atlas智能小车"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "展品枚举题（slide-3）。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-exh-03",
+    "question": "展厅文化建设规划一共包含多少项建设内容或功能区？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "13"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "数量事实题（slide-3 列出1-13项）。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "gen-exh-04",
+    "question": "展厅的LED落地造型墙以什么为核心标语？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "根生万物",
+      "智育未来"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "核心标语事实题（slide-5）；与既有题同源，验证同义表述召回。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-exh-05",
+    "question": "根技术体验中心展区的整体空间是如何布局的？请概括建设思路。",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "summary",
+    "expected_question_type": "summary",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "文化",
+      "体验"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "摘要类泛化题：现有系统摘要类0可答，作为阶段3的目标验证题（基线应无法答全）。",
+    "max_answer_length": 300
+  },
+  {
+    "id": "gen-ppt-01",
+    "question": "轩辕网络一共登记了多少项计算机软件著作权？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "147"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "知识产权数字题（slide-5），无硬编码覆盖。",
+    "max_answer_length": 60
+  },
+  {
+    "id": "gen-ppt-02",
+    "question": "轩辕网络与华为的合作历程分为哪三个阶段？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "集成合作",
+      "服务合作",
+      "深度融合"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "合作阶段枚举题（slide-86）。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-ppt-03",
+    "question": "轩辕网络连续承办了哪几年的华为ICT大赛？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "2021",
+      "2024"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "时间区段事实题（slide-47）。",
+    "max_answer_length": 80
+  },
+  {
+    "id": "gen-ppt-04",
+    "question": "广师大2024年9月面向大一新生开设的人工智能通识课覆盖哪些校区、多少名学生？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "5000",
+      "三个校区"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "教学规模事实题（slide-60）。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-ppt-05",
+    "question": "轩辕星Regulus轻量级大模型适配了哪家芯片？获得了什么奖项？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "昇腾",
+      "最佳原生创新奖"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "模型能力事实题（slide-41）。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-ppt-06",
+    "question": "科学城产业学院是广东省内唯一通过什么方式授名的产业学院？建设面积是多少平方米？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "红头文件",
+      "3000"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "区位与规模事实题（slide-68）。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-ppt-07",
+    "question": "广梅园数智产业学院的校区占地面积是多少平方米？园区内入园企业数量是多少？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "28890",
+      "220"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "规模数字题（slide-76）。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "gen-ppt-08",
+    "question": "轩辕网络的证券简称和证券代码分别是什么？",
+    "category": "generalization_v1",
+    "group": "kb_quality",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [
+      "轩辕网络",
+      "830891"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer_compact",
+    "blocking_is_correct_if_any": "none",
+    "required_before_freeze": "no",
+    "scoring_notes": "公司沿革事实题（slide-4）；代码为纯数字串，考验数字召回。",
+    "max_answer_length": 80
+  }
+]

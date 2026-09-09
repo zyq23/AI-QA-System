@@ -27,8 +27,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Run QA acceptance eval against the current local knowledge base.")
     parser.add_argument(
         "--dataset",
-        default="data/evals/knowledge_base_eval_cases.json",
-        help="Path to evaluation dataset JSON.",
+        default="data/evals/full_kb_minimal_regression_v1.json",
+        help="Path to evaluation dataset JSON (default: frozen 27-case full-KB regression set).",
     )
     parser.add_argument(
         "--output-dir",
@@ -36,6 +36,10 @@ def main() -> int:
         help="Directory to store timestamped evaluation reports.",
     )
     args = parser.parse_args()
+
+    dataset = Path(args.dataset)
+    if not dataset.exists():
+        raise SystemExit(f"eval dataset not found: {dataset}")
 
     container = build_container()
     payload = container.evaluation_service.run(dataset_path=Path(args.dataset), output_dir=Path(args.output_dir))
