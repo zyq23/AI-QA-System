@@ -659,14 +659,16 @@ class LlmService:
         for citation in citations:
             names.append(citation.file_name)
             stem = Path(citation.file_name).stem.strip()
-            if stem:
+            if len(stem) >= 5:
                 names.append(stem)
+        # Only replace names that appear as a standalone token (bounded by
+        # CJK punctuation / brackets), never inside a longer Chinese word.
         for name in sorted({name for name in names if name}, key=len, reverse=True):
-            normalized = normalized.replace(f"《{name}》", "相关资料")
-            normalized = normalized.replace(name, "相关资料")
+            pattern = rf"《{re.escape(name)}》|(?<=[\u4e00-\u9fff])?{re.escape(name)}"
+            normalized = re.sub(rf"《{re.escape(name)}》", "相关资料", normalized)
+            normalized = re.sub(rf"(?<![\u4e00-\u9fff]){re.escape(name)}(?![\u4e00-\u9fff])", "相关资料", normalized)
         normalized = re.sub(r"(相关资料){2,}", "相关资料", normalized)
         normalized = re.sub(r"(相关资料|这份资料|该资料){2,}", "相关资料", normalized)
-        normalized = re.sub(r"[\u4e00-\u9fffA-Za-z0-9（）()\-_.]{6,}相关资料", "相关资料", normalized)
         return normalized
 
     @staticmethod
@@ -674,7 +676,11 @@ class LlmService:
         normalized = text.strip()
         if not normalized:
             return False
-        if any(token in normalized for token in ("文件", "页码", "章节", "来源")):
+        # "文件"/"资料" alone appear in ordinary answers (e.g. "这两份资料都提到…");
+        # a leak is specifically a reference to a named document/page/section.
+        # Bare word checks removed (quality-upgrade) — they over-blocked benign
+        # answers and forced the insufficient template.
+        if "页码" in normalized or "章节" in normalized or "来源：" in normalized:
             return True
         if re.search(r"(第?\s*\d+\s*页|页\s*\d+)", normalized):
             return True
@@ -1421,50 +1427,21 @@ class LlmService:
             if memory and storage:
                 return f"运算单元最低要求是内存{memory}，存储{storage}。"
 
-        # Curated FAQ — last resort for queries where retrieval backends return
-        # nothing but we know the answer from manual review of the knowledge base.
-        curated = self._curated_factoid_answer(question, combined_extended)
-        if curated:
-            return curated
+        # Curated FAQ fallback REMOVED (quality-upgrade): unconditional canned
+        # answers bypassed evidence grounding. If deterministic extraction finds
+        # nothing, the caller correctly falls back to the insufficient template.
 
         return ""
 
     @staticmethod
     def _curated_factoid_answer(question: str, combined_text: str) -> str:
-        """Fallback curated answers for known frequent queries where retrieval fails."""
-        # The DB has the data but retrieval can't surface it due to OCR/synonym gaps.
+        """Deprecated: canned FAQ answers removed (quality-upgrade).
 
-        if any(token in question for token in ("四个支柱", "支柱方向", "支柱领域")):
-            if "智慧农业" in combined_text and len(combined_text) >= 40:
-                pillars = [p for p in ("智慧农业", "智能制造", "健康卫生", "智能教育") if p in combined_text]
-                if len(pillars) >= 3:
-                    return "四个支柱方向包括" + "、".join(pillars) + "。"
-            # OCR-garbled variant detection
-            has_agriculture = "智慧农业" in combined_text
-            has_garble = any(g in combined_text for g in ("智能支居", "智能交息", "智度工厂"))
-            if has_agriculture and has_garble:
-                return "四个支柱方向包括智慧农业、智能制造、健康卫生、智能教育。"
-            if any(token in question for token in ("四个支柱", "支柱方向")):
-                return "四个支柱方向包括智慧农业、智能制造、健康卫生、智能教育。"
-
-        if any(token in question for token in ("华为人才", "人才在线官网")) and any(token in question for token in ("优势", "优点")):
-            if "华为人才在线官网" in combined_text or "华为" in question:
-                return "华为人才在线官网的优势包括功能全面、性能优异、全球共享、操作灵活和效果评价。"
-
-        if "教学资料" in question:
-            if any(m in combined_text for m in ("教学大纲", "MOOC", "授课PPT")):
-                items = [m for m in ("教学大纲", "MOOC", "授课PPT", "电子教材", "实验手册") if m in combined_text]
-                if len(items) >= 3:
-                    return "教学资料包括" + "、".join(items[:5]) + "等。"
-            return "教学资料包括教学大纲、MOOC、授课PPT、电子教材、实验手册、实验室搭建指南等。"
-
-        if "课程资源" in question or "资源类型" in question:
-            if any(m in combined_text for m in ("通识课", "专业课", "认证课")):
-                items = [m for m in ("通识课", "专业课", "认证课") if m in combined_text]
-                if len(items) >= 2:
-                    return "课程资源包括" + "、".join(items) + "。"
-            # Unconditional fallback for known FAQ
-            return "课程资源包括通识课、专业课和认证课三种类型。"
+        Unconditional canned responses bypassed evidence grounding, so any
+        question whose retrieval failed silently got a memorized answer. The
+        evidence-driven path plus the insufficient template replaced this.
+        Kept as a no-op for backward compatibility with existing call sites.
+        """
         return ""
 
     @staticmethod
