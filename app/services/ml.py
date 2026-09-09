@@ -11,14 +11,13 @@ from typing import Iterable
 import numpy as np
 
 from app.domain import RetrievalHit
+from app.utils import tokenize as tokenize_text
 
 logger = logging.getLogger(__name__)
 
-TOKEN_PATTERN = re.compile(r"[A-Za-z0-9_./:-]+|[\u4e00-\u9fff]")
-
 
 def tokenize(text: str) -> list[str]:
-    return TOKEN_PATTERN.findall(text.lower())
+    return tokenize_text(text)
 
 
 def cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:

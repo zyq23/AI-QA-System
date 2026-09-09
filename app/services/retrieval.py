@@ -646,8 +646,14 @@ class RetrievalService:
         search_text = build_search_text(question)
         tokens = [token for token in search_text.split() if token]
         if not tokens:
-            return f'"{question}"'
-        return " OR ".join(f'"{token}"' for token in tokens[:12])
+            return '""'
+        # Quote each token so user input containing FTS syntax (quotes, parens)
+        # cannot break the MATCH expression.
+        quoted = []
+        for token in tokens[:12]:
+            escaped = token.replace('"', '""')
+            quoted.append(f'"{escaped}"')
+        return " OR ".join(quoted)
 
     @staticmethod
     def _matching_section_hints(question: str) -> list[str]:

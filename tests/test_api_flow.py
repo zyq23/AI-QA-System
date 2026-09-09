@@ -2307,7 +2307,7 @@ def test_llm_review_kept_for_followup_focus_issue():
         focus_terms=["最高决策机构", "理事会"],
     )
     draft = DraftAnswer(
-        answer="产业学院采用理事会领导下的院长负责制。",
+        answer="机械臂的额定负载是3kg。",
         grounded_answer="理事会作为最高决策机构。",
         inference_note="",
         question_type="followup",
