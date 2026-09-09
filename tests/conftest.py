@@ -23,6 +23,11 @@ def app_env(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.setenv("DISABLE_LLM", "true")
     monkeypatch.setenv("ADMIN_TOKEN", "test-token")
     monkeypatch.setenv("SECRET_KEY", "test-secret")
+    # Force offline/direct eval in tests: the repo .env points EVAL_API_BASE_URL at
+    # a live server, which may not be running (or may even serve another app).
+    # pydantic-settings reads the .env FILE, so override with an empty value which
+    # the evaluation service treats as "offline direct" (falsy check).
+    monkeypatch.setenv("EVAL_API_BASE_URL", "")
     get_settings.cache_clear()
     return tmp_path
 

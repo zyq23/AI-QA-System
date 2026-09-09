@@ -1,32 +1,51 @@
 from __future__ import annotations
 
 import re
+from functools import lru_cache
+from pathlib import Path
 
 from app.utils import normalize_text
 
-OCR_ANCHOR_PATTERNS = (
-    "Unitree G1",
-    "宇树G1",
-    "自由度",
-    "总自由度",
+# Domain-specific OCR anchor keywords used to boost OCR line quality scores.
+# These are data-driven (see `ocr_anchor_file` in app/config.py) instead of being
+# hard-coded to one knowledge base, so the same quality gate works for new corpora.
+DEFAULT_OCR_ANCHOR_PATTERNS = (
     "课程",
     "专业",
-    "机器人",
-    "机械臂",
-    "大模型",
-    "Jupyter",
     "学院",
     "产业",
     "治理",
     "课程体系",
     "培养",
     "实践",
-    "华为",
     "申请",
     "优势",
     "重构",
     "方向",
 )
+
+
+@lru_cache(maxsize=1)
+def _load_ocr_anchor_file(path: Path | None) -> tuple[str, ...]:
+    if not path:
+        return DEFAULT_OCR_ANCHOR_PATTERNS
+    try:
+        lines = [line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    except OSError:
+        return DEFAULT_OCR_ANCHOR_PATTERNS
+    return tuple(lines) if lines else DEFAULT_OCR_ANCHOR_PATTERNS
+
+
+def set_ocr_anchor_file(path: Path | None) -> None:
+    _load_ocr_anchor_file.cache_clear()
+    _load_ocr_anchor_file(path)
+
+
+def ocr_anchor_patterns() -> tuple[str, ...]:
+    # Import lazily to avoid a settings dependency cycle at module import time.
+    from app.config import get_settings
+
+    return _load_ocr_anchor_file(get_settings().ocr_anchor_file)
 
 LIST_MARKER_RE = re.compile(r"^(?:\d+[.)、]|[一二三四五六七八九十]+[、.]|[-*•])\s*")
 SHORT_FRAGMENT_RE = re.compile(r"^[\u4e00-\u9fff]{1,3}$")
@@ -51,7 +70,7 @@ def ocr_line_quality(text: str) -> float:
         score -= 0.35
     if punctuation_ratio >= 0.2:
         score -= 0.2
-    if any(pattern.lower() in normalized.lower() for pattern in OCR_ANCHOR_PATTERNS):
+    if any(pattern.lower() in normalized.lower() for pattern in ocr_anchor_patterns()):
         score += 0.35
     if re.search(r"\d+\s*个", normalized):
         score += 0.2
@@ -72,7 +91,7 @@ def clean_ocr_text(text: str) -> tuple[str, float]:
         normalized = re.sub(r"[|¦]+", " ", normalized)
         normalized = re.sub(r"\s{2,}", " ", normalized)
         score = ocr_line_quality(normalized)
-        anchored = any(pattern.lower() in normalized.lower() for pattern in OCR_ANCHOR_PATTERNS)
+        anchored = any(pattern.lower() in normalized.lower() for pattern in ocr_anchor_patterns())
         if re.search(r"[?？!！]{2,}", normalized) and not anchored:
             score -= 0.25
         if score >= 0.42 or anchored:

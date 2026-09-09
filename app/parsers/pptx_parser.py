@@ -351,6 +351,15 @@ class PptxParser:
                     and self.ocr
                     and getattr(shape, "shape_type", None) == MSO_SHAPE_TYPE.PICTURE
                 ):
+                    image_ext = ""
+                    try:
+                        image_ext = shape.image.ext
+                    except Exception:
+                        pass
+                    if image_ext and image_ext.lower() in {"wmf", "emf"}:
+                        if "WMF/EMF 图片跳过 OCR（无可用解码器）" not in warnings:
+                            warnings.append("WMF/EMF 图片跳过 OCR（无可用解码器）")
+                        continue
                     try:
                         raw_ocr_text = self.ocr.extract_image_text(shape.image.blob)
                         ocr_text, quality_score = clean_ocr_text(raw_ocr_text)

@@ -68,7 +68,8 @@ def test_upload_and_chat_flow(client):
     assert chat.status_code == 200, chat.text
     answer = chat.json()
     assert answer["citations"]
-    assert "知识库没有直接证据" in answer["answer"] or "知识库没有直接证据" in answer["grounded_answer"]
+    assert "知识库中没有找到" in answer["answer"] or "知识库没有直接证据" in answer["answer"]
+    assert "当前知识库没有直接证据" in answer["grounded_answer"] or "知识库中没有找到" in answer["grounded_answer"]
     assert "文件：" not in answer["answer"]
     assert "章节：" not in answer["answer"]
     assert "g1.docx" not in answer["answer"]
@@ -2471,7 +2472,7 @@ def test_generate_answer_returns_insufficient_when_no_deterministic_evidence():
     )
     assert ungrounded_draft.confidence_note == "ungrounded_fast_path"
     assert ungrounded_draft.grounded is False
-    assert "当前知识库没有直接证据" in ungrounded_draft.answer
+    assert LlmService._signals_insufficient_text(ungrounded_draft.answer)
 
 
 def test_build_answer_focus_normalizes_broken_focus_fragments():

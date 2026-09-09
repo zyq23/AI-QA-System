@@ -248,15 +248,18 @@ class PaddleOcrAdapter:
             except Exception:
                 return "", 0.0
 
-        # Try both engines, pick the one with better quality
+        # Try rapid first (fast); only fall back to the heavier Paddle engine when
+        # the rapid result is missing or low quality. Previously both engines always
+        # ran, which doubled OCR latency on every embedded image.
         rapid_text, rapid_score = _ocr_and_score("rapid")
-        paddle_text, paddle_score = _ocr_and_score("paddle")
-
-        if rapid_score >= paddle_score and rapid_text:
+        if rapid_text and rapid_score >= 0.6:
             return rapid_text
-        if paddle_text:
+        paddle_text, paddle_score = _ocr_and_score("paddle")
+        if paddle_score >= rapid_score and paddle_text:
             return paddle_text
-        return rapid_text or ""
+        if rapid_text:
+            return rapid_text
+        return paddle_text or ""
 
 
 class PdfParser:
@@ -265,6 +268,18 @@ class PdfParser:
     def __init__(self, enable_ocr_fallback: bool = True, ocr_language: str = "ch") -> None:
         self.enable_ocr_fallback = enable_ocr_fallback
         self.ocr = PaddleOcrAdapter(language=ocr_language) if enable_ocr_fallback else None
+
+    @staticmethod
+    def _page_is_image_heavy(text_length: int, usable_block_count: int, avg_chars_per_block: float) -> bool:
+        # Only run per-image OCR when the page itself is text-sparse; dense text pages
+        # gain nothing from OCRing every embedded logo/decoration image.
+        if text_length < 120:
+            return True
+        if usable_block_count <= 2:
+            return True
+        if avg_chars_per_block < 40:
+            return True
+        return False
 
     def parse(self, path: Path) -> ParsedDocument:
         document = fitz.open(path)
@@ -356,7 +371,7 @@ class PdfParser:
                             )
                 except Exception as exc:  # pragma: no cover - optional dependency
                     warnings.append(f"第 {page_index} 页 OCR 回退失败: {exc}")
-            if self.enable_ocr_fallback and self.ocr:
+            if self.enable_ocr_fallback and self.ocr and self._page_is_image_heavy(len(text), usable_block_count, avg_chars_per_block):
                 try:
                     image_texts = _extract_page_image_texts(page, self.ocr)
                     for image_index, (image_text, quality_score) in enumerate(image_texts, start=1):

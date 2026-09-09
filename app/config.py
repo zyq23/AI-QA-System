@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     source_documents_dir: Path = Field(default_factory=lambda: Path("宇树科技知识库"))
     eval_dataset_path: Path = Field(default_factory=lambda: Path("data/evals/knowledge_base_eval_cases.json"))
     eval_results_dir: Path = Field(default_factory=lambda: Path("data/evals/results"))
-    eval_api_base_url: str | None = None
+    eval_api_base_url: str | None = Field(default=None, validation_alias="EVAL_API_BASE_URL")
 
     llm_provider: str = "spark_ws"
     llm_base_url: str | None = None
@@ -57,6 +57,8 @@ class Settings(BaseSettings):
 
     enable_ocr_fallback: bool = True
     ocr_language: str = "ch"
+    # Optional file with one OCR anchor keyword per line; falls back to generic defaults.
+    ocr_anchor_file: Path | None = None
 
     upload_size_limit_mb: int = 150
     chunk_target_size: int = 700

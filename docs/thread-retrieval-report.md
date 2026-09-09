@@ -216,3 +216,13 @@
     - `p0-03` 仍是最新 smoke gate 里唯一 `wrong_release`
     - Retrieval 线程这轮没有新增可改变它结果的实现
     - 在 `Thread-Answer` 先确认并收紧这题前，立即复跑 `Thread-Eval` 预期只会重复得到同一结论
+
+## 诊断快照（与 docs/thread-retrieval-diagnosis.json 保持一致）
+
+> 由 `scripts/run_retrieval_diagnosis.py` 生成；`tests/test_retrieval_diagnosis.py::test_thread_retrieval_report_matches_latest_diagnosis_snapshot` 强制本段与 JSON 快照同步。
+
+`route_probe.summary` 当前为：`total_cases=5`、`remote_selected_cases=1`、`remote_selected_old_doc_dominant_cases=1`、`target_file_topk_covered_cases=4`。
+
+`conflict_case_count = 1`、`answer_ready_conflict_count = 1`、`blocked_conflict_count = 0`。
+
+`grounding_insufficient=2 / parser_upstream=2`

@@ -287,9 +287,10 @@ class LlmService:
     def _extract_focus_terms(self, text: str, limit: int = 6) -> list[str]:
         candidates: list[str] = []
         cleaned = self._strip_question_words(text)
-        # Chinese segments: capture longer meaningful phrases (2-8 chars)
-        # to avoid splitting compound nouns like "协作式机械臂"
-        for phrase in re.findall(r"[A-Za-z0-9._/-]{2,}|[\u4e00-\u9fff]{2,8}", cleaned):
+        # Chinese segments: capture longer meaningful phrases (2-10 chars) so that
+        # compound nouns like "华为根技术体验中心" (9 chars) stay whole, while a
+        # full question fragment still splits at a natural boundary.
+        for phrase in re.findall(r"[A-Za-z0-9._/-]{2,}|[\u4e00-\u9fff]{2,10}", cleaned):
             value = phrase.strip()
             # Filter out pure-function tokens
             if value and value not in candidates and value not in {
@@ -313,6 +314,7 @@ class LlmService:
                 value = piece.strip("、，。；：:（）()[]【】/ ")
                 value = re.sub(r"(的核心|的具体名称|的名称|的级别|的方向|的类型|的设备|的架构|的模式|的课程|的展品)$", "", value)
                 value = re.sub(r"的$", "", value)
+                value = re.sub(r"(是什么|有哪些|是多少|多少|怎么|如何|吗|呢|是|的)$", "", value)
                 if len(value) < 2 or value in FOCUS_STOPWORDS:
                     continue
                 if value not in cleaned:
@@ -1301,7 +1303,7 @@ class LlmService:
                 return f"最高决策机构是{value}。"
 
         if ("核心标语" in question or "口号" in question) and "根生万物" in combined and "智育未来" in combined:
-            return '核心标语是"根生万物·智育未来"。'
+            return "核心标语是\u201c根生万物·智育未来\u201d。"
 
         if "执行机构" in question and "下设" in question:
             value = self._first_match(combined, [r"下设([^，。；]+)", r"执行层[（(]([^）)]+)[)）]"])

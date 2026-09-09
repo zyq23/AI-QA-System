@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+import io
+import zipfile
 from pathlib import Path
 
 import mammoth
 from bs4 import BeautifulSoup, Tag
 
 from app.domain import ParsedDocument, SourceBlock
+from app.parsers.ocr_utils import clean_ocr_text, split_visual_text
 from app.utils import normalize_text
 
 
@@ -30,8 +33,38 @@ def _table_to_markdown(table: Tag) -> str:
     return "\n".join(lines)
 
 
+def _extract_image_ocr_texts(path: Path, ocr_adapter) -> list[tuple[str, float]]:
+    """OCR embedded raster images (word/media/*) inside a DOCX package."""
+    results: list[tuple[str, float]] = []
+    try:
+        archive = zipfile.ZipFile(path)
+    except (OSError, zipfile.BadZipFile):
+        return results
+    with archive:
+        media_names = sorted(
+            name
+            for name in archive.namelist()
+            if name.startswith("word/media/")
+            and name.lower().endswith((".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff"))
+        )
+        for name in media_names[:60]:
+            try:
+                raw = archive.read(name)
+                raw_ocr_text = ocr_adapter.extract_image_text(raw)
+            except Exception:
+                continue
+            cleaned_text, quality_score = clean_ocr_text(raw_ocr_text)
+            if cleaned_text:
+                results.append((cleaned_text, quality_score))
+    return results
+
+
 class DocxParser:
     parser_name = "mammoth"
+
+    def __init__(self, enable_ocr_fallback: bool = True, ocr_language: str = "ch") -> None:
+        self.enable_ocr_fallback = enable_ocr_fallback
+        self.ocr_language = ocr_language
 
     def parse(self, path: Path) -> ParsedDocument:
         with path.open("rb") as handle:
@@ -91,10 +124,35 @@ class DocxParser:
 
         warnings = [message.message for message in result.messages]
         raw_markdown = "\n\n".join(markdown_lines)
+
+        ocr_used = False
+        if self.enable_ocr_fallback:
+            from app.parsers.pdf_parser import PaddleOcrAdapter
+
+            ocr_adapter = PaddleOcrAdapter(language=self.ocr_language)
+            try:
+                for image_text, quality_score in _extract_image_ocr_texts(path, ocr_adapter):
+                    kind = "image_ocr" if quality_score >= 0.8 else "image_ocr_low_conf"
+                    parts = split_visual_text(image_text) or [image_text]
+                    for part_index, part in enumerate(parts, start=1):
+                        blocks.append(
+                            SourceBlock(
+                                page_or_slide="docx",
+                                section_path=f"{title} / 图片 OCR {part_index}",
+                                content=part,
+                                kind=kind,
+                                quality_score=quality_score,
+                            )
+                        )
+                    ocr_used = True
+            except Exception as exc:  # pragma: no cover - optional dependency
+                warnings.append(f"图片 OCR 失败: {exc}")
+
         return ParsedDocument(
             title=title,
             blocks=blocks,
             raw_markdown=raw_markdown,
             parser_name=self.parser_name,
+            ocr_used=ocr_used,
             warnings=warnings,
         )

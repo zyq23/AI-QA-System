@@ -10,7 +10,7 @@ from app.parsers.pptx_parser import PptxParser
 
 class DocumentParserService:
     def __init__(self, enable_ocr_fallback: bool = True, ocr_language: str = "ch") -> None:
-        self.docx_parser = DocxParser()
+        self.docx_parser = DocxParser(enable_ocr_fallback=enable_ocr_fallback, ocr_language=ocr_language)
         self.pptx_parser = PptxParser(enable_ocr_fallback=enable_ocr_fallback, ocr_language=ocr_language)
         self.pdf_parser = PdfParser(enable_ocr_fallback=enable_ocr_fallback, ocr_language=ocr_language)
 
