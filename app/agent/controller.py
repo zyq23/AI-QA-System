@@ -37,12 +37,15 @@ class AgentController:
         max_steps: int = 6,
         timeout_seconds: int = 45,
         use_llm_planner: bool = True,
+        chat_service: Any | None = None,
     ) -> None:
         self.tools = tools
         self.llm_service = llm_service
+        self.chat_service = chat_service
         self.max_steps = max_steps
         self.timeout_seconds = timeout_seconds
         self.use_llm_planner = use_llm_planner
+        self._pipeline_citations: list[dict[str, Any]] = []
 
     def tool_specs(self) -> list[dict[str, Any]]:
         return [tool.to_spec() for tool in self.tools.values()]
@@ -233,6 +236,10 @@ class AgentController:
             for hit in call.payload.get("hits", []):
                 if hit not in all_hits:
                     all_hits.append(hit)
+        # The production pipeline's own citations are the authoritative evidence
+        # for the final answer; prefer them over raw tool hits.
+        if self._pipeline_citations:
+            all_hits = self._pipeline_citations
 
         if followup:
             answer = followup
@@ -246,6 +253,8 @@ class AgentController:
             answer = self._compose_final_answer(question, steps, knowledge_calls)
             grounded = bool(answer) and not self._signals_insufficient(answer)
             confidence_note = "grounded_evidence_chain"
+            if not grounded:
+                answer = "当前知识库中没有找到相关信息。"
 
         return AgentResult(
             session_id="",
@@ -264,7 +273,35 @@ class AgentController:
         )
 
     def _compose_final_answer(self, question: str, steps: list[ToolCall], knowledge_calls: list[ToolCall]) -> str:
-        """Deterministic extractive composition from collected evidence, then trim."""
+        """Compose the final answer from the agent's collected evidence.
+
+        For knowledge QA the answer MUST come from the production answer
+        pipeline (ChatService.answer): it owns the full analysis + finalize
+        guard chain (subject-claim, yes/no, value, negative-question, OCR)
+        that releases or blocks a grounded answer. The agent's contribution is
+        the multi-step evidence chain and tool routing, NOT a parallel weaker
+        answer layer. If the pipeline blocks, the agent blocks.
+        """
+        if self.chat_service is not None:
+            try:
+                payload = self.chat_service.answer(question, top_k=8)
+                answer = str(payload.answer or "").strip()
+                if payload.grounded and answer and not self._signals_insufficient(answer):
+                    self._pipeline_citations = [
+                        {
+                            "file_name": h.file_name,
+                            "page_or_slide": h.page_or_slide,
+                            "section_path": h.section_path,
+                            "snippet": h.snippet,
+                            "score": round(float(h.rerank_score or h.fusion_score or 0.0), 3),
+                        }
+                        for h in payload.citations
+                    ]
+                    return answer[:260]
+                return ""
+            except Exception:
+                pass
+        # No chat pipeline wired (tests): fall back to a guarded local composition.
         from app.domain import QueryAnalysis, RetrievalHit
 
         hits = self._collect_hits(steps)
@@ -290,22 +327,26 @@ class AgentController:
             for index, raw in enumerate(hits, 1)
         ]
         try:
-            analysis = QueryAnalysis(rewritten_query=question, question_type="factoid", answer_focus="", focus_terms=[])
-            answer, _ = llm._compose_extract_answer(
-                question,
-                "factoid",
-                analysis.answer_focus,
-                [],
-                retrieval_hits,
-                True,
+            analysis = QueryAnalysis(
+                rewritten_query=question,
+                question_type=llm._infer_question_type(question),
+                answer_focus="",
+                focus_terms=llm._extract_focus_terms(question),
             )
-            answer = (answer or "").strip()
-            if answer and not self._signals_insufficient(answer):
+            effective_grounded = llm._can_ground_from_citations(question, analysis, retrieval_hits)
+            if not effective_grounded:
+                return ""
+            draft = llm._fast_path_draft_answer(question, analysis, retrieval_hits, True) or llm._fallback_draft_answer(
+                question, analysis, retrieval_hits, True, "Agent 证据链压缩。"
+            )
+            review = llm.review_answer(question, analysis, retrieval_hits, draft)
+            final = llm.finalize_answer(question, analysis, retrieval_hits, draft, review)
+            answer = str(final.get("answer") or "").strip()
+            if final.get("grounded") and answer and not self._signals_insufficient(answer):
                 return answer[:260]
+            return ""
         except Exception:
-            pass
-        combined = " ".join((raw.get("snippet") or "") for raw in hits if raw.get("snippet"))
-        return combined[:260]
+            return ""
 
     def _collect_hits(self, steps: list[ToolCall]) -> list[Any]:
         hits: list[Any] = []

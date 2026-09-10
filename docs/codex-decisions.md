@@ -1319,3 +1319,45 @@
 
 ### Revisit Trigger
 - 部署形态变化（多进程/多机）时限流与回收策略需重新评估
+
+---
+
+## D-038：企业级 RAG 指标体系与难例评测集（2026-09-11 接受）
+
+### Decision
+- 新增 130 题难例集 `data/evals/hard_eval_v1.json`（8 个难度桶：跨文档对比 / 数值陷阱 / 多跳 / 同义改写 / 否定前置 / 长上下文干扰 / OCR 噪声页 / 无答案 25 题），每题带 `expected_evidence`（文件+页+关键词），构建脚本 `scripts/build_hard_eval.py` 在生成时逐条对照 `data/runtime/app.db` 验证，证据缺失即构建失败
+- 新增企业级指标脚本 `scripts/run_rag_metrics.py`：Recall@3/5/10（file+page+关键词双条件判定）、MRR、nDCG、准确率（answer_pass/(answer_pass+wrong_release)）、幻觉率、正确拒答率、分桶输出
+- 目标线：R@5≥85%，R@10≥92%，准确率≥90%，拒答率≥95%，幻觉率≤5%
+
+### Reasons
+- 79 题基线无法度量企业落地要求的排序与幻觉粒度；难例集必须可机器验证而非人工判分
+
+### Impact
+- 检索迭代 8 轮后：R@3=0.852 / R@5=0.886 / R@10=0.943 / MRR=0.756（基线 0.752/0.805/0.829/0.645），召回目标全部达成
+- 无答案题正确拒答率 100%（25/25）；幻觉率 13.1%、可答题准确率 63.8% 未达标，主要瓶颈在答案生成层的多部分题收口（答案只取一侧关键词），已记录为已知限制
+- 检索层配套落地：jieba 单字回并分词（机械|臂→机械臂）、FTS 索引补文档名 token、跨文档题多查询分解 + 文档轮转合并、`除了X`排除窗屏蔽同义词、`scripts/refresh_search_text.py` 全量重建 search_text
+
+### Revisit Trigger
+- 新语料接入或答案生成层多部分收口改造时，复跑 `run_rag_metrics.py` 全量对齐
+
+---
+
+## D-039：企业级 Agent 架构（plan-then-execute 智能客服形态）（2026-09-11 接受）
+
+### Decision
+- 新增 `app/agent/`：plan-then-execute 控制器（步数上限 6 + 墙钟 45s 硬上限 + 工具异常即停）、7 个带 schema 的工具（knowledge_search / multi_doc_compare / document_detail / calculator / date_utils / clarification / no_answer）、规则优先 + LLM 精化的意图分类（置信度阈值路由澄清）、agent_sessions/agent_steps 双表落决策轨迹
+- 路由：`needs_agent()` 判定——简单问题走单轮快速路径，复杂问题（区别/分别/对比/计算/日期/长指令题）进 Agent；robot 接口复用同一路由
+- 关键约束：Agent 的最终答案必须回到生产答案管线（ChatService.answer→finalize 全守卫）收口，管线拒绝即拒答，不存在绕过守卫的放行路径
+- 新增 `POST /api/agent/query`（返回 answer + thought/tool/observation 轨迹）与 `scripts/run_agent_eval.py`（Agent 模式全量评测 + 与单轮对比）
+
+### Reasons
+- 知识库问答是受约束检索任务，plan-first 比 ReAct 更可控可审计；自研最小循环优于引入 LangChain/LangGraph（0 新依赖、守卫天然继承、决策轨迹可直接评测）
+
+### Impact
+- 130 题难例集对比（routed 模式）：Agent 平均延迟 4.6s vs 单轮 7.7s（-40%），幻觉率 0.123 vs 0.131，拒答率持平 1.0；可答题准确率 0.515 vs 0.638（Agent 多步检索后经管线重答，部分单轮通过的题被更严格证据条件拦下）
+- forced-agent 压力模式：幻觉率 0.092、拒答率 1.0，验证兜底链路
+- 已知限制：多部分题答案只取一侧关键词（答案生成层限制，非检索缺证据）；Agent-only 幻觉集中在否定题证据顺序差异
+- 16 条 Agent 专项 pytest（mock LLM 无网络）覆盖工具单测、计划路由、死循环/超时/异常兜底、会话持久化、API 路由
+
+### Revisit Trigger
+- 答案生成层多部分收口改造后复跑 agent_eval；工具数量超过 10 或出现图状依赖时重评 LangGraph 取舍

@@ -42,6 +42,7 @@ class AgentService:
             llm_service,
             max_steps=max_steps,
             timeout_seconds=timeout_seconds,
+            chat_service=chat_service,
         )
         self.sessions = AgentSessionStore(repository)
 

@@ -46,7 +46,7 @@ def _serialize_hits(hits: list[RetrievalHit], limit: int = 6) -> list[dict[str, 
                 "file_name": hit.file_name,
                 "page_or_slide": hit.page_or_slide,
                 "section_path": hit.section_path,
-                "snippet": (hit.snippet or hit.plain_text)[:200],
+                "snippet": (hit.snippet or hit.plain_text)[:400],
                 "score": round(float(hit.rerank_score or hit.fusion_score or 0.0), 3),
             }
         )

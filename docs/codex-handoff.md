@@ -733,3 +733,20 @@
 - [2026-09-10] 阶段 3b 完成：新增 summary 题型（SUMMARY_HINTS 识别 + 多 chunk 聚合生成路径），gen-exh-05 摘要题从 wrong_block 变为可给出多页聚合概述（当前因关键词维度仍记 wrong_block，属评测口径问题而非能力缺失；关键词已修正为建设思路维度）。
 - [2026-09-10] 阶段 4 完成：SQLite busy_timeout=30s + jobs 状态索引 + 启动时 24h stuck-job 自动回收；chat/robot 接口 30 req/min 每 IP 限流；conversation_id 格式校验；检索层共享 ThreadPoolExecutor（每请求建 executor 的线程泄漏已修）；Spark 复用事件循环；`../qianliyan/.env` 跨项目耦合移除；admin 鉴权仅接受 header/cookie（URL query token 已移除）；新增 GitHub Actions CI（stub 模式 pytest）；README RAGFlow 脚本漂移已标注；.env.example 补齐 RETRIEVAL_MODE 等缺失 key 并标注需轮换 live key。
 - [2026-09-10] 全程测试状态：112/112 通过。Git 提交链完整（quality-upgrade 分支 15+ commits，全部可回滚）。
+
+### Quality-Upgrade 线程 — 阶段 5/6 收口更新（2026-09-11，目标一 RAG 指标 + 目标二 Agent 架构）
+
+- [2026-09-11] 阶段 5（目标一）完成：130 题难例集 `data/evals/hard_eval_v1.json`（`scripts/build_hard_eval.py` 生成时逐条 DB 验证证据）+ 企业级指标脚本 `scripts/run_rag_metrics.py`（Recall@k file+page+关键词双条件、MRR、nDCG、准确率、幻觉率、拒答率、分桶）。检索迭代 8 轮（r1→r17 轨迹落盘 `data/evals/results/retrieval_local_only_r*.json`）：**R@3 0.852 / R@5 0.886 / R@10 0.943 / MRR 0.756**（基线 0.752/0.805/0.829/0.645），R@5≥85%、R@10≥92% 达标。
+- [2026-09-11] 检索层四项通用修复：① jieba 单字回并分词（机械|臂→机械臂，根|技术→根技术，func/unit 字符守卫）解决"协作式机械臂手册全文无 机械 臂 token"的 FTS 盲区；② FTS search_text 补文档名 token（`scripts/refresh_search_text.py` 全量重建 3,772 chunks）解决"产品文档正文从不提自己名字"；③ 跨文档题多查询分解 + 文档轮转合并 + 规则短语加分（chat.py `_multi_query_retrieve`/`_decompose_question`）；④ `除了X`排除窗屏蔽同义词 + 规则表新增 机械臂/机器人/模型家族/三次重构/建设路径 等扩展。
+- [2026-09-11] 全量 RAG 指标（含答案，`rag_metrics_20260911_032145.json`）：**无答案题正确拒答率 100%（25/25）**，幻觉率 0.131，可答题准确率 0.638。未达标项归因清楚：wrong_block 58 题中绝大多数是"证据已召回但答案生成层多部分题只收口一侧关键词"（如"机械臂和实训套件分别…"），不是检索缺证据——该限制为答案生成层的确定性压缩边界，已写入 D-038。
+- [2026-09-11] 79 题回归护栏复跑（检索改动后）：FROZEN 12 pass / 13 cb / **2 wr（≤3 ✓）**；GEN **25 answer_pass（≥20 ✓）** / 7 cb / 20 wb。对比基线 GEN 21→25、WR 2→3→2，无回退（`eval_20260911_033026_formal_summary.json`）。
+- [2026-09-11] 环境事件：DashScope 账户欠费（全部 7 个备选模型 Arrearage），LLM 切换本机 Ollama qwen2.5:14b（`_generate_text` 对 11434 后端启用 JSON mode），原配置注释保留；评测结论均在本地检索 + 本地生成下取得。
+- [2026-09-11] 阶段 6（目标二）完成：企业级 Agent 架构落地（详见 `docs/agent-architecture.md`，决策 D-039）。`app/agent/` 六模块（state/tools/planner/controller/sessions/service）+ `POST /api/agent/query` + robot 复用 + agent_sessions/agent_steps 双表决策轨迹。7 工具带 schema；plan-then-execute（步数 6 + 45s 硬上限 + 异常即停 + 一轮有界重规划）；**最终答案强制回生产答案管线收口**。
+- [2026-09-11] Agent 评测（`scripts/run_agent_eval.py`，130 题全量）：routed 模式 vs 单轮——延迟 4.6s vs 7.7s（-40%）、幻觉率 0.123 vs 0.131、拒答率 1.0 持平、可答题准确率 0.515 vs 0.638（flip 分析：Agent 多步检索后经管线 top_k=8 重答，部分单轮通过的题被更严证据条件拦下）；forced 压力模式幻觉率 0.092、拒答率 1.0。轨迹落盘 `agent_eval_20260911_053027.json`（routed）/ `051423.json`（forced）。
+- [2026-09-11] 测试状态：128 passed（含 16 条 Agent 专项，mock LLM 无网络）。Git 提交链：hard_eval 数据集 → 检索迭代 → Agent 核心 → robot 复用/测试修复 → 本收口，全部可回滚。
+
+### Blockers（阶段 5/6）
+- 无阻塞。遗留优化方向（非阻塞）：答案生成层多部分题收口（两侧关键词拼答）、否定题在 Agent 证据顺序下的守卫适配。
+
+### Next Step
+- 若继续：优先攻答案生成层多部分收口（预期同时抬升 hard 集准确率与 Agent 准确率），其次把 `clarification` 人工转接占位接到真实工单/日志通道。

@@ -29,10 +29,20 @@ from app.main import build_container  # noqa: E402
 
 
 def latest_rag_metrics(output_dir: Path) -> dict | None:
+    """Pick the FULL hard-set baseline (largest total), not the latest smoke run."""
     files = sorted(glob.glob(str(output_dir / "rag_metrics_*.json")))
     if not files:
         return None
-    return json.loads(Path(files[-1]).read_text(encoding="utf-8"))
+    best: dict | None = None
+    for path in files:
+        try:
+            report = json.loads(Path(path).read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        total = (report.get("overall") or {}).get("total") or 0
+        if best is None or total > (best.get("overall") or {}).get("total") or 0:
+            best = report
+    return best
 
 
 def summarize(per_case: list[dict]) -> dict:

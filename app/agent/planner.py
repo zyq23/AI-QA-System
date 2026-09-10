@@ -66,7 +66,8 @@ def refine_intent_with_llm(llm_service: Any, question: str, tools: list[dict[str
         "你是智能客服 Agent 的规划器。根据用户问题选择意图并制定 1-3 步工具计划。\n"
         f"可用工具：\n{tool_lines}\n"
         "只输出 JSON：{\"intent\": str, \"confidence\": 0-1, \"steps\": [{\"tool\": str, \"args\": {}, \"reason\": str}]}"
-        "。如果问题含糊到无法回答，intent 填 clarify 并给一个 clarification 步骤。\n"
+        "。如果问题含糊到无法回答，intent 填 clarify 并给一个 clarification 步骤。"
+        "knowledge_search 的 args.query 必须是完整问题文本，禁止为空。\n"
         f"用户问题：{question}"
     )
     try:
@@ -84,6 +85,21 @@ def refine_intent_with_llm(llm_service: Any, question: str, tools: list[dict[str
         return None
     if not payload or not isinstance(payload, dict):
         return None
+    # Validate plan steps: tools must exist, knowledge_search/multi_doc_compare
+    # args.query must be non-empty, and clarification must carry a real question;
+    # a malformed LLM plan falls back to the rule plan.
+    known = {t["name"] for t in tools}
+    for step in payload.get("steps") or []:
+        if not isinstance(step, dict) or str(step.get("tool")) not in known:
+            return None
+        if str(step.get("tool")) in {"knowledge_search", "multi_doc_compare"}:
+            args = step.get("args")
+            if not isinstance(args, dict) or not str(args.get("query") or args.get("subject_a") or "").strip():
+                return None
+        if str(step.get("tool")) == "clarification":
+            args = step.get("args")
+            if not isinstance(args, dict) or not str(args.get("question") or "").strip():
+                return None
     return payload
 
 
