@@ -140,6 +140,34 @@ class Database:
                 CREATE INDEX IF NOT EXISTS idx_answer_runs_conversation ON answer_runs(conversation_id, created_at DESC);
                 CREATE INDEX IF NOT EXISTS idx_answer_runs_created_at ON answer_runs(created_at DESC);
                 CREATE INDEX IF NOT EXISTS idx_jobs_status ON jobs(status, created_at);
+
+                CREATE TABLE IF NOT EXISTS agent_sessions (
+                    id TEXT PRIMARY KEY,
+                    conversation_id TEXT NOT NULL REFERENCES conversations(id) ON DELETE CASCADE,
+                    intent TEXT,
+                    intent_confidence REAL,
+                    slots_json TEXT,
+                    used_tools_json TEXT,
+                    intermediate_json TEXT,
+                    status TEXT NOT NULL,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL
+                );
+
+                CREATE TABLE IF NOT EXISTS agent_steps (
+                    id TEXT PRIMARY KEY,
+                    session_id TEXT NOT NULL REFERENCES agent_sessions(id) ON DELETE CASCADE,
+                    step_index INTEGER NOT NULL,
+                    step_type TEXT NOT NULL,
+                    tool_name TEXT,
+                    thought TEXT,
+                    observation TEXT,
+                    duration_ms INTEGER,
+                    created_at TEXT NOT NULL
+                );
+
+                CREATE INDEX IF NOT EXISTS idx_agent_sessions_conversation ON agent_sessions(conversation_id, created_at DESC);
+                CREATE INDEX IF NOT EXISTS idx_agent_steps_session ON agent_steps(session_id, step_index);
                 """
             )
 

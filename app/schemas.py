@@ -80,6 +80,38 @@ class RobotQueryRequest(BaseModel):
     voice_session_id: str | None = Field(default=None, max_length=128)
 
 
+class AgentQueryRequest(BaseModel):
+    question: str = Field(min_length=1, max_length=4000)
+    conversation_id: str | None = Field(default=None, max_length=64, pattern=r"^[A-Za-z0-9_-]*$")
+    force_agent: bool = False
+
+
+class AgentStepModel(BaseModel):
+    step: int
+    type: str = "tool"
+    tool: str | None = None
+    args: dict = Field(default_factory=dict)
+    observation: str = ""
+    duration_ms: int = 0
+    ok: bool = True
+
+
+class AgentQueryResponse(BaseModel):
+    answer: str
+    grounded: bool
+    conversation_id: str
+    session_id: str = ""
+    latency_ms: int
+    intent: str
+    intent_confidence: float
+    confidence_note: str = ""
+    tools_used: list[str] = Field(default_factory=list)
+    followup_question: str | None = None
+    escalated: bool = False
+    citations: list[CitationModel] = Field(default_factory=list)
+    steps: list[AgentStepModel] = Field(default_factory=list)
+
+
 class RobotQueryResponse(BaseModel):
     answer: str
     conversation_id: str

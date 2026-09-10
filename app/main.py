@@ -13,7 +13,7 @@ from app.container import ServiceContainer
 from app.db import Database
 from app.parsers.service import DocumentParserService
 from app.repositories import Repository
-from app.routers import api_admin, api_chat, api_robot, pages
+from app.routers import api_admin, api_agent, api_chat, api_robot, pages
 from app.services.chat import ChatService
 from app.services.evaluation import EvaluationService
 from app.services.chunker import ChunkerService
@@ -135,6 +135,12 @@ def build_container() -> ServiceContainer:
         llm_service=llm_service,
         history_turns=settings.conversation_history_turns,
     )
+    from app.agent.service import AgentService
+    agent_service = AgentService(
+        repository=repository,
+        chat_service=chat_service,
+        llm_service=llm_service,
+    )
     evaluation_service = EvaluationService(
         settings=settings,
         repository=repository,
@@ -158,6 +164,7 @@ def build_container() -> ServiceContainer:
         evaluation_service=evaluation_service,
         ingestion_service=ingestion_service,
         chat_service=chat_service,
+        agent_service=agent_service,
         ragflow_sync_service=ragflow_sync_service,
         version_cleanup_service=version_cleanup_service,
     )
@@ -205,6 +212,7 @@ def create_app() -> FastAPI:
     app.include_router(api_admin.build_router(templates))
     app.include_router(api_chat.build_router())
     app.include_router(api_robot.build_router())
+    app.include_router(api_agent.build_router())
     return app
 
 

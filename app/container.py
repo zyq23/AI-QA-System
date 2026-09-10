@@ -6,6 +6,7 @@ from app.config import Settings
 from app.db import Database
 from app.repositories import Repository
 from app.parsers.service import DocumentParserService
+from app.agent.service import AgentService
 from app.services.chat import ChatService
 from app.services.evaluation import EvaluationService
 from app.services.chunker import ChunkerService
@@ -33,5 +34,6 @@ class ServiceContainer:
     evaluation_service: EvaluationService
     ingestion_service: IngestionService
     chat_service: ChatService
+    agent_service: AgentService | None = None
     ragflow_sync_service: RagflowSyncService | None = None
     version_cleanup_service: VersionCleanupService | None = None
