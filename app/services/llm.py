@@ -414,7 +414,7 @@ class LlmService:
         generic_markers = (
             "系统", "智能", "展厅", "学院", "公司", "技术", "平台", "设备",
             "场景", "方案", "服务", "业务", "产业", "中心", "管理", "建设",
-            "是否", "支持", "提供", "包含", "采用", "属于", "作为", "进行",
+            "是否", "提供", "包含", "采用", "属于", "作为", "进行",
             "有哪些", "是什么", "怎么样", "多少", "哪家", "如何", "怎么",
             "连接", "套餐", "万元", "总额", "相关", "内容", "一共", "哪些",
         )
@@ -1615,10 +1615,23 @@ class LlmService:
             specific_terms = [term for term in analysis.focus_terms if len(term) >= 4]
             combined_top6 = " ".join(hit.plain_text for hit in citations[:6]).lower()
             if specific_terms:
-                for term in specific_terms[:2]:
-                    tokens = [tok for tok in tokenize(term) if len(tok) >= 2]
-                    if tokens and all(tok in combined_top6 for tok in tokens):
-                        return True
+                # Verify the PREDICATE first (e.g. "支持蓝牙" carries the claim;
+                # the subject 实训套件 appears everywhere). Prefer non-generic
+                # terms, then longer terms.
+                predicate_terms = sorted(
+                    specific_terms,
+                    key=lambda term: (
+                        self._is_generic_term(term),
+                        not any(verb in term for verb in ("支持", "提供", "包含", "具有", "能否")),
+                        len(term),
+                    ),
+                )
+                # Only the PREDICATE term (first in this order) may satisfy the
+                # claim; the bare subject appearing in the evidence must not.
+                claim_term = predicate_terms[0]
+                claim_tokens = [tok for tok in tokenize(claim_term) if len(tok) >= 2]
+                if claim_tokens and all(tok in combined_top6 for tok in claim_tokens):
+                    return True
                 return False
         special_answer, _ = self._special_case_answer(question, analysis.question_type, citations)
         if special_answer:
@@ -2592,6 +2605,19 @@ class LlmService:
         if final_grounded and self._is_foundation_platform_capability_question(question):
             if self._foundation_platform_capability_coverage_missing(citations):
                 final_grounded = False
+        # Value-claim guard: when a question asks for a concrete VALUE (金额/总额/
+        # 预算/价格/成本/供应商/厂家/名称), the draft must actually supply a
+        # value or named entity. A draft that re-echoes a question or returns an
+        # unrelated paragraph is a release of an absence-question.
+        value_markers = ("金额", "总额", "预算", "价格", "成本", "多少钱", "万元", "供应商", "厂家", "哪家")
+        if final_grounded and any(marker in question for marker in value_markers):
+            value_answer = self._normalize_text(grounded_answer or answer)
+            has_value = bool(re.search(r"\d", value_answer)) or bool(
+                re.search(r"[\u4e00-\u9fffA-Za-z0-9]{2,}", value_answer)
+            ) and not value_answer.startswith(("广师大根技术体验中心的建设目标", "产业学院总体定位与运营目标"))
+            if not has_value or self._strip_question_echo(question, value_answer) != value_answer:
+                final_grounded = False
+                inference_note = "价值类问题未给出具体数值或实体，已回退为证据不足。"
         final_question_type: QuestionType = analysis.question_type
         if not final_grounded:
             answer = self._insufficient_answer(analysis.question_type)
@@ -2711,6 +2737,22 @@ class LlmService:
                 answer = self._insufficient_answer(analysis.question_type)
                 grounded_answer = "当前知识库中没有找到相关信息。"
                 inference_note = "yes/no 题命中证据与问题核心主题不匹配，已回退为证据不足。"
+                final_grounded = False
+
+        # Post-recompose value guard: the deterministic recompose above can swap
+        # in a question-echo or unrelated extract AFTER the earlier value check.
+        # Re-verify on the FINAL answer text.
+        if final_grounded and any(marker in question for marker in value_markers):
+            value_answer = self._normalize_text(grounded_answer or answer)
+            echo = self._strip_question_echo(question, value_answer)
+            echo_like = echo == value_answer or value_answer.rstrip("？?。 ") == question.rstrip("？?。 ")
+            # A value question must answer with a numeric value or a named
+            # entity; a question echo or a generic label is not an answer.
+            plausible_value = bool(re.search(r"\d", value_answer)) and not echo_like
+            if not plausible_value and not self._signals_insufficient_text(value_answer):
+                answer = self._insufficient_answer(analysis.question_type)
+                grounded_answer = "当前知识库中没有找到相关信息。"
+                inference_note = "价值类问题最终答案未包含具体数值，已回退为证据不足。"
                 final_grounded = False
 
         return {
