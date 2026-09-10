@@ -237,6 +237,7 @@ class FallbackRetrievalService:
         self.primary = primary
         self.fallback = fallback
         self.primary_timeout_ms = primary_timeout_ms
+        self._executor = ThreadPoolExecutor(max_workers=2, thread_name_prefix="fallback-retrieval")
 
     @staticmethod
     def _mark_fallback(result: object, reason: str) -> object:
@@ -247,8 +248,10 @@ class FallbackRetrievalService:
 
     def retrieve(self, question: str, top_k: int | None = None, focus_terms: list[str] | None = None, expansion_terms: list[str] | None = None) -> RetrievalResult:
         if self.primary_timeout_ms and self.primary_timeout_ms > 0:
-            executor = ThreadPoolExecutor(max_workers=1)
-            future = executor.submit(self.primary.retrieve, question, top_k=top_k, focus_terms=focus_terms, expansion_terms=expansion_terms)
+            # Shared executor (created once in __init__); per-request executors
+            # leaked threads and abandoned futures could not cancel a running
+            # remote call.
+            future = self._executor.submit(self.primary.retrieve, question, top_k=top_k, focus_terms=focus_terms, expansion_terms=expansion_terms)
             try:
                 return future.result(timeout=self.primary_timeout_ms / 1000)
             except FutureTimeoutError:
@@ -266,8 +269,6 @@ class FallbackRetrievalService:
                     self.fallback.retrieve(question, top_k=top_k, focus_terms=focus_terms, expansion_terms=expansion_terms),
                     "primary_error",
                 )
-            finally:
-                executor.shutdown(wait=False, cancel_futures=True)
         try:
             return self.primary.retrieve(question, top_k=top_k, focus_terms=focus_terms, expansion_terms=expansion_terms)
         except Exception as exc:  # pragma: no cover - runtime safety
@@ -291,6 +292,7 @@ class AdaptiveRetrievalService:
         self.remote = remote
         self.remote_timeout_ms = remote_timeout_ms
         self.local_grounded_score_threshold = local_grounded_score_threshold
+        self._executor = ThreadPoolExecutor(max_workers=2, thread_name_prefix="adaptive-retrieval")
 
     @staticmethod
     def _top_score(result: RetrievalResult) -> float:
@@ -324,12 +326,11 @@ class AdaptiveRetrievalService:
 
     def _retrieve_remote(self, question: str, top_k: int | None, focus_terms: list[str] | None, expansion_terms: list[str] | None = None) -> RetrievalResult:
         if self.remote_timeout_ms and self.remote_timeout_ms > 0:
-            executor = ThreadPoolExecutor(max_workers=1)
-            future = executor.submit(self.remote.retrieve, question, top_k=top_k, focus_terms=focus_terms, expansion_terms=expansion_terms)
+            future = self._executor.submit(self.remote.retrieve, question, top_k=top_k, focus_terms=focus_terms, expansion_terms=expansion_terms)
             try:
                 return future.result(timeout=self.remote_timeout_ms / 1000)
-            finally:
-                executor.shutdown(wait=False, cancel_futures=True)
+            except FutureTimeoutError:
+                raise TimeoutError(f"remote retrieval exceeded {self.remote_timeout_ms}ms") from None
         return self.remote.retrieve(question, top_k=top_k, focus_terms=focus_terms, expansion_terms=expansion_terms)
 
     def retrieve(self, question: str, top_k: int | None = None, focus_terms: list[str] | None = None, expansion_terms: list[str] | None = None) -> RetrievalResult:

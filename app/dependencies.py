@@ -12,7 +12,9 @@ def get_container(request: Request) -> ServiceContainer:
 
 def require_admin(request: Request, response: Response, container: ServiceContainer = Depends(get_container)) -> str:
     expected = container.settings.admin_token
-    provided = request.headers.get("X-Admin-Token") or request.query_params.get("token")
+    # Header or signed cookie only. URL query tokens leak into access logs and
+    # browser history, so query-param auth was removed (quality-upgrade).
+    provided = request.headers.get("X-Admin-Token")
     if not provided:
         cookie = request.cookies.get(COOKIE_NAME)
         if cookie:

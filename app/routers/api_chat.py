@@ -3,7 +3,11 @@ from __future__ import annotations
 from fastapi import APIRouter, Depends, Request
 
 from app.dependencies import get_container
+from app.ratelimit import SlidingWindowLimiter
 from app.schemas import ChatMessageModel, ChatQueryRequest, ChatQueryResponse, CitationModel, SessionResponse
+
+# Shared limiter instance (one per app process) guards the paid-LLM endpoint.
+chat_limiter = SlidingWindowLimiter(limit=30, window_seconds=60.0)
 
 
 def build_router() -> APIRouter:
@@ -11,6 +15,7 @@ def build_router() -> APIRouter:
 
     @router.post("/query", response_model=ChatQueryResponse)
     def chat_query(request: Request, payload: ChatQueryRequest):
+        chat_limiter.check(request)
         container = get_container(request)
         answer = container.chat_service.answer(payload.question, payload.conversation_id, payload.top_k)
         return ChatQueryResponse(
@@ -42,6 +47,7 @@ def build_router() -> APIRouter:
 
     @router.get("/sessions/{conversation_id}", response_model=SessionResponse)
     def get_session(request: Request, conversation_id: str):
+        chat_limiter.check(request)
         container = get_container(request)
         messages = container.repository.get_conversation_messages(conversation_id)
         return SessionResponse(

@@ -44,6 +44,14 @@ class SparkContentPolicyError(SparkError):
 class SparkWebSocketClient:
     def __init__(self, config: SparkConfig) -> None:
         self.config = config
+        # Reusable event loop: asyncio.run() per call creates/destroys a loop
+        # for every request and breaks if ever invoked from an async context.
+        self._loop: asyncio.AbstractEventLoop | None = None
+
+    def _get_loop(self) -> asyncio.AbstractEventLoop:
+        if self._loop is None or self._loop.is_closed():
+            self._loop = asyncio.new_event_loop()
+        return self._loop
 
     def generate(
         self,
@@ -53,7 +61,7 @@ class SparkWebSocketClient:
         max_tokens: int | None = None,
         thinking_type: str | None = None,
     ) -> str:
-        return asyncio.run(
+        return self._get_loop().run_until_complete(
             self._generate_async(
                 messages,
                 temperature=temperature,

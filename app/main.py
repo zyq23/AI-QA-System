@@ -173,6 +173,26 @@ def build_templates() -> Jinja2Templates:
 async def lifespan(app: FastAPI):
     app.state.container = build_container()
     app.state.admin_signer = AdminSessionSigner(app.state.container.settings.secret_key)
+    # Reclaim jobs stuck in running/queued for over 24h (e.g. after a crash):
+    # prevents a stale running job from polluting "latest eval" queries forever.
+    import sqlite3
+    from datetime import datetime, timedelta, timezone
+
+    repo = app.state.container.repository
+    cutoff = (datetime.now(timezone.utc) - timedelta(hours=24)).isoformat()
+    try:
+        with repo.db.connect() as conn:
+            stuck = conn.execute(
+                "SELECT id FROM jobs WHERE status IN ('running','queued') AND updated_at < ?",
+                (cutoff,),
+            ).fetchall()
+            for row in stuck:
+                conn.execute(
+                    "UPDATE jobs SET status='failed', message='reclaimed on startup (stuck >24h)' WHERE id=?",
+                    (row["id"],),
+                )
+    except sqlite3.Error:
+        pass
     yield
 
 

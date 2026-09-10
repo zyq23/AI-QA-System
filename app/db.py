@@ -139,14 +139,16 @@ class Database:
                 CREATE INDEX IF NOT EXISTS idx_messages_conversation ON messages(conversation_id, created_at);
                 CREATE INDEX IF NOT EXISTS idx_answer_runs_conversation ON answer_runs(conversation_id, created_at DESC);
                 CREATE INDEX IF NOT EXISTS idx_answer_runs_created_at ON answer_runs(created_at DESC);
+                CREATE INDEX IF NOT EXISTS idx_jobs_status ON jobs(status, created_at);
                 """
             )
 
     @contextmanager
     def connect(self) -> Iterator[sqlite3.Connection]:
-        conn = sqlite3.connect(self.path, check_same_thread=False)
+        conn = sqlite3.connect(self.path, check_same_thread=False, timeout=30)
         conn.row_factory = sqlite3.Row
         conn.execute("PRAGMA foreign_keys = ON")
+        conn.execute("PRAGMA busy_timeout = 30000")
         try:
             yield conn
             conn.commit()

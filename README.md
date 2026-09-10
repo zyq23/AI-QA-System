@@ -256,7 +256,12 @@ RAGFLOW_FALLBACK_TO_LOCAL=true
 
 相关脚本：
 
+> 注意：`ragflow/` 源码目录当前未随仓库分发（历史上以 gitlink 形式存在），
+> `scripts/start_ragflow_source.sh` 等脚本在缺少该目录时不可用。使用 Docker
+> 自行部署 RAGFlow 并配置 `RAGFLOW_BASE_URL` / `RAGFLOW_API_KEY` 即可接入。
+
 ```bash
+# 需要先准备 ragflow/ 源码目录（见 RAGFlow 官方仓库）后执行
 bash scripts/start_ragflow_source.sh
 bash scripts/stop_ragflow_source.sh
 ```

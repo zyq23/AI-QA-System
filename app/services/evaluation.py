@@ -65,6 +65,11 @@ class EvaluationService:
         self.chat_service = chat_service
         self.http_client: httpx.Client | None = None
 
+    def close_http_client(self) -> None:
+        if self.http_client is not None:
+            self.http_client.close()
+            self.http_client = None
+
     @staticmethod
     def _payload_from_api(data: dict[str, Any]) -> AnswerPayload:
         citations = [

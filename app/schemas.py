@@ -52,7 +52,7 @@ class CitationModel(BaseModel):
 
 class ChatQueryRequest(BaseModel):
     question: str = Field(min_length=1, max_length=4000)
-    conversation_id: str | None = None
+    conversation_id: str | None = Field(default=None, max_length=64, pattern=r"^[A-Za-z0-9_-]*$")
     top_k: int | None = Field(default=None, ge=1, le=10)
 
 
