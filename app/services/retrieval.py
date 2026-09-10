@@ -431,13 +431,27 @@ class RetrievalService:
                 expansions.append(value)
 
         # Data-driven synonym + expansion tables (config/retrieval_rules.json).
+        # "除了X还..." questions EXCLUDE X: synonyms keyed on X must not fire,
+        # otherwise the excluded concept gets re-boosted into the query.
+        exclusion_keys: set[str] = set()
+        if "除了" in normalized:
+            idx = normalized.find("除了") + 2
+            window = normalized[idx : idx + 24]
+            for key in query_synonyms():
+                if key in window:
+                    exclusion_keys.add(key)
+
         for key, values in query_synonyms().items():
+            if key in exclusion_keys:
+                continue
             if key in normalized:
                 for value in values:
                     add(value)
 
         for term in focus_terms or []:
             for key, values in query_synonyms().items():
+                if key in exclusion_keys:
+                    continue
                 if key in term:
                     for value in values:
                         add(value)

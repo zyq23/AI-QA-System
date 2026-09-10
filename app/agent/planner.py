@@ -38,10 +38,10 @@ def classify_intent(question: str, history: list[dict[str, Any]] | None = None) 
         return "clarify", 0.9
     if _has_any(text, _MULTI_SUBJECT_MARKERS):
         return "multi_doc_compare", 0.85
+    if re.search(r"\d", text) and _has_any(text, _CALC_MARKERS + ("等于多少", "等于几", "结果是")):
+        return "math", 0.8
     if _has_any(text, _DATE_MARKERS):
         return "date_math", 0.75
-    if _has_any(text, _CALC_MARKERS) and re.search(r"\d", text):
-        return "math", 0.8
     if _has_any(text, ("哪份资料", "哪个文件", "哪一页", "哪里提到", "出自")):
         return "document_detail", 0.7
     if _has_any(text, _CLARIFY_MARKERS) and len(text) <= 14 and history:
@@ -131,7 +131,7 @@ def build_plan(
         steps.append(PlanStep(tool="knowledge_search", args={"query": question, "top_k": 6}))
         steps.append(PlanStep(tool="document_detail", args={"document": _guess_document(question)}))
     elif intent == "clarify":
-        steps.append(PlanStep(tool="clarification", args={"question": f"您的问题「{question[:30]}」可以再具体一点吗？"}))
+        steps.append(PlanStep(tool="no_answer", args={"reason": f"问题「{question[:30]}」意图不明确，可补充上下文后再问。"}))
     else:  # knowledge_qa
         steps.append(PlanStep(tool="knowledge_search", args={"query": question, "top_k": 6}))
         if use_llm_planner and llm_service is not None and not llm_service.disabled and confidence < 0.8:
@@ -156,16 +156,30 @@ def build_plan(
 
 
 def _split_subjects(question: str) -> list[str]:
-    segments = re.split(r"[，,、；;。？?]|和|与|跟|的区别|的对比|分别|还有", question)
+    """Split a compare question into its two subjects ('A和B的区别' -> [A, B]).
+
+    The attribute tail (核心设备/价格/…) is stripped from each subject: the
+    multi_doc_compare tool receives the attribute separately.
+    """
+    head = re.split(r"(?:的)?(?:什么)?(?:区别|不同|对比)", question)[0]
+    segments = re.split(r"[，,、；;。？?]|和|与|跟|分别|还有|\s", head)
     cleaned: list[str] = []
     for seg in segments:
         seg = seg.strip(" 的请把一起列出各自各是")
-        seg = re.sub(r"(什么|哪些|哪一|哪个|如何|怎么|不同|列出|是多少)", "", seg).strip()
-        if len(seg) >= 2 and seg not in cleaned and not re.search(r"[\u4e00-\u9fff]", seg) is None:
-            if re.search(r"(区别|分别|对比|不同)", seg):
-                continue
+        seg = re.sub(r"(什么|哪些|哪一|哪个|如何|怎么|是多少|有什么)", "", seg).strip()
+        if not seg or re.search(r"(区别|分别|对比|不同)", seg):
+            continue
+        if len(seg) >= 2 and seg not in cleaned:
             cleaned.append(seg)
-    return cleaned[:2]
+    # Drop a trailing attribute tail (核心设备/厂家电话…) from each subject so
+    # multi_doc_compare queries stay clean; the attribute travels separately.
+    attr_tail = re.compile(r"(核心设备|主要设备|核心组件|设备组成|厂家电话|联系方式|配置|参数|价格|架构|定位|名称|指标)$")
+    stripped = []
+    for subject in cleaned:
+        subject = attr_tail.sub("", subject).strip()
+        if len(subject) >= 2 and subject not in stripped:
+            stripped.append(subject)
+    return stripped[:2]
 
 
 def _extract_date(question: str) -> str | None:

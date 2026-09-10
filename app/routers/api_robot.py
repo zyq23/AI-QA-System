@@ -42,24 +42,44 @@ def build_router() -> APIRouter:
     @router.post("/query", response_model=RobotQueryResponse)
     def robot_query(request: Request, payload: RobotQueryRequest):
         container = get_container(request)
-        raw = container.chat_service.answer(
-            payload.question,
-            payload.conversation_id,
-            payload.top_k,
-            skip_llm_rewrite=True,
-            robot_mode=True,
-        )
-        tts_text = _clean_for_tts(raw.answer) or _CLEAN_INSUFFICIENT_REPLY
+        agent_service = container.agent_service
+        if agent_service is not None and agent_service.needs_agent(payload.question):
+            # Complex/multi-step questions run through the Agent; simple ones keep
+            # the single-turn fast path (skip_llm_rewrite + robot_mode).
+            result = agent_service.query(payload.question, payload.conversation_id, force_agent=True, persist=True)
+            answer = result.answer
+            conversation_id = result.conversation_id
+            latency_ms = result.latency_ms
+            grounded = result.grounded
+            answer_run_id = result.answer_run_id
+            question_type = result.intent
+            answer_focus = result.confidence_note
+        else:
+            raw = container.chat_service.answer(
+                payload.question,
+                payload.conversation_id,
+                payload.top_k,
+                skip_llm_rewrite=True,
+                robot_mode=True,
+            )
+            answer = raw.answer
+            conversation_id = raw.conversation_id
+            latency_ms = raw.latency_ms
+            grounded = raw.grounded
+            answer_run_id = raw.answer_run_id
+            question_type = raw.question_type
+            answer_focus = raw.answer_focus
+        tts_text = _clean_for_tts(answer) or _CLEAN_INSUFFICIENT_REPLY
         return RobotQueryResponse(
             answer=tts_text,
-            conversation_id=raw.conversation_id,
-            latency_ms=raw.latency_ms,
-            grounded=raw.grounded,
+            conversation_id=conversation_id,
+            latency_ms=latency_ms,
+            grounded=grounded,
             should_speak=bool(tts_text),
             tts_text=tts_text,
-            answer_run_id=raw.answer_run_id,
-            question_type=raw.question_type,
-            answer_focus=raw.answer_focus,
+            answer_run_id=answer_run_id,
+            question_type=question_type,
+            answer_focus=answer_focus,
         )
 
     return router
