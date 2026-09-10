@@ -692,3 +692,37 @@
   - 执行前最后 gate checklist
 - 验收标准：继续保持能力判断与正式验收边界清楚；方案能直接进入单组正式执行前最后审阅；不假装当前已完成正式通过率
 - 禁止事项：不得宣布正式通过率或正式回归完成
+
+---
+
+## Quality-Upgrade 线程（2026-09-09 ~ 2026-09-10，单线程全面改造）
+
+### Workstream
+- 跨线程专项：RAG 与问答系统整体质量提升（对应全部 WS-01~WS-05）
+
+### Current Goal
+- 系统性审计并修复六类不足：泛化能力、索引卫生、检索/答案短板、解析 OCR、工程卫生、评测体系
+
+### Done So Far
+- [2026-09-09] 阶段 0：新建 `quality-upgrade` 分支；修正 AGENTS.md 统计数字；新增 `scripts/build_generalization_eval.py` 生成 52 道规则外泛化题（`data/evals/kb_generalization_v1.json`），与 27 题冻结集合并为 79 题（`kb_quality_full_v1.json`）；`run_eval.py` 默认数据集路径从不存在的文件改为冻结集。**改造前基线**：Frozen 12 answer_pass / 12 correct_block / 3 wrong_release；Gen 14 answer_pass / 6 correct_block / 1 wrong_release / 31 wrong_block（`eval_20260910_015836`）。
+- [2026-09-10] 阶段 1 索引卫生：新增 `scripts/index_hygiene.py`（dry-run/备份/清理），清除 7,050 个过期版本 chunks、8 个 stuck jobs（>3 个月 running/queued）、VACUUM 77.9MB→72.4MB DB；Chroma 删除 3,696 个孤儿向量、空 `chunks_test` collection、31MB 孤儿 HNSW 段；三处计数对齐。
+- [2026-09-10] 阶段 1 解析修复：PDF 图片 OCR 改为文本稀疏页条件触发；OCR 双引擎改 rapid 优先快速通道；PPTX WMF/EMF 跳过并告警；DOCX 接入图片 OCR（质量门 + 实质文本门）；OCR 锚点词从 `ocr_utils.py` 硬编码改为 `config` 可配置（默认通用词表，删除宇树/华为等语料特定词）。`reindex_all.py` 重写为 CLI（main 守卫/dry-run/备份/--only）。全量重建 7 文档 5,278 chunks（后来 DOCX 去噪后 3,772）。
+- [2026-09-10] 阶段 2a 分词：FTS5 中文分词从逐字切分改为 jieba 词级预分词（`app/utils.py::tokenize`，ml.py 复用），FTS MATCH 引号转义防注入，重建 search_text。测试 112/112。
+- [2026-09-10] 阶段 2b 检索去硬编码：新增 `config/retrieval_rules.json`（3 张表：query_synonyms / query_expansions / entity_aliases，触发式键 "trigger+guard"）+ `app/services/retrieval_rules.py` 加载器（specific-shadows-generic 优先级）；`retrieval.py` 的 ~40 个扩展块、~20 个 rerank 定向加分块、~14 个 grounding 特判全部替换为规则驱动 + 通用信号（规则扩展短语覆盖率、通用"除了X"排除降级、意图锚定摘要严格化、来源格式自指词过滤）；删除 G1/宇树等语料外规则。
+- [2026-09-10] 阶段 2c 答案去硬编码：删除 `_curated_factoid_answer` 无条件预置答案（幻觉级缺陷）；`_contains_source_leak` 不再把"文件/资料"裸词当泄漏；`_anonymize_source_names` 只替换独立出现的文件名 token；`_can_ground_from_citations` 增加 focus-majority 证据门 + yes/no 特定主张门；`_select_support_sentences` 增加相关性下限（rank 裸分不再够格）；finalize yes/no 守卫从"是"前缀扩展到全部形式；移除 combined>=200 字符的全量放行。
+- [2026-09-10] 评测收口：测试 112/112 全绿。最新 79 题回归 `eval_20260910_081218`：TOTAL 32 answer_pass / 9 correct_block / 13 wrong_release / 25 wrong_block；Frozen 12/8/7（相比基线 12/12/3，wrong_release +4，主要来自 must_block 语义与重建后的检索漂移交互）；Gen 20/1/6/25（answer_pass 14→20，wrong_release 1→6）。
+
+### Current Judgement
+- 去硬编码后泛化能力真实提升（Gen answer_pass 14→20，且不再有"背题"成分），但 must_block 的把握度下降（规则修复前的专门闸门被通用门替代后，部分相关但不同主题的证据仍能通过 focus-majority 门）。
+- 剩余 7 个 frozen wrong_release 的共同模式：负向题/实体题的证据与问题共享泛化 token（展厅/智能/系统/产业学院），通用 token 重叠不足以区分"相关"与"回答"。下一步应做"问题-证据主张一致性"校验（问题 asking 的具体实体是否出现在答案中），这是阶段 3 幻觉防线精细化的核心。
+- RAGFlow 侧遵守 D-008：ragflow/ 目录已删除，全部观察仅为现象记录。
+
+### Blockers
+- 无阻塞；连续多轮评测确认无进一步回归恶化（多次 13/13 恒定）。
+
+### Next Step
+- 阶段 3：答案主张一致性校验（subject-claim verification），目标把 frozen wrong_release 压回 <=3 且保住 Gen answer_pass >= 20；摘要类多 chunk 聚合生成路径（gen-exh-05 等）。
+- 阶段 4：SQLite busy_timeout/连接复用、httpx 连接池、Spark 事件循环、安全整改（.env 解耦、admin token header、会话属主、限流）、CI。
+
+### Related Files
+- `config/retrieval_rules.json`、`app/services/retrieval_rules.py`、`app/services/retrieval.py`、`app/services/llm.py`、`app/parsers/*`、`scripts/index_hygiene.py`、`scripts/reindex_all.py`、`scripts/build_generalization_eval.py`、`data/evals/kb_quality_full_v1.json`、`data/evals/results/eval_20260910_081218_formal_summary.json`
