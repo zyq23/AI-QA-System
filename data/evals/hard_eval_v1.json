@@ -1,0 +1,5109 @@
+[
+  {
+    "id": "hard-cross-01",
+    "question": "机械臂和实训套件的核心设备有什么区别？",
+    "category": "cross_document",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "两台协作机器人",
+      "AR502H"
+    ],
+    "expected_answer_keywords": [
+      "两台协作机器人",
+      "AR502H"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "两台协作机器人",
+          "两套视觉系统",
+          "2D视觉系统",
+          "深度视觉系统"
+        ]
+      },
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "端、边、云、应用",
+          "AR502H"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "cross_document",
+      "cross_document"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-cross-02",
+    "question": "机械臂产品与边缘实训套件分别面向什么教学技术方向？",
+    "category": "cross_document",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "机器视觉",
+      "openEuler"
+    ],
+    "expected_answer_keywords": [
+      "机器视觉",
+      "openEuler"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "Python程序设计",
+          "深度学习",
+          "机器视觉",
+          "大模型技术应用"
+        ]
+      },
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "openEuler",
+          "容器部署",
+          "边缘计算"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "cross_document",
+      "cross_document"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-cross-03",
+    "question": "把机械臂的生产厂家和实训套件的核心网关一起列出。",
+    "category": "cross_document",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "湖南比邻星科技有限公司",
+      "AR502H"
+    ],
+    "expected_answer_keywords": [
+      "湖南比邻星科技有限公司",
+      "AR502H"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "湖南比邻星科技有限公司",
+          "0731-85828227"
+        ]
+      },
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "端、边、云、应用",
+          "AR502H"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "cross_document",
+      "cross_document"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-cross-04",
+    "question": "机械臂的视觉系统配置和边缘套件的物联设备组成分别是什么？",
+    "category": "cross_document",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "2D视觉系统",
+      "智能电子秤"
+    ],
+    "expected_answer_keywords": [
+      "2D视觉系统",
+      "智能电子秤"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "两台协作机器人",
+          "两套视觉系统",
+          "2D视觉系统",
+          "深度视觉系统"
+        ]
+      },
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "网络摄像头",
+          "智能电子秤",
+          "三合一传感器",
+          "超高频RFID"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "cross_document",
+      "cross_document"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-cross-05",
+    "question": "轩辕业务架构的两条主线与1+1+N服务四项分别是什么？",
+    "category": "cross_document",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx",
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "双轮驱动",
+      "人才培养服务"
+    ],
+    "expected_answer_keywords": [
+      "双轮驱动",
+      "人才培养服务"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-11",
+        "keywords": [
+          "双轮驱动",
+          "科教基座建设",
+          "产教融合建设及运营解决方案"
+        ]
+      },
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-20",
+        "keywords": [
+          "人才培养服务",
+          "师资培养服务",
+          "教学资源开发服务",
+          "科学研究服务"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "cross_document"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-cross-06",
+    "question": "轩辕基础模型页的模型家族和AI人才方案的产品各举两项。",
+    "category": "cross_document",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx",
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "deepseek",
+      "AIGC实验箱"
+    ],
+    "expected_answer_keywords": [
+      "deepseek",
+      "AIGC实验箱"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-19",
+        "keywords": [
+          "deepseek",
+          "通义千问",
+          "文心一言",
+          "OCR",
+          "语音识别",
+          "文档增强解析",
+          "知识元数据"
+        ]
+      },
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-21",
+        "keywords": [
+          "AIGC实验箱",
+          "六轴机械臂",
+          "智能网联车",
+          "轩辕星轻量级大模型"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "cross_document"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-cross-07",
+    "question": "产业学院治理模式与公司PPT战略定位分别怎么表述？",
+    "category": "cross_document",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "理事会领导下的院长负责制",
+      "AI+产教融合服务商"
+    ],
+    "expected_answer_keywords": [
+      "理事会领导下的院长负责制",
+      "AI+产教融合服务商"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "理事会领导下的院长负责制",
+          "最高决策机构"
+        ]
+      },
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-16",
+        "keywords": [
+          "AI+产教融合服务商"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "cross_document",
+      "cross_document"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-cross-08",
+    "question": "体验中心三条文化主线和产业学院三位一体定位分别是什么？",
+    "category": "cross_document",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx",
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [
+      "根技术筑基",
+      "职教母机"
+    ],
+    "expected_answer_keywords": [
+      "根技术筑基",
+      "职教母机"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+        "page_or_slide": "slide-1",
+        "keywords": [
+          "根技术筑基",
+          "产教融育人",
+          "师范践初心"
+        ]
+      },
+      {
+        "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "根技术",
+          "人工智能",
+          "职教母机",
+          "三位一体"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "cross_document",
+      "cross_document"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-cross-09",
+    "question": "实训套件采用的架构与机械臂开放实验环境分别是什么？",
+    "category": "cross_document",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "端、边、云、应用",
+      "Jupyter Notebook"
+    ],
+    "expected_answer_keywords": [
+      "端、边、云、应用",
+      "Jupyter Notebook"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "端、边、云、应用",
+          "AR502H"
+        ]
+      },
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "Jupyter Notebook",
+          "TensorFlow",
+          "PyTorch"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "cross_document",
+      "cross_document"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-cross-10",
+    "question": "公司基础环境页的算力资源和产业学院运营目标的核心方向如何拼接？",
+    "category": "cross_document",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx",
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [
+      "智能算力资源",
+      "人工智能"
+    ],
+    "expected_answer_keywords": [
+      "智能算力资源",
+      "人工智能"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-18",
+        "keywords": [
+          "通用算力资源",
+          "智能算力资源",
+          "高性能存储资源",
+          "高速网络"
+        ]
+      },
+      {
+        "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "根技术",
+          "人工智能",
+          "职教母机",
+          "三位一体"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "cross_document",
+      "cross_document"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-cross-11",
+    "question": "体验中心建设路径和合作汇报第一阶段建设内容各包含哪些要点？",
+    "category": "cross_document",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx",
+      "广东技术师范大学-根技术人才培养合作汇报-0.pptx"
+    ],
+    "expected_section_keywords": [
+      "从通识到专业",
+      "根技术课程体系"
+    ],
+    "expected_answer_keywords": [
+      "从通识到专业",
+      "根技术课程体系"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+        "page_or_slide": "slide-2",
+        "keywords": [
+          "从通识到专业",
+          "从校内辐射到社会",
+          "从实践到标准"
+        ]
+      },
+      {
+        "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+        "page_or_slide": "slide-2",
+        "keywords": [
+          "产教融合实践基地",
+          "根技术课程体系",
+          "根技术支撑平台",
+          "师资服务"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "cross_document",
+      "cross_document"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-cross-12",
+    "question": "公司成立信息与机械臂厂家电话分别是多少？",
+    "category": "cross_document",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx",
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "1998",
+      "0731-85828227"
+    ],
+    "expected_answer_keywords": [
+      "1998",
+      "0731-85828227"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-4",
+        "keywords": [
+          "1998",
+          "2014",
+          "830891"
+        ]
+      },
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "湖南比邻星科技有限公司",
+          "0731-85828227"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "cross_document",
+      "cross_document"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-cross-13",
+    "question": "实训套件发布日期与产业学院方案年份分别是什么？",
+    "category": "cross_document",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [
+      "2025-12-08",
+      "2026年1月"
+    ],
+    "expected_answer_keywords": [
+      "2025-12-08",
+      "2026年1月"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "文档版本",
+          "01",
+          "2025-12-08"
+        ]
+      },
+      {
+        "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "第一阶段",
+          "建设期",
+          "2026年1月",
+          "第二阶段",
+          "运营期"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "cross_document",
+      "cross_document"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-cross-14",
+    "question": "华为ICT预测的2030指标和公司基础模型页的模型名称分别是什么？",
+    "category": "cross_document",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf",
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "2000亿",
+      "通义千问"
+    ],
+    "expected_answer_keywords": [
+      "2000亿",
+      "通义千问"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "华为ICT学院手册 2024-2025.pdf",
+        "page_or_slide": "page-3",
+        "keywords": [
+          "2030年",
+          "2000亿",
+          "105ZFLOPS"
+        ]
+      },
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-19",
+        "keywords": [
+          "deepseek",
+          "通义千问",
+          "文心一言",
+          "OCR",
+          "语音识别",
+          "文档增强解析",
+          "知识元数据"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "cross_document",
+      "cross_document"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-cross-15",
+    "question": "展厅根技术的三项重构与合作汇报中的openEuler部署规模分别是什么？",
+    "category": "cross_document",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx",
+      "广东技术师范大学-根技术人才培养合作汇报-0.pptx"
+    ],
+    "expected_section_keywords": [
+      "软件重构",
+      "350万+"
+    ],
+    "expected_answer_keywords": [
+      "软件重构",
+      "350万+"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+        "page_or_slide": "slide-2",
+        "keywords": [
+          "理论重构",
+          "架构重构",
+          "软件重构",
+          "香农极限"
+        ]
+      },
+      {
+        "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+        "page_or_slide": "slide-11",
+        "keywords": [
+          "openEuler",
+          "350万+"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "cross_document",
+      "cross_document"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-numeric-01",
+    "question": "公司登记的软件著作权是147项还是174项？",
+    "category": "numeric_trap",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "147项"
+    ],
+    "expected_answer_keywords": [
+      "147项"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-5",
+        "keywords": [
+          "授权18项",
+          "登记147项",
+          "31个"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "numeric_trap"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-numeric-02",
+    "question": "轩辕网络获得授权的发明专利数量是18项还是81项？",
+    "category": "numeric_trap",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "授权18项"
+    ],
+    "expected_answer_keywords": [
+      "授权18项"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-5",
+        "keywords": [
+          "授权18项",
+          "登记147项",
+          "31个"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "numeric_trap"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-numeric-03",
+    "question": "轩辕网络注册商标数量是31个还是13个？",
+    "category": "numeric_trap",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "31个"
+    ],
+    "expected_answer_keywords": [
+      "31个"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-5",
+        "keywords": [
+          "授权18项",
+          "登记147项",
+          "31个"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "numeric_trap"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-numeric-04",
+    "question": "公司成立年份是1998还是1988？",
+    "category": "numeric_trap",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "1998"
+    ],
+    "expected_answer_keywords": [
+      "1998"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-4",
+        "keywords": [
+          "1998",
+          "2014",
+          "830891"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "numeric_trap"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-numeric-05",
+    "question": "公司新三板挂牌年份是2014还是2024？",
+    "category": "numeric_trap",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "2014"
+    ],
+    "expected_answer_keywords": [
+      "2014"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-4",
+        "keywords": [
+          "1998",
+          "2014",
+          "830891"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "numeric_trap"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-numeric-06",
+    "question": "轩辕网络证券代码是830891还是830819？",
+    "category": "numeric_trap",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "830891"
+    ],
+    "expected_answer_keywords": [
+      "830891"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-4",
+        "keywords": [
+          "1998",
+          "2014",
+          "830891"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "numeric_trap"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-numeric-07",
+    "question": "机械臂额定负载是3kg还是8kg？",
+    "category": "numeric_trap",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "3kg"
+    ],
+    "expected_answer_keywords": [
+      "3kg"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "自由度",
+          "6",
+          "额定负载",
+          "3kg"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "numeric_trap"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-numeric-08",
+    "question": "机械臂自由度是6还是16？",
+    "category": "numeric_trap",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "自由度",
+      "6"
+    ],
+    "expected_answer_keywords": [
+      "自由度",
+      "6"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "自由度",
+          "6",
+          "额定负载",
+          "3kg"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "numeric_trap"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-numeric-09",
+    "question": "实训套件文档发布日期是2025-12-08还是2025-08-12？",
+    "category": "numeric_trap",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "2025-12-08"
+    ],
+    "expected_answer_keywords": [
+      "2025-12-08"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "文档版本",
+          "01",
+          "2025-12-08"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "numeric_trap"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-numeric-10",
+    "question": "openEuler部署规模写的是350万+套还是35万+套？",
+    "category": "numeric_trap",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学-根技术人才培养合作汇报-0.pptx"
+    ],
+    "expected_section_keywords": [
+      "350万+"
+    ],
+    "expected_answer_keywords": [
+      "350万+"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+        "page_or_slide": "slide-11",
+        "keywords": [
+          "openEuler",
+          "350万+"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "numeric_trap"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-numeric-11",
+    "question": "华为预测2030年全球联接总数为2000亿还是200亿？",
+    "category": "numeric_trap",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [
+      "2000亿"
+    ],
+    "expected_answer_keywords": [
+      "2000亿"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "华为ICT学院手册 2024-2025.pdf",
+        "page_or_slide": "page-3",
+        "keywords": [
+          "2030年",
+          "2000亿",
+          "105ZFLOPS"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "numeric_trap"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-numeric-12",
+    "question": "AI计算算力预测是105ZFLOPS还是15ZFLOPS？",
+    "category": "numeric_trap",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [
+      "105ZFLOPS"
+    ],
+    "expected_answer_keywords": [
+      "105ZFLOPS"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "华为ICT学院手册 2024-2025.pdf",
+        "page_or_slide": "page-3",
+        "keywords": [
+          "2030年",
+          "2000亿",
+          "105ZFLOPS"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "numeric_trap"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-numeric-13",
+    "question": "套件文档版本是01还是10？",
+    "category": "numeric_trap",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "文档版本",
+      "01"
+    ],
+    "expected_answer_keywords": [
+      "文档版本",
+      "01"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "文档版本",
+          "01",
+          "2025-12-08"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "numeric_trap"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-numeric-14",
+    "question": "机械臂采用一台还是两台协作机器人？",
+    "category": "numeric_trap",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "两台协作机器人"
+    ],
+    "expected_answer_keywords": [
+      "两台协作机器人"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "两台协作机器人",
+          "两套视觉系统",
+          "2D视觉系统",
+          "深度视觉系统"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "numeric_trap"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-numeric-15",
+    "question": "机械臂视觉系统是一套还是两套？",
+    "category": "numeric_trap",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "两套视觉系统"
+    ],
+    "expected_answer_keywords": [
+      "两套视觉系统"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "两台协作机器人",
+          "两套视觉系统",
+          "2D视觉系统",
+          "深度视觉系统"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "numeric_trap"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-multihop-01",
+    "question": "若要在机械臂产品上做本地大模型+视觉实践，文档给出的模型和视觉任务是什么？",
+    "category": "multi_hop",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "DeepSeek",
+      "视觉"
+    ],
+    "expected_answer_keywords": [
+      "DeepSeek",
+      "视觉"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "两台协作机器人",
+          "两套视觉系统",
+          "2D视觉系统",
+          "深度视觉系统"
+        ]
+      },
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "Jupyter Notebook",
+          "TensorFlow",
+          "PyTorch"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "multi_hop"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-multihop-02",
+    "question": "把AR502H网关放入端边云应用架构后，套件还融合了哪两类接入设备？",
+    "category": "multi_hop",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "AR502H",
+      "网络摄像头"
+    ],
+    "expected_answer_keywords": [
+      "AR502H",
+      "网络摄像头"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "端、边、云、应用",
+          "AR502H"
+        ]
+      },
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "网络摄像头",
+          "智能电子秤",
+          "三合一传感器",
+          "超高频RFID"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "multi_hop"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-multihop-03",
+    "question": "公司业务架构的‘双轮’分别落到哪两类解决方案？",
+    "category": "multi_hop",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "科教基座建设",
+      "产教融合建设及运营解决方案"
+    ],
+    "expected_answer_keywords": [
+      "科教基座建设",
+      "产教融合建设及运营解决方案"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-11",
+        "keywords": [
+          "双轮驱动",
+          "科教基座建设",
+          "产教融合建设及运营解决方案"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "multi_hop"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-multihop-04",
+    "question": "基础模型页中，通用大模型和小模型各对应哪些例子？",
+    "category": "multi_hop",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "deepseek",
+      "OCR"
+    ],
+    "expected_answer_keywords": [
+      "deepseek",
+      "OCR"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-19",
+        "keywords": [
+          "deepseek",
+          "通义千问",
+          "文心一言",
+          "OCR",
+          "语音识别",
+          "文档增强解析",
+          "知识元数据"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "multi_hop"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-multihop-05",
+    "question": "产业学院理事会负责决策，谁负责执行院长办公室的整体规划？",
+    "category": "multi_hop",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [
+      "理事会",
+      "邓文新"
+    ],
+    "expected_answer_keywords": [
+      "理事会",
+      "邓文新"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "理事会领导下的院长负责制",
+          "最高决策机构"
+        ]
+      },
+      {
+        "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "邓文新",
+          "院长"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "multi_hop"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-multihop-06",
+    "question": "体验中心的‘从通识到专业’路径最终要走向哪一阶段？",
+    "category": "multi_hop",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [
+      "从实践到标准"
+    ],
+    "expected_answer_keywords": [
+      "从实践到标准"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+        "page_or_slide": "slide-2",
+        "keywords": [
+          "从通识到专业",
+          "从校内辐射到社会",
+          "从实践到标准"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "multi_hop"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-multihop-07",
+    "question": "轩辕星轻量级大模型的训练定位与公司AI人才方案的基础设施分别是什么？",
+    "category": "multi_hop",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "轩辕星轻量级大模型",
+      "高性能存储资源"
+    ],
+    "expected_answer_keywords": [
+      "轩辕星轻量级大模型",
+      "高性能存储资源"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-21",
+        "keywords": [
+          "AIGC实验箱",
+          "六轴机械臂",
+          "智能网联车",
+          "轩辕星轻量级大模型"
+        ]
+      },
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-18",
+        "keywords": [
+          "通用算力资源",
+          "智能算力资源",
+          "高性能存储资源",
+          "高速网络"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "multi_hop"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-multihop-08",
+    "question": "机械臂生产线通过哪两种视觉系统分别承担识别检测和深度视觉任务？",
+    "category": "multi_hop",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "2D视觉系统",
+      "深度视觉系统"
+    ],
+    "expected_answer_keywords": [
+      "2D视觉系统",
+      "深度视觉系统"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "两台协作机器人",
+          "两套视觉系统",
+          "2D视觉系统",
+          "深度视觉系统"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "multi_hop"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-multihop-09",
+    "question": "实训套件的软件底座与部署动作如何衔接？",
+    "category": "multi_hop",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "openEuler",
+      "容器部署"
+    ],
+    "expected_answer_keywords": [
+      "openEuler",
+      "容器部署"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "openEuler",
+          "容器部署",
+          "边缘计算"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "multi_hop"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-multihop-10",
+    "question": "公司服务四项中，哪一项直接对应科研方向？",
+    "category": "multi_hop",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "科学研究服务"
+    ],
+    "expected_answer_keywords": [
+      "科学研究服务"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-20",
+        "keywords": [
+          "人才培养服务",
+          "师资培养服务",
+          "教学资源开发服务",
+          "科学研究服务"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "multi_hop"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-multihop-11",
+    "question": "产业学院的定位要服务什么战略并形成什么三位一体？",
+    "category": "multi_hop",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [
+      "人工智能",
+      "三位一体"
+    ],
+    "expected_answer_keywords": [
+      "人工智能",
+      "三位一体"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "根技术",
+          "人工智能",
+          "职教母机",
+          "三位一体"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "multi_hop"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-multihop-12",
+    "question": "展厅内容用三项重构解释根技术，哪一项与架构直接相关？",
+    "category": "multi_hop",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [
+      "架构重构"
+    ],
+    "expected_answer_keywords": [
+      "架构重构"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+        "page_or_slide": "slide-2",
+        "keywords": [
+          "理论重构",
+          "架构重构",
+          "软件重构",
+          "香农极限"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "multi_hop"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-multihop-13",
+    "question": "合作汇报把根技术课程体系放在第一阶段的哪类建设中？",
+    "category": "multi_hop",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学-根技术人才培养合作汇报-0.pptx"
+    ],
+    "expected_section_keywords": [
+      "根技术课程体系"
+    ],
+    "expected_answer_keywords": [
+      "根技术课程体系"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+        "page_or_slide": "slide-2",
+        "keywords": [
+          "产教融合实践基地",
+          "根技术课程体系",
+          "根技术支撑平台",
+          "师资服务"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "multi_hop"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-multihop-14",
+    "question": "华为ICT预测中，全球联接和AI算力两个量化指标各是多少？",
+    "category": "multi_hop",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [
+      "2000亿",
+      "105ZFLOPS"
+    ],
+    "expected_answer_keywords": [
+      "2000亿",
+      "105ZFLOPS"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "华为ICT学院手册 2024-2025.pdf",
+        "page_or_slide": "page-3",
+        "keywords": [
+          "2030年",
+          "2000亿",
+          "105ZFLOPS"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "multi_hop"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-multihop-15",
+    "question": "机械臂产品的厂家信息与其电话必须同时给出，分别是什么？",
+    "category": "multi_hop",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "湖南比邻星科技有限公司",
+      "0731-85828227"
+    ],
+    "expected_answer_keywords": [
+      "湖南比邻星科技有限公司",
+      "0731-85828227"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "湖南比邻星科技有限公司",
+          "0731-85828227"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "multi_hop"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-synonym-01",
+    "question": "轩辕网络做教育行业多久了，主攻的赛道是哪一个？",
+    "category": "synonym_rewrite",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "28",
+      "产教融合"
+    ],
+    "expected_answer_keywords": [
+      "28",
+      "产教融合"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-3",
+        "keywords": [
+          "28",
+          "产教融合"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "synonym_rewrite"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-synonym-02",
+    "question": "这家公司的知识产权里，软件著作登记量有多少？",
+    "category": "synonym_rewrite",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "登记147项"
+    ],
+    "expected_answer_keywords": [
+      "登记147项"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-5",
+        "keywords": [
+          "授权18项",
+          "登记147项",
+          "31个"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "synonym_rewrite"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-synonym-03",
+    "question": "公司在资本市场的股票识别码是什么？",
+    "category": "synonym_rewrite",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "830891"
+    ],
+    "expected_answer_keywords": [
+      "830891"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-4",
+        "keywords": [
+          "1998",
+          "2014",
+          "830891"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "synonym_rewrite"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-synonym-04",
+    "question": "业务蓝图说的‘有产懂教’实际上是怎样的驱动关系？",
+    "category": "synonym_rewrite",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "双轮驱动"
+    ],
+    "expected_answer_keywords": [
+      "双轮驱动"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-11",
+        "keywords": [
+          "双轮驱动",
+          "科教基座建设",
+          "产教融合建设及运营解决方案"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "synonym_rewrite"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-synonym-05",
+    "question": "AI中台里负责听觉和视觉等小模型能力的例子有哪些？",
+    "category": "synonym_rewrite",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "OCR",
+      "语音识别"
+    ],
+    "expected_answer_keywords": [
+      "OCR",
+      "语音识别"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-19",
+        "keywords": [
+          "deepseek",
+          "通义千问",
+          "文心一言",
+          "OCR",
+          "语音识别",
+          "文档增强解析",
+          "知识元数据"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "synonym_rewrite"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-synonym-06",
+    "question": "1+1+N模式下提供给高校的四种服务是什么？",
+    "category": "synonym_rewrite",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "人才培养服务",
+      "科学研究服务"
+    ],
+    "expected_answer_keywords": [
+      "人才培养服务",
+      "科学研究服务"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-20",
+        "keywords": [
+          "人才培养服务",
+          "师资培养服务",
+          "教学资源开发服务",
+          "科学研究服务"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "synonym_rewrite"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-synonym-07",
+    "question": "机械臂整线是用几台机器人配几套视觉系统？",
+    "category": "synonym_rewrite",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "两台协作机器人",
+      "两套视觉系统"
+    ],
+    "expected_answer_keywords": [
+      "两台协作机器人",
+      "两套视觉系统"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "两台协作机器人",
+          "两套视觉系统",
+          "2D视觉系统",
+          "深度视觉系统"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "synonym_rewrite"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-synonym-08",
+    "question": "这个机器人产品适合拿来教哪些AI和机器人课程？",
+    "category": "synonym_rewrite",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "机器视觉",
+      "大模型技术应用"
+    ],
+    "expected_answer_keywords": [
+      "机器视觉",
+      "大模型技术应用"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "Python程序设计",
+          "深度学习",
+          "机器视觉",
+          "大模型技术应用"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "synonym_rewrite"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-synonym-09",
+    "question": "机械臂的制造商及其联系电话能查到吗？",
+    "category": "synonym_rewrite",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "湖南比邻星科技有限公司",
+      "0731-85828227"
+    ],
+    "expected_answer_keywords": [
+      "湖南比邻星科技有限公司",
+      "0731-85828227"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "湖南比邻星科技有限公司",
+          "0731-85828227"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "synonym_rewrite"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-synonym-10",
+    "question": "边缘计算箱采用哪种四层技术分层？",
+    "category": "synonym_rewrite",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "端、边、云、应用"
+    ],
+    "expected_answer_keywords": [
+      "端、边、云、应用"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "端、边、云、应用",
+          "AR502H"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "synonym_rewrite"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-synonym-11",
+    "question": "实训箱里面有哪些物联网传感或识别终端？",
+    "category": "synonym_rewrite",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "智能电子秤",
+      "超高频RFID"
+    ],
+    "expected_answer_keywords": [
+      "智能电子秤",
+      "超高频RFID"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "网络摄像头",
+          "智能电子秤",
+          "三合一传感器",
+          "超高频RFID"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "synonym_rewrite"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-synonym-12",
+    "question": "产业学院采用谁领导、谁负责的治理办法？",
+    "category": "synonym_rewrite",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [
+      "理事会领导下的院长负责制"
+    ],
+    "expected_answer_keywords": [
+      "理事会领导下的院长负责制"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "理事会领导下的院长负责制",
+          "最高决策机构"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "synonym_rewrite"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-synonym-13",
+    "question": "体验中心文化建设的三句主旨口号是什么？",
+    "category": "synonym_rewrite",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [
+      "根技术筑基",
+      "师范践初心"
+    ],
+    "expected_answer_keywords": [
+      "根技术筑基",
+      "师范践初心"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+        "page_or_slide": "slide-1",
+        "keywords": [
+          "根技术筑基",
+          "产教融育人",
+          "师范践初心"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "synonym_rewrite"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-synonym-14",
+    "question": "根技术方案讲的三次重构分别指什么？",
+    "category": "synonym_rewrite",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [
+      "理论重构",
+      "软件重构"
+    ],
+    "expected_answer_keywords": [
+      "理论重构",
+      "软件重构"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+        "page_or_slide": "slide-2",
+        "keywords": [
+          "理论重构",
+          "架构重构",
+          "软件重构",
+          "香农极限"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "synonym_rewrite"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-synonym-15",
+    "question": "华为预计到2030年连接规模会达到多少？",
+    "category": "synonym_rewrite",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [
+      "2000亿"
+    ],
+    "expected_answer_keywords": [
+      "2000亿"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "华为ICT学院手册 2024-2025.pdf",
+        "page_or_slide": "page-3",
+        "keywords": [
+          "2030年",
+          "2000亿",
+          "105ZFLOPS"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "synonym_rewrite"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-negative-01",
+    "question": "以下哪一项不是轩辕网络公司的知识产权数量：18项、147项、31个，还是500项？",
+    "category": "negative_exclusion",
+    "group": "hard_eval_v1",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "500项"
+    ],
+    "expected_answer_keywords": [
+      "500项"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-5",
+        "keywords": [
+          "授权18项",
+          "登记147项",
+          "31个"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "negative_exclusion"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-negative-02",
+    "question": "以下哪项不是机械臂产品的视觉系统：2D视觉系统、深度视觉系统还是AR502H？",
+    "category": "negative_exclusion",
+    "group": "hard_eval_v1",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "AR502H"
+    ],
+    "expected_answer_keywords": [
+      "AR502H"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "两台协作机器人",
+          "两套视觉系统",
+          "2D视觉系统",
+          "深度视觉系统"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "negative_exclusion"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-negative-03",
+    "question": "以下哪一项不属于实训套件的物联设备：网络摄像头、智能电子秤、三合一传感器还是理事会？",
+    "category": "negative_exclusion",
+    "group": "hard_eval_v1",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "理事会"
+    ],
+    "expected_answer_keywords": [
+      "理事会"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "网络摄像头",
+          "智能电子秤",
+          "三合一传感器",
+          "超高频RFID"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "negative_exclusion"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-negative-04",
+    "question": "公司AI中台的小模型例子中，哪项不是OCR或语音识别：OCR、语音识别还是财务审计？",
+    "category": "negative_exclusion",
+    "group": "hard_eval_v1",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "财务审计"
+    ],
+    "expected_answer_keywords": [
+      "财务审计"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-19",
+        "keywords": [
+          "deepseek",
+          "通义千问",
+          "文心一言",
+          "OCR",
+          "语音识别",
+          "文档增强解析",
+          "知识元数据"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "negative_exclusion"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-negative-05",
+    "question": "以下哪项不是1+1+N服务：人才培养服务、师资培养服务、科学研究服务还是证券交易服务？",
+    "category": "negative_exclusion",
+    "group": "hard_eval_v1",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "证券交易服务"
+    ],
+    "expected_answer_keywords": [
+      "证券交易服务"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-20",
+        "keywords": [
+          "人才培养服务",
+          "师资培养服务",
+          "教学资源开发服务",
+          "科学研究服务"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "negative_exclusion"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-negative-06",
+    "question": "以下哪项不是机械臂适用课程：机器视觉、深度学习、大模型技术应用还是会计学？",
+    "category": "negative_exclusion",
+    "group": "hard_eval_v1",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "会计学"
+    ],
+    "expected_answer_keywords": [
+      "会计学"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "Python程序设计",
+          "深度学习",
+          "机器视觉",
+          "大模型技术应用"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "negative_exclusion"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-negative-07",
+    "question": "以下哪项不是产业学院三位一体定位中的词：根技术、人工智能、职教母机还是房地产？",
+    "category": "negative_exclusion",
+    "group": "hard_eval_v1",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [
+      "房地产"
+    ],
+    "expected_answer_keywords": [
+      "房地产"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "根技术",
+          "人工智能",
+          "职教母机",
+          "三位一体"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "negative_exclusion"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-negative-08",
+    "question": "以下哪项不是体验中心三条主线：根技术筑基、产教融育人、师范践初心还是金融投资？",
+    "category": "negative_exclusion",
+    "group": "hard_eval_v1",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [
+      "金融投资"
+    ],
+    "expected_answer_keywords": [
+      "金融投资"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+        "page_or_slide": "slide-1",
+        "keywords": [
+          "根技术筑基",
+          "产教融育人",
+          "师范践初心"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "negative_exclusion"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-negative-09",
+    "question": "以下哪项不是基础环境算力资源：通用算力资源、智能算力资源、高性能存储资源还是餐饮资源？",
+    "category": "negative_exclusion",
+    "group": "hard_eval_v1",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "餐饮资源"
+    ],
+    "expected_answer_keywords": [
+      "餐饮资源"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-18",
+        "keywords": [
+          "通用算力资源",
+          "智能算力资源",
+          "高性能存储资源",
+          "高速网络"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "negative_exclusion"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-negative-10",
+    "question": "以下哪项不是华为2030预测指标：2000亿、105ZFLOPS还是1000万亿字节？",
+    "category": "negative_exclusion",
+    "group": "hard_eval_v1",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [
+      "1000万亿字节"
+    ],
+    "expected_answer_keywords": [
+      "1000万亿字节"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "华为ICT学院手册 2024-2025.pdf",
+        "page_or_slide": "page-3",
+        "keywords": [
+          "2030年",
+          "2000亿",
+          "105ZFLOPS"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "negative_exclusion"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-negative-11",
+    "question": "以下哪项不是机械臂硬件参数：自由度、额定负载、本体重量还是年营收？",
+    "category": "negative_exclusion",
+    "group": "hard_eval_v1",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "年营收"
+    ],
+    "expected_answer_keywords": [
+      "年营收"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "自由度",
+          "6",
+          "额定负载",
+          "3kg"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "negative_exclusion"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-negative-12",
+    "question": "以下哪项不是实训套件架构层：端、边、云、应用还是董事会？",
+    "category": "negative_exclusion",
+    "group": "hard_eval_v1",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "董事会"
+    ],
+    "expected_answer_keywords": [
+      "董事会"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "端、边、云、应用",
+          "AR502H"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "negative_exclusion"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-negative-13",
+    "question": "以下哪项不是治理模式描述：理事会领导下的院长负责制、最高决策机构还是随机抽签管理？",
+    "category": "negative_exclusion",
+    "group": "hard_eval_v1",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [
+      "随机抽签管理"
+    ],
+    "expected_answer_keywords": [
+      "随机抽签管理"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "理事会领导下的院长负责制",
+          "最高决策机构"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "negative_exclusion"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-negative-14",
+    "question": "以下哪项不是根技术的三次重构：理论重构、架构重构、软件重构还是组织重构？",
+    "category": "negative_exclusion",
+    "group": "hard_eval_v1",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [
+      "组织重构"
+    ],
+    "expected_answer_keywords": [
+      "组织重构"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+        "page_or_slide": "slide-2",
+        "keywords": [
+          "理论重构",
+          "架构重构",
+          "软件重构",
+          "香农极限"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "negative_exclusion"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-negative-15",
+    "question": "以下哪项不是公司目录四部分：公司概况、标杆案例、与华为同行还是海外房地产？",
+    "category": "negative_exclusion",
+    "group": "hard_eval_v1",
+    "question_type": "enumeration",
+    "expected_question_type": "enumeration",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "海外房地产"
+    ],
+    "expected_answer_keywords": [
+      "海外房地产"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-11",
+        "keywords": [
+          "双轮驱动",
+          "科教基座建设",
+          "产教融合建设及运营解决方案"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "negative_exclusion"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-long-01",
+    "question": "通读公司介绍后，只回答第5页知识产权中的软件著作登记量。",
+    "category": "long_context_distraction",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "登记147项"
+    ],
+    "expected_answer_keywords": [
+      "登记147项"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-5",
+        "keywords": [
+          "授权18项",
+          "登记147项",
+          "31个"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "long_context_distraction"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-long-02",
+    "question": "忽略封面和目录，定位公司介绍第16页的战略定位，轩辕网络被定位为什么？",
+    "category": "long_context_distraction",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "AI+产教融合服务商"
+    ],
+    "expected_answer_keywords": [
+      "AI+产教融合服务商"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-16",
+        "keywords": [
+          "AI+产教融合服务商"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "long_context_distraction"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-long-03",
+    "question": "在基础环境长页中只提取算力资源，不要回答课程或服务内容。",
+    "category": "long_context_distraction",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "高性能存储资源"
+    ],
+    "expected_answer_keywords": [
+      "高性能存储资源"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-18",
+        "keywords": [
+          "通用算力资源",
+          "智能算力资源",
+          "高性能存储资源",
+          "高速网络"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "long_context_distraction"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-long-04",
+    "question": "在基础模型长页中只回答通用大模型列出的三个名字。",
+    "category": "long_context_distraction",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "deepseek",
+      "通义千问"
+    ],
+    "expected_answer_keywords": [
+      "deepseek",
+      "通义千问",
+      "文心一言"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-19",
+        "keywords": [
+          "deepseek",
+          "通义千问",
+          "文心一言",
+          "OCR",
+          "语音识别",
+          "文档增强解析",
+          "知识元数据"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "long_context_distraction"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-long-05",
+    "question": "公司服务页有很多合作主体，只回答1+1+N的四项服务。",
+    "category": "long_context_distraction",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "教学资源开发服务",
+      "科学研究服务"
+    ],
+    "expected_answer_keywords": [
+      "教学资源开发服务",
+      "科学研究服务"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-20",
+        "keywords": [
+          "人才培养服务",
+          "师资培养服务",
+          "教学资源开发服务",
+          "科学研究服务"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "long_context_distraction"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-long-06",
+    "question": "在机械臂产品长文档中，跳过课程目录，只回答厂家电话。",
+    "category": "long_context_distraction",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "0731-85828227"
+    ],
+    "expected_answer_keywords": [
+      "0731-85828227"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "湖南比邻星科技有限公司",
+          "0731-85828227"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "long_context_distraction"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-long-07",
+    "question": "机械臂文档包含多个实验项目，精确回答其额定负载。",
+    "category": "long_context_distraction",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "3kg"
+    ],
+    "expected_answer_keywords": [
+      "3kg"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "自由度",
+          "6",
+          "额定负载",
+          "3kg"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "long_context_distraction"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-long-08",
+    "question": "边缘套件文档包含安全须知和FAQ，只回答封面元数据发布日期。",
+    "category": "long_context_distraction",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "2025-12-08"
+    ],
+    "expected_answer_keywords": [
+      "2025-12-08"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "文档版本",
+          "01",
+          "2025-12-08"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "long_context_distraction"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-long-09",
+    "question": "边缘套件长文档中不要被设备清单干扰，只回答四层架构。",
+    "category": "long_context_distraction",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "端、边、云、应用"
+    ],
+    "expected_answer_keywords": [
+      "端、边、云、应用"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "端、边、云、应用",
+          "AR502H"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "long_context_distraction"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-long-10",
+    "question": "在产业学院方案的治理、运营、保障多段内容之后，回答最高决策机构是什么。",
+    "category": "long_context_distraction",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [
+      "最高决策机构"
+    ],
+    "expected_answer_keywords": [
+      "最高决策机构"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "理事会领导下的院长负责制",
+          "最高决策机构"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "long_context_distraction"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-long-11",
+    "question": "长篇产业学院方案只提取院长姓名，不要把副院长混进答案。",
+    "category": "long_context_distraction",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [
+      "邓文新"
+    ],
+    "expected_answer_keywords": [
+      "邓文新"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "邓文新",
+          "院长"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "long_context_distraction"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-long-12",
+    "question": "展厅PPT包含大量OCR图片页，定位第一页的三句核心定位主线。",
+    "category": "long_context_distraction",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [
+      "根技术筑基",
+      "产教融育人"
+    ],
+    "expected_answer_keywords": [
+      "根技术筑基",
+      "产教融育人",
+      "师范践初心"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+        "page_or_slide": "slide-1",
+        "keywords": [
+          "根技术筑基",
+          "产教融育人",
+          "师范践初心"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "long_context_distraction"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-long-13",
+    "question": "跳过根技术说明中的中美对比和产业链内容，只回答三次重构。",
+    "category": "long_context_distraction",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [
+      "理论重构",
+      "架构重构"
+    ],
+    "expected_answer_keywords": [
+      "理论重构",
+      "架构重构",
+      "软件重构"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+        "page_or_slide": "slide-2",
+        "keywords": [
+          "理论重构",
+          "架构重构",
+          "软件重构",
+          "香农极限"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "long_context_distraction"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-long-14",
+    "question": "在合作汇报的多页方案之后，回答第一阶段建设的四类内容。",
+    "category": "long_context_distraction",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学-根技术人才培养合作汇报-0.pptx"
+    ],
+    "expected_section_keywords": [
+      "根技术支撑平台",
+      "师资服务"
+    ],
+    "expected_answer_keywords": [
+      "根技术支撑平台",
+      "师资服务"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+        "page_or_slide": "slide-2",
+        "keywords": [
+          "产教融合实践基地",
+          "根技术课程体系",
+          "根技术支撑平台",
+          "师资服务"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "long_context_distraction"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-long-15",
+    "question": "在ICT手册的长篇趋势描述中，只回答2030年全球联接总数。",
+    "category": "long_context_distraction",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "华为ICT学院手册 2024-2025.pdf"
+    ],
+    "expected_section_keywords": [
+      "2000亿"
+    ],
+    "expected_answer_keywords": [
+      "2000亿"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "华为ICT学院手册 2024-2025.pdf",
+        "page_or_slide": "page-3",
+        "keywords": [
+          "2030年",
+          "2000亿",
+          "105ZFLOPS"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "long_context_distraction"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-ocr-01",
+    "question": "OCR页中提到华为根技术通过哪三次重构突围？",
+    "category": "ocr_noise_page",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [
+      "理论重构",
+      "架构重构"
+    ],
+    "expected_answer_keywords": [
+      "理论重构",
+      "架构重构",
+      "软件重构"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+        "page_or_slide": "slide-2",
+        "keywords": [
+          "理论重构",
+          "架构重构",
+          "软件重构",
+          "香农极限"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "ocr_noise_page"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-ocr-02",
+    "question": "OCR内容里的核心定位三句话是什么？",
+    "category": "ocr_noise_page",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [
+      "根技术筑基",
+      "产教融育人"
+    ],
+    "expected_answer_keywords": [
+      "根技术筑基",
+      "产教融育人",
+      "师范践初心"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+        "page_or_slide": "slide-1",
+        "keywords": [
+          "根技术筑基",
+          "产教融育人",
+          "师范践初心"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "ocr_noise_page"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-ocr-03",
+    "question": "OCR基础环境页列出了哪几种算力或存储资源？",
+    "category": "ocr_noise_page",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "通用算力资源",
+      "高性能存储资源"
+    ],
+    "expected_answer_keywords": [
+      "通用算力资源",
+      "高性能存储资源"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-18",
+        "keywords": [
+          "通用算力资源",
+          "智能算力资源",
+          "高性能存储资源",
+          "高速网络"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "ocr_noise_page"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-ocr-04",
+    "question": "OCR中台页里通用大模型有哪些名称？",
+    "category": "ocr_noise_page",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "deepseek",
+      "通义千问"
+    ],
+    "expected_answer_keywords": [
+      "deepseek",
+      "通义千问",
+      "文心一言"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-19",
+        "keywords": [
+          "deepseek",
+          "通义千问",
+          "文心一言",
+          "OCR",
+          "语音识别",
+          "文档增强解析",
+          "知识元数据"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "ocr_noise_page"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-ocr-05",
+    "question": "OCR页里小模型对应哪些识别能力？",
+    "category": "ocr_noise_page",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "OCR",
+      "语音识别"
+    ],
+    "expected_answer_keywords": [
+      "OCR",
+      "语音识别"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-19",
+        "keywords": [
+          "deepseek",
+          "通义千问",
+          "文心一言",
+          "OCR",
+          "语音识别",
+          "文档增强解析",
+          "知识元数据"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "ocr_noise_page"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-ocr-06",
+    "question": "OCR服务页中的四项服务是什么？",
+    "category": "ocr_noise_page",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "人才培养服务",
+      "师资培养服务"
+    ],
+    "expected_answer_keywords": [
+      "人才培养服务",
+      "师资培养服务",
+      "教学资源开发服务",
+      "科学研究服务"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-20",
+        "keywords": [
+          "人才培养服务",
+          "师资培养服务",
+          "教学资源开发服务",
+          "科学研究服务"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "ocr_noise_page"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-ocr-07",
+    "question": "OCR图片识别到的公司成立年份和挂牌年份是什么？",
+    "category": "ocr_noise_page",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "1998",
+      "2014"
+    ],
+    "expected_answer_keywords": [
+      "1998",
+      "2014"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-4",
+        "keywords": [
+          "1998",
+          "2014",
+          "830891"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "ocr_noise_page"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-ocr-08",
+    "question": "OCR页识别到的公司证券代码是什么？",
+    "category": "ocr_noise_page",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "【公司介绍】轩辕网络公司介绍202606.pptx"
+    ],
+    "expected_section_keywords": [
+      "830891"
+    ],
+    "expected_answer_keywords": [
+      "830891"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+        "page_or_slide": "slide-4",
+        "keywords": [
+          "1998",
+          "2014",
+          "830891"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "ocr_noise_page"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-ocr-09",
+    "question": "OCR机械臂参数表的自由度和额定负载是多少？",
+    "category": "ocr_noise_page",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "6",
+      "3kg"
+    ],
+    "expected_answer_keywords": [
+      "6",
+      "3kg"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "自由度",
+          "6",
+          "额定负载",
+          "3kg"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "ocr_noise_page"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-ocr-10",
+    "question": "OCR机械臂页显示配置了几台机器人？",
+    "category": "ocr_noise_page",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "协作式机械臂（产品介绍）4-5B机器人大模型.docx"
+    ],
+    "expected_section_keywords": [
+      "两台协作机器人"
+    ],
+    "expected_answer_keywords": [
+      "两台协作机器人"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "两台协作机器人",
+          "两套视觉系统",
+          "2D视觉系统",
+          "深度视觉系统"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "ocr_noise_page"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-ocr-11",
+    "question": "OCR实训套件页中的核心网关型号是什么？",
+    "category": "ocr_noise_page",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "AR502H"
+    ],
+    "expected_answer_keywords": [
+      "AR502H"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "端、边、云、应用",
+          "AR502H"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "ocr_noise_page"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-ocr-12",
+    "question": "OCR实训套件页中的设备包含RFID还是普通打印机？",
+    "category": "ocr_noise_page",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "智能物联边缘计算实训套件用户手册V1.01 -20251.docx"
+    ],
+    "expected_section_keywords": [
+      "超高频RFID"
+    ],
+    "expected_answer_keywords": [
+      "超高频RFID"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "网络摄像头",
+          "智能电子秤",
+          "三合一传感器",
+          "超高频RFID"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "ocr_noise_page"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-ocr-13",
+    "question": "OCR产业学院页的治理模式是什么？",
+    "category": "ocr_noise_page",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx"
+    ],
+    "expected_section_keywords": [
+      "理事会领导下的院长负责制"
+    ],
+    "expected_answer_keywords": [
+      "理事会领导下的院长负责制"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+        "page_or_slide": "docx",
+        "keywords": [
+          "理事会领导下的院长负责制",
+          "最高决策机构"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "ocr_noise_page"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-ocr-14",
+    "question": "OCR体验中心标题页的三条主线是什么？",
+    "category": "ocr_noise_page",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "根技术体验中心展厅内涵建设v2-cx.pptx"
+    ],
+    "expected_section_keywords": [
+      "根技术筑基",
+      "师范践初心"
+    ],
+    "expected_answer_keywords": [
+      "根技术筑基",
+      "师范践初心"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+        "page_or_slide": "slide-1",
+        "keywords": [
+          "根技术筑基",
+          "产教融育人",
+          "师范践初心"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "ocr_noise_page"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-ocr-15",
+    "question": "OCR合作汇报页记录的openEuler规模是多少？",
+    "category": "ocr_noise_page",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [
+      "广东技术师范大学-根技术人才培养合作汇报-0.pptx"
+    ],
+    "expected_section_keywords": [
+      "350万+"
+    ],
+    "expected_answer_keywords": [
+      "350万+"
+    ],
+    "forbidden_answer_keywords": [],
+    "expected_grounded": true,
+    "expected_directness": true,
+    "expected_insufficient": false,
+    "expected_result_mode": "must_answer",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [
+      {
+        "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+        "page_or_slide": "slide-11",
+        "keywords": [
+          "openEuler",
+          "350万+"
+        ]
+      }
+    ],
+    "difficulty_tags": [
+      "ocr_noise_page"
+    ],
+    "scoring_notes": "答案必须同时满足文档、页/幻灯片与关键词证据。",
+    "max_answer_length": 180
+  },
+  {
+    "id": "hard-noanswer-01",
+    "question": "轩辕网络目前有多少名正式员工？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "员工人数"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-02",
+    "question": "轩辕网络2025年度营业收入是多少？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "营收"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-03",
+    "question": "轩辕网络股票当前价格是多少？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "股价"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-04",
+    "question": "公司董事长的手机号码是什么？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "手机号码"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-05",
+    "question": "公司是否拥有特斯拉合作资质？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "特斯拉"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-06",
+    "question": "公司是否销售量子计算机？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "量子计算产品"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-07",
+    "question": "公司是否推出过GPT-4产品？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "GPT-4"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-08",
+    "question": "公司在2030年要实现多少亿元营收？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "2030规划"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-09",
+    "question": "边缘实训套件的官方售价是多少元？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "实训套件价格"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-10",
+    "question": "协作机械臂整套产品的销售价格是多少？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "机械臂价格"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-11",
+    "question": "机械臂支持几轴力控精度，文档是否给出？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "力控精度"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-12",
+    "question": "实训套件保修期是几年？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "保修期"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-13",
+    "question": "实训套件WiFi密码是什么？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "WiFi密码"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-14",
+    "question": "轩辕星模型的参数量是多少B？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "参数量"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-15",
+    "question": "公司AI中台的日均并发量是多少？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "并发量"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-16",
+    "question": "产业学院最终会有多少名学生？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "学生人数"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-17",
+    "question": "产业学院的确定性年利润目标是多少？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "利润目标"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-18",
+    "question": "邓文新院长的任期到哪一年？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "任期"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-19",
+    "question": "AIPL实验室的具体经费预算是多少？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "经费预算"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-20",
+    "question": "体验中心每天接待多少名参观者？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "接待人数"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-21",
+    "question": "体验中心的建筑面积是多少平方米？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "建筑面积"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-22",
+    "question": "华为ICT学院2025年新增了多少所高校？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "新增高校"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-23",
+    "question": "华为ICT学院认证考试通过率是多少？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "通过率"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-24",
+    "question": "openEuler在该项目中的准确市场占有率是多少？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "市场占有率"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  },
+  {
+    "id": "hard-noanswer-25",
+    "question": "机械臂的最大重复定位精度是多少毫米？",
+    "category": "no_answer",
+    "group": "hard_eval_v1",
+    "question_type": "factoid",
+    "expected_question_type": "factoid",
+    "expected_files": [],
+    "expected_section_keywords": [],
+    "expected_answer_keywords": [],
+    "forbidden_answer_keywords": [
+      "重复定位精度"
+    ],
+    "expected_grounded": false,
+    "expected_directness": true,
+    "expected_insufficient": true,
+    "expected_result_mode": "must_block",
+    "blocking_is_correct_if_any": "none",
+    "expected_evidence": [],
+    "difficulty_tags": [
+      "no_answer",
+      "no_answer"
+    ],
+    "scoring_notes": "知识库中不存在该具体事实，必须拒答，不得用相近主题证据补全。",
+    "max_answer_length": 100
+  }
+]
