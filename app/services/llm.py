@@ -881,9 +881,15 @@ class LlmService:
                     if "Unitree G1" in normalized and any(marker in normalized for marker in ("总自由度", "自由度")):
                         score += 2.4
                 candidates.append((score, normalized))
+        # Only accept sentences with real relevance: a rank bonus alone (1/rank)
+        # must not qualify. Require either a focus-term match (score >= 1.8 from
+        # the term branch) or a token-overlap floor — otherwise unrelated slides
+        # get selected and release negative/factoid questions.
+        min_score = 1.2 if focus_terms else 0.8
+        filtered = [(score, sentence) for score, sentence in candidates if score >= min_score]
         seen: set[str] = set()
         selected: list[str] = []
-        for _, sentence in sorted(candidates, key=lambda item: item[0], reverse=True):
+        for _, sentence in sorted(filtered, key=lambda item: item[0], reverse=True):
             if sentence in seen:
                 continue
             seen.add(sentence)
@@ -1575,9 +1581,46 @@ class LlmService:
     ) -> bool:
         if not citations:
             return False
+        # Yes/no questions ("…是否…") need the specific claim present in the
+        # evidence. Generic subject overlap (e.g. "华为ICT学院" alone when asking
+        # about a degree right) is not enough — the answer layer must not
+        # re-release what retrieval already blocked.
+        yes_no_markers = ("是否", "能不能", "有没有", "可不可以", "支持不支持", "是否提供", "是否支持", "是否包含")
+        if any(marker in question for marker in yes_no_markers) and analysis.focus_terms:
+            specific_terms = [term for term in analysis.focus_terms if len(term) >= 4]
+            combined_top6 = " ".join(hit.plain_text for hit in citations[:6]).lower()
+            if specific_terms:
+                for term in specific_terms[:2]:
+                    tokens = [tok for tok in tokenize(term) if len(tok) >= 2]
+                    if tokens and all(tok in combined_top6 for tok in tokens):
+                        return True
+                return False
         special_answer, _ = self._special_case_answer(question, analysis.question_type, citations)
         if special_answer:
             return True
+        # General guard: if NONE of the question's focus terms appears in the
+        # evidence, the hits are related-but-different content (e.g. a culture
+        # slide released for a lighting-supplier question). This must be checked
+        # BEFORE the topic special branches below, which otherwise bypass it.
+        # A fragment counts as present only if a MAJORITY of its jieba tokens
+        # appear — two generic tokens (智能/系统) out of four do not qualify.
+        combined_top6 = " ".join(hit.plain_text for hit in citations[:6]).lower()
+        if analysis.focus_terms:
+            focus_present = []
+            for term in analysis.focus_terms:
+                if len(term) < 2:
+                    continue
+                if term.lower() in combined_top6:
+                    focus_present.append(term)
+                    continue
+                tokens = [tok for tok in tokenize(term) if len(tok) >= 2]
+                if tokens:
+                    present = sum(1 for tok in tokens if tok in combined_top6)
+                    need = max(2, -(-len(tokens) * 3 // 5))  # ~60% of tokens, min 2
+                    if present >= need:
+                        focus_present.append(term)
+            if not focus_present:
+                return False
 
         if analysis.question_type == "procedure":
             short_answer, _ = self._procedure_short_answer(question)
@@ -1706,13 +1749,9 @@ class LlmService:
                     ratio = matched / max(len(question_tokens), 1)
                     if ratio >= 0.45 and matched >= 2:
                         return True
-                # If combined text is substantial (>120 chars has enough signal)
-                if len(combined_top6) >= 200:
-                    return True
-                # As long as there ARE citations with non-trivial content,
-                # allow the compose/curated FAQ path to attempt an answer
-                if any(len(hit.plain_text) >= 60 for hit in citations):
-                    return True
+                # Do not treat a long bundle of unrelated chunks as evidence:
+                # length alone cannot ground a factoid/negative question.
+                # The caller must have a focus-term or token match.
             return False
 
         if analysis.question_type == "enumeration":
@@ -2587,11 +2626,13 @@ class LlmService:
             inference_note = "命中证据疑似 OCR 噪声，已回退为证据不足。"
             final_grounded = False
 
-        if final_grounded and any(hint in question for hint in YES_NO_HINTS) and answer.startswith("是"):
-            # Guard against false "是" on yes/no questions: extract the core
+        if final_grounded and any(hint in question for hint in YES_NO_HINTS):
+            # Guard against false yes/no answers: extract the core
             # subject (excluding yes/no hints and common verbs) and verify it
             # appears in grounded_answer. If the subject is missing, the
-            # citation is about a different topic — block the answer.
+            # citation is about a different topic — block the answer
+            # regardless of whether the reply starts with "是" or is a raw
+            # extractive snippet that dodges the question.
             subject_text = re.sub(
                 r"(是否|能否|有没有|是不是|可否|华为|ICT|学院|提供|支持|包括|包含|有哪些|是什么|有哪些|的|吗|呢|？|\?)",
                 " ",

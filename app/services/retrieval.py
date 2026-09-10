@@ -564,6 +564,36 @@ class RetrievalService:
         strict_tokens = [token for token in strict_tokens if token not in source_format_tokens]
         if strict_tokens and any(token not in combined_text for token in strict_tokens):
             return False
+        # Yes/no questions ("…是否提供/支持…", "有没有…", "能不能…") require the
+        # SPECIFIC subject/predicate to appear in the evidence — related-but-different
+        # content (e.g. nearby course modules when asking about a degree right)
+        # must not ground a yes/no answer. The longest focus terms carry the
+        # specific claim (e.g. "提供本科学位授予权", "支持水下作业"); generic
+        # nouns like 华为/学院/实训套件 alone are not enough.
+        yes_no_markers = ("是否", "能不能", "有没有", "可不可以", "支持不支持", "是否提供", "是否支持", "是否包含")
+        if any(marker in question for marker in yes_no_markers) and focus_terms:
+            subject_terms = [term.lower() for term in focus_terms if len(term) >= 2]
+            specific_terms = [term for term in subject_terms if len(term) >= 4]
+            if specific_terms:
+                # The specific claim (e.g. "提供本科学位授予权") must be fully
+                # covered by its jieba tokens — a single common token (提供/学院)
+                # must not satisfy it.
+                present = False
+                for term in specific_terms[:2]:
+                    tokens = [tok for tok in tokenize(term) if len(tok) >= 2]
+                    if tokens and all(tok in combined_text for tok in tokens):
+                        present = True
+                        break
+                if not present:
+                    return False
+            elif len(subject_terms) >= 2:
+                present = sum(
+                    1
+                    for term in subject_terms
+                    if term in combined_text or any(tok in combined_text for tok in tokenize(term) if len(tok) >= 2)
+                )
+                if present < max(2, len(subject_terms) - 1):
+                    return False
         grounding_phrases = list(dict.fromkeys([*rule_phrases, *alias_phrases]))
         if grounding_phrases:
             covered = sum(1 for phrase in grounding_phrases if phrase in combined_text_top5)
