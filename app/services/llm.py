@@ -17,9 +17,12 @@ logger = logging.getLogger(__name__)
 FOLLOWUP_HINTS = ("它", "这个", "上述", "上面", "该", "那", "其", "对应", "接口", "参数")
 ENUMERATION_HINTS = ("哪些", "包括", "分别", "有哪些", "什么类型", "什么区域", "哪些功能", "哪几", "哪四个")
 PROCEDURE_HINTS = ("如何", "怎么", "步骤", "流程", "方式", "方法", "操作", "查看", "检查", "处理")
+# Summary-type questions ask for a whole-topic synthesis across multiple pages —
+# they are answered by aggregating several chunks, not by one extracted sentence.
+SUMMARY_HINTS = ("概括", "总结", "综述", "整体介绍", "简要介绍", "主要内容", "主要讲了", "都讲了什么", "是如何布局", "整体布局")
 YES_NO_HINTS = ("是否", "能否", "有没有", "是不是", "可否")
 SOURCE_QUERY_HINTS = ("哪份资料", "哪份文档", "哪份材料", "哪个文件", "哪一页", "哪页", "哪一章", "哪一节", "哪里提到")
-QUESTION_TYPE_VALUES: set[str] = {"factoid", "enumeration", "procedure", "followup", "out_of_scope", "unknown"}
+QUESTION_TYPE_VALUES: set[str] = {"factoid", "enumeration", "procedure", "followup", "summary", "out_of_scope", "unknown"}
 QUALITY_ISSUES = {
     "direct",
     "verbose",
@@ -607,6 +610,8 @@ class LlmService:
         has_history = bool(history_messages)
         if has_history and (any(token in text for token in FOLLOWUP_HINTS) or len(text) <= 14):
             return "followup"
+        if any(token in text for token in SUMMARY_HINTS):
+            return "summary"
         if any(token in text for token in PROCEDURE_HINTS):
             return "procedure"
         if any(token in text for token in ("哪四个", "四个支柱", "支柱领域")):
@@ -1559,7 +1564,32 @@ class LlmService:
             clean_sentences = sentences  # keep all if everything is garbled
 
         grounded_answer = " ".join(self._clean_extracted_sentence(sentence) for sentence in clean_sentences[:2])
-        if question_type == "enumeration":
+        if question_type == "summary":
+            # Summary path: aggregate evidence from multiple chunks (multi-page
+            # synthesis) rather than one extracted sentence. Compose a compact
+            # overview from the top distinct chunks; cap length for directness.
+            summary_parts: list[str] = []
+            seen_pages: set[str] = set()
+            for hit in citations[:6]:
+                page_key = f"{hit.file_name}:{hit.page_or_slide}"
+                if page_key in seen_pages:
+                    continue
+                seen_pages.add(page_key)
+                sentence = self._clean_extracted_sentence(
+                    self._select_support_sentences(question, "factoid", focus_terms, [hit])[0]
+                    if self._select_support_sentences(question, "factoid", focus_terms, [hit])
+                    else hit.plain_text
+                )
+                if sentence and not self._looks_like_garbled_ocr(sentence):
+                    summary_parts.append(sentence)
+                if len(summary_parts) >= 3:
+                    break
+            if summary_parts:
+                answer = "；".join(part.rstrip("。 ") for part in summary_parts[:3]) + "。"
+                grounded_answer = " ".join(summary_parts)
+                return answer, grounded_answer
+            answer = self._enumeration_answer(clean_sentences)
+        elif question_type == "enumeration":
             answer = self._enumeration_answer(clean_sentences)
         elif question_type == "procedure":
             short_answer, short_grounded = self._procedure_short_answer(question)

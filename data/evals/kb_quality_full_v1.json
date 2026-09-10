@@ -1869,8 +1869,8 @@
     ],
     "expected_section_keywords": [],
     "expected_answer_keywords": [
-      "文化",
-      "体验"
+      "建设思路",
+      "凸显"
     ],
     "forbidden_answer_keywords": [],
     "expected_grounded": true,
@@ -1879,7 +1879,7 @@
     "expected_result_mode": "must_answer",
     "blocking_is_correct_if_any": "none",
     "required_before_freeze": "no",
-    "scoring_notes": "摘要类泛化题：现有系统摘要类0可答，作为阶段3的目标验证题（基线应无法答全）。",
+    "scoring_notes": "摘要类泛化题：验证多 chunk 聚合生成路径；期望答案概括展厅建设思路要点（核心标语/师范育人/分区布局任一维度）。",
     "max_answer_length": 300
   },
   {

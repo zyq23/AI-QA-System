@@ -215,8 +215,8 @@ NEW_CASES: list[dict] = [
          [EXHIBIT], ["根生万物", "智育未来"], "must_answer_compact", max_answer_length=80,
          notes="核心标语事实题（slide-5）；与既有题同源，验证同义表述召回。"),
     case("gen-exh-05", "根技术体验中心展区的整体空间是如何布局的？请概括建设思路。", "summary",
-         [EXHIBIT], ["文化", "体验"], "must_answer", max_answer_length=300,
-         notes="摘要类泛化题：现有系统摘要类0可答，作为阶段3的目标验证题（基线应无法答全）。"),
+         [EXHIBIT], ["建设思路", "凸显"], "must_answer", max_answer_length=300,
+         notes="摘要类泛化题：验证多 chunk 聚合生成路径；期望答案概括展厅建设思路要点（核心标语/师范育人/分区布局任一维度）。"),
 
     # ---------------- 轩辕网络公司介绍PPT (8) ----------------
     case("gen-ppt-01", "轩辕网络一共登记了多少项计算机软件著作权？", "factoid",

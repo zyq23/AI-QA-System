@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from typing import Any, Literal
 
 
-QuestionType = Literal["factoid", "enumeration", "procedure", "followup", "out_of_scope", "unknown"]
+QuestionType = Literal["factoid", "enumeration", "procedure", "followup", "summary", "out_of_scope", "unknown"]
 
 
 @dataclass(slots=True)
