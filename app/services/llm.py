@@ -404,6 +404,31 @@ class LlmService:
     def _is_quantity_question(question: str) -> bool:
         return any(token in question for token in ("多久", "多少", "几次", "频率", "多久召开"))
 
+    @staticmethod
+    def _is_generic_term(term: str) -> bool:
+        """Generic nouns that appear across many topics; they cannot serve as a
+        subject-claim consistency check (e.g. 展厅/系统/智能/学院/公司/技术)."""
+        normalized = term.strip().lower()
+        if len(normalized) < 2:
+            return True
+        generic_markers = (
+            "系统", "智能", "展厅", "学院", "公司", "技术", "平台", "设备",
+            "场景", "方案", "服务", "业务", "产业", "中心", "管理", "建设",
+            "是否", "支持", "提供", "包含", "采用", "属于", "作为", "进行",
+            "有哪些", "是什么", "怎么样", "多少", "哪家", "如何", "怎么",
+            "连接", "套餐", "万元", "总额", "相关", "内容", "一共", "哪些",
+        )
+        if len(normalized) <= 4:
+            # Short terms are generic only when they actually contain a marker.
+            return any(marker in normalized for marker in generic_markers)
+        # Longer terms are substantive when they carry at least one
+        # domain-specific token beyond the generic stop markers.
+        remainder = normalized
+        for marker in sorted(generic_markers, key=len, reverse=True):
+            remainder = remainder.replace(marker, " ")
+        remainder_tokens = [t for t in remainder.split() if len(t) >= 2]
+        return not remainder_tokens
+
     def _answer_matches_focus(self, answer: str, answer_focus: str, focus_terms: list[str], question: str) -> bool:
         normalized_answer = self._normalize_text(answer).lower()
         if not normalized_answer:
@@ -2523,6 +2548,44 @@ class LlmService:
             and not self._signals_insufficient_text(draft.inference_note)
             and not self._signals_insufficient_text(review.revised_inference_note)
         )
+        # Subject-claim consistency: the answer must share substantive content
+        # with the question's specific terms (the longest focus terms). A draft
+        # whose evidence covers only generic tokens (展厅/智能/系统) is answering
+        # a different question — release it as insufficient instead.
+        # Exempted: quantity/时间 questions (answers are numbers/dates rarely
+        # echoing the claim core) AND questions whose answer IS a proper entity
+        # name that legitimately differs from the claim (e.g. 供应商/名称/哪家公司
+        # — the answer "科学城产业学院" is the sought entity, not a mismatch).
+        is_entity_answer = any(token in question for token in ("供应商", "名称", "哪家公司", "叫什么", "简称", "代码"))
+        if (
+            final_grounded
+            and analysis.question_type in {"factoid", "followup"}
+            and not self._is_quantity_question(question)
+            and not is_entity_answer
+        ):
+            substantive_terms = [
+                term
+                for term in analysis.focus_terms
+                if len(term) >= 4 and not self._is_generic_term(term)
+            ]
+            if substantive_terms:
+                answer_lower = f"{answer}\n{grounded_answer}".lower()
+                covered = False
+                for term in substantive_terms[:2]:
+                    # The claim core is the longest jieba token that is not a
+                    # generic marker (e.g. 年度预算 in "产业学院的年度预算总").
+                    tokens = [tok for tok in tokenize(term) if len(tok) >= 2]
+                    core_tokens = [tok for tok in tokens if not self._is_generic_term(tok)]
+                    core_tokens = sorted(core_tokens, key=len, reverse=True)
+                    if core_tokens and core_tokens[0] in answer_lower:
+                        covered = True
+                        break
+                    if not core_tokens and tokens and all(tok in answer_lower for tok in tokens):
+                        covered = True
+                        break
+                if not covered:
+                    final_grounded = False
+                    inference_note = "答案与问题具体主张不一致（证据仅覆盖泛化词），已回退为证据不足。"
         if final_grounded and self._is_foundation_capability_enumeration_question(question):
             if self._foundation_capability_coverage_missing(citations):
                 final_grounded = False
