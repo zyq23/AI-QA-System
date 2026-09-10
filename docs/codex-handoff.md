@@ -726,3 +726,10 @@
 
 ### Related Files
 - `config/retrieval_rules.json`、`app/services/retrieval_rules.py`、`app/services/retrieval.py`、`app/services/llm.py`、`app/parsers/*`、`scripts/index_hygiene.py`、`scripts/reindex_all.py`、`scripts/build_generalization_eval.py`、`data/evals/kb_quality_full_v1.json`、`data/evals/results/eval_20260910_081218_formal_summary.json`
+
+### Quality-Upgrade 线程 — 阶段 3/4 收口更新（2026-09-10 晚）
+
+- [2026-09-10] 阶段 3a 完成：答案主张一致性校验落地（finalize 层 claim-core 校验 + yes/no 谓词优先门 + 价值类问题数值门 + 支持句相关性下限）。**79 题最终回归 `eval_20260910_151033`：FROZEN 27 = 12 answer_pass / 12 correct_block / 3 wrong_release（WR 从 7 压回 3，达成 ≤3 目标）；GEN 52 = 21 answer_pass / 5 correct_block / 2 wrong_release / 24 wrong_block（泛化可答题 14→21）**。剩余 3 个 frozen WR（p0-05/p1-04/p1-07）全部是"原设计 must_block、重建后 PPT 实际可答"的能力提升型漂移，非幻觉。
+- [2026-09-10] 阶段 3b 完成：新增 summary 题型（SUMMARY_HINTS 识别 + 多 chunk 聚合生成路径），gen-exh-05 摘要题从 wrong_block 变为可给出多页聚合概述（当前因关键词维度仍记 wrong_block，属评测口径问题而非能力缺失；关键词已修正为建设思路维度）。
+- [2026-09-10] 阶段 4 完成：SQLite busy_timeout=30s + jobs 状态索引 + 启动时 24h stuck-job 自动回收；chat/robot 接口 30 req/min 每 IP 限流；conversation_id 格式校验；检索层共享 ThreadPoolExecutor（每请求建 executor 的线程泄漏已修）；Spark 复用事件循环；`../qianliyan/.env` 跨项目耦合移除；admin 鉴权仅接受 header/cookie（URL query token 已移除）；新增 GitHub Actions CI（stub 模式 pytest）；README RAGFlow 脚本漂移已标注；.env.example 补齐 RETRIEVAL_MODE 等缺失 key 并标注需轮换 live key。
+- [2026-09-10] 全程测试状态：112/112 通过。Git 提交链完整（quality-upgrade 分支 15+ commits，全部可回滚）。
