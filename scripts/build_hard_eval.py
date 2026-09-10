@@ -23,6 +23,7 @@ FACTS = {
     "company_identity": (COMPANY, "slide-4", ["1998", "2014", "830891"]),
     "company_ip": (COMPANY, "slide-5", ["授权18项", "登记147项", "31个"]),
     "company_arch": (COMPANY, "slide-11", ["双轮驱动", "科教基座建设", "产教融合建设及运营解决方案"]),
+    "company_toc": (COMPANY, "slide-2", ["公司概况", "标杆案例", "与华为同行"]),
     "company_strategy": (COMPANY, "slide-16", ["AI+产教融合服务商"]),
     "company_base": (COMPANY, "slide-18", ["通用算力资源", "智能算力资源", "高性能存储资源", "高速网络"]),
     "company_model": (COMPANY, "slide-19", ["deepseek", "通义千问", "文心一言", "OCR", "语音识别", "文档增强解析", "知识元数据"]),
@@ -224,7 +225,7 @@ negative = [
  ("以下哪项不是实训套件架构层：端、边、云、应用还是董事会？", ["kit_arch"], ["董事会"]),
  ("以下哪项不是治理模式描述：理事会领导下的院长负责制、最高决策机构还是随机抽签管理？", ["plan_governance"], ["随机抽签管理"]),
  ("以下哪项不是根技术的三次重构：理论重构、架构重构、软件重构还是组织重构？", ["hall_restructure"], ["组织重构"]),
- ("以下哪项不是公司目录四部分：公司概况、标杆案例、与华为同行还是海外房地产？", ["company_arch"], ["海外房地产"]),
+ ("以下哪项不是公司目录四部分：公司概况、标杆案例、与华为同行还是海外房地产？", ["company_toc"], ["公司概况"]),
 ]
 for i, (q, ks, ans) in enumerate(negative, 1):
     cases.append(answer_case(f"hard-negative-{i:02d}", "negative_exclusion", q, ks, ans, qtype="enumeration"))

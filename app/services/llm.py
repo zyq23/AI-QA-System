@@ -159,12 +159,18 @@ class LlmService:
     def _generate_text(self, messages: list[dict[str, str]], *, temperature: float, max_tokens: int) -> str:
         if self._is_spark():
             return self.spark_client.generate(messages, temperature=temperature, max_tokens=max_tokens)
-        response = self._client_instance().chat.completions.create(
-            model=self.model,
-            temperature=temperature,
-            max_tokens=max_tokens,
-            messages=messages,
-        )
+        kwargs: dict[str, object] = {
+            "model": self.model,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+            "messages": messages,
+        }
+        # Local Ollama backends (e.g. qwen2.5) cannot reliably emit the strict
+        # JSON the pipeline parses; the native structured-output mode keeps the
+        # draft/review payloads parseable without an extra format-validation call.
+        if self.base_url and "11434" in self.base_url:
+            kwargs["response_format"] = {"type": "json_object"}
+        response = self._client_instance().chat.completions.create(**kwargs)
         return (response.choices[0].message.content or "").strip()
 
     @staticmethod

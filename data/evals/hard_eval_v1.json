@@ -3208,10 +3208,10 @@
       "【公司介绍】轩辕网络公司介绍202606.pptx"
     ],
     "expected_section_keywords": [
-      "海外房地产"
+      "公司概况"
     ],
     "expected_answer_keywords": [
-      "海外房地产"
+      "公司概况"
     ],
     "forbidden_answer_keywords": [],
     "expected_grounded": true,
@@ -3222,11 +3222,11 @@
     "expected_evidence": [
       {
         "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
-        "page_or_slide": "slide-11",
+        "page_or_slide": "slide-2",
         "keywords": [
-          "双轮驱动",
-          "科教基座建设",
-          "产教融合建设及运营解决方案"
+          "公司概况",
+          "标杆案例",
+          "与华为同行"
         ]
       }
     ],
