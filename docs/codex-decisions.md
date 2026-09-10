@@ -1279,3 +1279,43 @@
 
 ### Revisit Trigger
 - 阶段 3 完成或新增重大检索/答案改动时
+
+---
+
+## D-036：反放行闸门与摘要题型（2026-09-10 接受）
+
+### Decision
+- 在 finalize 层建立四类通用一致性守卫：subject-claim 校验（claim-core token）、yes/no 谓词优先门（谓词非主体单独即可通过）、价值类问题数值门（question echo / 无数值 → 阻塞）、支持句相关性下限（rank 裸分不足以上榜）
+- 新增 summary 题型：SUMMARY_HINTS 识别 + 多 chunk 聚合生成路径（多页综合而非单句抽取）
+
+### Reasons
+- 去硬编码后 must_block 把握度下降是主要回退项；以上守卫是通用机制而非题面特判，泛化到新语料
+- 摘要类 0 可答是阶段限制（D-035），聚合路径补齐该能力缺口
+
+### Impact
+- 最终回归：FROZEN 12/12/3（WR ≤3 达标），GEN 21 answer_pass（泛化可答 14→21，+50%）
+- 3 个残留 frozen WR 为"原设计阻塞题现可真实作答"的能力提升型漂移，建议后续评审将其 expected_result_mode 改为 must_answer（属评测集更新而非系统缺陷）
+
+### Revisit Trigger
+- 新语料接入或守卫误杀率上升时
+
+---
+
+## D-037：安全与运行卫生基线（2026-09-10 接受）
+
+### Decision
+- admin 鉴权仅接受 X-Admin-Token header / 签名 cookie（URL query token 移除）
+- chat/robot 接口每 IP 30 req/min 进程内限流；conversation_id 增加格式校验
+- SQLite busy_timeout=30s + WAL 索引优化 + 启动 24h stuck-job 自动回收
+- 移除 `../qianliyan/.env` 跨项目耦合；`.env.example` 补齐；CI（GitHub Actions stub pytest）
+
+### Reasons
+- URL token 泄漏访问日志；无鉴权付费 LLM 接口存在滥用面；stuck job 污染 latest-eval 查询
+- 数据库锁错误在 ingestion 并发写入下可复现
+
+### Impact
+- 对外部署前仍需轮换 .env 中的 live API key（已标注）
+- RAGFlow 现象观察仍受 D-034 约束
+
+### Revisit Trigger
+- 部署形态变化（多进程/多机）时限流与回收策略需重新评估
