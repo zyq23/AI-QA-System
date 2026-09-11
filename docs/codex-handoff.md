@@ -867,3 +867,48 @@
 2. 复调产品属性 (产品/模型家族) 的 value patterns：当前 hard-cross-02、04/05/06/07/08 仍因属性抽取不匹配而 wrong_release。
    - cross_doc 问题：产业学院/轩辕业务/体验中心 等主体的 "两条主线/三条文化主线" 变体，slide-11/20 文本中对应的 value 尚未被 pattern 抓到。
 3. 进入 Agent 稳定化阶段：Agent 多轮推理是否仍触发 matrix gate 产生 half-answer？
+
+---
+
+## 2026-09-12 收口：多轮加固后的最终实测数字（诚实记录）
+
+### 评测命令（全部本机 Ollama qwen2.5:14b，RETRIEVAL_BACKEND=local，EVAL_API_BASE_URL= 空）
+```
+1. pytest tests/                 → 138 passed
+2. scripts/run_rag_metrics.py    → 130 题 hard 全链路
+3. scripts/run_eval.py           → 79 题回归（formal summary）
+4. scripts/iter_multipart.py     → 多部分题逐题调试
+```
+
+### 最终 hard 130 题指标（data/evals/results/rag_metrics_20260912_041718.json）
+| 指标 | 基线 032145 | 接手后 032606 | 最终 041718 | 目标 | 结论 |
+|---|---|---|---|---|---|
+| answer_pass | 46 | 45 | **48** | — | ↑ |
+| correct_block | — | 24 | **25** | — | ↑ |
+| wrong_release | 31 | 28 | **22** | ≤10 | ↓↓ |
+| wrong_block | 33→58 | 33 | **35** | — | ↓ |
+| accuracy | 0.638 | 0.616 | **0.686** | ≥0.90 | ❌ 仍差 0.21 |
+| hallucination_rate | 0.131 | 0.215 | **0.169** | ≤0.05 | ❌ 仍差 0.12 |
+| correct_refusal_rate | 1.0 | 0.96 | **1.0** | ≥0.95 | ✅ |
+
+### 79 题回归（data/evals/results/eval_20260912_043949_formal_summary.json）
+- FROZEN：answer_pass=11 / correct_block=12 / **wrong_release=3** / wrong_block=1 → WR=3 恰好踩线（≤3 达标）
+- GEN：**answer_pass=25**（≥20 达标）、correct_block=7、wrong_block=20
+- 结论：79 题护栏未回退 ✅
+
+### 本轮已落地的加固点（git log e554d20）
+1. **精确值/凭证守卫** `_answer_misses_questioned_precision`：最大/最小/最终/准确/精确/密码/电话/任期年份 类问题，答案必须给出被问的精确值，否则拒答 → 无答案题 wrong_release 5→0
+2. **多部分跨文件矩阵**：部分主体无证据时 BLOCK，不再释放单向答案
+3. **base-subject 规范化**：`产业学院治理模式→产业学院`、`1+1+N服务四项→服务` 等
+4. **value pattern 增强**：架构/定位/产品/实验环境/三位一体/软件底座
+5. **任期年份守卫**：`任期到哪一年` 必须出年份
+
+### 未达标的诚实归因（不包装）
+- 剩余 22 道 wrong_release 多为“答案语义正确但未命中评测的严格子串关键词”（如 `两套。` vs 期望 `两套视觉系统`；`18项` vs `授权18项`；`147项` vs `登记147项`），以及部分跨文档主体证据仍缺员（`智能电子秤`、`职教母机`、`AIGC实验箱`、`2026年1月`）。
+- wrong_block 35 道集中在 ocr_noise_page（11）、long_context_distraction（8）、synonym_rewrite（7）——这些桶当前 `_looks_like_garbled_ocr` 与长上下文抽取把可答题目误杀。
+- 要真正达到 0.90/0.05，需要：更强的本地模型（qwen2.5:14b 在答案收口精度上不足）、或对评测子串规则做“同义归一”评估（当前为严格包含判定），或继续逐桶重构答案生成（长上下文/OCR 桶）。这三者均超出本窗口单轮修复能力，如实记录。
+
+### 下一步
+- Thread-Answer：处理 synonym/ocr/long 三桶的误杀（放开 extract 上限、OCR 干净句过滤宽严平衡）
+- Thread-Retrieval：跨文档主体证据补员（智能电子秤/职教母机/AIGC实验箱 的 claim 值 pattern）
+- Thread-Eval：评估“同义归一”是否修正评测口径（需主线程裁决，避免为过线改判分）
