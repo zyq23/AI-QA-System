@@ -451,3 +451,58 @@
 - 锁定阶段目标与依赖
 - 让各专项线程在同一上下文下推进
 - 为后续真正的实现和优化提供统一监督框架
+
+---
+
+## Quality-Upgrade follow-up: enterprise RAG + Agent hardening (2026-09-11)
+
+The quality-upgrade branch now has a 130-case hard set and a working Agent
+skeleton, but **accuracy and hallucination targets are not yet met**. The next
+window must treat these as active engineering work, not completed deliverables.
+
+### Current target lines
+- hard set `hard_eval_v1.json`: Recall@5 >= 0.85, Recall@10 >= 0.92, MRR tracked
+- answer accuracy >= 0.90 (`answer_pass / (answer_pass + wrong_release)`)
+- hallucination/wrong_release <= 0.05
+- no-answer correct refusal >= 0.95
+- frozen 27 wrong_release <= 3 and generalization answer_pass >= 20 (non-regression)
+- Agent must improve or at least not worsen the single-turn answer quality while
+  retaining decision trails, bounded tools, and lower latency
+
+### Required next work (evidence-first)
+1. Analyze each hard-set wrong_release/wrong_block by category and exact guard
+   failure; do not add question-ID-specific canned answers.
+2. Fix multi-part composition so all requested subjects/attributes are answered
+   from multiple evidence groups, not only the top sentence or one side.
+3. Add a structured claim/evidence matrix before final release: each claim must
+   map to a citation file+page+keyword; negative questions must validate the
+   excluded option and requested alternatives; numeric traps must reject near
+   values; OCR text must pass quality gates.
+4. Make Agent tools return stable full evidence records (not lossy snippets),
+   then let the production finalize layer consume the evidence matrix. Agent
+   must never release raw tool observations as an answer.
+5. Add real Agent evaluation to `scripts/run_agent_eval.py`: report routed vs
+   forced mode, per-category buckets, tool/step/latency distributions, and
+   exact flip cases vs single-turn. A smoke slice is not a full acceptance.
+6. Run after every behavior change, in this order:
+   - `pytest tests/ -q`
+   - hard set RAG metrics with local backend
+   - 79-case `kb_quality_full_v1.json` regression
+   - Agent hard-set routed + forced evaluation
+   Results must be committed and appended to handoff.
+
+### Model/runtime invariant
+- Use local Ollama `qwen2.5:14b` at `http://127.0.0.1:11434/v1` for this phase.
+- DashScope currently returns account-arrears errors; do not interpret that as
+  an algorithm result or silently fall back to a different remote model.
+- RAGFlow remains D-034 phenomenon-only; local retrieval is the formal evidence
+  path.
+
+### Files of truth
+- `data/evals/hard_eval_v1.json`
+- `scripts/run_rag_metrics.py`
+- `scripts/run_agent_eval.py`
+- `data/evals/results/`
+- `docs/agent-architecture.md`
+- `docs/codex-handoff.md`
+- `docs/codex-decisions.md` (D-038/D-039)

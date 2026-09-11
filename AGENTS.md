@@ -25,16 +25,22 @@
 
 ## Current Project Context
 
-基于主线程审计，截至 2026-06-16，项目已确认的状态如下：
+基于主线程审计，截至 2026-09-11，项目已完成一轮质量升级与 Agent 化改造，当前状态如下：
 
-- 当前系统不是从零开始，已具备完整的本地问答骨架
-- 代码栈以 `FastAPI + SQLite FTS5 + ChromaDB + BGE + 可选 RAGFlow` 为主
-- 实际运行策略是“本地检索优先，RAGFlow 作为增强或兜底”
-- 当前数据库中已有 7 份已入库文档、19 个版本、10839 个 chunk（其中仅 3789 个属于当前版本，存在 7050 个过期残留）、1871 条 answer runs
-- `宇树科技知识库/` 目录中的 `【公司介绍】轩辕网络公司介绍202606.pptx` 已完成接入（document_id=69eb3a72378c4b15b95591a5e2b7ff27，1197 chunks）
-- 现有已入库资料主要是 PDF、DOCX、PPTX，复杂 PPT 已经暴露 OCR 和阅读顺序问题
-- 全库最小回归（27 题）最终 12 answer_pass + 15 correct_block = 27/27；但其中 9 题为按设计正确拒答，摘要类问题尚无正向可答样例
-- 已知数据卫生问题：SQLite 当前版本 chunks / Chroma 向量数 / 总 chunks 三处计数失配；jobs 表存在 2 个永久 running、6 个永久 queued 的残留任务
+- 当前系统不是从零开始，具备完整的本地问答骨架：`FastAPI + SQLite FTS5 + ChromaDB + BGE + 可选 RAGFlow`
+- 正式能力证据以本地链路为准；RAGFlow 仅保留现象观察（D-034）
+- 当前数据库已完成索引卫生：7 份已入链文档、当前有效 chunks 约 3,772，SQLite/Chroma/业务计数已对齐
+- 新增公司介绍 PPT 已正式入链：`document_id=69eb3a72378c4b15b95591a5e2b7ff27`，正式版本约 1,196/1,197 chunks
+- `quality-upgrade` 分支已完成：OCR/解析加固、jieba 词级分词与单字回并、FTS 文档名 token、数据驱动检索规则、答案主张一致性/数值/yes-no/摘要守卫、安全与运行卫生
+- 新增企业级难例集 `data/evals/hard_eval_v1.json`：130 题，覆盖跨文档对比、数值陷阱、多跳、同义改写、否定前置、长上下文、OCR 噪声页、无答案（25题）
+- 企业级 RAG 指标脚本为 `scripts/run_rag_metrics.py`；检索目标已达标：Recall@5=0.886、Recall@10=0.943、MRR=0.756；无答案题正确拒答率=1.0
+- hard 集全链路基线（本机 Ollama qwen2.5:14b）：可答准确率=0.638、幻觉率=0.131；这两项仍未达到企业目标线（准确率≥0.90、幻觉率≤0.05），主要短板是多部分答案只收口一侧、否定/复杂题收口边界，禁止把未达标包装成通过
+- 79 题回归护栏最新：FROZEN 12 answer_pass / 13 correct_block / 2 wrong_release；GEN 25 answer_pass（基线 21），无回退
+- Agent 架构已落地于 `app/agent/`：plan-then-execute 控制器、7 个 schema 工具、max_steps=6、timeout=45s、异常/重规划兜底、`agent_sessions`/`agent_steps` 轨迹落库；接口 `POST /api/agent/query`，robot 复杂问题复用 Agent
+- Agent 必须复用生产 `ChatService.answer` 的 finalize 守卫，不能通过工具结果绕过 subject-claim、yes/no、value、OCR 等反幻觉闸门
+- Agent 全量评测脚本为 `scripts/run_agent_eval.py`；routed 结果：平均延迟 4.6s、拒答率 1.0、幻觉率 0.123、可答准确率 0.515（准确率仍需继续提升，结果见 `data/evals/results/agent_eval_20260911_053027.json`）
+- 当前 LLM 使用本机 Ollama `qwen2.5:14b`（`http://127.0.0.1:11434/v1`）；DashScope 账户当前欠费，恢复前不得假设远端模型可用
+- 当前测试总数：128 passed；所有行为变更必须同时跑 hard_eval 与 79 题回归，并逐轮落盘结果
 
 ## Collaboration Model
 
