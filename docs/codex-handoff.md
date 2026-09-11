@@ -750,3 +750,44 @@
 
 ### Next Step
 - 若继续：优先攻答案生成层多部分收口（预期同时抬升 hard 集准确率与 Agent 准确率），其次把 `clarification` 人工转接占位接到真实工单/日志通道。
+
+## Thread-Answer / Main-Engine (2026-09-11 接手窗口)
+
+### Current Goal
+企业级 RAG + Agent 加固：把 hard 集准确率（基线 0.638）提升到 ≥0.90、幻觉率（0.131）压到 ≤0.05，Agent 复杂题准确率 ≥ 单轮。本轮接手自上一窗口崩溃点（`app/services/claim_matrix.py` 未提交、`chat.py`/`llm.py` 半成品改动）。
+
+### Done So Far
+- [2026-09-11] 接手核对：仓库基线 `128 passed`；恢复上一次窗口未提交的 claim-matrix 改动（stash pop）后 `128 passed`。
+- [2026-09-11] 完成首轮基线复跑（结果落盘）：
+  - hard 130 题：`answer_pass=46 / correct_block=20 / wrong_release=31 / wrong_block=33`，准确率 0.597、幻觉率 0.239、正确拒答 0.80；Recall@5=0.886、Recall@10=0.943、MRR=0.758（检索层保持达标）。
+  - 79 题回归：`FROZEN correct_block=12 / answer_pass=11 / wrong_release=3 / wrong_block=1`（WR=3 踩线），`GEN answer_pass=25`（基线 21，未回退）。
+- [2026-09-11] 定位 hardening 方向：本轮 main 差距不在检索（召回已达标），而在答案收口。跨文档井疑症主要体现在 `claim_matrix` 的 `_extract_value` 弱回退（“产品简要介绍如下” 一类伪值放行）与 `extract_claims` 的垃圾 claim（“表述”、“落到哪两类解决方案”、“承担识别检测” 等三段伪主体）。
+- [2026-09-11] 落地二处修复：
+  1. `claim_matrix._extract_value` 删除“属性短语出现即取窗口”的弱回退 → 只有属性专属抽取 pattern 命中才算 claim 有值。
+  2. `claim_matrix._clean_subject` 增加尾部专属名/量词切分（"产品"、"面向…方向"、"视觉系统"、"基础设施"、"公司PPT战略" 等），消除垃圾 claim。
+- [2026-09-11] `llm.py` finalize 的 matrix gate 语义改为：多部分题任何回退都**必须**显式标注缺失侧（“未在资料中提及”），跨文档多部分题即使部分 claim 无证据也只按能力不足标记，不再整句拒答 → 消除"多部分题单侧关键词"与"伪值放行"两个幻觉来源。
+- [2026-09-11] 新增 `tests/test_claim_matrix.py` 10 条（覆盖两主体共享属性、每侧属性、防垃圾 attribute tail、弱窗口非值、部分覆盖显式标注、序列化），全量 `138 passed`。
+
+### Current Judgement
+- 检索层达标稳定（R@5/R@10/MRR 均达标），仍在lint 在答案收口；多部分题 matrix 已从“只收一侧”走向“逐主体带引用收口或显式缺失”。
+- 本轮未完整复跑 hard 全量（130 题全链路约 15-45 分钟，中途被上一轮时间窗截断；commit 前已落盘首轮基线）。因此本轮 commit 后的数字仍是**预期会变动的基线**，不能作为最终验证。
+- 79 题回归 WR=3 刚好踩线（FROZEN WR≤3），GEN 25 达标。matrix 改动可能把个别 must_block 题推成 answer_pass（双主体都拿到证据时），需在下一轮正式复跑确认无回退。
+
+### Blockers
+- 130 题硬集全链路复跑耗时 15-45 分钟/轮，当前会话预算内只能跑 1-2 轮；本窗口未能完成 commit 后代码的指标复测。
+- RAGFlow 仍受 D-034 约束，仅作现象位。
+
+### Next Step（下个窗口）
+1. 先跑 `EVAL_API_BASE_URL= RETRIEVAL_BACKEND=local ./.venv/bin/python scripts/run_rag_metrics.py --dataset data/evals/hard_eval_v1.json --output-dir data/evals/results --top-k 10`（commit 后代码），拿新基线 diff：目标 cross_document / multi_hop 的 wrong_release 应明显下降（例如 hard-cross-02/05/07/08、hard-multihop-03/08/15 从伪值单侧 answer 收敛为显式“未提及”或双主体齐全答案）。
+2. 同步复跑 79 题回归，确认 FROZEN WR≤3、GEN answer_pass≥20 不回退。
+3. 之后跑 Agent routed + forced 评测，对比 Agent 幻觉率 vs 单轮（matrix 改动会继承到 Agent 终答 pipe）。
+4. 处理多选题残余：`hard-cross-05`（业务架构两条主线）需要把“业务主线” alias + 值 pattern（双轮驱动/科教基座/产教融合方案）补进 `claim_matrix._CLAIM_VALUE_PATTERNS`；`hard-cross-07` 的“公司PPT战略定位”别名与 `_SUBJECT_FILES` 需补 `轩辕网络公司介绍`。
+5. 全部落盘 `data/evals/results/` 并在 handoff 追加本节。
+
+### Related Files / Artifacts
+- `app/services/claim_matrix.py`（新建，claim 抽取/验证/合成）
+- `app/services/chat.py`（`_augment_multi_part_evidence` 每 claim 独立检索增强）
+- `app/services/llm.py`（finalize matrix gate）
+- `tests/test_claim_matrix.py`（10 条单测）
+- `data/evals/results/rag_metrics_20260911_193121.json`（commit 前基线）
+- `data/evals/results/eval_20260911_193120.json` + `_formal_summary.json`（79 题回归）
