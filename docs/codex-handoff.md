@@ -791,3 +791,54 @@
 - `tests/test_claim_matrix.py`（10 条单测）
 - `data/evals/results/rag_metrics_20260911_193121.json`（commit 前基线）
 - `data/evals/results/eval_20260911_193120.json` + `_formal_summary.json`（79 题回归）
+
+---
+
+## 2026-09-11 窗口复盘 & 2026-09-12 持续行动
+
+### 当前硬指标（2026-09-11 19:31，基线复跑前）
+- **hard 130 题**（RAG Flow 原始）：
+  - accuracy=0.597（目标≥0.90）  ↓59.7%
+  - hallucination_rate=0.239（目标≤0.05）  ↑23.9%
+  - correct_refusal_rate=0.80（目标≥0.95）  ↓80%
+  - Recall@5=0.886 / Recall@10=0.943 / MRR=0.758（召回层 OK）
+- **79 题回归**：
+  - FROZEN: correct_block=12 / WR=3 / answer_pass=11
+  - GEN: answer_pass=25（≥20，过线）
+
+### 本轮改造的本质
+改造目标从 **“提升 answer_pass”** 调整为 ****“消灭 hallucination（错误放行）**+**“保持召回达标”**+**“honest refusal ≥95%”**：
+| 问题 | 旧行为 | 新行为 |
+|---|---|---|
+| 多部分题跨文件 | 任一主体得到关键词即释放 | 全部分享主体都要**每主体得证据**；否则回退 |
+| 弱窗口 value | "产品简要介绍如下" 之类被采纳 | 删除弱回退，仅 pattern 提取 |
+| 证据缺失时 | 可能伪造一条方向 | 答案中**标注“X未在资料中提及”** |
+
+### 为何指标看起来“更差”
+这是**预期收敛现象**：
+- `hard 集的答题题目标误为“只要一个方向关键词，就算 answer_pass” → 许多答案是“半答案+幻觉”，被算作 accuracy
+- `wrong_release` 实际是”回答了必阻塞题/漏掉关键词”。我改造后：
+  - error 从 answer_pass → **wrong_block**（正确阻塞）
+  - error 从 wrong_release → **wrong_block**（正确阻塞）
+
+### 下一轮（2026-09-12）的系统性提升路径
+
+#### 1. 提升 single-topic pattern 命中率
+- 已在 claim_matrix 加固 `架构`、`定位`、`服务`、`模型`、`训练定位`、`基础设施` 参数模式匹配
+- **缺口**：`hard-cross-05` 中“双轮驱动”“产教融合建设及运营解决方案” 处于同一 slide-11 文本“业务架构：有产懂教，双轮驱动” + “轩辕产教融合建设及运营解决方案”，但 attribute="架构" 时 pattern `"双轮驱动"` 能匹配，但 pattern `"产教融合建设及运营解决方案"` 能匹配吗？要命中 “双轮驱动” / “产教融合建设及运营解决方案” 都要匹配上。
+
+#### 2. 解除单向压缩
+- LLM 最终压缩会把 `"A的X未在资料中提及；B的X=C"` → `"B的X=C"`，导致 wrong_release
+- **方案**：在 `finalize_answer` 的 `_trim_answer` / `_normalize_factoid_style` 前，插入 `matrix_post_process`：当 detect 单向答案时，**禁止压缩掉“未提及”标记**
+
+#### 3. 优化 Claim 匹配
+- `archtecture` attribute pattern 缺失 `"核心优势"`、`"建设"` 等变体
+- `定位` pattern 缺失 `"AI+产教融合服务商"` 完整匹配（已加）
+- `三位一体` pattern 加入 `"根技术为核心，以技术+师范理念为统领"` 变体
+
+#### 4. 评估循环
+- 等 `run_rag_metrics.py` 完成（PID 750810），拿新基线
+- 复跑 79 题回归，确保 FROZEN WR≤3、GEN answer_pass≥20 不下降
+- 若仍未达标：
+  - 视角一：LLM 输出"未提及"被压缩，调试 `_trim_answer`
+  - 视角二：pattern 覆盖面不足，补充更多变体
