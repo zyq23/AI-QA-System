@@ -702,6 +702,10 @@ class LlmService:
         # (a) credential ask: 'WiFi密码' must be answered with 密码+value
         if "密码" in question and not re.search(r"密码\s*[是为：:]\s*\S{2,}", answer):
             return True
+        # (a2) term/year ask: '任期到哪一年' must deliver a year, otherwise
+        # the "who is the director" neighboring extract leaked instead.
+        if re.search(r"(到哪一年|是哪一年|哪一年|什么时候到期|任期)", question) and not re.search(r"20\d{2}\s*年", answer):
+            return True
         # (b) exactness modifier + attribute: '最大重复定位精度' etc.
         m = re.search(
             r"(最大|最小)([\u4e00-\u9fff]{2,8}?(?:精度|负载|重量|半径|高度|深度|容量|速度|面积|数量|规模|金额|份额|占比|占有率|功率|长度))",
