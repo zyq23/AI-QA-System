@@ -33,6 +33,51 @@ class ChatService:
         markers = ("区别", "分别", "对比", "有什么不同", "各自", "一起列出", "同时给出", "分别是什么", "各是")
         return any(marker in question for marker in markers)
 
+    def _augment_multi_part_evidence(
+        self,
+        question: str,
+        hits: list[RetrievalHit],
+        top_k: int | None,
+    ) -> list[RetrievalHit]:
+        """Mine each decomposed claim independently before finalization.
+
+        A fused query often lets one subject consume the whole candidate window;
+        per-claim probes preserve evidence for every subject without changing
+        the normal retrieval ranking for simple questions.
+        """
+        from app.services.claim_matrix import extract_claims, subject_probe_queries
+
+        claims = extract_claims(question)
+        if len(claims) < 2:
+            return hits
+        seen = {h.chunk_id for h in hits}
+        extra: list[RetrievalHit] = []
+        for subject, attribute in claims[:3]:
+            queries = subject_probe_queries(subject) or [f"{subject} {attribute}".strip()]
+            # Always include the natural claim query after alias-aware probes.
+            queries.append(f"{subject} {attribute}".strip())
+            # For experiment-environment-type attributes, also include the canonical
+            # keyword (e.g. 'Jupyter Notebook') to surface document-specific chunks.
+            for probe in queries[:6]:
+                try:
+                    sub = self.retrieval_service.retrieve(
+                        probe,
+                        top_k=max(4, min(6, (top_k or 10) // 2)),
+                        focus_terms=None,
+                    )
+                    for hit in sub.hits:
+                        if hit.chunk_id not in seen:
+                            seen.add(hit.chunk_id)
+                            extra.append(hit)
+                except Exception as exc:
+                    logger.debug("Claim probe failed for %s: %s", probe[:40], exc)
+        if not extra:
+            return hits
+        # Append claim-probe evidence, preserving the primary ranking first.
+        # The final matrix verifies each claim against the union and citations
+        # retain file/page provenance for downstream evaluation.
+        return list(hits) + extra[: max(0, (top_k or 10) * 4)]
+
     def _multi_query_retrieve(
         self,
         question: str,
@@ -247,6 +292,7 @@ class ChatService:
 
         retrieval_started = time.perf_counter()
         hits, grounded = self._multi_query_retrieve(question, analysis, top_k)
+        hits = self._augment_multi_part_evidence(question, hits, top_k)
         latency_retrieval_ms = int((time.perf_counter() - retrieval_started) * 1000)
 
         generate_started = time.perf_counter()
@@ -343,7 +389,9 @@ class ChatService:
         """Fast heuristic rewrite for robot/voice scenarios — no LLM call."""
         # Delegate to LlmService's existing heuristic methods
         question_type = self.llm_service._infer_question_type(question, history_messages)
-        focus_terms = self.llm_service._extract_focus_terms(question)
+        focus_terms = self.llm_service._sanitize_focus_terms(
+            self.llm_service._extract_focus_terms(question)
+        )
         answer_focus = self.llm_service._build_answer_focus(question, question_type, focus_terms)
         return QueryAnalysis(
             rewritten_query=question,

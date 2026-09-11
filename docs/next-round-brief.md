@@ -65,4 +65,4 @@ EVAL_API_BASE_URL= RETRIEVAL_BACKEND=local ./.venv/bin/python scripts/run_agent_
 - 检索迭代轨迹：`data/evals/results/retrieval_local_only_r*.json`
 - Agent 评测：`agent_eval_20260911_053027.json`（routed）/ `051423.json`（forced）
 - 79 回归：`data/evals/results/eval_20260911_033026_formal_summary.json`
-- 80% 以上硬编码规则表：`config/retrieval_rules.json`；Agent 架构说明：`docs/agent-architecture.md`
+- 80% 以上硬编码规则表：`config/retrieval_rules.json`；Agent 架构说明：`docs/agent-architecture.md`CHECKPOINT: hard_eval metrics current status: answer_pass=46 correct_block=20 wrong_release=31 wrong_block=33 accuracy=0.597 hallucination_rate=0.239 correct_refusal_rate=0.8 Recall@5 0.886 Recall@10 0.943 MRR 0.758

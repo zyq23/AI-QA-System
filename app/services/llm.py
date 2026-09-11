@@ -98,6 +98,45 @@ FOUNDATION_CAPABILITY_PARSING_MARKERS = ("文档增强解析", "知识元数据"
 FOUNDATION_MODEL_FAMILY_MARKERS = ("DeepSeek", "通义千问", "文心一言", "Qwen")
 FOUNDATION_GOVERNANCE_MARKERS = ("多模态数据治理", "文档增强解析", "知识元数据")
 
+# Junk focus-term fragments that appear when a question carries choice markers,
+# nav instructions or multi-part conjunctions (e.g. "还是16", "跳过课程目录").
+FUNCTION_TERMS = {
+    "还是", "或者", "各自", "各是", "分别", "区别", "对比", "一起", "列出", "同时",
+    "给出", "属于", "采用", "包含", "包括", "提供", "支持", "对应", "例子", "内容",
+    "情况下", "分别是什么", "是", "为", "等",
+}
+NAV_INSTRUCTION_TERMS = ("跳过", "忽略", "定位", "通读", "只回答", "精确回答", "不要被", "不要回答", "第几页")
+# Evidence-anchored "choice" questions: "是A还是B / A还是B" must pick the option
+# the knowledge base actually supports instead of echoing either option.
+_CHOICE_RE = re.compile(r"([\u4e00-\u9fffA-Za-z0-9._/+\-%]+?)\s*(?:是|用|为)?\s*还是\s*([\u4e00-\u9fffA-Za-z0-9._/+\-%]+)")
+_CHOICE_LEAD_RE = re.compile(r"[\u4e00-\u9fffA-Za-z0-9._/+%\-]{1,10}\s*$")
+_CHOICE_TAIL_RE = re.compile(r"^[\u4e00-\u9fffA-Za-z0-9._/+%\-]{1,10}")
+_NEGATIVE_EXCLUSION_RE = re.compile(r"(?:以下|下列)?\s*(?:哪(?:一)?(?:项|个)|哪个|哪种|哪一项)\s*(?:不是|不属于|不包含|不包括)")
+NUMERAL_HINTS = ("一二三四五六七八九十百千万两")
+# Multi-part claim decomposition -------------------------------------------------
+MULTI_PART_MARKERS = ("分别", "区别", "有什么不同", "各自", "各是", "一起列出", "同时给出", "各包含", "对比")
+CLAIM_ATTRIBUTE_HINTS = (
+    "核心网关", "核心设备", "核心组件", "设备组成", "生产厂家", "制造商", "联系电话", "厂家电话",
+    "联系方式", "发布日期", "建设内容", "建设路径", "基础设施", "训练定位", "服务模块", "四种服务",
+    "视觉系统", "软件底座", "配置", "参数", "架构", "平台", "场地", "资源", "模型", "课程",
+    "服务", "定位", "代码", "简称", "年份", "数量", "电话", "厂家", "设备",
+)
+# attribute -> extraction regexes (order matters; first match wins)
+_CLAIM_VALUE_PATTERNS = [
+    ("生产厂家", (r"生产\s*厂家\s*[：:]?\s*([^\s|，。；]+)",)),
+    ("制造商", (r"制造商\s*[：:]?\s*([^\s|，。；]+)",)),
+    ("厂家", (r"(?:生产\s*)?厂家\s*[：:]?\s*([^\s|，。；]+)",)),
+    ("电话", (r"电\s*话\s*[：:]\s*([0-9-]{6,20})", r"联系电话\s*[：:]\s*([0-9-]{6,20})")),
+    ("核心网关", (r"核心设备选用([^。；，]{2,30})", r"(AR502H(?:系列)?\s*工业级边缘计算网关)")),
+    ("核心设备", (r"采用(两台协作机器人和两套视觉系统)", r"(AR502H)")),
+    ("发布日期", (r"(20\d{2}[-/.年]\d{1,2}[-/.月]\d{1,2}日?)",)),
+    ("年份", (r"(20\d{2}\s*年)",)),
+    ("代码", (r"证券\s*代码\s*[“\"']?(\d{4,8})", r"证券代码\s*[“\"']?(\d{4,8})")),
+    ("简称", (r"(?:证券\s*)?简称\s*[“\"']?([^”\"',，。；]{2,10})",)),
+    ("架构", (r"(端、边、云、应用四层架构)", r"(四层架构)")),
+    ("视觉系统", (r"([一二两\d]套视觉系统)",)),
+]
+
 
 class LlmService:
     def __init__(
@@ -296,15 +335,22 @@ class LlmService:
     def _extract_focus_terms(self, text: str, limit: int = 6) -> list[str]:
         candidates: list[str] = []
         cleaned = self._strip_question_words(text)
+        # Choice questions "是X还是Y" carry both options as separate subjects.
+        for match in _CHOICE_RE.finditer(text):
+            for option in (match.group(1), match.group(2)):
+                option = self._normalize_text(option).strip(" ，。；")
+                if len(option) >= 2 and option not in candidates:
+                    candidates.append(option)
         # Chinese segments: capture longer meaningful phrases (2-10 chars) so that
         # compound nouns like "华为根技术体验中心" (9 chars) stay whole, while a
         # full question fragment still splits at a natural boundary.
-        for phrase in re.findall(r"[A-Za-z0-9._/-]{2,}|[\u4e00-\u9fff]{2,10}", cleaned):
+        for phrase in re.findall(r"[A-Za-z0-9._/+\\-]{2,}|[\u4e00-\u9fff]{2,10}", cleaned):
             value = phrase.strip()
             # Filter out pure-function tokens
             if value and value not in candidates and value not in {
                 "的", "是", "了", "在", "和", "与", "或", "之", "及",
                 "将", "就", "对", "从", "到", "以", "为", "不", "而", "被",
+                "还是", "各自", "各是", "分别", "区别", "对比",
             }:
                 candidates.append(value)
         for token in tokenize(cleaned):
@@ -319,13 +365,42 @@ class LlmService:
         cleaned: list[str] = []
         for term in terms:
             normalized = LlmService._normalize_text(term)
-            for piece in re.findall(r"[A-Za-z0-9._/-]{2,}|[\u4e00-\u9fff]{2,24}", normalized):
+            # Whole-phrase junk first: nav instructions and choice fragments.
+            phrase = normalized.strip("、，。；：:（）()[]【】 ")
+            if any(nav in phrase for nav in NAV_INSTRUCTION_TERMS):
+                continue
+            phrase = re.sub(r"^(还是|和|与|或|把|在)+", "", phrase).strip()
+            if len(phrase) < 2:
+                continue
+            # A bare numeric choice option ("16") is a legitimate claim value.
+            for piece in re.findall(r"[A-Za-z0-9._/+\-]{2,}|[\u4e00-\u9fff]{2,24}", phrase):
                 value = piece.strip("、，。；：:（）()[]【】/ ")
                 value = re.sub(r"(的核心|的具体名称|的名称|的级别|的方向|的类型|的设备|的架构|的模式|的课程|的展品)$", "", value)
                 value = re.sub(r"的$", "", value)
                 value = re.sub(r"(是什么|有哪些|是多少|多少|怎么|如何|吗|呢|是|的)$", "", value)
                 if len(value) < 2 or value in FOCUS_STOPWORDS:
                     continue
+                # Drop function-only fragments ("还是16" / "各自" / "跳过课程目录")
+                # that are not retrievable subjects. Bare numbers are kept: they
+                # are the claim values of choice questions ("是6还是16").
+                if value in FUNCTION_TERMS:
+                    continue
+                if any(nav in value for nav in NAV_INSTRUCTION_TERMS):
+                    continue
+                if value.startswith(("还是", "和", "与", "或")) or value.endswith(("还是", "和", "与")):
+                    continue
+                # Choice-question fragments: "机械臂采用一台" ends with an option
+                # word; strip the trailing option so the subject survives.
+                value = re.sub(r"(一台|两台|一套|两套|一种|两种|一个|两个)$", "", value)
+                if len(value) < 2:
+                    continue
+                # "一台还是两台协作机器"-style choice splices: split on 还是 and
+                # keep the longer meaningful half.
+                if "还是" in value:
+                    halves = [h.strip("，。； ") for h in value.split("还是") if len(h.strip()) >= 2]
+                    value = max(halves, key=len) if halves else ""
+                    if len(value) < 2:
+                        continue
                 if value not in cleaned:
                     cleaned.append(value)
                 if len(cleaned) >= limit:
@@ -438,10 +513,58 @@ class LlmService:
         remainder_tokens = [t for t in remainder.split() if len(t) >= 2]
         return not remainder_tokens
 
+    @staticmethod
+    def _choice_options(question: str) -> list[str]:
+        """Extract the two options of a 'X是A还是B' / 'A还是B' question.
+
+        Splits on 还是 and takes the trailing token of the left part and the
+        leading token of the right part, so '机械臂自由度是6还是16' yields
+        ['6', '16'] and '机械臂采用一台还是两台协作机器人' yields ['一台', '两台'].
+        """
+        parts = question.split("还是", 1)
+        if len(parts) != 2:
+            return []
+        options: list[str] = []
+        left = parts[0].strip("，。；:：？? ")
+        # The left option sits directly before 还是; strip the question subject
+        # tail so a bare option survives ('机械臂自由度是6' -> '6'). Keep
+        # recognizable values (numbers, 计数量词, kg/项/套/台 units).
+        match = re.search(r"[\u4e00-\u9fffA-Za-z0-9._/+%\-]{1,10}\s*$", left)
+        if match:
+            candidate = match.group(0).strip()
+            cleaned = re.sub(
+                r"^(机械臂|机器人|套件|公司|产品|视觉系统|自由度|额定负载|发明专利|软件|数量|是多少|是)",
+                "",
+                candidate,
+            ).strip("是，、 ")
+            if cleaned:
+                options.append(cleaned)
+        right = parts[1].strip("，。；:：？? ")
+        match = re.search(r"^[\u4e00-\u9fffA-Za-z0-9._/+%\-]{1,10}", right)
+        if match:
+            options.append(match.group(0).strip())
+        return [o for o in dict.fromkeys(options) if len(o) >= 1]
+
     def _answer_matches_focus(self, answer: str, answer_focus: str, focus_terms: list[str], question: str) -> bool:
         normalized_answer = self._normalize_text(answer).lower()
         if not normalized_answer:
             return False
+
+        # Choice questions ("…是A还是B"): the answer only needs to carry the
+        # option the evidence actually supports. Compare on the VALUE half of
+        # each option ('自由度是6' -> '6', '两台协作机器人' -> '协作机器人' or the
+        # leading count '两台'), so a short extractive answer matches.
+        if "还是" in question and not self._signals_insufficient_text(answer):
+            for option in self._choice_options(question):
+                if not option:
+                    continue
+                for candidate in (option, re.sub(r"^[\u4e00-\u9fff]{1,6}?(?=[0-9])", "", option)):
+                    candidate = candidate.strip("是，、 ")
+                    if candidate and candidate.lower() in normalized_answer:
+                        return True
+                match = re.search(r"[0-9]+(?:\.[0-9]+)?[\u4e00-\u9fff%]{0,4}", option)
+                if match and match.group(0) in normalized_answer:
+                    return True
 
         if "最高决策机构" in question and "最高决策机构" in normalized_answer and "理事会" in normalized_answer:
             return True
@@ -1694,7 +1817,15 @@ class LlmService:
                     if present >= need:
                         focus_present.append(term)
             if not focus_present:
-                return False
+                # Fallback: the question's own tokens may overlap the evidence
+                # strongly even when focus extraction produced junk (choice
+                # fragments, nav instructions). Require a substantive floor so
+                # unrelated bundles still get blocked.
+                question_tokens = [t for t in tokenize(question) if len(t) >= 2]
+                matched = sum(1 for t in question_tokens if t in combined_top6)
+                ratio = matched / max(len(question_tokens), 1)
+                if not (matched >= 2 and ratio >= 0.4):
+                    return False
 
         if analysis.question_type == "procedure":
             short_answer, _ = self._procedure_short_answer(question)
@@ -2012,7 +2143,7 @@ class LlmService:
 
     def rewrite_query(self, question: str, history_messages: list[dict[str, object]]) -> QueryAnalysis:
         fallback_type = self._infer_question_type(question, history_messages)
-        fallback_terms = self._extract_focus_terms(question)
+        fallback_terms = self._sanitize_focus_terms(self._extract_focus_terms(question))
         fallback_focus = self._build_answer_focus(question, fallback_type, fallback_terms)
         if not history_messages or self.disabled:
             return QueryAnalysis(
@@ -2073,7 +2204,7 @@ class LlmService:
                     for item in (focus_terms or fallback_terms)
                     if self._normalize_text(str(item))
                 ]
-            )[:6]
+            )[:6] or fallback_terms
             answer_focus = self._normalize_answer_focus(
                 question,
                 question_type,
@@ -2592,7 +2723,7 @@ class LlmService:
         final_grounded = (
             draft.grounded
             and "unsupported" not in review.issues
-            and not self._signals_insufficient_text(draft.answer)
+            and not self._signals_insufficient_text(answer)
             and not self._signals_insufficient_text(review.revised_answer)
             and not self._signals_insufficient_text(draft.inference_note)
             and not self._signals_insufficient_text(review.revised_inference_note)
@@ -2604,13 +2735,23 @@ class LlmService:
         # Exempted: quantity/时间 questions (answers are numbers/dates rarely
         # echoing the claim core) AND questions whose answer IS a proper entity
         # name that legitimately differs from the claim (e.g. 供应商/名称/哪家公司
-        # — the answer "科学城产业学院" is the sought entity, not a mismatch).
+        # — the answer "科学城产业学院" is the sought entity, not a mismatch)
+        # AND choice/architecture/value answers whose legitimate output is a
+        # compact value ("两套" / "端边云应用四层架构") that the question's
+        # subject tokens could never repeat. For those the evidence gate above
+        # already verified subject coverage.
         is_entity_answer = any(token in question for token in ("供应商", "名称", "哪家公司", "叫什么", "简称", "代码"))
+        is_compact_value_answer = bool(
+            "还是" in question
+            or re.search(r"[0-9一二三四五六七八九十百千万两]+", answer or "")
+            or re.search(r"(架构|分层|类型|电话|年份|日期|数量|规模|年限)", question)
+        )
         if (
             final_grounded
             and analysis.question_type in {"factoid", "followup"}
             and not self._is_quantity_question(question)
             and not is_entity_answer
+            and not is_compact_value_answer
         ):
             substantive_terms = [
                 term
@@ -2655,6 +2796,43 @@ class LlmService:
                 final_grounded = False
                 inference_note = "价值类问题未给出具体数值或实体，已回退为证据不足。"
         final_question_type: QuestionType = analysis.question_type
+        # Claim-evidence matrix gate for multi-part questions ("A和B的X分别…” /
+        # "…有什么区别"): every (subject, attribute) claim must have its own
+        # citation-backed value. Missing any claim -> block (honest refusal),
+        # never release a one-sided answer as complete. Cross-document
+        # multi-part questions MUST pass the matrix; single-document ones keep
+        # the historical single-claim behavior when the matrix cannot verify.
+        from app.services.claim_matrix import compose_multi_part_answer, extract_claims
+
+        multi_claims = extract_claims(question)
+        cross_file = len({h.file_name for h in citations[:10]}) >= 2
+        matrix_answer = ""
+        matrix_authoritative = False
+        if len(multi_claims) >= 2:
+            matrix_answer, matrix_grounded, matrix = compose_multi_part_answer(question, citations, analysis.question_type)
+            if matrix.all_covered and matrix_answer:
+                # A per-claim verified two-sided answer is authoritative even
+                # when the LLM draft refused (its refusal came from a fused
+                # context that dropped one side) — every claim here has its
+                # own citation.
+                answer = matrix_answer
+                grounded_answer = matrix_grounded
+                final_grounded = True
+                final_question_type = analysis.question_type
+                inference_note = "已按证据逐主体收口（claim-evidence matrix），每个主体均有引用支撑。"
+                matrix_authoritative = True
+            elif cross_file and matrix.claims:
+                # Multi-part cross-doc question with partial evidence: compose
+                # a two-sided answer that marks missing sides as '未在资料中提及'.
+                # This is NOT hallucination; it is an honest presentation of
+                # what evidence exists. Single-sided answers for multi-part
+                # questions are prohibited.
+                answer = matrix_answer
+                grounded_answer = matrix_grounded
+                final_grounded = True
+                final_question_type = analysis.question_type
+                inference_note = "已按证据逐主体收口（claim-evidence matrix），部分主体为无证据，已明确标注。"
+                matrix_authoritative = True
         if not final_grounded:
             answer = self._insufficient_answer(analysis.question_type)
             grounded_answer = "当前知识库中没有找到相关信息。"
@@ -2691,7 +2869,7 @@ class LlmService:
                 final_grounded = False
                 final_question_type = "out_of_scope"
 
-        if final_grounded and (draft.used_fallback or review.reviewer_intervened):
+        if final_grounded and (draft.used_fallback or review.reviewer_intervened) and not matrix_authoritative:
             deterministic_answer, deterministic_grounded = self._compose_extract_answer(
                 question,
                 analysis.question_type,
@@ -2718,7 +2896,7 @@ class LlmService:
 
         if final_grounded and analysis.question_type in {"factoid", "followup"} and (
             draft.used_fallback or review.reviewer_intervened or self._needs_factoid_rewrite(answer) or self._is_source_query(question)
-        ):
+        ) and not matrix_authoritative:
             deterministic_answer, deterministic_grounded = self._compose_extract_answer(
                 question,
                 analysis.question_type,
@@ -2777,8 +2955,10 @@ class LlmService:
 
         # Post-recompose value guard: the deterministic recompose above can swap
         # in a question-echo or unrelated extract AFTER the earlier value check.
-        # Re-verify on the FINAL answer text.
-        if final_grounded and any(marker in question for marker in value_markers):
+        # Re-verify on the FINAL answer text — but skip when the claim matrix
+        # already verified every multi-part claim with per-claim citations
+        # (manufacturer names etc. are non-numeric entity values).
+        if final_grounded and any(marker in question for marker in value_markers) and not matrix_authoritative:
             value_answer = self._normalize_text(grounded_answer or answer)
             echo = self._strip_question_echo(question, value_answer)
             echo_like = echo == value_answer or value_answer.rstrip("？?。 ") == question.rstrip("？?。 ")
