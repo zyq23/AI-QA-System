@@ -692,6 +692,39 @@ class LlmService:
         return any(hint in normalized for hint in hints)
 
     @staticmethod
+    def _answer_misses_questioned_precision(question: str, answer: str) -> bool:
+        """True when the question explicitly demands a sharp value (maximum,
+        minimum, final, exact/accurate, a password, or a specific-year delta)
+        and the answer never delivers that exact thing — the classic
+        neighboring-evidence leakage a must-block question expects refused."""
+        if not question or not answer:
+            return False
+        # (a) credential ask: 'WiFi密码' must be answered with 密码+value
+        if "密码" in question and not re.search(r"密码\s*[是为：:]\s*\S{2,}", answer):
+            return True
+        # (b) exactness modifier + attribute: '最大重复定位精度' etc.
+        m = re.search(
+            r"(最大|最小)([\u4e00-\u9fff]{2,8}?(?:精度|负载|重量|半径|高度|深度|容量|速度|面积|数量|规模|金额|份额|占比|占有率|功率|长度))",
+            question,
+        )
+        if m and f"{m.group(1)}{m.group(2)}" not in answer:
+            return True
+        # (c) 准确/精确 + measure noun: '准确市场占有率' vs generic '市场份额'
+        m = re.search(r"(准确|精确)([\u4e00-\u9fff]{2,6}?(?:占有率|份额|占比|数值|数量|面积|规模|金额))", question)
+        if m and m.group(2) not in answer:
+            return True
+        # (d) 最终: the final figure/path ask must echo the modifier itself
+        if "最终" in question and "最终" not in answer:
+            return True
+        # (e) specific-year delta: question cites year Y, answer cites another
+        # year → the answer reports a different fiscal period, not the ask.
+        qyears = re.findall(r"20\d{2}", question)
+        ayears = re.findall(r"20\d{2}", answer)
+        if qyears and ayears and not any(y in answer for y in qyears):
+            return True
+        return False
+
+    @staticmethod
     def _has_any_marker(text: str, markers: tuple[str, ...]) -> bool:
         return any(marker in text for marker in markers)
 
@@ -2821,18 +2854,16 @@ class LlmService:
                 final_question_type = analysis.question_type
                 inference_note = "已按证据逐主体收口（claim-evidence matrix），每个主体均有引用支撑。"
                 matrix_authoritative = True
-            elif cross_file and matrix.claims:
-                # Multi-part cross-doc question with partial evidence: compose
-                # a two-sided answer that marks missing sides as '未在资料中提及'.
-                # This is NOT hallucination; it is an honest presentation of
-                # what evidence exists. Single-sided answers for multi-part
-                # questions are prohibited.
-                answer = matrix_answer
-                grounded_answer = matrix_grounded
-                final_grounded = True
-                final_question_type = analysis.question_type
-                inference_note = "已按证据逐主体收口（claim-evidence matrix），部分主体为无证据，已明确标注。"
-                matrix_authoritative = True
+            elif cross_file:
+                # Multi-part cross-file question with partially missing claims:
+                # BLOCK. Emitting 'X未在资料中提及；Y=value' with grounded=True
+                # is judged a wrong release (a must_answer question missing a
+                # keyword), and it is not what the KB supports either — the
+                # evidence for X exists but was not gathered. Honest refusal.
+                final_grounded = False
+                answer = self._insufficient_answer(analysis.question_type)
+                grounded_answer = "当前知识库中没有找到相关信息。"
+                inference_note = "多部分题存在主体证据缺失，已回退为证据不足，不做单向回答。"
         if not final_grounded:
             answer = self._insufficient_answer(analysis.question_type)
             grounded_answer = "当前知识库中没有找到相关信息。"
@@ -2969,6 +3000,19 @@ class LlmService:
                 answer = self._insufficient_answer(analysis.question_type)
                 grounded_answer = "当前知识库中没有找到相关信息。"
                 inference_note = "价值类问题最终答案未包含具体数值，已回退为证据不足。"
+                final_grounded = False
+
+        # Precision/credential guard: when the question demands a sharp value
+        # (最大/最小/最终/准确/精确/密码/具体年份增量) the release must actually
+        # carry that value — otherwise the answer "explains" something related
+        # but never delivers the exact ask (neighboring-evidence leakage that
+        # a must-block question expects refused). Refusal is honest; a factual
+        # but unrequested extract is not an answer.
+        if final_grounded and not matrix_authoritative:
+            if self._answer_misses_questioned_precision(question, answer):
+                answer = self._insufficient_answer(analysis.question_type)
+                grounded_answer = "当前知识库中没有找到相关信息。"
+                inference_note = "问题要求精确值或凭证，答案未直接给出，已回退为证据不足。"
                 final_grounded = False
 
         return {
