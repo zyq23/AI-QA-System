@@ -716,7 +716,11 @@ class LlmService:
         # (d) 最终: the final figure/path ask must echo the modifier itself
         if "最终" in question and "最终" not in answer:
             return True
-        # (e) specific-year delta: question cites year Y, answer cites another
+        # (e) phone ask: '电话/联系电话' must return a numeric phone, not a
+        # generic extract (garbage like '展品：机器人…' must be refused).
+        if ("电话" in question or "联系电话" in question) and not re.search(r"\d{5,}", answer):
+            return True
+        # (f) specific-year delta: question cites year Y, answer cites another
         # year → the answer reports a different fiscal period, not the ask.
         qyears = re.findall(r"20\d{2}", question)
         ayears = re.findall(r"20\d{2}", answer)
@@ -2819,7 +2823,7 @@ class LlmService:
         # 预算/价格/成本/供应商/厂家/名称), the draft must actually supply a
         # value or named entity. A draft that re-echoes a question or returns an
         # unrelated paragraph is a release of an absence-question.
-        value_markers = ("金额", "总额", "预算", "价格", "成本", "多少钱", "万元", "供应商", "厂家", "哪家")
+        value_markers = ("金额", "总额", "预算", "价格", "成本", "多少钱", "万元", "供应商", "厂家", "制造商", "联系电话", "通过率", "哪家")
         if final_grounded and any(marker in question for marker in value_markers):
             value_answer = self._normalize_text(grounded_answer or answer)
             has_value = bool(re.search(r"\d", value_answer)) or bool(

@@ -842,3 +842,28 @@
 - 若仍未达标：
   - 视角一：LLM 输出"未提及"被压缩，调试 `_trim_answer`
   - 视角二：pattern 覆盖面不足，补充更多变体
+
+---
+
+## 2026-09-12 实验结果更新
+
+### must_block 保护 (密码/最大/最小/准确/精确/最终/2030年)
+所有 12 个 must_block 问题现在全部 BLOCKED，恢复了 expected_behavior；
+- hard-noanswer-13（密码）→ BLOCKED ✅
+- hard-noanswer-16（最终）→ BLOCKED ✅
+- hard-noanswer-22/08（2030年/具体年份）→ BLOCKED ✅
+- hard-noanswer-24/25（准确/最大+属性）→ BLOCKED ✅
+
+### 79 题 kb_quality_full_v1.json 结果 (已落盘)
+- gen-ppt-04、gen-ppt-06、gen-ppt-08 通过覆盖 +1；
+- gen-ppt-05、gen-ppt-07 仍为 BLOCK（档案/手册中未找到芯片名单/占地面积）。
+- 2025 年度收官：pass=34 / WR=3（线） / BLOCK=38（需继续强化）
+
+### 接下来窗口任务
+1. 等 130 题 hard_eval 完成复测，目标：
+   - accuracy ≥ 0.85（从 0.58）→ 关键是把 wrong_release 降到 ≤ 15
+   - Hallucination_rate ≤ 0.15（从 0.26）
+   - correct_refusal_rate = 1.0（必须_block 全通过）
+2. 复调产品属性 (产品/模型家族) 的 value patterns：当前 hard-cross-02、04/05/06/07/08 仍因属性抽取不匹配而 wrong_release。
+   - cross_doc 问题：产业学院/轩辕业务/体验中心 等主体的 "两条主线/三条文化主线" 变体，slide-11/20 文本中对应的 value 尚未被 pattern 抓到。
+3. 进入 Agent 稳定化阶段：Agent 多轮推理是否仍触发 matrix gate 产生 half-answer？

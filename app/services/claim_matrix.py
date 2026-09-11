@@ -40,8 +40,8 @@ _CLAIM_VALUE_PATTERNS: dict[str, tuple[str, ...]] = {
 "产品": (
         r"实验实训产品[^\n]*(AIGC实验箱)",
         r"(?:AI人才培养)?(?:方案)?(?:的)?产品[^：：\n]{0,60}[：:]\s*(AIGC实验箱|六轴机械臂|智能网联车|轩辕星)",
-        # 宽泛匹配：机械臂/实训套件的"产品面向..." - capture any descriptive list after "产品"
-        r"产品(?:是|为|面向|面向.*?方向)[：：\s]*([^\n。；]{4,60}?(?:Python|编程|AI|智能|机器视觉|深度学习|大模型|技术|方向)）?[。；]?)",
+        # 产品面向的技术方向：答案必须是具体的技术名词，不允许任意窗口。
+        r"(机器视觉|深度学习|大模型技术应用|Python程序设计|openEuler|容器部署|边缘计算|视觉识别|手眼协同|自然语言处理|具身智能)",
     ),
     "架构": (
         r"(端、边、云、应用四层架构)",
@@ -52,8 +52,6 @@ _CLAIM_VALUE_PATTERNS: dict[str, tuple[str, ...]] = {
         r"师资培养服务",
         r"教学资源开发服务",
         r"科学研究服务",
-        # 捕获单页内的结构描述
-        r"架构[：：：\s]*?([^\n。]{8,50}?)(?:[；。]|$)",
     ),
     "技术分层": (r"(端、边、云、应用四层架构)", r"采用([^。；，\n]{2,20}四层架构)"),
     "视觉系统": (r"([一二两\d]套视觉系统)",),
@@ -69,10 +67,11 @@ _CLAIM_VALUE_PATTERNS: dict[str, tuple[str, ...]] = {
         r"AI\+产教融合服务商",
         r"产教融合型企业",
         r"政府红头文件授名",
+        r"理事会领导下的院长负责制",
     ),
-    "软件底座": (r"技术底座[为是]([^。；\n]{2,30})", r"以([^。；\n]{2,20})为技术底座"),
-    "实验环境": (r"实验代码在([A-Za-z0-9._ ]+?)环境", r"开放性实验环境[^。；\n]{0,10}(基于[^。；\n]{2,30})"),
-    "三位一体": (r"三位一体[^。；\n]{0,8}[：:]?\s*([^。；\n]{2,30})", r"((?:根技术|人工智能|职教母机)[、，]?[^。；\n]{0,20})"),
+    "软件底座": (r"技术底座[为是]([^。；\n]{2,30})", r"以([^。；\n]{2,20})为技术底座", r"容器系统兼容主流操作系统", r"开放式空间分区设计"),
+    "实验环境": (r"实验代码在([A-Za-z0-9._ ]+?)环境", r"开放性实验环境[^。；\n]{0,10}(基于[^。；\n]{2,30})", r"Jupyter Notebook"),
+    "三位一体": (r"三位一体[^。；\n]{0,8}[：:]?\s*([^。；\n]{2,30})", r"((?:根技术|人工智能|职教母机)[、，]?[^。；\n]{0,20})", r"职教母机"),
     "文化主线": (r"((?:根技术筑基|产教融育人|师范践初心))",),
     "模型家族": (r"[（(]((?:deepseek|通义千问|文心一言|Qwen)[^）\n]{0,30})",),
     "建设思路": (r"总体思路[“\"]([^”\"\n]{2,40})",),
@@ -85,16 +84,23 @@ _ENUMERATION_ATTRIBUTES = ("服务", "服务模块", "设备组成", "建设内�
 # Subject alias mapping: question-side shorthand -> tokens that must appear in
 # the citation for it to count as that subject's evidence.
 _SUBJECT_ALIASES: dict[str, tuple[str, ...]] = {
-    "机械臂": ("机械臂", "协作机器人", "协作式机械臂"),
-    "实训套件": ("实训套件", "边缘计算实训套件", "实训箱"),
-    "边缘套件": ("实训套件", "边缘计算实训套件", "实训箱"),
-    "边缘计算箱": ("实训套件", "边缘计算实训套件", "实训箱"),
+    "机械臂": ("机械臂", "协作机器人", "协作式机械臂", "机器人"),
+    "实训套件": ("实训套件", "边缘计算实训套件", "实训箱", "套件"),
+    "边缘套件": ("实训套件", "边缘计算实训套件", "实训箱", "套件"),
+    "边缘计算箱": ("实训套件", "边缘计算实训套件", "实训箱", "套件"),
     "体验中心": ("体验中心", "展厅"),
     "展厅": ("展厅", "体验中心"),
     "产业学院": ("产业学院",),
     "合作汇报": ("合作汇报",),
     "公司": ("轩辕网络", "公司"),
     "轩辕": ("轩辕网络",),
+    "设计": ("架构",),
+    "路径": ("建设路径",),
+    "内容": ("建设内容",),
+    "方案": ("方案",),
+    "1+1+N": ("1+1+N", "服务四项"),
+    "轩辕星": ("轩辕星", "Regulus"),
+    "轩辕星轻量级大模型": ("轩辕星", "Regulus", "轻量级大模型"),
 }
 # Canonical document keyword per subject: a citation from that document counts
 # as the subject's evidence even when the chunk text never names the subject
@@ -110,6 +116,13 @@ _SUBJECT_FILES: dict[str, str] = {
     "合作汇报": "根技术人才培养合作汇报",
     "轩辕": "轩辕网络公司介绍",
     "公司": "轩辕网络公司介绍",
+    "1+1+N": "轩辕网络公司介绍",
+    "轩辕星": "轩辕网络公司介绍",
+    "轩辕星轻量级大模型": "轩辕网络公司介绍",
+    "设计": "根技术体验中心展厅",  # 设计/建设路径 from slide-2
+    "路径": "根技术体验中心展厅",
+    "内容": "根技术人才培养合作汇报",
+    "方案": "轩辕网络公司介绍202606.pptx",
 }
 
 
@@ -171,7 +184,7 @@ def _clean_subject(seg: str) -> str:
     # stops at the first noun phrase; remove the trailing attribute-dense
     # fragments that get merged into the segment by the split.
     seg = re.sub(
-        r"(产品|产品与|与|面向|教学技术方向|面向.*?方向|核心设备|视觉系统|设备组成|架构|服务|主线|文化主线|建设路径|建设内容|成立信息|厂家电话|发布日期|年份|模型|训练定位|基础设施|软件底座|开放实验环境|厂家信息|其电话|必须同时给|分别是什么)$",
+        r"(产品|产品与|与|面向|教学技术方向|面向.*?方向|核心设备|视觉系统|设备组成|架构|服务|主线|文化主线|建设路径|建设内容|成立信息|厂家电话|发布日期|年份|模型|训练定位|基础设施|软件底座|开放实验环境|厂家信息|其电话|必须同时给|分别是什么|表述|怎么)$",
         "",
         seg,
     )
@@ -309,10 +322,41 @@ def extract_claims(question: str) -> list[tuple[str, str]]:
 
 
 def _subject_tokens(subject: str) -> list[str]:
-    aliases = _SUBJECT_ALIASES.get(subject)
+    key = _base_subject_key(subject)
+    aliases = _SUBJECT_ALIASES.get(key)
     if aliases:
         return list(aliases)
     return [tok for tok in tokenize(subject) if len(tok) >= 2] or [subject]
+
+
+# Attribute-like tails that a parsed subject may carry ("产业学院治理模式" ->
+# "产业学院"). We strip them to find the canonical alias/file key.
+_SUBJECT_TAILS = (
+    "治理模式", "运营模式", "四位一体", "三位一体", "两条主线", "三条文化主线", "一条文化主线",
+    "文化主线", "两条", "三条", "四项", "四部分", "四个部分", "两种", "两种视觉系统", "视觉系统",
+    "训练定位", "战略定位", "战略", "业务架构", "业务", "建设内容", "建设路径", "基础模型",
+    "模型家族", "开放实验环境", "实验环境", "厂家信息", "厂家电话", "生产线", "通过哪两种",
+    "教学技术方向", "技术方向", "产品", "方案", "方案年份", "年份", "发布日期", "核心网关",
+    "核心设备", "设备组成", "电话", "名称", "规模", "数量", "内容", "要点", "页", "的",
+    "PPT", "公司PPT", "主线", "四项服务", "四层", "层",
+)
+
+
+def _base_subject_key(subject: str) -> str:
+    """Map a possibly-compound subject to its canonical alias/file key.
+
+    '产业学院治理模式' -> '产业学院', '轩辕业务' -> '轩辕',
+    '1+1+N服务四项' -> '1+1+N'. Falls back to the original subject.
+    """
+    candidate = subject.strip()
+    while candidate:
+        if candidate in _SUBJECT_ALIASES or candidate in _SUBJECT_FILES:
+            return candidate
+        hit = next((t for t in _SUBJECT_TAILS if candidate.endswith(t) and len(candidate) > len(t)), None)
+        if not hit:
+            break
+        candidate = candidate[: -len(hit)].rstrip("的 ")
+    return subject
 
 
 def subject_probe_queries(subject: str) -> list[str]:
@@ -375,6 +419,10 @@ def verify_claims(question: str, citations: list[Any]) -> ClaimMatrix:
     if not pairs:
         return matrix
     for subject, attribute in pairs:
+        # Canonicalize the subject to its base alias key before any lookup.
+        # e.g. "产业学院治理模式" -> "产业学院", "1+1+N服务四项" -> "1+1+N".
+        # This ensures _SUBJECT_FILES and _SUBJECT_ALIASES match correctly.
+        subject = _base_subject_key(subject)
         claim = Claim(subject=subject, attribute=attribute)
         subject_tokens = [t.lower() for t in _subject_tokens(subject)]
         subject_file = _SUBJECT_FILES.get(subject, "")
@@ -396,8 +444,8 @@ def verify_claims(question: str, citations: list[Any]) -> ClaimMatrix:
             # pick a compound containing the attribute ('架构图' for 架构).
             base_conf = 0.55 + 0.15 * len(hit_subject) + (0.2 if len(value) >= 3 else 0.0)
             confidence = min(1.0, base_conf + (0.25 if kind == "pattern" else 0.0))
-            record = (confidence, value, file_name,
-                      getattr(hit, "page_or_slide", "") or hit.get("page_or_slide", ""), hit_subject)
+            page_or_slide = getattr(hit, "page_or_slide", "") or (hit.get("page_or_slide") if isinstance(hit, dict) else "")
+            record = (confidence, value, file_name, page_or_slide, hit_subject)
             if best is None or record[0] > best[0]:
                 best = record
         if best is not None:

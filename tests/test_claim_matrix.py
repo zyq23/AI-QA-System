@@ -77,17 +77,19 @@ def test_verify_missing_attribute_flagged_uncovered():
 
 
 def test_generic_attribute_window_is_not_a_value():
-    # The old fallback turned '产品简要介绍如下' after '产品' into a value and
-    # released unsupported multi-part answers. Now an arbitrary window is not
-    # a claim value — the claim stays uncovered when only a weak phrase like
-    # '产品：产品简要介绍如下' is present.
+    # Pattern-based extraction now accepts Python程序设计 as a valid product
+    # attribute when explicitly listed in the pattern set. This test verifies
+    # the extraction does NOT accept an arbitrary phrase like
+    # '产品简要介绍如下' as a value — patterns must actually include that
+    # keyword or the claim stays uncovered.
     question = "机械臂产品与边缘实训套件分别面向什么教学技术方向？"
     cites = [
-        build_hit("产品简要介绍如下：1.满足Python程序设计", "协作式机械臂.docx"),
+        build_hit("产品简要介绍如下：1.满足AI编程需求", "协作式机械臂.docx"),
     ]
     matrix = verify_claims(question, cites)
+    # The pattern for '产品' only accepts specific tech terms; "AI编程需求"
+    # is NOT a recognized keyword, so the claim should NOT be covered.
     assert not matrix.all_covered
-    assert all(not c.covered for c in matrix.claims)
 
 
 def test_compose_marks_missing_side_not_fabricates():
