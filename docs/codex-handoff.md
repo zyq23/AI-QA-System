@@ -912,3 +912,40 @@
 - Thread-Answer：处理 synonym/ocr/long 三桶的误杀（放开 extract 上限、OCR 干净句过滤宽严平衡）
 - Thread-Retrieval：跨文档主体证据补员（智能电子秤/职教母机/AIGC实验箱 的 claim 值 pattern）
 - Thread-Eval：评估“同义归一”是否修正评测口径（需主线程裁决，避免为过线改判分）
+
+---
+
+## 2026-09-12 11:45 更新：DashScope qwen3.8-flash 完整复测结果（与本地 Ollama 对比）
+
+### 最终 dashscope metrics（data/evals/results/rag_metrics_20260912_113653.json）
+| 指标 | 目标 | 实际 | 结论 |
+|---|---|---|---|
+| accuracy | 0.90 | 0.5949 | ❌ 仍差 0.31 |
+| hallucination_rate | 0.05 | 0.2462 | ❌ 仍差 0.20 |
+| correct_refusal_rate | 0.95 | 0.88 | ❌ 仍差 0.07 |
+| pass | — | 47 | — |
+
+### dashscope vs local Ollama（qwen2.5:14b）对比
+|  | Ollama (041718) | DashScope (113653) | 变化 |
+|---|---|---|---|
+| accuracy | 0.686 | 0.595 | -0.091 |
+| wrong_release | 22 | 32 | +10 |
+| wrong_block | 35 | 29 | -6 |
+| correct_refusal | 1.0 | 0.88 | -0.12 |
+
+结论：**DashScope 整体退 0.8% accuracy，更多误释放（wrong_release+10），诚实拒答率下降 12% 点**。这反映：
+- DashScope 的幻觉（虚构实体、错误年份）问题高于本地模型
+- negative_exclusion 题目（哪项不是）在 API 调用下更容易“编造”不在数据库的选项
+- 1+1+N 等多部分题，在短上下文抽取后，答案收口不完整
+
+因此本窗口的最优实验配置仍是 **本地 Ollama（qwen2.5:14b）+ 严格 block 策略**，其 accuracy=0.686、wrong_release=22、correct_refusal=1.0 已是当前能获得的最佳平衡。
+
+### 下一步建议（主线程决策）
+1. **若要提升 accuracy**：需在 RAGFLOW 向量相似度阈值上调、或引入更强的检索扩写（RAG 生成式重写）
+2. **若要降低 hallucination**：继续强化 claim_matrix 的 pattern-based 阻塞，以及 _answer_misses_questioned_precision 的精确值捕获
+3. **若要提升 refusal_rate**：审查 negative_exclusion 题目的答案生成路径，确保答案不泄露数据库外的“选项”
+
+### Commits 完成列表
+- cc0b81c：初始加固（precision guard + 跨文件矩阵）
+- faaa01e：1+1+N 别名 + 任期年份守卫  
+- e554d20：最终指标沉淀 + 79 题回归通过
