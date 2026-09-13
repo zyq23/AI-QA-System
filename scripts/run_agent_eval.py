@@ -70,6 +70,21 @@ def summarize(per_case: list[dict]) -> dict:
     }
 
 
+def _retained_citation(c: dict) -> dict:
+    """Keep the Agent evidence contract intact in the report.
+
+    The agent tools serialize full provenance (chunk_id/document_id/page/
+    plain_text/ocr_quality/score); the eval report must not strip it, or the
+    evidence-chain acceptance can't be observed. Only plain_text/markdown_text
+    are length-capped to keep the report readable.
+    """
+    out = dict(c)
+    for key in ("plain_text", "markdown_text"):
+        if isinstance(out.get(key), str) and len(out[key]) > 600:
+            out[key] = out[key][:600]
+    return out
+
+
 def run(dataset_path: Path, output_dir: Path, limit: int | None = None, force_agent: bool = False) -> dict:
     container = build_container()
     agent_service = container.agent_service
@@ -105,7 +120,7 @@ def run(dataset_path: Path, output_dir: Path, limit: int | None = None, force_ag
                 "latency_ms": latency,
                 "tools_used": tools_used,
                 "steps": steps,
-                "citations": [{"file_name": c.get("file_name"), "page_or_slide": c.get("page_or_slide")} for c in citations[:10]],
+                "citations": [_retained_citation(c) for c in citations[:10]],
             }
         )
         print(
