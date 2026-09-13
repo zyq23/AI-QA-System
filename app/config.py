@@ -1,10 +1,49 @@
 from __future__ import annotations
 
+import os
+import sys
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+_PROD_DEFAULTS_NOTED = set()
+
+
+def _is_stub_or_test_mode() -> bool:
+    """Return True when the process is explicitly allowed to use stub credentials."""
+    return bool(os.environ.get("USE_STUB_ML", "").lower() in ("1", "true", "yes")) or \
+        os.environ.get("DISABLE_LLM", "").lower() in ("1", "true", "yes") or \
+        os.environ.get("PYTEST_CURRENT_TEST", "").strip() != ""
+
+
+def _prod_default_credential_error(name: str, value: str) -> ValueError | None:
+    """Reject well-known default credentials unless stub/test mode is active.
+
+    The check is per-field and stateless: in production mode every default
+    credential (ADMIN_TOKEN *and* SECRET_KEY) must raise, not just the first
+    one encountered.
+    """
+    if not _is_stub_or_test_mode() and value in ("change-me", "knowledge-qa-secret"):
+        return ValueError(
+            f"{name} is set to the insecure default '{value}'. "
+            "Set ADMIN_TOKEN and SECRET_KEY in .env before starting in production. "
+            "Override with USE_STUB_ML=1 for local dev or tests."
+        )
+    return None
+
+
+def _prod_default_credential_note(name: str, value: str) -> str | None:
+    """Emit a startup note (not fatal) when running in stub/test mode with defaults."""
+    if _is_stub_or_test_mode() and value in ("change-me", "knowledge-qa-secret") and name not in _PROD_DEFAULTS_NOTED:
+        _PROD_DEFAULTS_NOTED.add(name)
+        return (
+            f"[stub/test mode] {name} is using the default '{value}'. "
+            "Override ADMIN_TOKEN/SECRET_KEY in .env for production use."
+        )
+    return None
 
 
 class Settings(BaseSettings):
@@ -18,6 +57,28 @@ class Settings(BaseSettings):
     admin_token: str = "change-me"
     secret_key: str = "knowledge-qa-secret"
     default_locale: str = "zh-CN"
+
+    @field_validator("admin_token")
+    @classmethod
+    def _reject_default_admin_token(cls, value: str) -> str:
+        err = _prod_default_credential_error("ADMIN_TOKEN", value)
+        if err is not None:
+            raise err
+        note = _prod_default_credential_note("ADMIN_TOKEN", value)
+        if note:
+            print(note, file=sys.stderr)
+        return value
+
+    @field_validator("secret_key")
+    @classmethod
+    def _reject_default_secret_key(cls, value: str) -> str:
+        err = _prod_default_credential_error("SECRET_KEY", value)
+        if err is not None:
+            raise err
+        note = _prod_default_credential_note("SECRET_KEY", value)
+        if note:
+            print(note, file=sys.stderr)
+        return value
 
     project_root: Path = Field(default_factory=lambda: Path(__file__).resolve().parent.parent)
     data_dir: Path = Field(default_factory=lambda: Path("data"))
