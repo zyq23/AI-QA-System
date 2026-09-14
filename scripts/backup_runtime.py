@@ -93,20 +93,20 @@ def backup(backup_dir: Path, dry_run: bool = False) -> dict[str, Any]:
         if DB_PATH.exists():
             dst_db = target / "app.db"
             _copy_db(DB_PATH, dst_db)
-            manifest["paths"]["database"] = str(dst_db.relative_to(ROOT))
-            manifest["artifacts"]["app.db"] = {"path": str(dst_db), "sha256": _sha256(dst_db)}
+            manifest["paths"]["database"] = str(dst_db.relative_to(target))
+            manifest["artifacts"]["app.db"] = {"path": str(dst_db.relative_to(target)), "sha256": _sha256(dst_db)}
             manifest["counts"] = _sqlite_counts(DB_PATH)
         if CHROMA_DIR.exists():
             dst_chroma = target / "chroma"
             shutil.copytree(CHROMA_DIR, dst_chroma)
-            manifest["paths"]["chroma"] = str(dst_chroma.relative_to(ROOT))
+            manifest["paths"]["chroma"] = str(dst_chroma.relative_to(target))
             manifest["chroma_count"] = _chroma_count(dst_chroma)
-            manifest["artifacts"]["chroma"] = {"path": str(dst_chroma)}
+            manifest["artifacts"]["chroma"] = {"path": str(dst_chroma.relative_to(target))}
         if UPLOAD_DIR.exists():
             dst_uploads = target / "uploads"
             shutil.copytree(UPLOAD_DIR, dst_uploads)
-            manifest["paths"]["uploads"] = str(dst_uploads.relative_to(ROOT))
-            manifest["artifacts"]["uploads"] = {"path": str(dst_uploads)}
+            manifest["paths"]["uploads"] = str(dst_uploads.relative_to(target))
+            manifest["artifacts"]["uploads"] = {"path": str(dst_uploads.relative_to(target))}
         manifest_path = target / "manifest.json"
         manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"backup -> {target}\nmanifest -> {manifest_path}")
