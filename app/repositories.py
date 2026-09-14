@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import re
 from dataclasses import asdict
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Iterable
 from uuid import uuid4
@@ -340,19 +340,252 @@ class Repository:
                 (utc_now(), utc_now(), document_id),
             )
 
+    def list_queued_jobs(self, limit: int = 20) -> list[dict[str, Any]]:
+        with self.db.connect() as conn:
+            rows = conn.execute(
+                "SELECT * FROM jobs WHERE status = 'queued' AND cancelled_at IS NULL ORDER BY created_at LIMIT ?",
+                (limit,),
+            ).fetchall()
+            return [self._job_dict(row) for row in rows]
+
+    @staticmethod
+    def _job_dict(row: Any) -> dict[str, Any]:
+        item = dict(row)
+        item["payload"] = json.loads(item.pop("payload_json") or "{}")
+        item["result"] = json.loads(item.pop("result_json") or "{}")
+        return item
+
+    def job_is_cancelled(self, job_id: str) -> bool:
+        with self.db.connect() as conn:
+            row = conn.execute("SELECT status FROM jobs WHERE id = ?", (job_id,)).fetchone()
+            return row is None or row["status"] == "cancelled"
+
+    def requeue_job(self, job_id: str, *, message: str, not_before_seconds: float = 0.0) -> None:
+        # not_before is recorded in the message for the current SQLite worker;
+        # a future queue backend can promote it to a dedicated column.
+        with self.db.connect() as conn:
+            conn.execute(
+                "UPDATE jobs SET status = 'queued', owner = NULL, heartbeat_at = NULL, message = ?, updated_at = ? WHERE id = ?",
+                (message, utc_now(), job_id),
+            )
+
     def create_job(self, job_type: str, payload: dict[str, Any] | None = None) -> dict[str, Any]:
         job_id = uuid4().hex
         now = utc_now()
+        payload_json = json.dumps(payload or {}, ensure_ascii=False, sort_keys=True)
         with self.db.connect() as conn:
+            # Idempotency: a new queue request for the same (job_type, payload)
+            # supersedes any still-active duplicate instead of stacking two
+            # jobs that would process the same target twice.
             conn.execute(
                 """
-                INSERT INTO jobs (id, job_type, status, payload_json, created_at, updated_at)
-                VALUES (?, ?, 'queued', ?, ?, ?)
+                UPDATE jobs
+                SET status = 'cancelled', message = 'superseded by a newer identical job', cancelled_at = ?, updated_at = ?
+                WHERE job_type = ? AND payload_json = ? AND status IN ('queued', 'running')
                 """,
-                (job_id, job_type, json.dumps(payload or {}, ensure_ascii=False), now, now),
+                (now, now, job_type, payload_json),
+            )
+            conn.execute(
+                """
+                INSERT INTO jobs (id, job_type, status, payload_json, created_at, updated_at, attempt, max_attempts)
+                VALUES (?, ?, 'queued', ?, ?, ?, 0, 3)
+                """,
+                (job_id, job_type, payload_json, now, now),
             )
             row = conn.execute("SELECT * FROM jobs WHERE id = ?", (job_id,)).fetchone()
-            return dict(row)
+            return self._job_dict(row)
+
+    def get_job(self, job_id: str) -> dict[str, Any] | None:
+        with self.db.connect() as conn:
+            row = conn.execute("SELECT * FROM jobs WHERE id = ?", (job_id,)).fetchone()
+            if not row:
+                return None
+            item = dict(row)
+            item["payload"] = json.loads(item.pop("payload_json") or "{}")
+            item["result"] = json.loads(item.pop("result_json") or "{}")
+            return item
+
+    def claim_job(self, job_id: str, *, owner: str, max_attempts: int | None = None) -> dict[str, Any] | None:
+        """Atomically take ownership of a job for execution.
+
+        Claimable when queued, or when running with a stale lease and attempts
+        left (crash recovery). Returns None if the job is missing, terminal,
+        cancelled, still freshly owned, or out of attempts.
+        """
+        now = utc_now()
+        with self.db.connect() as conn:
+            row = conn.execute("SELECT * FROM jobs WHERE id = ?", (job_id,)).fetchone()
+            if not row:
+                return None
+            job = dict(row)
+            attempts_cap = max_attempts if max_attempts is not None else int(job.get("max_attempts") or 3)
+            if job["attempt"] >= attempts_cap:
+                return None
+            stale_before = (datetime.now(timezone.utc) - timedelta(minutes=5)).isoformat()
+            result = conn.execute(
+                """
+                UPDATE jobs
+                SET status = 'running', attempt = attempt + 1, owner = ?, heartbeat_at = ?,
+                    max_attempts = ?, message = NULL, updated_at = ?
+                WHERE id = ?
+                  AND (
+                        (status = 'queued' AND cancelled_at IS NULL)
+                        OR (status = 'running' AND cancelled_at IS NULL
+                            AND COALESCE(heartbeat_at, updated_at) < ?)
+                  )
+                """,
+                (owner, now, attempts_cap, now, job_id, stale_before),
+            )
+            if result.rowcount == 0:
+                return None
+            row = conn.execute("SELECT * FROM jobs WHERE id = ?", (job_id,)).fetchone()
+            return self._job_dict(row)
+
+    def heartbeat_job(self, job_id: str, *, owner: str) -> bool:
+        with self.db.connect() as conn:
+            result = conn.execute(
+                "UPDATE jobs SET heartbeat_at = ?, updated_at = ? WHERE id = ? AND owner = ? AND status = 'running'",
+                (utc_now(), utc_now(), job_id, owner),
+            )
+            return result.rowcount > 0
+
+    def complete_job(
+        self,
+        job_id: str,
+        *,
+        owner: str,
+        message: str | None = None,
+        result: dict[str, Any] | None = None,
+    ) -> None:
+        self._finish_owned_job(job_id, owner=owner, status="completed", message=message, result=result)
+
+    def fail_job(self, job_id: str, *, owner: str, message: str | None = None) -> None:
+        self._finish_owned_job(job_id, owner=owner, status="failed", message=message, result=None)
+
+    def _finish_owned_job(
+        self,
+        job_id: str,
+        *,
+        owner: str,
+        status: str,
+        message: str | None,
+        result: dict[str, Any] | None,
+    ) -> None:
+        with self.db.connect() as conn:
+            row = conn.execute("SELECT owner FROM jobs WHERE id = ?", (job_id,)).fetchone()
+            if row is None:
+                raise RuntimeError(f"job {job_id} not found")
+            if (row["owner"] or "") != owner:
+                raise RuntimeError(f"job {job_id} is owned by {row['owner']!r}, not {owner!r}")
+            conn.execute(
+                "UPDATE jobs SET status = ?, message = ?, result_json = ?, heartbeat_at = ?, updated_at = ? WHERE id = ?",
+                (status, message, json.dumps(result or {}, ensure_ascii=False), utc_now(), utc_now(), job_id),
+            )
+
+    def cancel_job(self, job_id: str) -> bool:
+        """Request cancellation of an active job; workers see it via claim_job."""
+        now = utc_now()
+        with self.db.connect() as conn:
+            result = conn.execute(
+                "UPDATE jobs SET status = 'cancelled', cancelled_at = ?, updated_at = ? WHERE id = ? AND status IN ('queued', 'running')",
+                (now, now, job_id),
+            )
+            return result.rowcount > 0
+
+    def latest_active_job(self, job_type: str, payload: dict[str, Any]) -> dict[str, Any] | None:
+        payload_json = json.dumps(payload or {}, ensure_ascii=False, sort_keys=True)
+        with self.db.connect() as conn:
+            row = conn.execute(
+                """
+                SELECT * FROM jobs
+                WHERE job_type = ? AND payload_json = ? AND status IN ('queued', 'running')
+                ORDER BY created_at DESC LIMIT 1
+                """,
+                (job_type, payload_json),
+            ).fetchone()
+            return dict(row) if row else None
+
+    def reclaim_stale_jobs(self, *, stale_after_seconds: int = 3600) -> list[str]:
+        """Recover jobs whose worker died mid-run (running with stale heartbeat).
+
+        With attempts left they go back to 'queued' (owner cleared) for the next
+        claimer; exhausted jobs are moved to 'failed' (dead-letter). Returns the
+        ids of jobs marked failed.
+        """
+        cutoff = (datetime.now(timezone.utc) - timedelta(seconds=stale_after_seconds)).isoformat()
+        now = utc_now()
+        failed_ids: list[str] = []
+        with self.db.connect() as conn:
+            rows = conn.execute(
+                """
+                SELECT id, attempt, max_attempts FROM jobs
+                WHERE status = 'running' AND COALESCE(heartbeat_at, updated_at) < ?
+                """,
+                (cutoff,),
+            ).fetchall()
+            for row in rows:
+                if int(row["attempt"]) >= int(row["max_attempts"] or 3):
+                    conn.execute(
+                        "UPDATE jobs SET status = 'failed', message = 'attempts exhausted after lost lease', updated_at = ? WHERE id = ?",
+                        (now, row["id"]),
+                    )
+                    failed_ids.append(row["id"])
+                else:
+                    conn.execute(
+                        "UPDATE jobs SET status = 'queued', owner = NULL, message = 'requeued after lost lease', updated_at = ? WHERE id = ?",
+                        (now, row["id"]),
+                    )
+        return failed_ids
+
+    def fail_stale_queued_jobs(self, *, stale_after_seconds: int = 24 * 3600) -> list[str]:
+        """Mark queued jobs that were never picked up (e.g. process died before
+        BackgroundTasks ran them) as failed, so backlog metrics stay honest."""
+        cutoff = (datetime.now(timezone.utc) - timedelta(seconds=stale_after_seconds)).isoformat()
+        now = utc_now()
+        with self.db.connect() as conn:
+            rows = conn.execute(
+                "SELECT id FROM jobs WHERE status = 'queued' AND updated_at < ?",
+                (cutoff,),
+            ).fetchall()
+            ids = [row["id"] for row in rows]
+            for job_id in ids:
+                conn.execute(
+                    "UPDATE jobs SET status = 'failed', message = 'never picked up (stale queued)', updated_at = ? WHERE id = ?",
+                    (now, job_id),
+                )
+        return ids
+
+    def job_backlog_stats(self) -> dict[str, Any]:
+        now = datetime.now(timezone.utc)
+        with self.db.connect() as conn:
+            counts = dict(
+                conn.execute("SELECT status, COUNT(*) FROM jobs GROUP BY status").fetchall()
+            )
+            by_type_rows = conn.execute(
+                "SELECT job_type, status, COUNT(*) AS n FROM jobs GROUP BY job_type, status"
+            ).fetchall()
+            oldest = conn.execute(
+                "SELECT MIN(created_at) FROM jobs WHERE status = 'queued'"
+            ).fetchone()[0]
+        by_type: dict[str, dict[str, int]] = {}
+        for row in by_type_rows:
+            stats = by_type.setdefault(row["job_type"], {})
+            stats[row["status"]] = int(row["n"])
+        oldest_age = None
+        if oldest:
+            try:
+                oldest_age = max(0, int((now - datetime.fromisoformat(oldest)).total_seconds()))
+            except ValueError:
+                oldest_age = None
+        return {
+            "queued": int(counts.get("queued", 0)),
+            "running": int(counts.get("running", 0)),
+            "completed": int(counts.get("completed", 0)),
+            "failed": int(counts.get("failed", 0)),
+            "cancelled": int(counts.get("cancelled", 0)),
+            "by_type": by_type,
+            "oldest_queued_age_seconds": oldest_age,
+        }
 
     def update_job(
         self,
