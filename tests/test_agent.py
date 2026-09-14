@@ -13,7 +13,8 @@ from app.agent.controller import AgentController
 from app.agent.planner import build_plan, classify_intent
 from app.agent.service import AgentService
 from app.agent.state import AgentResult
-from app.agent.tools import CalculatorTool, DateUtilsTool, NoAnswerTool
+from app.agent.tools import CalculatorTool, DateUtilsTool, NoAnswerTool, MultiDocCompareTool, _serialize_hits
+from app.domain import RetrievalHit
 from app.main import build_container
 
 
@@ -45,10 +46,71 @@ def test_date_utils_weekday_and_offset():
     assert "10 天" in diff["observation"]
 
 
+def test_date_plan_preserves_offset_and_weekday_operation(app_env: Path):
+    plan = build_plan("2026-09-10后3天是周几？", None, [], use_llm_planner=False)
+    assert plan.steps[0].tool == "date_utils"
+    assert plan.steps[0].args == {"base": "2026-09-10", "weekday_of": "2026-09-13", "offset_days": 3}
+
+
 def test_no_answer_tool_returns_refusal_marker(app_env: Path):
     tool = NoAnswerTool()
     result = tool.run({"reason": "库中无此数据"})
     assert result["payload"]["no_answer"] is True
+
+
+def test_serialize_hits_preserves_evidence_provenance():
+    hit = RetrievalHit(
+        chunk_id="chunk-1", document_id="doc-1", version_id="ver-1",
+        file_name="demo.pdf", page_or_slide="page-2", section_path="A > B",
+        snippet="短证据", markdown_text="**完整证据**", plain_text="完整证据文本",
+        trust_level="internal", source_type="pdf", fusion_score=0.4,
+        rerank_score=0.8, ocr_quality=0.73,
+    )
+    serialized = _serialize_hits([hit])[0]
+    assert serialized["chunk_id"] == "chunk-1"
+    assert serialized["document_id"] == "doc-1"
+    assert serialized["version_id"] == "ver-1"
+    assert serialized["plain_text"] == "完整证据文本"
+    assert serialized["markdown_text"] == "**完整证据**"
+    assert serialized["ocr_quality"] == 0.73
+    assert serialized["page_or_slide"] == "page-2"
+
+
+def test_multidoc_compare_returns_top_level_evidence_contract():
+    class _Llm:
+        def _extract_focus_terms(self, query):
+            return [query]
+
+    class _Chat:
+        llm_service = _Llm()
+
+        def _multi_query_retrieve(self, query, analysis, top_k):
+            hit = RetrievalHit(
+                chunk_id=f"{query}-chunk", document_id=f"{query}-doc", version_id="v1",
+                file_name=f"{query}.pdf", page_or_slide="page-1", section_path="root",
+                snippet=f"{query} evidence", markdown_text=f"{query} evidence",
+                plain_text=f"{query} evidence", trust_level="internal", source_type="pdf",
+                fusion_score=0.7, rerank_score=0.8,
+            )
+            return [hit], True
+
+    result = MultiDocCompareTool(_Chat()).run({"subject_a": "A", "subject_b": "B", "attribute": "型号"})
+    payload = result["payload"]
+    assert payload["grounded"] is True
+    assert len(payload["hits"]) == 2
+    assert set(payload["sides"]) == {"a", "b"}
+    assert payload["comparison"]["sides"]["a"]["claims"][0]["citations"]
+    assert payload["missing_fields"] == []
+
+
+def test_health_probes_report_liveness_and_readiness(app_env: Path, client):
+    assert client.get("/live").status_code == 200
+    ready = client.get("/ready")
+    assert ready.status_code == 200
+    assert ready.json()["status"] == "ready"
+    health = client.get("/healthz")
+    assert health.status_code == 200
+    assert health.json()["status"] == "ok"
 
 
 # ------------------------------------------------------------------- planner
@@ -170,6 +232,13 @@ def test_controller_timeout_stops_loop():
     elapsed = time.perf_counter() - started
     assert elapsed < 3.5  # hard wall-clock floor respected
     assert result.grounded is False
+    assert result.terminal_status == "no_answer"
+
+
+def test_controller_marks_tool_error_terminal_status():
+    ctrl = _controller(tools={"knowledge_search": _fake_tool("knowledge_search", raise_error=True)})
+    result = ctrl.execute("会崩的问题", "conv1")
+    assert result.terminal_status == "exhausted_error"
 
 
 def test_controller_bounded_replan():

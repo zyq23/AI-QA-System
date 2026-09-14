@@ -187,11 +187,26 @@ uv run --python 3.11 python -m app.cli download-models
 
 ## 评测与回归
 
-仓库内已经提供评测资产与脚本：
+仓库内提供三套互补的评测入口，均需显式指定数据集，避免误跑历史默认集：
 
 ```bash
-uv run --python 3.11 python scripts/run_eval.py
+# 1. 79 题质量回归护栏（FROZEN + GEN）
+EVAL_API_BASE_URL= RETRIEVAL_BACKEND=local \
+  uv run --python 3.11 python scripts/run_eval.py \
+  --dataset data/evals/kb_quality_full_v1.json --output-dir data/evals/results
+
+# 2. 130 题企业级难例集 RAG 指标（Recall/MRR/准确率/幻觉率/拒答率）
+EVAL_API_BASE_URL= RETRIEVAL_BACKEND=local \
+  uv run --python 3.11 python scripts/run_rag_metrics.py \
+  --dataset data/evals/hard_eval_v1.json --output-dir data/evals/results --top-k 10
+
+# 3. Agent 评测（routed 与 forced 两种模式）
+EVAL_API_BASE_URL= RETRIEVAL_BACKEND=local \
+  uv run --python 3.11 python scripts/run_agent_eval.py \
+  --dataset data/evals/hard_eval_v1.json --output-dir data/evals/results
 ```
+
+`scripts/run_eval.py` 的默认数据集为 `data/evals/full_kb_minimal_regression_v1.json`（27 题历史冻结集），不等同于上述 79 题回归或 130 题难例集，使用时请显式传入 `--dataset`。
 
 评测数据位于：
 

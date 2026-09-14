@@ -51,3 +51,5 @@ class AgentResult:
     escalated: bool = False
     followup_question: str | None = None
     answer_run_id: str | None = None
+    deterministic_evidence: dict[str, Any] = field(default_factory=dict)
+    terminal_status: str | None = None

@@ -1361,3 +1361,43 @@
 
 ### Revisit Trigger
 - 答案生成层多部分收口改造后复跑 agent_eval；工具数量超过 10 或出现图状依赖时重评 LangGraph 取舍
+
+---
+
+## D-040：2026-09-13 文档与接力基线校准
+
+### Decision
+- 当前窗口以工作树最新实测结果为准：hard 130 题 accuracy `0.7246`、hallucination `0.1462`、correct refusal `1.0`；79 题 formal `wrong_release=4`，不再沿用旧的 `0.686/0.169` 或 WR=3 口径
+- 旧阶段报告与旧窗口计划移入 `docs/archive/`、`.zcode/plans/archive/`，不物理删除 Git 历史；现行接力入口为 `docs/next-round-brief.md` 与 `docs/codex-handoff.md`
+- 下一轮优先优化答案收口与 OCR/长上下文误杀，不放松现有 grounded/claim 守卫，不把未达标指标包装为已完成
+
+### Evidence
+- `data/evals/results/rag_metrics_20260912_151042.json`
+- `data/evals/results/eval_20260912_155138_formal_summary.json`
+
+### Revisit Trigger
+- 生成新的 hard、79 题和 Agent 结果后，必须以新结果文件更新接力文档，再调整当前优先级
+
+---
+
+## D-041：企业级双轨门禁与生产就绪定义（2026-09-13 接受）
+
+### Decision
+- 项目从本轮起采用“质量轨 + 生产轨”双轨推进；只有质量、可靠性、安全、可观测性/运维、数据保护/部署门禁全部通过，才允许对外称为“企业级生产就绪”。
+- 当前状态明确为“单机/内网验证态”：hard accuracy `0.7246`、hallucination `0.1462`、wrong_release `19`，79 题 FROZEN wrong_release `4`，生产轨 P0 尚未完成；不得包装为已达标。
+- 质量评测正式证据继续使用本地 Ollama `qwen2.5:14b` + `RETRIEVAL_BACKEND=local` + 空 `EVAL_API_BASE_URL`；RAGFlow 继续遵守 D-034，仅作现象记录。
+- 新增正式 workstream：`WS-QA`、`WS-Agent`、`WS-Eval`、`WS-Runtime`、`WS-Reliability`、`WS-Security`、`WS-Deploy`。它们的边界、门禁和产物以 `docs/next-round-brief.md` 为准，不覆盖既有 WS-01~WS-05 历史记录。
+- 判分口径不得为过线而修改：任何 accuracy/hallucination 口径变更，必须先完成每类 wrong_release/wrong_block 至少 20% 人工抽样，说明规则判分与人工判断差异，并另行记录决策。
+
+### Reasons
+- 当前计划已覆盖 RAG 指标和答案收口，但企业级落地还需要鉴权、任务可靠性、迁移、健康探针、可观测性、灾备、部署和成本治理。
+- Agent 代码审查发现 Evidence/Claim contract、对比题顶层证据、请求隔离、工具超时与 schema 校验尚未闭环；仅有 130 题 RAG 指标不能证明 Agent 生产质量。
+- 单测、局部样例或 Recall 达标都不能替代生产 SLO、安全和恢复证据。双轨门禁能防止“算法指标达标但不可上线”或“服务可运行但会幻觉”的单维度误判。
+
+### Impact
+- `docs/next-round-brief.md` 成为当前执行计划：先冻结可追溯基线，再并行质量 P0 与生产 P0，最后按门禁矩阵验收。
+- 所有行为变更必须跑全量 pytest、hard、79 题、Agent routed/forced，并落盘结果、commit 和 sha256；未测量项不算通过。
+- 在 G-Q/G-R/G-T/G-S/G-O/G-D 任一门禁未通过前，README、AGENTS 和对外汇报不得写“企业级生产就绪”。
+
+### Revisit Trigger
+- 生成新的 hard/79/Agent 结果、完成生产 P0 或发现门禁目标不适合实际容量后，由主线程基于证据调整目标并追加新决策；不得静默改写本决策。

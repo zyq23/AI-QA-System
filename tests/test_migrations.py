@@ -233,22 +233,67 @@ def test_job_worker_executes_handler_and_records_completion(tmp_path: Path):
     assert repo.get_job(job["id"])["status"] == "completed"
 
 
-def test_job_worker_requeues_then_dead_letters_on_failure(tmp_path: Path):
+def test_worker_preserves_handler_reported_status(tmp_path: Path):
+    """Handlers that self-report must retain their rich result payload."""
     from app.services.job_worker import JobWorker
 
     repo = _repo(tmp_path)
-    job = repo.create_job("flaky", {})
-    seen = {"n": 0}
-    worker = JobWorker(repo, owner="worker-1", heartbeat_interval_seconds=1, backoff_base_seconds=0)
+    job = repo.create_job("self_report", {})
+    worker = JobWorker(repo, owner="worker-1", heartbeat_interval_seconds=1)
 
     def handler(payload, context):
-        seen["n"] += 1
-        raise RuntimeError("bad")
+        repo.update_job(context.job_id, status="completed", message="rich message", result={"chunks": 7})
 
-    worker.register("flaky", handler)
-    assert worker.run_one(job["id"]) == "requeued"
-    assert repo.get_job(job["id"])["status"] == "queued"
-    assert worker.run_one(job["id"]) == "requeued"
-    assert worker.run_one(job["id"]) == "failed"
-    assert repo.get_job(job["id"])["status"] == "failed"
-    assert seen["n"] == 3
+    worker.register("self_report", handler)
+    assert worker.run_one(job["id"]) == "completed"
+    stored = repo.get_job(job["id"])
+    assert stored["message"] == "rich message"
+    assert stored["result"] == {"chunks": 7}
+
+
+def test_ingestion_background_adapter_uses_durable_worker(tmp_path: Path):
+    """BackgroundTasks delegates to the worker, which claims and completes the job."""
+    from app.services.ingestion import IngestionService
+    from app.services.job_worker import JobWorker
+
+    repo = _repo(tmp_path)
+
+    class Parser:
+        def parse(self, path):
+            from app.domain import ParsedDocument, SourceBlock
+            return ParsedDocument(title="t", blocks=[SourceBlock(page_or_slide="p1", section_path="s", content="hello")], raw_markdown="hello", parser_name="stub")
+
+    class Chunker:
+        target_size = 100
+        overlap = 10
+        def chunk(self, parsed, context):
+            from app.domain import ChunkRecord
+            return [ChunkRecord("c1", context.document_id, context.version_id, context.file_name, context.source_type, context.trust_level, "p1", "s", 0, "h", "hello", "hello", "hello")]
+
+    class Embed:
+        def embed_documents(self, texts): return [[0.0] for _ in texts]
+
+    class Store:
+        def delete_version(self, version_id): pass
+        def upsert_chunks(self, chunks, embeddings): pass
+
+    service = IngestionService(repo, Parser(), Chunker(), Embed(), Store(), tmp_path / "up")
+    worker = JobWorker(repo, owner="worker-test", heartbeat_interval_seconds=1)
+    worker.register("ingest_document", service.process_job)
+    worker.register("reindex_document", service.process_job)
+    service.attach_worker(worker)
+    doc = repo.create_or_get_document("T", "t.txt", "upload", "internal")
+    version_id, _ = service._persist_upload(doc["id"], "t.txt", b"hello")
+
+    class Background:
+        tasks = []
+        def add_task(self, fn, *args): self.tasks.append((fn, args))
+
+    bg = Background()
+    service.reindex_version(version_id, background_tasks=bg)
+    fn, args = bg.tasks[-1]
+    fn(*args)
+    latest = repo.latest_job(job_type="reindex_document")
+    assert latest["status"] == "completed"
+    assert latest["attempt"] == 1
+    assert latest["owner"] == "worker-test"

@@ -71,6 +71,15 @@ class JobWorker:
     def register(self, job_type: str, handler: JobHandler) -> None:
         self._handlers[job_type] = handler
 
+    def enqueue_background(self, job_id: str) -> None:
+        """Compatibility adapter for FastAPI BackgroundTasks.
+
+        The HTTP response may return immediately, but the actual execution is
+        still claimed through the durable lease path rather than calling a
+        service handler directly.
+        """
+        self.run_one(job_id)
+
     # -- single execution ---------------------------------------------------
 
     def run_one(self, job_id: str) -> str:
@@ -112,8 +121,12 @@ class JobWorker:
             if heartbeat_thread.is_alive():
                 heartbeat_thread.join(timeout=2.0)
         finished = self.repository.get_job(job_id)
-        if finished and finished["status"] == "cancelled":
-            return "cancelled"
+        if finished and finished["status"] in ("completed", "failed", "cancelled"):
+            # Legacy service handlers (process_version / evaluation run_job)
+            # finish the row themselves with a rich message and result payload.
+            # Do not overwrite that — the worker's job is the lease, not the
+            # business bookkeeping, for handlers that self-report.
+            return finished["status"]
         self.repository.complete_job(job_id, owner=self.owner, message="done")
         return "completed"
 

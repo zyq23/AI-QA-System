@@ -84,9 +84,13 @@ class AgentService:
                 citations=[
                     {
                         "file_name": h.file_name,
+                        "document_id": h.document_id,
                         "page_or_slide": h.page_or_slide,
                         "section_path": h.section_path,
+                        "chunk_id": h.chunk_id,
+                        "plain_text": h.plain_text,
                         "snippet": h.snippet,
+                        "ocr_quality": round(float(getattr(h, "ocr_quality", 1.0) or 0.0), 3),
                         "score": round(float(h.rerank_score or h.fusion_score or 0.0), 3),
                     }
                     for h in payload.citations
@@ -135,7 +139,7 @@ class AgentService:
                 observation=str(step.get("observation") or "")[:2000],
                 duration_ms=int(step.get("duration_ms") or 0),
             )
-        status = "completed" if result.grounded else ("clarification" if result.followup_question else "no_answer")
+        status = result.terminal_status or ("completed" if result.grounded else ("clarification" if result.followup_question else "no_answer"))
         self.sessions.complete_session(
             result.session_id,
             status=status,
@@ -144,6 +148,7 @@ class AgentService:
                 "answer": result.answer,
                 "grounded": result.grounded,
                 "confidence_note": result.confidence_note,
+                "deterministic_evidence": result.deterministic_evidence,
             },
             slots={"question": question},
         )

@@ -605,3 +605,12 @@ class EvaluationService:
         except Exception as exc:
             self.repository.update_job(job_id, status="failed", message=str(exc), result={})
             raise
+
+    def process_job(self, payload: dict[str, Any], context) -> None:
+        """Job worker handler. Looks up dataset from payload and reuses run_job,
+        which sets its own status transitions; the worker still provides lease
+        and retry semantics so a crash mid-run becomes reclaimable."""
+        context.check_cancelled()
+        dataset = payload.get("dataset")
+        dataset_path = Path(dataset) if dataset else None
+        self.run_job(context.job_id, dataset_path=dataset_path)

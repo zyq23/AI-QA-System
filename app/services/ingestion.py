@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 from pathlib import Path
+from typing import Any
 
 from fastapi import BackgroundTasks, UploadFile
 
@@ -31,6 +32,7 @@ class IngestionService:
         self.embedding_service = embedding_service
         self.vector_store = vector_store
         self.upload_dir = upload_dir
+        self.job_worker: Any | None = None
 
     async def register_uploads(
         self,
@@ -51,7 +53,10 @@ class IngestionService:
             version_ids.append(version_id)
             job_ids.append(job_id)
             if background_tasks is not None:
-                background_tasks.add_task(self.process_version, version_id, job_id)
+                if self.job_worker is not None:
+                    background_tasks.add_task(self.job_worker.enqueue_background, job_id)
+                else:
+                    background_tasks.add_task(self.process_version, version_id, job_id)
         return {"document_ids": document_ids, "versions": version_ids, "job_ids": job_ids}
 
     def _persist_upload(self, document_id: str, original_filename: str, raw: bytes) -> tuple[str, str]:
@@ -74,6 +79,20 @@ class IngestionService:
         job = self.repository.create_job("ingest_document", {"version_id": version["id"]})
         self.repository.update_job(job["id"], status="queued", message="文档已入队")
         return version["id"], job["id"]
+
+    def process_job(self, payload: dict, context: Any) -> None:
+        """Worker handler for ingest_document / reindex_document jobs.
+
+        The durable lease (attempt/owner/heartbeat) is held by the worker;
+        process_version keeps updating the same job_id for its fine-grained
+        progress messages, so status stays consistent whether a job is run
+        inline via the BackgroundTasks adapter or by the poll loop.
+        """
+        context.check_cancelled()
+        self.process_version(str(payload["version_id"]), context.job_id)
+
+    def attach_worker(self, worker: Any) -> None:
+        self.job_worker = worker
 
     def process_version(self, version_id: str, job_id: str) -> None:
         version = self.repository.get_version(version_id)
@@ -119,7 +138,10 @@ class IngestionService:
     def reindex_version(self, version_id: str, background_tasks: BackgroundTasks | None = None) -> str:
         job = self.repository.create_job("reindex_document", {"version_id": version_id})
         if background_tasks is not None:
-            background_tasks.add_task(self.process_version, version_id, job["id"])
+            if self.job_worker is not None:
+                background_tasks.add_task(self.job_worker.enqueue_background, job["id"])
+            else:
+                background_tasks.add_task(self.process_version, version_id, job["id"])
         else:
             self.process_version(version_id, job["id"])
         return job["id"]
@@ -153,7 +175,10 @@ class IngestionService:
             version_ids.append(version_id)
             job_ids.append(job_id)
             if background_tasks is not None:
-                background_tasks.add_task(self.process_version, version_id, job_id)
+                if self.job_worker is not None:
+                    background_tasks.add_task(self.job_worker.enqueue_background, job_id)
+                else:
+                    background_tasks.add_task(self.process_version, version_id, job_id)
             else:
                 self.process_version(version_id, job_id)
         return {"document_ids": document_ids, "versions": version_ids, "job_ids": job_ids}

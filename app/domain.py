@@ -58,6 +58,7 @@ class RetrievalHit:
     source_type: str
     fusion_score: float
     rerank_score: float
+    ocr_quality: float = 1.0
     raw_scores: dict[str, Any] = field(default_factory=dict)
 
 

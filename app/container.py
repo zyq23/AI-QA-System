@@ -17,6 +17,7 @@ from app.services.ragflow_sync import RagflowSyncService
 from app.services.retrieval import RetrievalService
 from app.services.vector_store import VectorStoreService
 from app.services.version_cleanup import VersionCleanupService
+from app.services.job_worker import JobWorker
 
 
 @dataclass(slots=True)
@@ -37,3 +38,4 @@ class ServiceContainer:
     agent_service: AgentService | None = None
     ragflow_sync_service: RagflowSyncService | None = None
     version_cleanup_service: VersionCleanupService | None = None
+    job_worker: JobWorker | None = None

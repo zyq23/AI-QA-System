@@ -41,12 +41,23 @@ class BaseTool(ABC):
 def _serialize_hits(hits: list[RetrievalHit], limit: int = 6) -> list[dict[str, Any]]:
     out = []
     for hit in hits[:limit]:
+        quality = getattr(hit, "ocr_quality", None)
+        if quality is None:
+            quality = hit.raw_scores.get("ocr_quality", 1.0)
         out.append(
             {
+                "chunk_id": hit.chunk_id,
+                "document_id": hit.document_id,
+                "version_id": hit.version_id,
                 "file_name": hit.file_name,
                 "page_or_slide": hit.page_or_slide,
                 "section_path": hit.section_path,
+                "plain_text": hit.plain_text,
+                "markdown_text": hit.markdown_text,
                 "snippet": (hit.snippet or hit.plain_text)[:400],
+                "trust_level": hit.trust_level,
+                "source_type": hit.source_type,
+                "ocr_quality": round(float(quality or 0.0), 3),
                 "score": round(float(hit.rerank_score or hit.fusion_score or 0.0), 3),
             }
         )
@@ -216,10 +227,47 @@ class MultiDocCompareTool(BaseTool):
                 "hits": _serialize_hits(hits, limit=top_k),
                 "combined": "\n".join(h.plain_text for h in hits[:4])[:1200],
             }
+        all_hits: list[dict[str, Any]] = []
+        for side in sides.values():
+            for hit in side["hits"]:
+                if hit not in all_hits:
+                    all_hits.append(hit)
+        grounded = all(bool(side["grounded"] and side["hits"]) for side in sides.values())
+        comparison = {
+            "attribute": attribute,
+            "sides": {
+                label: {
+                    "subject": side["subject"],
+                    "claims": [
+                        {
+                            "subject": side["subject"],
+                            "attribute": attribute,
+                            "evidence": side["hits"],
+                            "citations": side["hits"],
+                        }
+                    ],
+                    "citations": side["hits"],
+                    "grounded": bool(side["grounded"] and side["hits"]),
+                }
+                for label, side in sides.items()
+            },
+            "missing_fields": [
+                label for label, side in sides.items() if not side["grounded"] or not side["hits"]
+            ],
+        }
         observation = "\n\n".join(
             f"【{side['subject']}】接地={side['grounded']}\n{side['combined'][:400]}" for side in sides.values()
         )
-        return {"observation": observation, "payload": {"sides": sides}}
+        return {
+            "observation": observation,
+            "payload": {
+                "grounded": grounded,
+                "hits": all_hits,
+                "sides": sides,
+                "comparison": comparison,
+                "missing_fields": comparison["missing_fields"],
+            },
+        }
 
 
 class CalculatorTool(BaseTool):

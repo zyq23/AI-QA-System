@@ -45,7 +45,7 @@ class AgentController:
         self.max_steps = max_steps
         self.timeout_seconds = timeout_seconds
         self.use_llm_planner = use_llm_planner
-        self._pipeline_citations: list[dict[str, Any]] = []
+        # Removed shared state; all citations must be passed per-request
 
     def tool_specs(self) -> list[dict[str, Any]]:
         return [tool.to_spec() for tool in self.tools.values()]
@@ -78,6 +78,7 @@ class AgentController:
             call = self._run_step(planned, conversation_id)
             steps.append(call)
             step_index += 1
+            # Collect tool outputs for evidence chain and deterministic results
             citations.extend(call.payload.get("hits", []) if isinstance(call.payload, dict) else [])
             observation = call.observation
             if self._is_terminal(plan, call):
@@ -96,12 +97,16 @@ class AgentController:
                         call = self._run_step(planned, conversation_id)
                         steps.append(call)
                         step_index += 1
+                        # Attach calculator/date payloads to the step evidence unchanged.
                         citations.extend(call.payload.get("hits", []) if isinstance(call.payload, dict) else [])
                         if self._is_terminal(replanned, call):
                             break
 
         elapsed_ms = int((time.perf_counter() - started) * 1000)
-        return self._finalize(question, conversation_id, plan, steps, citations, elapsed_ms)
+        terminal_status = self._terminal_status(steps, step_index, started)
+        result = self._finalize(question, conversation_id, plan, steps, citations, elapsed_ms)
+        result.terminal_status = terminal_status
+        return result
 
     def _run_step(self, planned: PlanStep, conversation_id: str) -> ToolCall:
         tool = self.tools.get(planned.tool)
@@ -198,6 +203,33 @@ class AgentController:
         return AgentPlan(intent="replan", confidence=0.5, steps=steps_out, rationale="LLM 重规划")
 
     # -------------------------------------------------------------- finalize
+    def _terminal_status(
+        self,
+        steps: list[ToolCall],
+        step_index: int,
+        started: float,
+    ) -> str:
+        """Classify why execution stopped, distinct from the answer content.
+
+        Order matters: a genuine conclusion wins; otherwise report the first
+        binding limit (timeout, then step budget, then error) so operators can
+        tell a slow-but-correct run from one that was cut off.
+        """
+        last = steps[-1] if steps else None
+        if last is not None and last.tool == "clarification":
+            return "clarification"
+        if last is not None and last.tool == "no_answer":
+            return "no_answer"
+        if last is not None and self._has_conclusion(steps):
+            return "completed"
+        if time.perf_counter() - started > self.timeout_seconds:
+            return "timeout"
+        if step_index >= self.max_steps:
+            return "step_budget"
+        if last is not None and not last.ok:
+            return "exhausted_error"
+        return "no_answer"
+
     def _finalize(
         self,
         question: str,
@@ -206,6 +238,7 @@ class AgentController:
         steps: list[ToolCall],
         citations: list[dict[str, Any]],
         elapsed_ms: int,
+        pipeline_citations: list[dict[str, Any]] | None = None,
     ) -> AgentResult:
         step_records = [
             {
@@ -225,6 +258,7 @@ class AgentController:
             if call.tool == "clarification":
                 followup = call.payload.get("clarification_question") or call.observation
         no_answer_final = bool(steps) and steps[-1].tool == "no_answer"
+        deterministic_call = next((call for call in reversed(steps) if call.tool in {"calculator", "date_utils"} and call.ok), None)
 
         knowledge_calls = [call for call in steps if call.tool in {"knowledge_search", "multi_doc_compare", "document_detail"}]
         grounded = any(call.payload.get("grounded") for call in steps if call.tool in {"knowledge_search", "multi_doc_compare"})
@@ -236,21 +270,31 @@ class AgentController:
             for hit in call.payload.get("hits", []):
                 if hit not in all_hits:
                     all_hits.append(hit)
-        # The production pipeline's own citations are the authoritative evidence
-        # for the final answer; prefer them over raw tool hits.
-        if self._pipeline_citations:
-            all_hits = self._pipeline_citations
+        pipeline_citations: list[dict[str, Any]] = []
+        for call in knowledge_calls:
+            if call.tool in {"knowledge_search", "multi_doc_compare"}:
+                for h in call.payload.get("hits", []):
+                    if h not in pipeline_citations:
+                        pipeline_citations.append(h)
+        if pipeline_citations:
+            all_hits = pipeline_citations
 
         if followup:
             answer = followup
             grounded = False
             confidence_note = "need_clarification"
+        elif deterministic_call is not None:
+            answer = str(deterministic_call.payload.get("rendered") or deterministic_call.observation).strip()
+            grounded = True
+            confidence_note = "deterministic_tool_evidence"
         elif no_answer_final or not grounded:
             answer = "当前知识库中没有找到相关信息。"
             grounded = False
             confidence_note = "no_grounded_evidence"
         else:
-            answer = self._compose_final_answer(question, steps, knowledge_calls)
+            answer, pipeline_hits = self._compose_final_answer(question, conversation_id, steps, knowledge_calls)
+            if pipeline_hits:
+                all_hits = pipeline_hits
             grounded = bool(answer) and not self._signals_insufficient(answer)
             confidence_note = "grounded_evidence_chain"
             if not grounded:
@@ -270,9 +314,14 @@ class AgentController:
             confidence_note=confidence_note,
             escalated=not grounded and not followup,
             followup_question=followup,
+            deterministic_evidence=(
+                {"tool": deterministic_call.tool, **deterministic_call.payload}
+                if deterministic_call is not None
+                else {}
+            ),
         )
 
-    def _compose_final_answer(self, question: str, steps: list[ToolCall], knowledge_calls: list[ToolCall]) -> str:
+    def _compose_final_answer(self, question: str, conversation_id: str, steps: list[ToolCall], knowledge_calls: list[ToolCall]) -> tuple[str, list[dict[str, Any]]]:
         """Compose the final answer from the agent's collected evidence.
 
         For knowledge QA the answer MUST come from the production answer
@@ -284,21 +333,28 @@ class AgentController:
         """
         if self.chat_service is not None:
             try:
-                payload = self.chat_service.answer(question, top_k=8)
+                payload = self.chat_service.answer(question, conversation_id=conversation_id, top_k=8)
                 answer = str(payload.answer or "").strip()
                 if payload.grounded and answer and not self._signals_insufficient(answer):
-                    self._pipeline_citations = [
+                    pipeline_hits = [
                         {
+                            "chunk_id": h.chunk_id,
+                            "document_id": h.document_id,
+                            "version_id": h.version_id,
                             "file_name": h.file_name,
                             "page_or_slide": h.page_or_slide,
                             "section_path": h.section_path,
                             "snippet": h.snippet,
+                            "plain_text": h.plain_text,
+                            "trust_level": h.trust_level,
+                            "source_type": h.source_type,
+                            "ocr_quality": round(float(getattr(h, "ocr_quality", 1.0) or 0.0), 3),
                             "score": round(float(h.rerank_score or h.fusion_score or 0.0), 3),
                         }
                         for h in payload.citations
                     ]
-                    return answer[:260]
-                return ""
+                    return answer[:260], pipeline_hits
+                return "", []
             except Exception:
                 pass
         # No chat pipeline wired (tests): fall back to a guarded local composition.
@@ -306,23 +362,24 @@ class AgentController:
 
         hits = self._collect_hits(steps)
         if not hits:
-            return ""
+            return "", []
         llm = self.llm_service
         retrieval_hits = [
             RetrievalHit(
-                chunk_id=f"agent-{index}",
-                document_id="",
-                version_id="",
+                chunk_id=raw.get("chunk_id") or f"agent-{index}",
+                document_id=raw.get("document_id", ""),
+                version_id=raw.get("version_id", ""),
                 file_name=raw.get("file_name", ""),
                 page_or_slide=raw.get("page_or_slide", ""),
-                section_path="",
+                section_path=raw.get("section_path", ""),
                 snippet=(raw.get("snippet") or "")[:220],
-                markdown_text=raw.get("snippet") or "",
-                plain_text=raw.get("snippet") or "",
+                markdown_text=raw.get("markdown_text") or (raw.get("snippet") or ""),
+                plain_text=raw.get("plain_text") or (raw.get("snippet") or ""),
                 trust_level="agent",
                 source_type="agent",
                 fusion_score=0.0,
                 rerank_score=float(raw.get("score") or 0.0),
+                ocr_quality=float(raw.get("ocr_quality") or 1.0),
             )
             for index, raw in enumerate(hits, 1)
         ]
@@ -335,7 +392,7 @@ class AgentController:
             )
             effective_grounded = llm._can_ground_from_citations(question, analysis, retrieval_hits)
             if not effective_grounded:
-                return ""
+                return "", []
             draft = llm._fast_path_draft_answer(question, analysis, retrieval_hits, True) or llm._fallback_draft_answer(
                 question, analysis, retrieval_hits, True, "Agent 证据链压缩。"
             )
@@ -343,10 +400,10 @@ class AgentController:
             final = llm.finalize_answer(question, analysis, retrieval_hits, draft, review)
             answer = str(final.get("answer") or "").strip()
             if final.get("grounded") and answer and not self._signals_insufficient(answer):
-                return answer[:260]
-            return ""
+                return answer[:260], hits
+            return "", []
         except Exception:
-            return ""
+            return "", []
 
     def _collect_hits(self, steps: list[ToolCall]) -> list[Any]:
         hits: list[Any] = []

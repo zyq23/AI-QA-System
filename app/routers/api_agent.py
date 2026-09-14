@@ -39,6 +39,8 @@ def build_router() -> APIRouter:
             tools_used=result.tools_used,
             followup_question=result.followup_question,
             escalated=result.escalated,
+            terminal_status=result.terminal_status,
+            deterministic_evidence=result.deterministic_evidence,
             citations=[
                 CitationModel(
                     document_id="",

@@ -1,5 +1,7 @@
 # Codex Plan
 
+> **历史计划说明（2026-09-13）**：本文主体记录 2026-06 的多线程施工计划，已不再是当前执行状态的唯一来源。新窗口请优先读取 `docs/next-round-brief.md` 与 `docs/codex-handoff.md`；本文件保留用于理解阶段目标、workstream 边界和协作约束。旧阶段报告已归档至 `docs/archive/`。
+
 ## Project
 
 - 项目：宇树科技知识库 AI 问答系统完善
@@ -179,7 +181,7 @@
   - 当前最新可信 smoke gate 分布已回正为 `4 / 7 / 2 / 0`
   - 当前真实未收敛题已缩小为 `ppt-company-p0-03` 与 `ppt-company-p1-04`
 - 已确认 `WS-03` 在最新一轮"remaining wrong_release 最小收口"上也已完成：
-  - `Thread-Answer` 已提交统一汇报 `docs/thread-answer-wrong-release-report.md`
+  - `Thread-Answer` 已提交统一汇报 `docs/archive/thread-answer-wrong-release-report.md`
   - 最新 smoke gate 结果已更新为 `4 / 8 / 1 / 0`
   - `ppt-company-p1-04` 与 `ppt-company-p0-06` 已从 `wrong_release` 收敛为 `correct_block`
   - 当前剩余唯一 `wrong_release` 为 `ppt-company-p0-03`
@@ -232,7 +234,7 @@
 ### Thread-Infra
 
 - 当前目标：保持 latest eval 读数纠偏结果稳定，并为"全知识库最小回归集"提供脱机执行入口与环境可信度口径
-- 输入依赖：`docs/thread-infra-report.md`
+- 输入依赖：`docs/archive/thread-infra-report.md`
 - 预期输出：
   - 保持当前纠偏结果与脱机执行口径稳定
   - 如主线程要求，再补"全知识库最小回归集"执行前环境 checklist
@@ -253,7 +255,7 @@
 ### Thread-Answer
 
 - 当前目标：只围绕剩余唯一 `wrong_release = ppt-company-p0-03`` 做单题回流复核，查清"现有业务架构概括题阻塞守卫为何未在最新正式 smoke gate 中生效"，并补最小修复
-- 输入依赖：`docs/thread-answer-report.md`、`docs/thread-answer-minimal-eval.json`
+- 输入依赖：`docs/archive/thread-answer-report.md`、`docs/thread-answer-minimal-eval.json`
 - 预期输出：仅针对 `ppt-company-p0-03` 的统一汇报、最小代码修复、最小测试与是否建议交给 `Thread-Eval` 复跑
 - 验收标准：不扩到别题；要明确解释为什么旧守卫未命中，并给出最新正式证据
 - 禁止事项：不得重开 `p1-04 / p0-06 / p0-05`；不得自行扩到全题集提分
@@ -265,10 +267,10 @@
 
 - 当前目标：保持当前 `13` 题 smoke gate 口径稳定，等待 `ppt-company-p0-03` 收敛后立即执行正式复跑；同时保持全知识库最小回归集冻结方案待命
 - 输入依赖：
-  - `docs/thread-infra-report.md`
+  - `docs/archive/thread-infra-report.md`
   - `docs/thread-retrieval-report.md`
-  - `docs/thread-answer-report.md`
-  - `docs/thread-eval-report.md`
+  - `docs/archive/thread-answer-report.md`
+  - `docs/archive/thread-eval-report.md`
   - `docs/thread-eval-formal-acceptance-template.md`
   - `data/evals/ppt_company_single_group_formal_v1.json`
 - 预期输出：
@@ -280,7 +282,7 @@
 - 当前主线程最新派单：立即复跑当前冻结的 `13` 题 smoke gate，产出新的 `eval_<timestamp>.json` 与 `eval_<timestamp>_formal_summary.json`，并明确回答 `p0-03` 是否已从唯一 `wrong_release` 收敛
 - 当前主线程最新验收判断：
   - 结果文件层面：`pass`
-  - 严格线程收口层面：待 `docs/thread-eval-smoke-gate-rerun-report.md` 补到最新结果后再记 `pass`
+  - 严格线程收口层面：待 `docs/archive/thread-eval-smoke-gate-rerun-report.md` 补到最新结果后再记 `pass`
 - 禁止事项：不得宣布"全库正式通过率"；不得把历史旧评测结果直接并入当前总分
 
 ## Workstreams

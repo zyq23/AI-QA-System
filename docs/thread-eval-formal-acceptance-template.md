@@ -1,5 +1,7 @@
 # Formal Acceptance Layer Minimal Template
 
+> **历史模板校准（2026-09-13）**：此文件保留为评分字段与验收结构模板。2026-06 的单组/27 题历史结果已归档，当前执行命令和最新结果请以 `docs/next-round-brief.md` 与 `data/evals/results/` 为准；当前 79 题护栏与 130 题 hard 集不得混用；正式结果必须查看 `*_formal_summary.json`，不得把 `run_eval.py` 原始摘要当作正式结论。
+
 ## 0. Usage Boundary
 
 - 这个模板只用于“正式验收层”的设计与执行准备。

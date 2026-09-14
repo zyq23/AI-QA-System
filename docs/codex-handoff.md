@@ -298,8 +298,8 @@
 - [2026-06-17] 针对上述重复模式，`Thread-Answer` 已在 [app/services/llm.py](/data/zyq/yushu/app/services/llm.py) 补 3 条最小收口规则：公司概况事实题只保留 `28年 + 产教融合`，`1+1+N` 服务模块题只列四项服务，基础环境场地/平台题只列场地平台项，战略定位是/否题只收口到 `AI+产教融合服务商`。
 - [2026-06-17] 对应最小护栏已补入 [tests/test_api_flow.py](/data/zyq/yushu/tests/test_api_flow.py)，并通过定点回归：`5 passed`。
 - [2026-06-17] 最新正式链路复跑后，4 道放行题当前均已 `grounded=true`、`fallback_used=false`、`reviewer_intervened=false`；其中 `ppt-company-p0-02`、`ppt-company-p1-06` 已收口为短事实答案，`ppt-company-p0-07`、`ppt-company-p1-03` 已收口为不混杂总述的短枚举答案。
-- [2026-06-17] `Thread-Answer` 已输出统一汇报 [docs/thread-answer-report.md](/data/zyq/yushu/docs/thread-answer-report.md)。当前答案侧判断是：本轮 4 题可视为“最小闭环已稳定收口”；概括题不在本轮放行题内，仍应沿用 `grounding_insufficient` 阻塞口径，不在答案侧越权放开。
-- [2026-06-17] `Thread-Answer` 已继续只围绕 3 道 formal 错误放行题做边界复核，并输出二次统一汇报 [docs/thread-answer-wrong-release-report.md](/data/zyq/yushu/docs/thread-answer-wrong-release-report.md)。当前结论已收口为：`ppt-company-p0-03` 需要答案侧新增“概括题双主线未覆盖时必须阻塞”的最小规则；`ppt-company-p1-04` 需要答案侧新增“能力项枚举仅命中感知侧时必须降级/阻塞”的最小规则；`ppt-company-p0-05` 不建议由答案侧兜底放行判断，仍应由 Retrieval/formal gate 的 `route_conflict + expected_files` 一致性拦截负责。
+- [2026-06-17] `Thread-Answer` 已输出统一汇报 [docs/archive/thread-answer-report.md](/data/zyq/yushu/docs/archive/thread-answer-report.md)。当前答案侧判断是：本轮 4 题可视为“最小闭环已稳定收口”；概括题不在本轮放行题内，仍应沿用 `grounding_insufficient` 阻塞口径，不在答案侧越权放开。
+- [2026-06-17] `Thread-Answer` 已继续只围绕 3 道 formal 错误放行题做边界复核，并输出二次统一汇报 [docs/archive/thread-answer-wrong-release-report.md](/data/zyq/yushu/docs/archive/thread-answer-wrong-release-report.md)。当前结论已收口为：`ppt-company-p0-03` 需要答案侧新增“概括题双主线未覆盖时必须阻塞”的最小规则；`ppt-company-p1-04` 需要答案侧新增“能力项枚举仅命中感知侧时必须降级/阻塞”的最小规则；`ppt-company-p0-05` 不建议由答案侧兜底放行判断，仍应由 Retrieval/formal gate 的 `route_conflict + expected_files` 一致性拦截负责。
 - [2026-06-17] `Thread-Answer` 已按主线程“快速可用优先”要求完成最小实现修复：在 `app/services/llm.py` 的 deterministic review 阶段新增 2 条窄规则，把 `ppt-company-p0-03` 的“业务架构概括题双主线未共同覆盖”与 `ppt-company-p1-04` 的“基础模型能力项枚举只命中感知侧”统一打回 `unsupported`，从而复用 finalize 现有阻塞出口；本轮未触碰 `ppt-company-p0-05`。
 - [2026-06-17] 对应最小护栏测试已补到 `tests/test_api_flow.py` 并通过：新增 2 条 wrong-release 阻塞测试，加上既有短答护栏一起定点复跑后结果为 `7 passed`。当前建议主线程直接交给 `Thread-Eval` 复跑 `13` 题 smoke gate，验证 `ppt-company-p0-03 / p1-04` 是否已从 `wrong_release` 收敛为 `correct_block`。
 - [2026-06-18] `Thread-Answer` 已按最新可信 smoke gate `4 / 7 / 2 / 0` 重新复核当前 worktree：`app/services/llm.py` 中针对 `ppt-company-p0-03 / p1-04` 的两条 deterministic review 阻塞守卫仍在，且定点复核 `./.venv/bin/pytest tests/test_api_flow.py -q -k "partial_business_architecture_summary_release or foundation_capability_partial_enumeration_release or company_ppt_factoid_and_enumeration_boundaries or compact_factoid_and_enumeration_answers"` 结果为 `4 passed`。当前判断保持不变：这轮答案侧只影响这 2 道 remaining wrong_release，仍建议主线程立刻交给 `Thread-Eval` 再复跑 `13` 题 smoke gate。
@@ -317,8 +317,8 @@
 - `app/services/chat.py`
 - `app/services/llm.py`
 - `docs/thread-answer-minimal-eval.json`
-- `docs/thread-answer-report.md`
-- `docs/thread-answer-wrong-release-report.md`
+- `docs/archive/thread-answer-report.md`
+- `docs/archive/thread-answer-wrong-release-report.md`
 
 ## Thread-Eval
 
@@ -364,14 +364,14 @@
 - [2026-06-17] `Thread-Infra` 已复核 `latest eval` 污染路径仍成立：`Repository.list_jobs()` 仍按 `updated_at DESC` 排序，admin 侧仍直接取第一条 evaluation job，不筛 `completed`。
 - [2026-06-17] `Thread-Infra` 已复核 `.env` 仍把正式评测入口绑到 `EVAL_API_BASE_URL=http://127.0.0.1:8000`，但当前 `8000` 连接失败；同时 `9380`、`6380` 本轮也都不可达。
 - [2026-06-17] `Thread-Infra` 已复核当前仓库根下没有 `.gitmodules`，也没有可直接核对的 `ragflow` 跟踪项；当前不能把 `ragflow` 源码恢复路径当作本轮正式验收补件的最小前置。
-- [2026-06-17] `Thread-Infra` 已将本轮追加统一汇报写入 [docs/thread-infra-report.md](/data/zyq/yushu/docs/thread-infra-report.md)，补充了正式验收补件恢复顺序、`latest eval` 最小处理、`data/evals` 冻结/恢复策略、以及 HTTP vs 脱机直连建议。
+- [2026-06-17] `Thread-Infra` 已将本轮追加统一汇报写入 [docs/archive/thread-infra-report.md](/data/zyq/yushu/docs/archive/thread-infra-report.md)，补充了正式验收补件恢复顺序、`latest eval` 最小处理、`data/evals` 冻结/恢复策略、以及 HTTP vs 脱机直连建议。
 - [2026-06-17] `Thread-Infra` 已落地 `latest eval` 代码侧 completed 过滤的最小实现：在 [app/repositories.py](/data/zyq/yushu/app/repositories.py:389) 新增 `Repository.latest_job(...)`，并将 [app/routers/api_admin.py](/data/zyq/yushu/app/routers/api_admin.py:124) 与 [app/routers/api_admin.py](/data/zyq/yushu/app/routers/api_admin.py:170) 的 latest eval 读取改为直接查询最新 `completed` evaluation job。
 - [2026-06-17] `Thread-Infra` 已确认“只在 `list_jobs(limit=20)` 结果上过滤 completed”并不足够，因为当前 runtime DB 最近 20 条 jobs 会把最新 completed evaluation 截断掉；因此本轮最小可信修法必须是定向 DB 查询，而不是截断后过滤。
 - [2026-06-17] `Thread-Infra` 已补定点测试 [tests/test_api_flow.py](/data/zyq/yushu/tests/test_api_flow.py:181)，并通过 `./.venv/bin/pytest tests/test_api_flow.py -q -k "repository_latest_job_skips_running_evaluation_with_newer_non_eval_jobs or admin_can_run_failed_eval_job"`，结果 `2 passed`。
 - [2026-06-17] `Thread-Infra` 已完成 runtime DB 只读验证：当前 `latest_any` 仍是 `3eaefc2254424bd6857f756b70716356 / running`，但新逻辑下 `latest_completed` 已稳定落到 `bc34a60dfc824656ad3a44f0199ba898 / completed`；因此 latest eval 读数当前已不再命中 running job。
 - [2026-06-17] `Thread-Infra` 已继续补“全知识库最小回归”执行前环境口径：确认 `offline_direct_eval` 仍是短期正式入口、`data/runtime/app.db` 与 `data/evals/results/` 当前存在、仓库 `.venv` 可作为唯一推荐 Python 环境、而 `127.0.0.1:8000` 仍未恢复但这不构成最小回归 blocker。
 - [2026-06-17] `Thread-Infra` 已确认当前全库最小回归的关键 blocker 不是 HTTP/admin 未恢复，而是“全知识库最小回归集”数据文件尚未冻结落地；在此之前，只能说环境入口与 checklist 已准备好，不能越权宣布全库最小回归已可直接执行。
-- [2026-06-17] `Thread-Infra` 已把“必须确认的运行入口 / 数据路径 / runtime DB / 结果目录 / Python 环境 / blocker vs 风险提示 / 仍需授权动作”全部补入 [docs/thread-infra-report.md](/data/zyq/yushu/docs/thread-infra-report.md)，供主线程直接采用。
+- [2026-06-17] `Thread-Infra` 已把“必须确认的运行入口 / 数据路径 / runtime DB / 结果目录 / Python 环境 / blocker vs 风险提示 / 仍需授权动作”全部补入 [docs/archive/thread-infra-report.md](/data/zyq/yushu/docs/archive/thread-infra-report.md)，供主线程直接采用。
 
 ### Current Judgement
 
@@ -395,7 +395,7 @@
 
 ### Next Step
 
-- 等主线程基于 [docs/thread-infra-report.md](/data/zyq/yushu/docs/thread-infra-report.md) 选择：
+- 等主线程基于 [docs/archive/thread-infra-report.md](/data/zyq/yushu/docs/archive/thread-infra-report.md) 选择：
   - 是否还要继续申请 DB 修正授权，把残留 `running` evaluation job` 处理到终态
   - `data/evals` 走历史恢复，还是冻结后重建最小正式验收基线
   - 正式 eval 先按脱机直连推进，还是同步追 HTTP/admin 恢复
@@ -404,7 +404,7 @@
 
 ### Related Files
 
-- [docs/thread-infra-report.md](/data/zyq/yushu/docs/thread-infra-report.md)
+- [docs/archive/thread-infra-report.md](/data/zyq/yushu/docs/archive/thread-infra-report.md)
 - [app/config.py](/data/zyq/yushu/app/config.py:28)
 - [app/repositories.py](/data/zyq/yushu/app/repositories.py:375)
 - [app/routers/api_admin.py](/data/zyq/yushu/app/routers/api_admin.py:124)
@@ -430,23 +430,23 @@
 
 ### Latest Update
 
-- [2026-06-17] `Thread-Eval` 已吸收 [docs/thread-answer-report.md](/data/zyq/yushu/docs/thread-answer-report.md)，把 [docs/thread-eval-report.md](/data/zyq/yushu/docs/thread-eval-report.md) 从 `interim` 升级为主线程可直接采用的能力判断层统一稿。
+- [2026-06-17] `Thread-Eval` 已吸收 [docs/archive/thread-answer-report.md](/data/zyq/yushu/docs/archive/thread-answer-report.md)，把 [docs/archive/thread-eval-report.md](/data/zyq/yushu/docs/archive/thread-eval-report.md) 从 `interim` 升级为主线程可直接采用的能力判断层统一稿。
 - [2026-06-17] 升级版统一稿已明确写入 4 题答案侧最小闭环结果：`ppt-company-p0-02 / p0-07 / p1-03 / p1-06` 当前均已在正式运行态下实现稳定短答，且 `grounded=true / fallback_used=false / reviewer_intervened=false`。
 - [2026-06-17] 升级版统一稿同时保留边界：概括题当前仍无答案侧放行正例，`ppt-company-p0-03 / p1-05` 继续按 `grounding_insufficient` 阻塞；其余阻塞题继续按 `route_conflict / coverage_insufficient` 管理，不混写为通过率。
 - [2026-06-17] 当前正式验收补件清单保持不变，仍至少覆盖：`latest eval` 污染、`data/evals` 历史资产缺失、正式 eval 入口当前不可直接信任。
 - [2026-06-17] `Thread-Eval` 已新增正式验收层最小模板草案 [docs/thread-eval-formal-acceptance-template.md](/data/zyq/yushu/docs/thread-eval-formal-acceptance-template.md)，把执行前 gate、验收范围、逐题字段、评分规则、阻塞记录、输出摘要全部显式模板化。
-- [2026-06-17] 本轮已把“当前缺失补件 -> 正式验收模板字段”的对应关系补入 [docs/thread-eval-report.md](/data/zyq/yushu/docs/thread-eval-report.md)，并明确建议恢复后先跑“新增 PPT 单组验收”，再跑“旧资料最小回归”。
+- [2026-06-17] 本轮已把“当前缺失补件 -> 正式验收模板字段”的对应关系补入 [docs/archive/thread-eval-report.md](/data/zyq/yushu/docs/archive/thread-eval-report.md)，并明确建议恢复后先跑“新增 PPT 单组验收”，再跑“旧资料最小回归”。
 - [2026-06-17] 在主线程接受“先冻结后决策”的前提下，`Thread-Eval` 已进一步把正式验收层草案补成“脱机直连 + 新增 PPT 单组正式验收优先 + 冻结后新基线”的可执行口径：当前推荐入口为 `offline_direct_eval`，当前正式范围先限定为新增 PPT 单组，不默认恢复旧 `data/evals` 资产，也不默认拉起旧资料总回归。
-- [2026-06-17] 本轮已把“冻结后新基线下先必填哪些字段”与“若当前不恢复旧正式资产，主线程应如何表述正式验收范围”写入 [docs/thread-eval-report.md](/data/zyq/yushu/docs/thread-eval-report.md) 与 [docs/thread-eval-formal-acceptance-template.md](/data/zyq/yushu/docs/thread-eval-formal-acceptance-template.md)，可直接供主线程决定是否进入脱机直连正式单组验收执行。
+- [2026-06-17] 本轮已把“冻结后新基线下先必填哪些字段”与“若当前不恢复旧正式资产，主线程应如何表述正式验收范围”写入 [docs/archive/thread-eval-report.md](/data/zyq/yushu/docs/archive/thread-eval-report.md) 与 [docs/thread-eval-formal-acceptance-template.md](/data/zyq/yushu/docs/thread-eval-formal-acceptance-template.md)，可直接供主线程决定是否进入脱机直连正式单组验收执行。
 - [2026-06-17] `Thread-Eval` 已继续把草案收紧到“新增 PPT 单组正式执行前最后审阅”粒度：补入了需要先冻结的题集/字段清单、执行前最后 gate checklist，以及主线程若批准执行时推荐使用的最小命令入口 `./.venv/bin/python scripts/run_eval.py --dataset data/evals/<frozen_new_ppt_single_group>.json --output-dir data/evals/results`。
 - [2026-06-17] `Thread-Eval` 已完成首次新增 PPT 单组正式验收执行：按冻结后的单组数据集 [data/evals/ppt_company_single_group_formal_v1.json](/data/zyq/yushu/data/evals/ppt_company_single_group_formal_v1.json) 走 `offline_direct_eval`，原始结果落盘为 [data/evals/results/eval_20260617_175814.json](/data/zyq/yushu/data/evals/results/eval_20260617_175814.json)，并按正式模板口径补做二次归类 [data/evals/results/eval_20260617_175814_formal_summary.json](/data/zyq/yushu/data/evals/results/eval_20260617_175814_formal_summary.json)。
 - [2026-06-17] 本轮正式单组执行后的正式模板分布已收口为：`可答通过=4`、`正确阻塞=6`、`错误放行=3`、`错误阻塞=0`。3 道错误放行题为 `ppt-company-p0-03 / p0-05 / p1-04`；当前不建议进入旧资料最小回归。
-- [2026-06-17] `Thread-Eval` 已新增统一汇报 [docs/thread-eval-formal-single-group-report.md](/data/zyq/yushu/docs/thread-eval-formal-single-group-report.md)，并明确写清：原始 `run_eval.py` 摘要中的 `0/13` 不能直接读成“正式单组 13 题全失败”，因为现有 `EvaluationService` 尚不理解 `must_block` 语义，且当前 `section_match` 口径会系统性打穿 PPT citation path。
-- [2026-06-17] `Thread-Eval` 已进一步把当前 `13` 题正式单组结果固化成长期 smoke gate 设计，并补出“全知识库最小回归集”方案 [docs/thread-eval-full-kb-minimal-regression-report.md](/data/zyq/yushu/docs/thread-eval-full-kb-minimal-regression-report.md)。该方案当前明确覆盖运行态全部 `7` 份已入链文档，其中新增 PPT 保持 `13` 题 smoke gate，旧资料最小回归集建议新增 `14` 题，总计建议下一轮最小正式范围为 `27` 题。
+- [2026-06-17] `Thread-Eval` 已新增统一汇报 [docs/archive/thread-eval-formal-single-group-report.md](/data/zyq/yushu/docs/archive/thread-eval-formal-single-group-report.md)，并明确写清：原始 `run_eval.py` 摘要中的 `0/13` 不能直接读成“正式单组 13 题全失败”，因为现有 `EvaluationService` 尚不理解 `must_block` 语义，且当前 `section_match` 口径会系统性打穿 PPT citation path。
+- [2026-06-17] `Thread-Eval` 已进一步把当前 `13` 题正式单组结果固化成长期 smoke gate 设计，并补出“全知识库最小回归集”方案 [docs/archive/thread-eval-full-kb-minimal-regression-report.md](/data/zyq/yushu/docs/archive/thread-eval-full-kb-minimal-regression-report.md)。该方案当前明确覆盖运行态全部 `7` 份已入链文档，其中新增 PPT 保持 `13` 题 smoke gate，旧资料最小回归集建议新增 `14` 题，总计建议下一轮最小正式范围为 `27` 题。
 - [2026-06-17] 本轮新增的全库回归设计同时固定了逐题字段规范与执行顺序：字段层至少冻结 `id / question / group / question_type / expected_files / expected_answer_keywords / forbidden_answer_keywords / expected_grounded / expected_result_mode / blocking_is_correct_if_any / scoring_notes`；执行层明确建议“先把当前 smoke gate 的 3 道错误放行题收敛到 `4/9/0/0`，再开跑全知识库最小回归集”，当前仍不得把单组结果外推成全库已通过。
 - [2026-06-17] `Thread-Eval` 已按主线程新目标实际复跑当前 `13` 题 smoke gate：`EVAL_API_BASE_URL= ./.venv/bin/python scripts/run_eval.py --dataset data/evals/ppt_company_single_group_formal_v1.json --output-dir data/evals/results`，新原始结果落盘为 [data/evals/results/eval_20260617_231828.json](/data/zyq/yushu/data/evals/results/eval_20260617_231828.json)，companion formal summary 落盘为 [data/evals/results/eval_20260617_231828_formal_summary.json](/data/zyq/yushu/data/evals/results/eval_20260617_231828_formal_summary.json)。
 - [2026-06-17] 本轮复跑未收敛到目标 `4 / 9 / 0 / 0`，而是出现新的 formal 分布：`可答通过=0`、`正确阻塞=3`、`错误放行=6`、`错误阻塞=4`。与上一轮 `4 / 6 / 3 / 0` 相比，`ppt-company-p0-05` 已从 `wrong_release` 收敛为 `correct_block`，但 `ppt-company-p0-03` 与 `ppt-company-p1-04` 仍保持 `wrong_release`，且原先 4 道 `must_answer_compact` 题 (`p0-02 / p0-07 / p1-03 / p1-06`) 在新 companion formal summary 中全部漂移为 `wrong_block`。
-- [2026-06-17] `Thread-Eval` 已补本轮统一汇报 [docs/thread-eval-smoke-gate-rerun-report.md](/data/zyq/yushu/docs/thread-eval-smoke-gate-rerun-report.md)。当前线程判断是：必须承认已实际复跑，但当前 formal 归类口径并未稳定收敛，不能宣布新增 PPT `13` 题 smoke gate 已达 `4 / 9 / 0 / 0`，也不能据此放行进入全知识库最小回归。
+- [2026-06-17] `Thread-Eval` 已补本轮统一汇报 [docs/archive/thread-eval-smoke-gate-rerun-report.md](/data/zyq/yushu/docs/archive/thread-eval-smoke-gate-rerun-report.md)。当前线程判断是：必须承认已实际复跑，但当前 formal 归类口径并未稳定收敛，不能宣布新增 PPT `13` 题 smoke gate 已达 `4 / 9 / 0 / 0`，也不能据此放行进入全知识库最小回归。
 - [2026-06-17] `Thread-Eval` 已继续按主线程新目标只修 formal 判分口径：在 [app/services/evaluation.py](/data/zyq/yushu/app/services/evaluation.py) 中收紧 `EvaluationService._formal_bucket()`，不再直接复用旧 `report.passed` 语义来给 `must_block` 与 `must_answer_compact` 归桶。当前修法只作用于 formal summary 归类层，不改 Retrieval、Answer 或主问答链路。
 - [2026-06-17] 对应最小测试已补入 [tests/test_api_flow.py](/data/zyq/yushu/tests/test_api_flow.py) 并通过 `3 passed`：一条继续锁住 `route_conflict` 正确阻塞，一条锁住“阻塞型答案不会再被记成 wrong_release”，一条锁住“稳定短答的 must_answer_compact 不会再被记成 wrong_block”。
 - [2026-06-17] `Thread-Eval` 已在判分修复后立刻重跑 `13` 题 smoke gate：新原始结果为 [data/evals/results/eval_20260617_234247.json](/data/zyq/yushu/data/evals/results/eval_20260617_234247.json)，新 formal summary 为 [data/evals/results/eval_20260617_234247_formal_summary.json](/data/zyq/yushu/data/evals/results/eval_20260617_234247_formal_summary.json)。
@@ -462,11 +462,11 @@
 - `app/services/evaluation.py`
 - `data/evals/`
 - `scripts/run_eval.py`
-- `docs/thread-eval-report.md`
+- `docs/archive/thread-eval-report.md`
 - `docs/thread-eval-formal-acceptance-template.md`
-- `docs/thread-eval-formal-single-group-report.md`
-- `docs/thread-eval-smoke-gate-rerun-report.md`
-- `docs/thread-eval-full-kb-minimal-regression-report.md`
+- `docs/archive/thread-eval-formal-single-group-report.md`
+- `docs/archive/thread-eval-smoke-gate-rerun-report.md`
+- `docs/archive/thread-eval-full-kb-minimal-regression-report.md`
 
 ## Thread-Infra
 
@@ -528,7 +528,7 @@
 - [2026-06-17] `Thread-Infra` 已补接口可达性分层：当前 `127.0.0.1:8000` 关闭，但 `127.0.0.1:9380` 与 `127.0.0.1:6380` 都可达，且 `.env` 中配置的 RAGFlow dataset id 在 `9380` 上能正常返回 `retrieval` 响应。因此更准确的定性是“RAGFlow 外部服务可达，但仓库源码位失配”，不是“RAGFlow 全部未启动”。
 - [2026-06-17] `Thread-Infra` 已补宿主环境与项目环境分离结论：宿主 `python` 缺 `pydantic_settings`，但仓库 `./.venv/bin/python` 可正常加载 `app.config` 与 `build_container()`；后续只读探针应优先统一在 `.venv` 下执行，避免把宿主缺依赖误判为项目问题。
 - [2026-06-17] `Thread-Infra` 已补“当前链路可信度矩阵”：`data/runtime/app.db` 与基础目录结构记为 `高可信`；本地 Chroma 运行态、RAGFlow 外部 API、`.venv` 下脱机容器能力记为 `中可信`；`127.0.0.1:8000` 管理接口、当前正式 eval API、latest eval 视图记为 `低可信`。
-- [2026-06-17] `Thread-Infra` 已输出统一汇报 [docs/thread-infra-report.md](/data/zyq/yushu/docs/thread-infra-report.md)，当前建议主线程仅暂停 `Thread-Eval` 的正式验收动作，不暂停 Parser / Retrieval / Answer 的诊断性推进。
+- [2026-06-17] `Thread-Infra` 已输出统一汇报 [docs/archive/thread-infra-report.md](/data/zyq/yushu/docs/archive/thread-infra-report.md)，当前建议主线程仅暂停 `Thread-Eval` 的正式验收动作，不暂停 Parser / Retrieval / Answer 的诊断性推进。
 
 ### Related Files
 
@@ -584,7 +584,7 @@
 - [2026-06-17] 主线程已复核 `Thread-Retrieval` 统一汇报，确认其满足当前轮“正式运行态最小复跑验收”的 pass 条件：已基于正式 `retrieval_service` 复跑指定最小题集，并收口 `allow_to_answer / blocked_with_reason / route_conflicts_still_present`。主线程判定：`WS-02` 对本轮目标记 `pass`，但不外推为“检索链路全面通过”。
 - [2026-06-17] 主线程已将当前阶段最关键目标切换为：由 `Thread-Answer` 消费正式运行态已放行的 4 道题，完成答案侧最小闭环验收；`Thread-Eval` 继续只做模板与补件清单，不做正式通过率验收。
 - [2026-06-17] 主线程已复核 `Thread-Answer` 统一汇报，确认其满足当前轮“4 题答案侧最小闭环验收”的 pass 条件：已消费正式运行态放行题单、修补 3 类真实答案侧偏差、定点护栏测试 `5 passed`，且 4 题均已稳定短答收口。主线程判定：`WS-03` 对本轮目标记 `pass`，但不外推为“概括题已放开”或“全链路正式通过”。
-- [2026-06-17] 主线程已复核升级后的 `Thread-Eval` 统一汇报，确认其已吸收 `docs/thread-answer-report.md`，并完成“能力判断层统一稿 + 正式补件清单”收口：4 题答案侧最小闭环结果已写入、9 题阻塞边界仍清楚、正式验收补件未被偷换成通过率。主线程当前判定：`WS-04` 对本轮目标记 `pass`，但不外推为“正式验收完成”。
+- [2026-06-17] 主线程已复核升级后的 `Thread-Eval` 统一汇报，确认其已吸收 `docs/archive/thread-answer-report.md`，并完成“能力判断层统一稿 + 正式补件清单”收口：4 题答案侧最小闭环结果已写入、9 题阻塞边界仍清楚、正式验收补件未被偷换成通过率。主线程当前判定：`WS-04` 对本轮目标记 `pass`，但不外推为“正式验收完成”。
 - [2026-06-17] 主线程已完成当前阶段统一收口：`WS-01 / WS-02 / WS-03 / WS-04 / WS-05` 均已完成各自当前轮最小目标，项目当前可正式记为“新增 PPT 最小能力判断闭环完成”；但 latest eval 污染、历史评测资产缺失、正式 eval 入口不可信仍未解除，因此当前不得表述为“正式验收完成”。
 - [2026-06-17] 主线程已决定下一阶段优先做“正式验收补件恢复”，而不是直接进入 9 道阻塞题提分。当前最高优先级线程切换为 `Thread-Infra`，`Thread-Eval` 负责把能力判断层统一稿往正式验收模板设计推进；`Thread-Retrieval / Thread-Answer / Thread-Parser` 暂转为按需支持状态。
 - [2026-06-17] 主线程已复核本轮“正式验收补件恢复”阶段汇报：`Thread-Infra` 已把恢复顺序、latest eval 最小纠偏方案、`data/evals` 冻结/恢复策略建议、以及“短期正式入口优先走脱机直连”收口成可执行路径；`Thread-Eval` 已补出正式验收层最小模板并明确建议先跑“新增 PPT 单组验收”，再跑“旧资料最小回归”。主线程判定：两线程本轮目标均记 `pass`。
@@ -600,7 +600,7 @@
 - [2026-06-18] 主线程已复核 `Thread-Eval` 对 smoke gate formal 判分口径的修复与复跑结果，确认上一轮 `0 / 3 / 6 / 4` 的异常主体确属评测口径 bug，而非真实能力全线回退。最新可信 formal 分布已回正为：`可答通过=4 / 正确阻塞=7 / 错误放行=2 / 错误阻塞=0`。
 - [2026-06-18] 主线程当前正式判断：`ppt-company-p0-05` 已确认收敛为 `correct_block`；`ppt-company-p0-03` 与 `ppt-company-p1-04` 仍为真实未收敛题；其余此前被误记的 `p0-01 / p0-06 / p1-05 / p1-07` 与 4 道 `must_answer_compact` 题，已确认为 formal 判分口径回正，不再视为新的能力退化。
 - [2026-06-18] 因此当前 smoke gate 的剩余目标已从“收敛 3 题”进一步缩小为“只收敛 2 题”：`ppt-company-p0-03` 与 `ppt-company-p1-04`。主线程后续应继续按“最小实现 -> 立即复跑”节奏推进，不再新增大范围设计或回归扩面。
-- [2026-06-22] 主线程已复核 `Thread-Answer` 最新统一汇报 `docs/thread-answer-wrong-release-report.md` 与正式结果 `data/evals/results/eval_20260622_004134_formal_summary.json`。结论分两层记录：
+- [2026-06-22] 主线程已复核 `Thread-Answer` 最新统一汇报 `docs/archive/thread-answer-wrong-release-report.md` 与正式结果 `data/evals/results/eval_20260622_004134_formal_summary.json`。结论分两层记录：
   - 能力判断：`Thread-Answer` 本轮最小 finalize coverage 闸门确已生效，`ppt-company-p1-04` 与 `ppt-company-p0-06` 都已从 `wrong_release` 压回 `correct_block`
   - 正式验收：当前最新 `13` 题 smoke gate 分布为 `answer_pass=4 / correct_block=8 / wrong_release=1 / wrong_block=0`，仍未达到快速放行阈值 `4 / 9 / 0 / 0`
 - [2026-06-22] 主线程当前最新阶段判断已进一步收敛：当前剩余唯一真实 `wrong_release` 为 `ppt-company-p0-03`；因此 `Thread-Answer` 本轮目标记 `pass`，后续默认转入待命支持，下一步最小实现优先只派给 `Thread-Retrieval` 或按其复核结果再决定是否回流到 `Thread-Answer`。
@@ -617,7 +617,7 @@
   - `ppt-company-p0-03` 已从最后一个 `wrong_release` 收敛为 `correct_block`
   - `ppt-company-p0-06` 也已回到 `correct_block`
   - 因此从“正式结果证据”看，新增 PPT 单组 smoke gate 已达到当前快速放行阈值 `4 / 9 / 0 / 0`
-- [2026-06-22] 但主线程也同步保留严格验收边界：当前 `docs/thread-eval-smoke-gate-rerun-report.md` 仍停留在旧轮次口径，尚未吸收本次最新结果文件 `eval_20260622_103930_formal_summary.json`。因此：
+- [2026-06-22] 但主线程也同步保留严格验收边界：当前 `docs/archive/thread-eval-smoke-gate-rerun-report.md` 仍停留在旧轮次口径，尚未吸收本次最新结果文件 `eval_20260622_103930_formal_summary.json`。因此：
   - 正式结果判断：`已达标`
   - 线程正式验收判断：`Thread-Eval` 还需补一版与最新结果一致的统一汇报，主线程才把本轮 `WS-04` 记为严格收口完成
 - [2026-06-22] 主线程当前阶段判断已更新：系统已具备进入"全知识库最小回归集执行"的正式前提；但在真正派发该阶段前，优先要求 `Thread-Eval` 补齐最新统一汇报，避免出现"结果文件已更新、线程汇报仍是旧口径"的接力断层。
@@ -653,7 +653,7 @@
 ### Thread-Infra
 
 - 当前目标：围绕 `latest eval` 读数污染，给出代码侧 completed 过滤的最小实现与验证
-- 输入依赖：`docs/thread-infra-report.md`
+- 输入依赖：`docs/archive/thread-infra-report.md`
 - 预期输出：
   - 最小改动方案
   - 影响到的代码路径
@@ -672,7 +672,7 @@
 ### Thread-Answer
 
 - 当前目标：保持已通过状态，仅补正式验收模板中答案侧评分口径
-- 输入依赖：`docs/thread-answer-report.md`、`docs/thread-answer-minimal-eval.json`
+- 输入依赖：`docs/archive/thread-answer-report.md`、`docs/thread-answer-minimal-eval.json`
 - 预期输出：如主线程需要，把事实题 / 枚举题 / 概括题的“应答 / 应降级 / 应阻塞”评分口径补成统一说明；否则不新增实现
 - 验收标准：不重复扩大实现范围；只补口径，不新开题集
 - 禁止事项：不得自行放宽到 retrieval 已阻塞题
@@ -681,10 +681,10 @@
 
 - 当前目标：围绕“新增 PPT 单组 + 脱机直连 + 冻结后新基线”，准备正式单组验收的最小执行方案
 - 输入依赖：
--  - `docs/thread-eval-report.md`
--  - `docs/thread-infra-report.md`
+-  - `docs/archive/thread-eval-report.md`
+-  - `docs/archive/thread-infra-report.md`
 -  - `docs/thread-retrieval-report.md`
--  - `docs/thread-answer-report.md`
+-  - `docs/archive/thread-answer-report.md`
 -  - `docs/thread-eval-formal-acceptance-template.md`
 - 预期输出：
 -  - 新增 PPT 单组正式验收最小执行方案
@@ -949,3 +949,55 @@
 - cc0b81c：初始加固（precision guard + 跨文件矩阵）
 - faaa01e：1+1+N 别名 + 任期年份守卫  
 - e554d20：最终指标沉淀 + 79 题回归通过
+
+---
+
+## 2026-09-13 新窗口接力与文档清理
+
+### 当前真实基线（工作树实测，结果文件尚未提交）
+
+- hard 130 题：`data/evals/results/rag_metrics_20260912_151042.json`，`answer_pass=50 / correct_block=25 / wrong_release=19 / wrong_block=36`，accuracy `0.7246`、hallucination `0.1462`、correct_refusal `1.0`，Recall@5 `0.8857`、Recall@10 `0.9429`、MRR `0.7575`。
+- 79 题 formal：`data/evals/results/eval_20260912_155138_formal_summary.json`，`answer_pass=36 / correct_block=18 / wrong_release=4 / wrong_block=21`。因此旧文档中的 hard `0.686/0.169` 和 79 题 WR=3 已过时，不能继续作为当前基线；当前 FROZEN WR 已超过 ≤3 门槛。
+- DashScope 结果不作为最优基线；本阶段正式证据链继续使用本地 Ollama `qwen2.5:14b` + `RETRIEVAL_BACKEND=local` + 清空 `EVAL_API_BASE_URL`。
+
+### 文档接力状态
+
+- 旧阶段报告已移至 `docs/archive/`，旧 `.zcode` 计划已移至 `.zcode/plans/archive/`，保留 Git 历史可追溯性；归档文件不是当前执行入口。
+- 当前新窗口先读 `AGENTS.md`、本文件、`docs/next-round-brief.md`、`docs/codex-decisions.md`；`docs/codex-plan.md` 与 `docs/codex-dialogs.md` 仍保留为历史协作规范，但主体日期较旧。
+- 下一步优先处理 hard 集 `cross_document / multi_hop / synonym_rewrite` 的错误放行，以及 `ocr_noise_page / long_context_distraction` 的错误阻塞；检索召回指标已达标。
+
+### 推荐执行入口
+
+```bash
+EVAL_API_BASE_URL= RETRIEVAL_BACKEND=local ./.venv/bin/python scripts/run_rag_metrics.py --dataset data/evals/hard_eval_v1.json --output-dir data/evals/results --top-k 10
+EVAL_API_BASE_URL= RETRIEVAL_BACKEND=local ./.venv/bin/python scripts/run_eval.py --dataset data/evals/kb_quality_full_v1.json --output-dir data/evals/results
+EVAL_API_BASE_URL= RETRIEVAL_BACKEND=local ./.venv/bin/python scripts/run_agent_eval.py --dataset data/evals/hard_eval_v1.json --output-dir data/evals/results
+``` 
+
+### 2026-09-13 企业级工程化审查收口（当前窗口）
+
+#### 审查结论
+- `docs/next-round-brief.md` 原计划质量方向正确，但未覆盖企业级生产所需的安全、可靠性、可观测性、数据治理、成本、部署和灾备；已修订为质量轨 + 生产轨双轨计划，并新增发布门禁矩阵。
+- 当前项目定性：**单机/内网验证态，不是企业级生产就绪**。不得因检索 Recall 达标或 pytest 全绿而改变该结论。
+
+#### 当前基线（证据已核对）
+- 基线 commit：`42e69c739eb9bf8cbe1e1dd4fdc7a0103c41a645`。
+- hard 130：`data/evals/results/rag_metrics_20260912_151042.json`，answer_pass=50、correct_block=25、wrong_release=19、wrong_block=36，accuracy=0.7246、hallucination=0.1462、correct_refusal=1.0，R@5=0.8857、R@10=0.9429、MRR=0.7575，平均延迟=8542.8ms。
+- hard 分桶短板：wrong_release 为 cross_document=5、multi_hop=4、synonym_rewrite=5、numeric_trap=2、ocr_noise_page=2、long_context_distraction=1；wrong_block 为 ocr_noise_page=11、long_context_distraction=7、multi_hop=7、cross_document=3、synonym_rewrite=6、negative_exclusion=2。
+- 79 题：`data/evals/results/eval_20260912_155138_formal_summary.json`，answer_pass=36、correct_block=18、wrong_release=4、wrong_block=21；FROZEN WR=4 已越过 ≤3 门槛，GEN answer_pass=25。
+- Agent：当前窗口没有新全量结果；历史 `agent_eval_20260911_053027.json` 仅作参考，不能作为当前基线。
+- 结果文件当时尚未跟踪，校验值：hard `sha256=3bcb408315413e876a1c4fed16895bdcaf195a9d19ee375f7ea2f1bcb6cb0e2f`；79 `sha256=2c1b13848d2f837af1051fb540640a115f0936c28a71637d5a2f44c518596ab9`。下一次提交前须确认是否将可复现结果纳入版本管理，不得把运行态临时文件误当源码。
+
+#### 企业级阻断项（按优先级）
+- **P0 质量/证据**：Agent 工具丢失 `chunk_id/plain_text/ocr_quality`；`MultiDocCompareTool` 没有顶层 grounded/hits；Agent 未持久化 claim matrix 和 `answer_run_id`；共享 `_pipeline_citations` 存在并发串证据风险；calculator/date 结果未进入 finalize 证据链。
+- **P0 Agent 可靠性**：45 秒超时仅在工具调用间隙检查，不能中断工具内部阻塞；replan 未统一做完整 schema/参数校验；终态未区分 timeout/step budget/error。
+- **P1 安全**：`/api/agent/query` 和 `/api/robot/query` 无认证；会话无用户/租户归属；Cookie 缺 secure/CSRF token；默认 `change-me`/弱 secret 可启动；无提示注入防护测试和审计日志。
+- **P1 生产运行**：无 `/live`/`/ready`/`/healthz`、Prometheus metrics、OTel trace、结构化日志/request-id、统一异常码；BackgroundTasks 非可靠队列；无 schema migration、幂等/lease/retry/dead-letter。
+- **P1/P2 数据与交付**：无自动备份恢复演练/RPO-RTO；无 Docker/systemd/Kubernetes 生产启动基线；CI 只有 stub pytest，缺 lint/类型/依赖扫描/SBOM/集成/性能门禁；无 token 成本计量和容量数据。
+
+#### 当前状态与下一步
+- 计划修订已落盘：`docs/next-round-brief.md`（双轨门禁、SLO/SLA 矩阵、Phase 0-5、WS-QA/Agent/Eval/Runtime/Reliability/Security/Deploy）。
+- 质量轨 Phase 1 首要任务：统一 Evidence/Claim/Comparison contract，修复 Agent 对比题、证据保真、请求隔离和终答关联；不放松 finalize 守卫。
+- 生产轨可与质量轨并行：先做安全启动校验、API 鉴权/会话归属、健康探针、可靠任务/migration、备份恢复和生产启动配置；未完成前不得宣称企业级。
+- 每次行为变更必须执行 pytest → hard metrics → 79 regression → Agent routed → Agent forced，并将 commit、结果路径、sha256、WR/WB 变化追加到本文件；判分口径变更必须先完成 ≥20% 人工抽样并追加决策。
+

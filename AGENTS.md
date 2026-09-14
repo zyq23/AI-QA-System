@@ -40,7 +40,7 @@
 - Agent 必须复用生产 `ChatService.answer` 的 finalize 守卫，不能通过工具结果绕过 subject-claim、yes/no、value、OCR 等反幻觉闸门
 - Agent 全量评测脚本为 `scripts/run_agent_eval.py`；routed 结果：平均延迟 4.6s、拒答率 1.0、幻觉率 0.123、可答准确率 0.515（准确率仍需继续提升，结果见 `data/evals/results/agent_eval_20260911_053027.json`）
 - 当前 LLM 使用本机 Ollama `qwen2.5:14b`（`http://127.0.0.1:11434/v1`）；DashScope 账户当前欠费，恢复前不得假设远端模型可用
-- 当前测试总数：128 passed；所有行为变更必须同时跑 hard_eval 与 79 题回归，并逐轮落盘结果
+- 当前测试总数：128 passed；所有行为变更必须同时跑 hard_eval 与 79 题回归，并逐轮落盘结果；**2026-09-12 实测结果文件**：`data/evals/results/rag_metrics_20260912_151042.json`、`data/evals/results/eval_20260912_155138_formal_summary.json`（工作树未提交，仅增量）；**下一窗口目标**：accuracy ≥ 0.85、hallucination ≤ 0.15、FROZEN WR ≤ 3、GEN answer_pass ≥ 20；**当前阻挡**：hard WR=19，需优先在答案收口降低，尤其处理 cross_document / multi_hop / synonym_rewrite 桶、ocr_noise_page、long_context_distraction 误杀。
 
 ## Collaboration Model
 

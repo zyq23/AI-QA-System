@@ -1,5 +1,7 @@
 # Codex Dialogs
 
+> **历史协作规范（2026-09-13）**：本文保留 2026-06 的 6 对话协作拓扑和统一汇报格式，模型/日期/派工快照均已过时，不应作为当前运行状态依据。新窗口状态以 `docs/next-round-brief.md`、`docs/codex-handoff.md` 和 `AGENTS.md` 为准。
+
 ## Purpose
 
 本文件定义当前项目的“6 个对话协作面”：
@@ -490,7 +492,7 @@
 
 - 当前目标：让 `Thread-Infra` 先完成 `latest eval` 代码侧 completed 过滤
 - 输入依赖：
-  - `docs/thread-infra-report.md`
+  - `docs/archive/thread-infra-report.md`
   - 当前工作树与运行态现状
 - 预期输出：
   - 最小改动方案

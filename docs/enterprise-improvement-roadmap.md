@@ -245,17 +245,17 @@ request_id
 
 ### 目标
 
-把“有备份文件”升级为“可验证、可恢复的备份系统”。
+把“偶尔拷贝备份文件”升级为“可验证、可恢复、可审计的备份系统”。
 
 ### 实现
 
-新增：
+在 `scripts/` 层面新增：
 
 - `scripts/backup_runtime.py`；
 - `scripts/restore_runtime.py`；
 - `scripts/verify_backup.py`；
+- `scripts/check_data_consistency.py`；
 - `docs/runbooks/backup-restore.md`；
-- `data/backups/manifest.json`（运行产物不必提交，但格式和校验脚本提交）。
 
 备份包必须包含：
 
@@ -266,12 +266,22 @@ request_id
 - 配置非敏感快照；
 - manifest、时间、commit、计数和 SHA256。
 
+### 现有基线
+
+`scripts/index_hygiene.py` 和 `scripts/reindex_all.py` 已具备基本 `backup()` 能力，后者在重建前做一次 DB + Chroma 备份。本阶段在其上面加：
+
+1. **统一 manifest**：每次备份都写 `data/backups/manifest.json`（运行产物，gitignore），包含版本号、schema version、document/chunk/answer_run 计数、各文件的 SHA256 和 commit sha。
+2. **一致性校验**：`check_data_consistency.py` 输出机器可读 JSON + exit code；正常数据 exit 0；偏差 exit 1。
+3. **恢复脚本**：`restore_runtime.py` 能把一个 manifest 指向的包恢复到 `data/runtime`、`data/chroma`、`data/uploads`，并在恢复后自动执行 consistency check。
+4. **验证脚本**：`verify_backup.py` 在不恢复的情况下对一个包内部结构、SHA256 和 manifest 完整性校验。
+5. **演练记录**：每季度恢复演练结果写入 `data/backups/restore_drills/YYYY-MM-DD.json`（不提交到 git）。
+
 ### 目标
 
 - RPO ≤24h；
 - RTO ≤4h；
 - 每日自动备份；
-- 备份加密并支持保留策略；
+- 备份加密并支持保留策略（7/30/90 天）；
 - 恢复后自动执行 integrity/foreign key/SQLite-Chroma-count consistency；
 - 每季度恢复演练，落盘演练报告。
 
@@ -280,6 +290,7 @@ request_id
 - 未验证备份就删除旧数据；
 - 把 API key、secret、cookie 写入 manifest；
 - 将真实运行数据库、上传文件或密钥备份提交 Git。
+
 
 ## Phase 3D：可观测性与运行 SLO（P1）
 

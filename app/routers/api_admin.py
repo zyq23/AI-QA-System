@@ -222,7 +222,7 @@ def build_router(templates: Jinja2Templates) -> APIRouter:
             "evaluation",
             payload={"dataset": str(dataset_path)},
         )
-        background_tasks.add_task(container.evaluation_service.run_job, job["id"], dataset_path)
+        background_tasks.add_task(container.job_worker.enqueue_background, job["id"]) if container.job_worker else background_tasks.add_task(container.evaluation_service.run_job, job["id"], dataset_path)
         return {"job_id": job["id"], "status": "queued"}
 
     @api.post("/evals/run-failures")
@@ -241,7 +241,7 @@ def build_router(templates: Jinja2Templates) -> APIRouter:
             "evaluation",
             payload={"dataset": str(dataset_path), "mode": "failed_cases"},
         )
-        background_tasks.add_task(container.evaluation_service.run_job, job["id"], dataset_path)
+        background_tasks.add_task(container.job_worker.enqueue_background, job["id"]) if container.job_worker else background_tasks.add_task(container.evaluation_service.run_job, job["id"], dataset_path)
         return {"job_id": job["id"], "status": "queued", "dataset": str(dataset_path), "case_count": generated["case_count"]}
 
     @api.delete("/documents/{document_id}")
@@ -455,7 +455,7 @@ def build_router(templates: Jinja2Templates) -> APIRouter:
             "evaluation",
             payload={"dataset": str(dataset_path)},
         )
-        background_tasks.add_task(container.evaluation_service.run_job, job["id"], dataset_path)
+        background_tasks.add_task(container.job_worker.enqueue_background, job["id"]) if container.job_worker else background_tasks.add_task(container.evaluation_service.run_job, job["id"], dataset_path)
         return render_admin_shell(request)
 
     @htmx.post("/evals/run-failures", response_class=HTMLResponse, dependencies=[Depends(require_admin)])
@@ -473,7 +473,7 @@ def build_router(templates: Jinja2Templates) -> APIRouter:
                 "evaluation",
                 payload={"dataset": str(dataset_path), "mode": "failed_cases"},
             )
-            background_tasks.add_task(container.evaluation_service.run_job, job["id"], dataset_path)
+            background_tasks.add_task(container.job_worker.enqueue_background, job["id"]) if container.job_worker else background_tasks.add_task(container.evaluation_service.run_job, job["id"], dataset_path)
         return render_admin_shell(request)
 
     @htmx.post("/documents/{document_id}/disable", response_class=HTMLResponse, dependencies=[Depends(require_admin)])

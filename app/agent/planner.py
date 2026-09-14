@@ -140,7 +140,7 @@ def build_plan(
         expr = re.search(r"([\d\s+\-*/().%]{3,})", question)
         steps.append(PlanStep(tool="calculator", args={"expression": expr.group(1).strip() if expr else "0"}))
     elif intent == "date_math":
-        steps.append(PlanStep(tool="date_utils", args={"base": _extract_date(question) or None}))
+        steps.append(PlanStep(tool="date_utils", args=_build_date_args(question)))
     elif intent == "document_detail":
         doc = re.search(r"(?:哪份|哪个)(?:资料|文档|文件)", question)
         _ = doc  # source-locating questions still start with a search step
@@ -196,6 +196,29 @@ def _split_subjects(question: str) -> list[str]:
         if len(subject) >= 2 and subject not in stripped:
             stripped.append(subject)
     return stripped[:2]
+
+
+def _build_date_args(question: str) -> dict[str, Any]:
+    """Extract all supported date operations so deterministic results are complete."""
+    args: dict[str, Any] = {"base": _extract_date(question)}
+    dates = re.findall(r"\d{4}-\d{2}-\d{2}", question)
+    if "周几" in question or "星期几" in question:
+        if dates:
+            args["weekday_of"] = dates[-1]
+    if dates and len(dates) >= 2 and "相隔" in question:
+        args["base"], args["diff_from"] = dates[0], dates[1]
+    offset = re.search(r"(?:\d{4}-\d{2}-\d{2})\s*(?:后|之后|前)\s*(\d+)\s*天|(?:\d+)\s*天\s*(?:后|之后|前)", question)
+    if offset:
+        number = next((group for group in offset.groups() if group is not None), None)
+        days = int(number)
+        if "前" in offset.group(0):
+            days = -days
+        args["offset_days"] = days
+        if ("周几" in question or "星期几" in question) and args.get("base"):
+            from datetime import date, timedelta
+            base = date.fromisoformat(args["base"])
+            args["weekday_of"] = (base + timedelta(days=days)).isoformat()
+    return {key: value for key, value in args.items() if value is not None}
 
 
 def _extract_date(question: str) -> str | None:

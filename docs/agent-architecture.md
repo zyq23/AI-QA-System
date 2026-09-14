@@ -103,6 +103,8 @@
 
 ## 4. 当前评测数字（Agent 路径 vs 单轮链路）
 
+> 2026-09-13 文档校准：以下 Agent 数字是 2026-09-11 历史结果；当前代码在 2026-09-12 后有 claim-matrix/否定题收口改动，尚未生成新的 Agent 全量结果，因此不得把旧数字当作当前基线。最新单轮 hard 指标见 `data/evals/results/rag_metrics_20260912_151042.json`。
+
 `scripts/run_agent_eval.py --dataset data/evals/hard_eval_v1.json`（130 题难例集）：
 
 | 指标 | 单轮链路基线 | Agent 模式 | 说明 |
@@ -130,3 +132,18 @@
 - `app/routers/api_robot.py`：robot 接口复用 Agent（复杂题走 Agent 回路）
 - `scripts/run_agent_eval.py`：Agent 评测 + 与单轮对比
 - `tests/test_agent.py`：16 条 Agent 单测（mock LLM，无网络）
+
+## 6. 2026-09-13 企业级审查待修订项
+
+本节不是能力通过声明，而是与当前代码核对后形成的文档债清单；修复必须以代码、测试和新评测结果为证据，不能只改文字：
+
+- **Evidence contract 未闭环**：`app/agent/tools.py::_serialize_hits` 当前仍截断为 `snippet`，缺少 `chunk_id`、完整 `plain_text` 和 `ocr_quality`；应统一为可追溯 evidence schema（file/page/section/chunk/version/quality/score）。
+- **对比工具输出不完整**：`MultiDocCompareTool` 当前 payload 只有 `sides`，控制器无法从顶层识别 `grounded/hits`；目标是每侧 claims/citations/grounded，并显式输出 `missing_fields` 和 comparison matrix。
+- **终答留痕与并发隔离**：Agent 终答尚未稳定回填 `answer_run_id`、claim-evidence matrix；控制器共享 `_pipeline_citations` 存在并发串引用风险，应改为请求级状态。
+- **确定性工具证据**：calculator/date_utils 的结果目前没有统一进入生产 finalize 的 typed evidence；不能仅凭工具 observation 释放答案。
+- **超时与状态语义**：当前 timeout 主要在工具调用间隙检查，不能中断工具内部阻塞；文档中的“硬上限”需待可取消执行器实现后再宣称。终态还需区分 timeout、step budget、tool error、completed、clarification、no_answer。
+- **计划校验与不可信输入**：初始计划与 replan 必须统一通过 JSON Schema/Pydantic 参数校验、工具 allowlist 和不可信文档指令隔离；当前尚无完整 prompt-injection 测试。
+- **意图与日期语义**：低置信规则路径当前可能走 `no_answer` 而不是 `clarification`；date plan 需要确认 `offset_days/weekday_of/diff_from` 都被正确传入和评测。
+- **测试数字需更新**：本文“112+ pytest”及旧 Agent 数字仅为历史材料；当前 Agent 全量新基线尚未生成，下一轮必须以结果文件更新，不能引用旧数字代表当前能力。
+
+在上述项目完成前，本文件的架构图和“企业级”表述均按设计目标理解，不作为生产就绪证据；当前发布状态以 `docs/next-round-brief.md` 的双轨门禁为准。

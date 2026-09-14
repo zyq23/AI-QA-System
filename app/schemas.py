@@ -110,6 +110,8 @@ class AgentQueryResponse(BaseModel):
     escalated: bool = False
     citations: list[CitationModel] = Field(default_factory=list)
     steps: list[AgentStepModel] = Field(default_factory=list)
+    terminal_status: str | None = None
+    deterministic_evidence: dict = Field(default_factory=dict)
 
 
 class RobotQueryResponse(BaseModel):

@@ -56,6 +56,10 @@ class Settings(BaseSettings):
     app_name: str = "知识库 AI 问答系统"
     admin_token: str = "change-me"
     secret_key: str = "knowledge-qa-secret"
+    service_api_token: str | None = None
+    robot_hmac_secret: str | None = None
+    robot_signature_window_seconds: int = 300
+    audit_log_retention_days: int = 365
     default_locale: str = "zh-CN"
 
     @field_validator("admin_token")

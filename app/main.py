@@ -2,8 +2,10 @@ from __future__ import annotations
 
 from contextlib import asynccontextmanager
 from pathlib import Path
+import os
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -150,6 +152,12 @@ def build_container() -> ServiceContainer:
         repository=repository,
         vector_store=vector_store,
     )
+    from app.services.job_worker import JobWorker
+    job_worker = JobWorker(repository, owner=f"api-{os.getpid()}")
+    job_worker.register("ingest_document", ingestion_service.process_job)
+    job_worker.register("reindex_document", ingestion_service.process_job)
+    job_worker.register("evaluation", evaluation_service.process_job)
+    ingestion_service.attach_worker(job_worker)
     return ServiceContainer(
         settings=settings,
         db=db,
@@ -167,6 +175,7 @@ def build_container() -> ServiceContainer:
         agent_service=agent_service,
         ragflow_sync_service=ragflow_sync_service,
         version_cleanup_service=version_cleanup_service,
+        job_worker=job_worker,
     )
 
 
@@ -207,6 +216,31 @@ def create_app() -> FastAPI:
     settings = get_settings()
     templates = build_templates()
     app = FastAPI(title=settings.app_name, lifespan=lifespan)
+
+    @app.get("/live", tags=["health"])
+    def live() -> dict[str, str]:
+        return {"status": "ok"}
+
+    @app.get("/ready", tags=["health"])
+    def ready(request: Request):
+        """Readiness probe: verify the initialized SQLite store is queryable."""
+        container = getattr(request.app.state, "container", None)
+        if container is None:
+            return JSONResponse(status_code=503, content={"status": "not_ready", "reason": "container_not_initialized"})
+        try:
+            with container.db.connect() as conn:
+                conn.execute("SELECT 1").fetchone()
+            return {"status": "ready", "database": "ok"}
+        except Exception:
+            return JSONResponse(status_code=503, content={"status": "not_ready", "database": "error"})
+
+    @app.get("/healthz", tags=["health"])
+    def healthz(request: Request):
+        container = getattr(request.app.state, "container", None)
+        if container is None:
+            return JSONResponse(status_code=503, content={"status": "unhealthy"})
+        return {"status": "ok", "ready": True, "retrieval_backend": container.settings.retrieval_backend}
+
     app.mount("/static", StaticFiles(directory=str(Path(__file__).parent / "static")), name="static")
     app.include_router(pages.build_router(templates))
     app.include_router(api_admin.build_router(templates))
