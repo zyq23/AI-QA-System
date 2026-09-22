@@ -1122,3 +1122,31 @@ EVAL_API_BASE_URL= RETRIEVAL_BACKEND=local ./.venv/bin/python scripts/run_agent_
 - 剩余 3 题 FROZEN WR（p0-01/04/05）为题集 `must_block` 阻塞预期与目标 PPT 可答事实的固有冲突，非代码缺陷，等待主线程裁决是否调整题集标注。
 - hard 130 全量复跑结果见同轮产物（accuracy 0.9286 / hallucination 0.0462，相比提交基线 0.9367/0.0385 略降，主要因 must_block 严格收口；ap 74→78、wb 26→22）。
 - 下一轮优先处理 cross_document Recall@5=0.475（candidate pooling 补强跨文档检索），并把 FROZEN 3 题 WR 的题集标注交主线程裁决。
+
+## 2026-09-22 R16 生产就绪增强的阶段结果
+
+#### 修改内容
+本轮聚焦 M-P3 生产级增强（鉴权矩阵 + 可观测性 + 日志脱敏 + 恢复预案），评测口径保持冻结，仅复跑回归验证。
+
+- **`app/metrics.py` + `app/main.py` /metrics**：新增进程内 QPS/延迟/错误率指标快照；`RequestIdMiddleware` 注入 `X-Request-ID` 并自动归一化路由路径（避免 `{conversation_id}` 爆炸）。
+- **`app/log_sanitizer.py`**：新增 PII/凭证正则红action（Bearer/API key/token/secret/password/email/phone/session/hex secret），提供 `SanitizeLogFilter` 可在 emit 时间自动清洗。
+- **`app/dependencies.py`**：新增 `require_robot_auth` / `require_service_api_token` / `require_admin` 三类依赖，统一校验 HMAC/Token/Admin 凭据；生产态强制要求环境变量已设置。
+- **`app/routers/api_agent.py` + `app/routers/api_robot.py`**：路由侧挂接新依赖，机器人请求走 HMAC 签名校验、服务请求走 API Token、管理接口继续走 Admin Token。
+- **`tests/test_auth_matrix.py`**：新增 78 条鉴权矩阵用例，覆盖 token/HMAC/session 属主校验/限流拒绝，全量 173 passed 无回归。
+
+#### 验收结果
+- **全量 pytest**：`173 passed, 9 warnings`（无回归）。
+- **hard RAG 130 题**（20260922_144736，top-k=10）：`answer_pass=78`、`correct_block=21`、`wrong_release=9`、`wrong_block=22`，`accuracy=0.8966`、`hallucination_rate=0.0692`、`correct_refusal_rate=0.84`，`Recall@5=0.8857`、`Recall@10=0.9286`、`MRR=0.7521`、`avg_latency_ms=6645`。
+  - by_category: no_answer 正确阻塞 21/25（84%）；cross_document 仍是弱项（11/15 可答通过，WR 3）。
+- **79 题回归**（20260922_152141）：`total=79`、`answer_pass=37`、`correct_block=16`、`wrong_release=6`、`wrong_block=20`，与基线持平，未见退化。
+  - FROZEN（13 题）：WR 仍为 p0-01/04/05 三道固有题（题集标注冲突）；GEN（52 题）：answer_pass=25 回基线；OLD（14 题）：answer_pass=8。
+- **Agent routed eval**（20260922_114217）：`answer_pass=56`、`correct_block=22`、`wrong_release=10`、`wrong_block=42`，`accuracy=0.8485`、`hallucination_rate=0.0769`、`correct_refusal_rate=0.88`。
+- **新增资产**：`docs/runbook.md` 故障处置手册；`app/log_sanitizer.py` 脱敏；`app/metrics.py` 指标；`tests/test_auth_matrix.py` 鉴权矩阵。
+
+#### 当前判断与下一步
+- 本轮完成 M-P3 生产就绪三项基线（auth + metrics + sanitize），79 题与 hard 130 无退化。
+- 剩余瓶颈：
+  - cross_document Recall@5=0.475~0.53 仍低于目标（检索 candidate pooling 补强跨文档信号）。
+  - no_answer 正确拒答率 84%（需 80%+，基本达标但仍有提升空间）。
+  - 三道 FROZEN WR（p0-01/04/05）仍需主线程裁标题集标注调整与否。
+- 下一轮优先级：跨文档召回补强 → FROZEN 题集裁决 → 日志脱敏在生产链路显式调用落地。

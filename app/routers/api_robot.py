@@ -4,7 +4,7 @@ import re
 
 from fastapi import APIRouter, Request
 
-from app.dependencies import get_container
+from app.dependencies import get_container, require_robot_auth
 from app.schemas import RobotQueryRequest, RobotQueryResponse
 
 
@@ -42,6 +42,8 @@ def build_router() -> APIRouter:
     @router.post("/query", response_model=RobotQueryResponse)
     def robot_query(request: Request, payload: RobotQueryRequest):
         container = get_container(request)
+        # Enforce robot/session auth before processing
+        auth_principal = require_robot_auth(request, container)
         agent_service = container.agent_service
         if agent_service is not None and agent_service.needs_agent(payload.question):
             # Complex/multi-step questions run through the Agent; simple ones keep

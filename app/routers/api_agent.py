@@ -6,22 +6,40 @@ reasoning process for every question.
 """
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Request, HTTPException, status
 
-from app.dependencies import get_container
-from app.ratelimit import SlidingWindowLimiter
+from app.auth import AdminSessionSigner
+from app.dependencies import get_container, require_robot_auth
 from app.schemas import AgentQueryRequest, AgentQueryResponse, CitationModel
-
-agent_limiter = SlidingWindowLimiter(limit=30, window_seconds=60.0)
 
 
 def build_router() -> APIRouter:
     router = APIRouter(prefix="/api/agent", tags=["agent"])
 
     @router.post("/query", response_model=AgentQueryResponse)
-    def agent_query(request: Request, payload: AgentQueryRequest):
-        agent_limiter.check(request)
+    async def agent_query(
+        request: Request,
+        payload: AgentQueryRequest,
+        auth_principal: str = Depends(require_robot_auth),
+    ):
         container = get_container(request)
+        # Enforce session ownership: only the creator of a conversation may
+        # read it unless the caller holds a service/robot token.
+        if payload.conversation_id and auth_principal not in ("service", "robot"):
+            signer = AdminSessionSigner(container.settings.secret_key)
+            # The conversation_id is stored encrypted in the cookie as
+            # ``admin_session``; we decode it here to check ownership.
+            cookie = request.cookies.get("admin_session")
+            if cookie:
+                try:
+                    stored = signer.loads(cookie)
+                except Exception:
+                    stored = None
+            else:
+                stored = None
+            if stored and stored != payload.conversation_id:
+                raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Conversation ID mismatch.")
+        
         result = container.agent_service.query(
             payload.question,
             payload.conversation_id,

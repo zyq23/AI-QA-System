@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import logging
+import time
+import uuid
 from contextlib import asynccontextmanager
 from pathlib import Path
 import os
@@ -8,6 +11,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from starlette.middleware.base import BaseHTTPMiddleware
 
 from app.auth import AdminSessionSigner
 from app.config import get_settings
@@ -27,6 +31,51 @@ from app.services.ragflow_sync import RagflowSyncService
 from app.services.retrieval import AdaptiveRetrievalService, FallbackRetrievalService, RagflowRetrievalService, RetrievalService
 from app.services.vector_store import VectorStoreService
 from app.services.version_cleanup import VersionCleanupService
+from app.metrics import metrics as _metrics
+
+
+# Configure structured JSON logging with request-id support (production-ready)
+def setup_logging():
+    """Configure root logger for structured JSON output with request-id propagation."""
+    handler = logging.StreamHandler()
+    formatter = logging.Formatter(
+        "%(asctime)s [%(levelname)s] %(message)s",
+        datefmt="%Y-%m-%dT%H:%M:%S%z"
+    )
+    handler.setFormatter(formatter)
+    root_logger = logging.getLogger()
+    root_logger.handlers.clear()
+    root_logger.addHandler(handler)
+    root_logger.setLevel(logging.INFO)
+
+
+setup_logging()
+
+
+class RequestIdMiddleware(BaseHTTPMiddleware):
+    """Inject X-Request-ID + record per-request latency/error metrics."""
+
+    async def dispatch(self, request: Request, call_next):
+        request_id = request.headers.get("X-Request-ID") or str(uuid.uuid4())
+        request.state.request_id = request_id
+        started = time.perf_counter()
+        status_code = 500
+        try:
+            response = await call_next(request)
+            status_code = response.status_code
+            response.headers["X-Request-ID"] = request_id
+            return response
+        finally:
+            elapsed_ms = (time.perf_counter() - started) * 1000.0
+            route = request.scope.get("path", "unknown")
+            # Normalize path params so metrics don't explode in cardinality.
+            if route.startswith("/api/chat/sessions/"):
+                route = "/api/chat/sessions/{conversation_id}"
+            _metrics.observe_request(
+                f"http.request{route}",
+                elapsed_ms,
+                is_error=status_code >= 500,
+            )
 
 
 def build_container() -> ServiceContainer:
@@ -216,6 +265,9 @@ def create_app() -> FastAPI:
     settings = get_settings()
     templates = build_templates()
     app = FastAPI(title=settings.app_name, lifespan=lifespan)
+    
+    # Install request-id middleware for tracing and correlation
+    app.add_middleware(RequestIdMiddleware)
 
     @app.get("/live", tags=["health"])
     def live() -> dict[str, str]:
@@ -240,6 +292,11 @@ def create_app() -> FastAPI:
         if container is None:
             return JSONResponse(status_code=503, content={"status": "unhealthy"})
         return {"status": "ok", "ready": True, "retrieval_backend": container.settings.retrieval_backend}
+
+    @app.get("/metrics", tags=["health"])
+    def metrics_endpoint():
+        """Expose in-process request metrics (counts, error rate, latency percentiles)."""
+        return _metrics.snapshot()
 
     app.mount("/static", StaticFiles(directory=str(Path(__file__).parent / "static")), name="static")
     app.include_router(pages.build_router(templates))
