@@ -37,12 +37,17 @@ from app.metrics import metrics as _metrics
 # Configure structured JSON logging with request-id support (production-ready)
 def setup_logging():
     """Configure root logger for structured JSON output with request-id propagation."""
+    from app.log_sanitizer import SanitizeLogFilter
+
     handler = logging.StreamHandler()
     formatter = logging.Formatter(
         "%(asctime)s [%(levelname)s] %(message)s",
         datefmt="%Y-%m-%dT%H:%M:%S%z"
     )
     handler.setFormatter(formatter)
+    # Filters on the root logger do not run for records propagated from child
+    # loggers; attach sanitization to the emitting handler instead.
+    handler.addFilter(SanitizeLogFilter())
     root_logger = logging.getLogger()
     root_logger.handlers.clear()
     root_logger.addHandler(handler)

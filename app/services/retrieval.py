@@ -477,8 +477,12 @@ class RetrievalService:
             return '""'
         # Quote each token so user input containing FTS syntax (quotes, parens)
         # cannot break the MATCH expression.
+        # Use a generous token ceiling so cross-document expansion terms
+        # (which can add 6–10 extra tokens) survive into the FTS query.
+        # Previously this was 12 and silently dropped critical keywords.
+        _FTS_TOKEN_CEILING = 24
         quoted = []
-        for token in tokens[:12]:
+        for token in tokens[:_FTS_TOKEN_CEILING]:
             escaped = token.replace('"', '""')
             quoted.append(f'"{escaped}"')
         return " OR ".join(quoted)
@@ -541,13 +545,19 @@ class RetrievalService:
         return fused
 
     @staticmethod
-    def _rerank_window_size(top_k: int, focus_terms: list[str] | None = None, section_hints: list[str] | None = None) -> int:
+    @staticmethod
+    def _rerank_window_size(top_k: int, focus_terms: list[str] | None = None, section_hints: list[str] | None = None, is_multi_subject: bool = False) -> int:
         window = max(top_k * 3, 8)
         # Enumeration-style PPT questions often rely on sibling chunks from the same slide.
         # Give the reranker a slightly wider candidate pool when the query carries multiple
         # focus terms or an explicit section hint, so complementary chunks are not dropped too early.
         if len(focus_terms or []) >= 3 or section_hints:
             window = max(window, top_k * 4, 12)
+        # Multi-subject questions ("A 和 B 分别…") need evidence from BOTH subjects.
+        # Without widening the window, one subject's chunks can monopolize the top-k
+        # after reranking, leaving the other subject's evidence below the cut.
+        if is_multi_subject:
+            window = max(window, top_k * 5, 20)
         return window
 
     @staticmethod
@@ -696,16 +706,35 @@ class RetrievalService:
     @staticmethod
     def _diversify_by_document(hits: list[RetrievalHit], top_k: int) -> list[RetrievalHit]:
         """Ensure top_k results aren't dominated by a single document.
-        Allow at most ceil(top_k * 0.7) hits from the same document,
-        then fill remaining slots from other docs. Only applies when
-        there are 4+ hits from 2+ different documents."""
+
+        Multi-document questions ("A和B分别…") need both subjects' evidence in
+        the window. A flat 70% cap still lets one document occupy most slots
+        while the other subject's evidence ranks just below the cut. The cap is
+        therefore tightened in proportion to how many distinct documents the
+        question actually touches: with 3+ distinct documents each document can
+        hold at most about half the window, so round-robin filling can surface
+        every subject.
+        """
         if len(hits) <= top_k:
             return hits
-        # Only diversify if there are hits from at least 2 different docs
-        unique_docs = {h.file_name for h in hits[:top_k]}
-        if len(unique_docs) < 2:
+        distinct_docs = {h.file_name for h in hits}
+        # Gate on the WHOLE candidate pool, not just the head of the ranking.
+        # Checking only hits[:top_k] made the worst case (one document owning
+        # every top slot) look like a single-document question, so the function
+        # returned early and never surfaced the other subjects' evidence.
+        if len(distinct_docs) < 2:
             return hits[:top_k]
-        max_per_doc = max(3, (top_k * 7 + 9) // 10)  # ~70% of top_k, min 3
+        # Ratio shrinks as more documents compete for the same window.
+        if len(distinct_docs) >= 4:
+            ratio = 0.4
+        elif len(distinct_docs) == 3:
+            ratio = 0.5
+        else:
+            ratio = 0.7
+        # Multi-subject questions need a stricter cap so one subject cannot
+        # consume the entire top-k: with a 0.4 ratio and top_k=10, each
+        # document holds at most 4 slots, leaving room for the second subject.
+        max_per_doc = max(1, int(top_k * ratio + 0.9999))
         doc_counts: dict[str, int] = {}
         result: list[RetrievalHit] = []
         deferred: list[RetrievalHit] = []
@@ -777,7 +806,12 @@ class RetrievalService:
 
         section_hints = self._matching_section_hints(question)
         rerank_query = expanded_query if expansion_terms_out else question
-        rerank_window = self._rerank_window_size(top_k, expanded_focus_terms, section_hints)
+        # Cross-subject questions ("A和B分别…") need both subjects' evidence in
+        # the rerank window AND a tighter per-document cap so neither subject
+        # crowds out the other.
+        multi_subject_markers = ("区别", "分别", "对比", "有什么不同", "各自", "一起列出", "同时给出", "分别是什么", "各是")
+        is_multi_subject = any(marker in question for marker in multi_subject_markers)
+        rerank_window = self._rerank_window_size(top_k, expanded_focus_terms, section_hints, is_multi_subject)
         reranked = self.reranker_service.rerank(rerank_query, hits[:rerank_window])
         page_group_signals = self._page_group_signals(reranked, expanded_focus_terms, section_hints)
         # Data-driven rerank signals: reward chunks that actually contain the

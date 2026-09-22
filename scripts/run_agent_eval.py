@@ -78,11 +78,12 @@ def _failure_stage(case: dict, record: dict) -> str:
             # Partial evidence: the missing (subject, attribute) side is a
             # claim-aggregation gap, not a finalize refusal.
             return "evidence_incomplete"
+    # Citations present with full recall but grounded=False → the production
+    # finalize layer blocked the answer (long-context noise, OCR artifacts,
+    # or insufficient evidence quality). This is a finalize-stage failure,
+    # not a retrieval gap.
     if record.get("grounded") is False and citations:
-        # Evidence existed but the production finalize layer refused it.
-        if record.get("finalize_stage"):
-            return "finalize_rejected"
-        return "retrieval_no_evidence"
+        return "finalize_rejected"
     if record.get("bucket") == "wrong_release":
         return "release_guard_missed"
     return "unattributed"

@@ -336,6 +336,10 @@ class AgentController:
                     ]
                     if not retrieval_hits:
                         return "", [], {}
+                    # Reuse the production claim-conditioned augmentation for
+                    # multi-part questions. Agent tools deliberately keep their
+                    # per-step scope, while finalize needs the union of evidence
+                    # for every subject/attribute claim.
                     retrieval_hits = self.chat_service._augment_multi_part_evidence(
                         question, retrieval_hits, 10,
                     )

@@ -22,6 +22,10 @@
 - 管理能力：支持单文档重建、全量重建、停用文档、评测执行
 - 机器人接入：提供简化的 HTTP 问答接口和桥接示例
 - 可扩展后端：支持将 `RAGFlow` 接为可选检索/解析增强链路
+- Agent 路由：复杂问题进入 plan-then-execute 控制器，简单问题保留快速路径
+- Agent 工具：支持知识检索、跨文档对比、文档详情、计算、日期工具与保守拒答
+- 安全收口：Agent 最终答案必须复用生产 `ChatService.answer` 的证据、数值、yes/no、OCR 与主题一致性守卫
+- 轨迹留痕：`agent_sessions` / `agent_steps` 持久化计划、工具调用、观察结果与最终决策
 
 ## 技术栈
 
@@ -32,8 +36,9 @@
 - Vector Store: `ChromaDB`
 - Embedding / Rerank: `BGE` 系列模型
 - LLM Access: `OpenAI-compatible API` / `Spark WebSocket`
+- Agent 控制器：`POST /api/agent/query` 实现 plan-then-execute
 - Optional Enhancement: `RAGFlow`
-- Test / Eval: `pytest` + repo 内置回归脚本
+- Test / Eval: `pytest` + repo 内置回归脚本 + agent 轨迹评测
 
 ## 系统架构
 
@@ -220,13 +225,19 @@ data/evals/
 data/evals/results/
 ```
 
-如果你要做检索链路排查，也可以使用：
+### 3. Agent 评测与质量指标
 
 ```bash
-uv run --python 3.11 python scripts/run_retrieval_diagnosis.py
+# 4. Agent 评测（routed 与 forced 两种模式）
+EVAL_API_BASE_URL= RETRIEVAL_BACKEND=local \
+  uv run --python 3.11 python scripts/run_agent_eval.py \
+  --dataset data/evals/harder_eval_v1.json --output-dir data/evals/results
+
+# 5. 跨文档诊断脚本
+uv run --python 3.11 python scripts/diag_cross_doc.py --output data/evals/diagnosis.json
 ```
 
-## 机器人 / 外部系统接入
+### 4. 机器人 / 外部系统接入
 
 如果外部系统只需要“提交问题并获取可播报短答案”，可以直接调用：
 
@@ -248,6 +259,21 @@ uv run --python 3.11 python scripts/run_retrieval_diagnosis.py
 ```bash
 python robot_bridge/bridge.py --base-url http://127.0.0.1:8000
 ```
+
+## Agent API（复杂问题智能客服）
+
+对于需要多步检索、跨文档对比或证据收口的问题，可以使用 Agent 端点：
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/agent/query \
+  -H "Content-Type: application/json" \
+  -d '{"question": "对比机械臂和实训套件的核心能力差异", "conversation_id": null}'
+```
+
+Agent 控制器采用 plan-then-execute 模式：
+- 复杂问题进入规划-执行-收口循环
+- 最终答案复用生产管线的全部防幻觉守卫
+- 轨迹落库于 `agent_sessions` / `agent_steps` 表
 
 ## RAGFlow 可选集成
 

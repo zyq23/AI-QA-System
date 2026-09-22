@@ -8,6 +8,7 @@ from app.domain import AnswerPayload, QueryAnalysis, RetrievalHit
 from app.repositories import Repository
 from app.services.llm import LlmService
 from app.services.retrieval import RetrievalService
+from app.utils import tokenize
 
 logger = logging.getLogger(__name__)
 
@@ -52,6 +53,10 @@ class ChatService:
             return hits
         seen = {h.chunk_id for h in hits}
         extra: list[RetrievalHit] = []
+
+        # Track whether each claim has found evidence yet
+        claim_has_evidence: dict[tuple[str, str], bool] = {(s, a): False for s, a in claims[:3]}
+
         for subject, attribute in claims[:3]:
             # Always put the exact claim first. Alias probes are useful for
             # paraphrases, but truncating them before this query caused the
@@ -71,6 +76,7 @@ class ChatService:
             queries.append(subject)
             # De-duplicate while preserving exact claim priority.
             queries = list(dict.fromkeys(q for q in queries if q.strip()))
+            probe_found_any = False
             for probe in queries[:8]:
                 try:
                     sub = self.retrieval_service.retrieve(
@@ -82,14 +88,73 @@ class ChatService:
                         if hit.chunk_id not in seen:
                             seen.add(hit.chunk_id)
                             extra.append(hit)
+                            probe_found_any = True
                 except Exception as exc:
                     logger.debug("Claim probe failed for %s: %s", probe[:40], exc)
+            claim_has_evidence[(subject, attribute)] = probe_found_any
+
+            # Cross-document broad probe: when a per-claim probe returns zero
+            # extra hits, widen the query to just the attribute or just the
+            # subject. This catches chunks where the attribute-bearing chunk
+            # lives in a different document and the strict subject+attribute
+            # phrasing missed it (e.g. "模型家族" attribute chunk not matched
+            # by the "轩辕基础模型" subject phrasing).
+            if not probe_found_any:
+                broad_probes: list[str] = []
+                if len(attribute) >= 2:
+                    broad_probes.append(attribute)
+                if len(subject) >= 2:
+                    broad_probes.append(subject)
+                broad_probes.append(f"{subject}{attribute}")
+                broad_probes = list(dict.fromkeys(b for b in broad_probes if len(b) >= 2))
+                for probe in broad_probes[:4]:
+                    try:
+                        sub = self.retrieval_service.retrieve(
+                            probe,
+                            top_k=max(4, min(8, (top_k or 10) // 2)),
+                            focus_terms=None,
+                        )
+                        for hit in sub.hits:
+                            if hit.chunk_id not in seen:
+                                seen.add(hit.chunk_id)
+                                extra.append(hit)
+                    except Exception:
+                        pass
+
         if not extra:
             return hits
-        # Append claim-probe evidence, preserving the primary ranking first.
-        # The final matrix verifies each claim against the union and citations
-        # retain file/page provenance for downstream evaluation.
-        return list(hits) + extra[: max(0, (top_k or 10) * 4)]
+
+        # Put one strongest hit from each claim into the visible top-k window,
+        # ensuring cross-document evidence for multi-subject claims.
+        # Appending all probes after the primary ranking leaves the second
+        # document beyond the citation cutoff, even though the probe found it.
+        selected: list[RetrievalHit] = []
+        selected_ids: set[str] = set()
+        for subject, attribute in claims[:3]:
+            terms = [t for t in tokenize(f"{subject} {attribute}") if len(t) >= 2]
+            candidates = [h for h in extra if h.chunk_id not in selected_ids]
+            if not candidates:
+                continue
+
+            def claim_score(hit: RetrievalHit) -> tuple[float, float]:
+                text = hit.plain_text.lower()
+                overlap = sum(1 for term in terms if term.lower() in text)
+                return (float(overlap), float(hit.rerank_score))
+
+            best = max(candidates, key=claim_score)
+            selected.append(best)
+            selected_ids.add(best.chunk_id)
+
+        ordered: list[RetrievalHit] = []
+        seen_output: set[str] = set()
+        for hit in [*selected, *hits, *extra]:
+            if hit.chunk_id in seen_output:
+                continue
+            seen_output.add(hit.chunk_id)
+            ordered.append(hit)
+        # Keep additional probe evidence available to the claim matrix, while
+        # ensuring the selected per-claim hits occupy the top-k citations.
+        return ordered[: max((top_k or 10) * 4, top_k or 10)]
 
     def _multi_query_retrieve(
         self,

@@ -191,6 +191,24 @@ class EvaluationService:
         return json.loads(path.read_text(encoding="utf-8"))
 
     @staticmethod
+    def _filter_cases(
+        cases: list[dict[str, Any]],
+        *,
+        categories: list[str] | None = None,
+        case_ids: list[str] | None = None,
+        limit: int | None = None,
+    ) -> list[dict[str, Any]]:
+        category_set = {item.strip() for item in (categories or []) if item.strip()}
+        id_set = {item.strip() for item in (case_ids or []) if item.strip()}
+        selected = [
+            case for case in cases
+            if (not category_set or case.get("category") in category_set)
+            and (not id_set or str(case.get("id")) in id_set)
+        ]
+        return selected[:limit] if limit else selected
+
+
+    @staticmethod
     def build_failed_case_dataset(
         latest_result: dict[str, Any],
         *,
@@ -559,12 +577,25 @@ class EvaluationService:
             "formal_reports": formal_reports,
         }
 
-    def run(self, dataset_path: Path | None = None, output_dir: Path | None = None) -> dict[str, Any]:
+    def run(
+        self,
+        dataset_path: Path | None = None,
+        output_dir: Path | None = None,
+        *,
+        limit: int | None = None,
+        categories: list[str] | None = None,
+        case_ids: list[str] | None = None,
+    ) -> dict[str, Any]:
         dataset_path = dataset_path or self.settings.eval_dataset_path
         output_dir = output_dir or self.settings.eval_results_dir
         output_dir.mkdir(parents=True, exist_ok=True)
 
-        dataset_cases = self._load_cases(dataset_path)
+        dataset_cases = self._filter_cases(
+            self._load_cases(dataset_path),
+            categories=categories,
+            case_ids=case_ids,
+            limit=limit,
+        )
         reports: list[TurnReport] = []
         for case in dataset_cases:
             reports.extend(self._run_case(case))

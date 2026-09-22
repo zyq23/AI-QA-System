@@ -44,6 +44,28 @@ def build_hit(text: str, *, section_path: str = "测试") -> RetrievalHit:
     )
 
 
+def test_retrieval_diversifies_multi_document_pool_by_document_count():
+    hits = []
+    for index in range(8):
+        hit = build_hit(f"a-{index}")
+        hit.file_name = "a.docx"
+        hit.rerank_score = 10 - index
+        hits.append(hit)
+    for index in range(4):
+        hit = build_hit(f"b-{index}")
+        hit.file_name = "b.docx"
+        hit.rerank_score = 5 - index
+        hits.append(hit)
+    for index in range(4):
+        hit = build_hit(f"c-{index}")
+        hit.file_name = "c.docx"
+        hit.rerank_score = 4 - index
+        hits.append(hit)
+    result = RetrievalService._diversify_by_document(sorted(hits, key=lambda h: h.rerank_score, reverse=True), 6)
+    assert {h.file_name for h in result} == {"a.docx", "b.docx", "c.docx"}
+    assert sum(h.file_name == "a.docx" for h in result) <= 3
+
+
 def test_upload_and_chat_flow(client):
     files = [("files", ("g1.docx", build_docx_bytes(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document"))]
     response = client.post(
@@ -1983,7 +2005,7 @@ def test_compose_extract_answer_prefers_arm_courses_over_majors():
         ],
         True,
     )
-    assert answer == "包括Python程序设计、深度学习、数字图像处理、机器视觉、基于视觉的机器人应用等。"
+    assert answer == "包括Python程序设计、深度学习、数字图像处理、机器视觉、基于视觉的机器人应用、大模型技术应用。"
     assert "大模型技术应用" in grounded
 
 
@@ -2535,6 +2557,43 @@ def test_context_block_is_compact_for_factoid_questions():
     assert "[证据 1]" in context
     assert "文件:" not in context
     assert len(context) < 160
+
+
+def test_strict_quantity_guard_blocks_adjacent_employee_number_evidence():
+    service = LlmService(provider="openai_compatible", base_url=None, api_key=None, model=None, disabled=True)
+    question = "轩辕网络目前有多少名正式员工？"
+    analysis = QueryAnalysis(
+        rewritten_query=question,
+        question_type="factoid",
+        answer_focus="正式员工人数",
+        focus_terms=["轩辕网络", "正式员工", "人数"],
+    )
+    draft = DraftAnswer(
+        answer="轩辕网络与高校共同编写了7本云计算教材。",
+        grounded_answer="轩辕网络与高校共同编写了7本云计算教材。",
+        inference_note="",
+        question_type="factoid",
+        answer_focus=analysis.answer_focus,
+        grounded=True,
+    )
+    review = ReviewResult(
+        passed=True,
+        issues=[],
+        revised_answer=draft.answer,
+        revised_grounded_answer=draft.grounded_answer,
+        revised_inference_note="",
+        risk_level="low",
+        reviewer_intervened=False,
+    )
+    payload = service.finalize_answer(
+        question,
+        analysis,
+        [build_hit("轩辕网络与全国多所高校共同编写了7本云计算专业系列教材。")],
+        draft,
+        review,
+    )
+    assert payload["grounded"] is False
+    assert "没有找到" in payload["answer"]
 
 
 def test_finalize_answer_strips_question_echo():

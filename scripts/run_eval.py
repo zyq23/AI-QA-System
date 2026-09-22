@@ -35,6 +35,24 @@ def main() -> int:
         default="data/evals/results",
         help="Directory to store timestamped evaluation reports.",
     )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=None,
+        help="Only run the first N cases (smoke).",
+    )
+    parser.add_argument(
+        "--category",
+        action="append",
+        dest="categories",
+        help="Only run cases in this category; repeat for multiple categories.",
+    )
+    parser.add_argument(
+        "--case-id",
+        action="append",
+        dest="case_ids",
+        help="Only run this case id; repeat for multiple ids.",
+    )
     args = parser.parse_args()
 
     dataset = Path(args.dataset)
@@ -42,7 +60,13 @@ def main() -> int:
         raise SystemExit(f"eval dataset not found: {dataset}")
 
     container = build_container()
-    payload = container.evaluation_service.run(dataset_path=Path(args.dataset), output_dir=Path(args.output_dir))
+    payload = container.evaluation_service.run(
+        dataset_path=dataset,
+        output_dir=Path(args.output_dir),
+        limit=args.limit,
+        categories=args.categories,
+        case_ids=args.case_ids,
+    )
     print_report(payload["summary"], payload["reports"])
     print(f"\nSaved report to: {payload['report_path']}")
     return 0

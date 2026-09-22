@@ -121,11 +121,39 @@ def mean(values: list[float | None]) -> float | None:
     return round(sum(present) / len(present), 4) if present else None
 
 
-def run(dataset_path: Path, output_dir: Path, top_k: int = 10, limit: int | None = None, backend: str = "chat") -> dict:
+def _filter_cases(
+    cases: list[dict],
+    *,
+    categories: list[str] | None = None,
+    case_ids: list[str] | None = None,
+    limit: int | None = None,
+) -> list[dict]:
+    category_set = {item.strip() for item in (categories or []) if item.strip()}
+    id_set = {item.strip() for item in (case_ids or []) if item.strip()}
+    selected = [
+        case for case in cases
+        if (not category_set or case.get("category") in category_set)
+        and (not id_set or str(case.get("id")) in id_set)
+    ]
+    return selected[:limit] if limit else selected
+
+
+def run(
+    dataset_path: Path,
+    output_dir: Path,
+    top_k: int = 10,
+    limit: int | None = None,
+    backend: str = "chat",
+    categories: list[str] | None = None,
+    case_ids: list[str] | None = None,
+) -> dict:
     container = build_container()
-    cases = json.loads(dataset_path.read_text(encoding="utf-8"))
-    if limit:
-        cases = cases[:limit]
+    cases = _filter_cases(
+        json.loads(dataset_path.read_text(encoding="utf-8")),
+        categories=categories,
+        case_ids=case_ids,
+        limit=limit,
+    )
 
     per_case: list[dict] = []
     started = time.perf_counter()
@@ -238,8 +266,27 @@ def main() -> int:
     parser.add_argument("--output-dir", default="data/evals/results")
     parser.add_argument("--top-k", type=int, default=10)
     parser.add_argument("--limit", type=int, default=None, help="Only run the first N cases (smoke).")
+    parser.add_argument(
+        "--category",
+        action="append",
+        dest="categories",
+        help="Only run cases in this category; repeat for multiple categories.",
+    )
+    parser.add_argument(
+        "--case-id",
+        action="append",
+        dest="case_ids",
+        help="Only run this case id; repeat for multiple ids.",
+    )
     args = parser.parse_args()
-    run(Path(args.dataset), Path(args.output_dir), top_k=args.top_k, limit=args.limit)
+    run(
+        Path(args.dataset),
+        Path(args.output_dir),
+        top_k=args.top_k,
+        limit=args.limit,
+        categories=args.categories,
+        case_ids=args.case_ids,
+    )
     return 0
 
 
