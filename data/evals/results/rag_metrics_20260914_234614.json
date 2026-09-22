@@ -1,0 +1,224 @@
+{
+  "generated_at": "2026-09-14T23:46:14.357311+08:00",
+  "dataset": "data/evals/hard_eval_v1.json",
+  "targets": {
+    "recall_5": 0.85,
+    "recall_10": 0.92,
+    "accuracy": 0.9,
+    "correct_refusal_rate": 0.95,
+    "hallucination_rate": 0.05
+  },
+  "overall": {
+    "answer_pass": 1,
+    "correct_block": 0,
+    "wrong_release": 0,
+    "wrong_block": 2,
+    "total": 3,
+    "accuracy": 1.0,
+    "hallucination_rate": 0.0,
+    "correct_refusal_rate": null,
+    "recall_3": 1.0,
+    "recall_5": 1.0,
+    "recall_10": 1.0,
+    "mrr": 1.0,
+    "ndcg": 0.5062,
+    "avg_latency_ms": 13115.3
+  },
+  "by_category": {
+    "multi_hop": {
+      "answer_pass": 1,
+      "correct_block": 0,
+      "wrong_release": 0,
+      "wrong_block": 2,
+      "total": 3,
+      "accuracy": 1.0,
+      "hallucination_rate": 0.0,
+      "correct_refusal_rate": null,
+      "recall_3": 1.0,
+      "recall_5": 1.0,
+      "recall_10": 1.0,
+      "mrr": 1.0,
+      "ndcg": 0.5062,
+      "avg_latency_ms": 13115.3
+    }
+  },
+  "per_case": [
+    {
+      "id": "hard-multihop-01",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.2911012948868937,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 15457,
+      "citations": [
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-02",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.8974416663360282,
+        "first_rank": 1.0
+      },
+      "answer": "智能物联边缘计算实训套件面向边缘计算场景构建，在端、边、云、应用四层架构下，以华为边缘计算行业解决方案为技术底座，实训套件融合华为边缘计算网关AR502H、网络摄像头、智能电子秤、三合一传感器、超高频RFID等物联接入设备。",
+      "grounded": true,
+      "latency_ms": 9932,
+      "citations": [
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-03",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.33013764944712026,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息",
+      "grounded": false,
+      "latency_ms": 13957,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-15"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-4"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-4"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-3"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-6"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-24"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-9"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-7"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3635 @@
+{
+  "generated_at": "2026-09-15T03:10:38.661664+08:00",
+  "dataset": "data/evals/hard_eval_v1.json",
+  "targets": {
+    "recall_5": 0.85,
+    "recall_10": 0.92,
+    "accuracy": 0.9,
+    "correct_refusal_rate": 0.95,
+    "hallucination_rate": 0.05
+  },
+  "overall": {
+    "answer_pass": 17,
+    "correct_block": 0,
+    "wrong_release": 13,
+    "wrong_block": 30,
+    "total": 60,
+    "accuracy": 0.5667,
+    "hallucination_rate": 0.2167,
+    "correct_refusal_rate": null,
+    "recall_3": 0.7833,
+    "recall_5": 0.8167,
+    "recall_10": 0.9167,
+    "mrr": 0.7084,
+    "ndcg": 0.2403,
+    "avg_latency_ms": 8831.4
+  },
+  "by_category": {
+    "cross_document": {
+      "answer_pass": 6,
+      "correct_block": 0,
+      "wrong_release": 4,
+      "wrong_block": 5,
+      "total": 15,
+      "accuracy": 0.6,
+      "hallucination_rate": 0.2667,
+      "correct_refusal_rate": null,
+      "recall_3": 0.4333,
+      "recall_5": 0.5,
+      "recall_10": 0.8333,
+      "mrr": 0.4074,
+      "ndcg": 0.1445,
+      "avg_latency_ms": 16267.6
+    },
+    "multi_hop": {
+      "answer_pass": 5,
+      "correct_block": 0,
+      "wrong_release": 3,
+      "wrong_block": 7,
+      "total": 15,
+      "accuracy": 0.625,
+      "hallucination_rate": 0.2,
+      "correct_refusal_rate": null,
+      "recall_3": 0.7667,
+      "recall_5": 0.7667,
+      "recall_10": 0.8333,
+      "mrr": 0.7429,
+      "ndcg": 0.2899,
+      "avg_latency_ms": 7680.1
+    },
+    "ocr_noise_page": {
+      "answer_pass": 2,
+      "correct_block": 0,
+      "wrong_release": 2,
+      "wrong_block": 11,
+      "total": 15,
+      "accuracy": 0.5,
+      "hallucination_rate": 0.1333,
+      "correct_refusal_rate": null,
+      "recall_3": 1.0,
+      "recall_5": 1.0,
+      "recall_10": 1.0,
+      "mrr": 0.8556,
+      "ndcg": 0.2572,
+      "avg_latency_ms": 6261.7
+    },
+    "synonym_rewrite": {
+      "answer_pass": 4,
+      "correct_block": 0,
+      "wrong_release": 4,
+      "wrong_block": 7,
+      "total": 15,
+      "accuracy": 0.5,
+      "hallucination_rate": 0.2667,
+      "correct_refusal_rate": null,
+      "recall_3": 0.9333,
+      "recall_5": 1.0,
+      "recall_10": 1.0,
+      "mrr": 0.8278,
+      "ndcg": 0.2694,
+      "avg_latency_ms": 5116.2
+    }
+  },
+  "per_case": [
+    {
+      "id": "hard-cross-01",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.5714285714285714,
+        "ndcg": 0.23332116087283317,
+        "first_rank": 1.0
+      },
+      "answer": "机械臂的核心设备是两台协作机器人和两套视觉系统 实训套件的核心设备是华为 AR502H 系列工业级边缘计算网关。",
+      "grounded": true,
+      "latency_ms": 45898,
+      "citations": [
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-21"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-02",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 0.0,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.17142857142857143,
+        "ndcg": 0.07925351987049051,
+        "first_rank": 5.0
+      },
+      "answer": "当前知识库中没有找到相关信息",
+      "grounded": false,
+      "latency_ms": 17328,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-6"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-15"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-03",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg": 0.1404407505255908,
+        "first_rank": 2.0
+      },
+      "answer": "机械臂的生产厂家是湖南比邻星科技有限公司 实训套件的核心网关是华为 AR502H 系列工业级边缘计算网关。",
+      "grounded": true,
+      "latency_ms": 15944,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-04",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.3125,
+        "ndcg": 0.15916977447968594,
+        "first_rank": 2.0
+      },
+      "answer": "机械臂的视觉系统配置是1套2D视觉系统、1套深度视觉系统；边缘套件的设备组成是实训套件、实验模块、应用控制终端、IotDA云平台",
+      "grounded": true,
+      "latency_ms": 21953,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-8"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-81"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-05",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.5833333333333334,
+        "ndcg": 0.2468395180337083,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息",
+      "grounded": false,
+      "latency_ms": 14361,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-20"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-69"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-20"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-35"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-7"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-69"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-36"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-06",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 0.0,
+        "recall_5": 0.0,
+        "recall_10": 1.0,
+        "mrr": 0.12142857142857143,
+        "ndcg": 0.06849235514915589,
+        "first_rank": 7.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 13221,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-6"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-22"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-45"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-80"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-33"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-41"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-26"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-07",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 0.75,
+        "ndcg": 0.17947710508581735,
+        "first_rank": 1.0
+      },
+      "answer": "产业学院的定位是理事会领导下的院长负责制；公司的定位是AI+产教融合服务商",
+      "grounded": true,
+      "latency_ms": 15259,
+      "citations": [
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-16"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-69"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-64"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-17"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-13"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-12"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-4"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-08",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 0.5,
+        "mrr": 0.5,
+        "ndcg": 0.21615906613549737,
+        "first_rank": 1.0
+      },
+      "answer": "体验中心的文化主线是根技术筑基；产业学院的三位一体是根技术为核心，以“技术+师范”理念为统领 ，整",
+      "grounded": true,
+      "latency_ms": 19063,
+      "citations": [
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-89"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-88"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-25"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-90"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-6"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-16"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-09",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 0.0,
+        "recall_5": 0.0,
+        "recall_10": 0.5,
+        "mrr": 0.07142857142857142,
+        "ndcg": 0.03668196104968002,
+        "first_rank": 7.0
+      },
+      "answer": "实训套件的架构是端、边、云、应用四层架构；机械臂的实验环境是Jupyter Notebook",
+      "grounded": true,
+      "latency_ms": 11606,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-8"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-70"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-26"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-6"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-10",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.5714285714285714,
+        "ndcg": 0.1467278441987201,
+        "first_rank": 1.0
+      },
+      "answer": "1. 通识课程 专业课程 AI+X课程 数字素养提升 专业化人才培养 AI+微专业课程体系 智能化 职业化 教学能力提升 核心应用 师资/社会培训课程体系 工程化人才培养 产学研能力提升 教材/数字化教学资源 AIGC通识教育平台 AIGC实战平台 轻量大模型 数智底座 通用算力资源 智能算力资源（训练/推理） 高性能存储资源 高速网络 基础环境 数智技术实践中心 （人工智能实训室/数据智能实训室/物联网实训室•••） 产业技术及应用展厅 2. AI科学计算平台 轩辕星轻量级大模型 智能体应用开发平台 算力资源设施 集群管理 容器引擎 镜像管理 任务调度 负载均衡 资源监控 通用算力资源 智能算力资源（训练/推理） 高性能存储资源 高速网络 基础环境 AI实训室 （AIGC实训室/人工智能综合实训室/数据智能实训室•••） 产业技术及应用展厅 AIGC赋能中心 3. 2020-2022年，梳理并形成了产业学院运营服务手册，构建运营服务体系",
+      "grounded": true,
+      "latency_ms": 2769,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-18"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-89"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-80"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-70"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-69"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-12"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-64"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-11",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 0.0,
+        "recall_5": 0.5,
+        "recall_10": 0.5,
+        "mrr": 0.125,
+        "ndcg": 0.04739418218477539,
+        "first_rank": 4.0
+      },
+      "answer": "包括产教融合实践基地、根技术课程体系、支撑平台及配套服务体系",
+      "grounded": true,
+      "latency_ms": 8826,
+      "citations": [
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-16"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-65"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-2"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-2"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-16"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-7"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-4"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-12",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.5833333333333334,
+        "ndcg": 0.14924501763837775,
+        "first_rank": 1.0
+      },
+      "answer": "公司的成立信息是1998；机械臂的电话是0731-85828227",
+      "grounded": true,
+      "latency_ms": 16829,
+      "citations": [
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-51"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-51"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-4"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-6"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-76"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-13",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 0.5,
+        "mrr": 0.5,
+        "ndcg": 0.11004588314904008,
+        "first_rank": 1.0
+      },
+      "answer": "实训套件的发布日期是2025-12-08；产业学院的年份是2019年",
+      "grounded": true,
+      "latency_ms": 13016,
+      "citations": [
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-80"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-80"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-83"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-81"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-78"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-25"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-11"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-14",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 0.41666666666666663,
+        "ndcg": 0.24417459191260488,
+        "first_rank": 2.0
+      },
+      "answer": "当前知识库中没有找到相关信息",
+      "grounded": false,
+      "latency_ms": 18446,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-3"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-3"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-3"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-14"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-9"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-7"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-15",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 0.5,
+        "mrr": 0.5,
+        "ndcg": 0.11004588314904008,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息",
+      "grounded": false,
+      "latency_ms": 9495,
+      "citations": [
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-22"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-15"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-7"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-1"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-65"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-7"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-11"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-13"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-01",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.2911012948868937,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 5625,
+      "citations": [
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-02",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.8974416663360282,
+        "first_rank": 1.0
+      },
+      "answer": "智能物联边缘计算实训套件面向边缘计算场景构建，在端、边、云、应用四层架构下，以华为边缘计算行业解决方案为技术底座，实训套件融合华为边缘计算网关AR502H、网络摄像头、智能电子秤、三合一传感器、超高频RFID等物联接入设备。",
+      "grounded": true,
+      "latency_ms": 11506,
+      "citations": [
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-03",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.33013764944712026,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息",
+      "grounded": false,
+      "latency_ms": 8802,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-15"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-4"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-4"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-3"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-6"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-24"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-9"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-7"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-04",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.28952298823485745,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息",
+      "grounded": false,
+      "latency_ms": 4141,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-26"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-49"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-29"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-05",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 0.75,
+        "ndcg": 0.3212345732391268,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 4221,
+      "citations": [
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-77"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-89"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-81"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-81"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-70"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-06",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 0.0,
+        "recall_5": 0.0,
+        "recall_10": 0.0,
+        "mrr": 0.0,
+        "ndcg": 0.0,
+        "first_rank": null
+      },
+      "answer": "体验中心的‘从通识到专业’路径最终要走向专业的阶段。",
+      "grounded": true,
+      "latency_ms": 3536,
+      "citations": [
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-16"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-65"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-2"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-17"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-17"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-16"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-6"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-80"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-07",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 0.5,
+        "mrr": 0.25,
+        "ndcg": 0.06943122193677727,
+        "first_rank": 2.0
+      },
+      "answer": "包括消费级设备；AI人才方案的基础设施包括课程体系、实训平台和认证体系",
+      "grounded": true,
+      "latency_ms": 16581,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-41"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-6"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-80"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-70"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-5"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-1"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-15"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-08",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.33013764944712026,
+        "first_rank": 1.0
+      },
+      "answer": "包括2D视觉系统、深度视觉系统",
+      "grounded": true,
+      "latency_ms": 18223,
+      "citations": [
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-42"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-9"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-19"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-09",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.5423640154200349,
+        "first_rank": 1.0
+      },
+      "answer": "1. 实训箱的软件环境完全兼容主流开发工具与编程语言，支持标准 Python开发环境与C等主流开发语言，支持多容器部署，容器系统兼容主流的操作系统。 2. 自主创新技术生态支撑 依托华为鸿蒙操作系统与欧拉操作系统的技术基座，实训套件在一定程度上构建了自主创新教学生态体系。 3. 智能物联边缘计算实训套件面向边缘计算场景构建，在端、边、云、应用四层架构下，以华为边缘计算行业解决方案为技术底座，实训套件融合华为边缘计算网关AR502H、网络摄像头、智能电子秤、三合一传感器、超高频RFID等物联接入设备",
+      "grounded": true,
+      "latency_ms": 2537,
+      "citations": [
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-16"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-26"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-6"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-10",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "科学研究服务。",
+      "grounded": true,
+      "latency_ms": 4511,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-20"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-36"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-35"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-69"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-82"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-20"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-4"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-4"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-34"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-35"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-11",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.5442213638169618,
+        "first_rank": 1.0
+      },
+      "answer": "三位一体方向是根技术、人工智能、职教母机。",
+      "grounded": true,
+      "latency_ms": 3851,
+      "citations": [
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-90"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-88"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-89"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-2"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-88"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-12",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 0.0,
+        "recall_5": 0.0,
+        "recall_10": 1.0,
+        "mrr": 0.14285714285714285,
+        "ndcg": 0.07336392209936005,
+        "first_rank": 7.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 1491,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-5"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-7"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-5"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-15"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-7"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-18"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-2"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-3"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-5"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-11"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-13",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 0.0,
+        "recall_5": 0.0,
+        "recall_10": 0.0,
+        "mrr": 0.0,
+        "ndcg": 0.0,
+        "first_rank": null
+      },
+      "answer": "根技术课程体系面向17个学院70个专业，按不同学科特点打造新师范、新工科、新文科，并配套通识课课件和AIGC实战平台。",
+      "grounded": true,
+      "latency_ms": 3428,
+      "citations": [
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-14"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-2"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-4"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-13"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-24"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-14"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-17"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-31"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-2"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-14",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 11929,
+      "citations": [
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-3"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-18"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-18"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-20"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-3"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-14"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-81"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-15"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-33"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-7"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-15",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息",
+      "grounded": false,
+      "latency_ms": 14820,
+      "citations": [
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-51"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-6"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-2"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-81"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-4"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-01",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 5271,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-3"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-4"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-25"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-64"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-4"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-4"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-80"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-12"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-45"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-02",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "这家公司的知识产权里，软件著作登记量有147项。",
+      "grounded": true,
+      "latency_ms": 4880,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-5"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-6"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-41"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-41"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-6"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-6"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-6"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-41"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-6"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-41"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-03",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 0.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 0.25,
+        "ndcg": 0.09478836436955078,
+        "first_rank": 4.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 3033,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-89"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-53"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-61"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-4"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-11"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-14"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-11"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-8"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-51"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-04",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.3589542101716347,
+        "first_rank": 1.0
+      },
+      "answer": "‘有产懂教’是通过信息和人才培养两个方面互相促进的双轮驱动关系。",
+      "grounded": true,
+      "latency_ms": 5201,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-15"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-64"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-4"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-88"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-80"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-25"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-2"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-84"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-05",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 0.5,
+        "ndcg": 0.13886244387355454,
+        "first_rank": 2.0
+      },
+      "answer": "当前知识库中没有找到相关信息",
+      "grounded": false,
+      "latency_ms": 2773,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-30"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-28"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-28"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-11"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-06",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 3171,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-20"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-35"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-36"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-20"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-69"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-64"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-20"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-82"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-82"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-11"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-07",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.3679212572135327,
+        "first_rank": 1.0
+      },
+      "answer": "两台机器人配两套视觉系统。",
+      "grounded": true,
+      "latency_ms": 5085,
+      "citations": [
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-08",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg": 0.11004588314904008,
+        "first_rank": 3.0
+      },
+      "answer": "该机器人适合教物体分类识别、目标检测等AI课程",
+      "grounded": true,
+      "latency_ms": 5049,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-22"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-3"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-36"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-09",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 6261,
+      "citations": [
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-23"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-10",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.5321408435198608,
+        "first_rank": 1.0
+      },
+      "answer": "端、边、云、应用四层架构。",
+      "grounded": true,
+      "latency_ms": 4483,
+      "citations": [
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-16"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-7"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-11",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.6489315753318465,
+        "first_rank": 1.0
+      },
+      "answer": "包括三合一环境传感器、高清网络摄像头、超高频RFID读写器、智能电子秤、LCD电子价签",
+      "grounded": true,
+      "latency_ms": 5971,
+      "citations": [
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-72"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-3"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-3"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-12",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 4439,
+      "citations": [
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-81"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-81"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-89"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-80"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-64"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-13",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg": 0.11004588314904008,
+        "first_rank": 3.0
+      },
+      "answer": "核心标语是“根生万物·智育未来”。",
+      "grounded": true,
+      "latency_ms": 3616,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-5"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-6"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-1"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-1"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-3"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-88"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-2"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-17"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-21"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-14",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息",
+      "grounded": false,
+      "latency_ms": 12226,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-2"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-5"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-2"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-5"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-5"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-7"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-8"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-34"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-2"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-15",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.3589542101716347,
+        "first_rank": 1.0
+      },
+      "answer": "华为预计到2030年全球联接总数将达2000亿。",
+      "grounded": true,
+      "latency_ms": 5284,
+      "citations": [
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-3"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-3"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-3"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-20"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-3"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-1"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-11"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-20"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-86"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-6"
+        }
+      ]
+    },
+    {
+      "id": "hard-ocr-01",
+      "category": "ocr_noise_page",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 4857,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-2"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-5"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-2"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-5"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-65"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-5"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-5"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-2"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-6"
+        }
+      ]
+    },
+    {
+      "id": "hard-ocr-02",
+      "category": "ocr_noise_page",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 5529,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-1"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-88"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-11"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-6"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-5"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-13"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-11"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-11"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-23"
+        }
+      ]
+    },
+    {
+      "id": "hard-ocr-03",
+      "category": "ocr_noise_page",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "包括通用算力资源、智能算力资源（训练/推理）、高性能存储资源",
+      "grounded": true,
+      "latency_ms": 5261,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-18"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-18"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-5"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-5"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-18"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-44"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-55"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-55"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-4"
+        }
+      ]
+    },
+    {
+      "id": "hard-ocr-04",
+      "category": "ocr_noise_page",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.28952298823485745,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息",
+      "grounded": false,
+      "latency_ms": 11305,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-26"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-28"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-49"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-51"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-9"
+        }
+      ]
+    },
+    {
+      "id": "hard-ocr-05",
+      "category": "ocr_noise_page",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息",
+      "grounded": false,
+      "latency_ms": 4313,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-30"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-28"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-28"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-27"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-ocr-06",
+      "category": "ocr_noise_page",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 7436,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-20"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-36"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-35"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-69"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-82"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-34"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-35"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-25"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-11"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-4"
+        }
+      ]
+    },
+    {
+      "id": "hard-ocr-07",
+      "category": "ocr_noise_page",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 4736,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-4"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-74"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-89"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-30"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-61"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-11"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-11"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-88"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-ocr-08",
+      "category": "ocr_noise_page",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 11269,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-4"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-76"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-53"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-89"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-53"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-30"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-ocr-09",
+      "category": "ocr_noise_page",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 0.5,
+        "ndcg": 0.2051166673279436,
+        "first_rank": 2.0
+      },
+      "answer": "协作机器人的额定负载是3kg。",
+      "grounded": true,
+      "latency_ms": 2787,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-ocr-10",
+      "category": "ocr_noise_page",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 0.5,
+        "ndcg": 0.2906246349515899,
+        "first_rank": 2.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 6666,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-ocr-11",
+      "category": "ocr_noise_page",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.6172839611614819,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 8365,
+      "citations": [
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-ocr-12",
+      "category": "ocr_noise_page",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg": 0.2578753740644926,
+        "first_rank": 3.0
+      },
+      "answer": "OCR实训套件页中的设备包含RFID。",
+      "grounded": true,
+      "latency_ms": 5326,
+      "citations": [
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-21"
+        }
+      ]
+    },
+    {
+      "id": "hard-ocr-13",
+      "category": "ocr_noise_page",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.22009176629808017,
+        "first_rank": 1.0
+      },
+      "answer": "产业学院采用理事会领导下的院长负责制。",
+      "grounded": true,
+      "latency_ms": 6061,
+      "citations": [
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-80"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-88"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-89"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-82"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-80"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-81"
+        }
+      ]
+    },
+    {
+      "id": "hard-ocr-14",
+      "category": "ocr_noise_page",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 0.5,
+        "ndcg": 0.13886244387355454,
+        "first_rank": 2.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 7420,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-6"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-1"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-3"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-2"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-69"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-7"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-38"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-25"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-ocr-15",
+      "category": "ocr_noise_page",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.2984900352767555,
+        "first_rank": 1.0
+      },
+      "answer": "当前知识库中没有找到相关信息。",
+      "grounded": false,
+      "latency_ms": 2595,
+      "citations": [
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-11"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-5"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-8"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-6"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-8"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-6"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-12"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-8"
+        }
+      ]
+    }
+  ]
+}

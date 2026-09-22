@@ -1,0 +1,449 @@
+{
+  "generated_at": "2026-09-15T17:12:00.197232+08:00",
+  "dataset": "data/evals/hard_eval_v1.json",
+  "targets": {
+    "recall_5": 0.85,
+    "recall_10": 0.92,
+    "accuracy": 0.9,
+    "correct_refusal_rate": 0.95,
+    "hallucination_rate": 0.05
+  },
+  "overall": {
+    "answer_pass": 6,
+    "correct_block": 0,
+    "wrong_release": 0,
+    "wrong_block": 0,
+    "total": 6,
+    "accuracy": 1.0,
+    "hallucination_rate": 0.0,
+    "correct_refusal_rate": null,
+    "recall_3": 1.0,
+    "recall_5": 1.0,
+    "recall_10": 1.0,
+    "mrr": 0.9167,
+    "ndcg": 0.4323,
+    "avg_latency_ms": 5590.2
+  },
+  "by_category": {
+    "long_context_distraction": {
+      "answer_pass": 1,
+      "correct_block": 0,
+      "wrong_release": 0,
+      "wrong_block": 0,
+      "total": 1,
+      "accuracy": 1.0,
+      "hallucination_rate": 0.0,
+      "correct_refusal_rate": null,
+      "recall_3": 1.0,
+      "recall_5": 1.0,
+      "recall_10": 1.0,
+      "mrr": 1.0,
+      "ndcg": 0.4153,
+      "avg_latency_ms": 3655.0
+    },
+    "multi_hop": {
+      "answer_pass": 2,
+      "correct_block": 0,
+      "wrong_release": 0,
+      "wrong_block": 0,
+      "total": 2,
+      "accuracy": 1.0,
+      "hallucination_rate": 0.0,
+      "correct_refusal_rate": null,
+      "recall_3": 1.0,
+      "recall_5": 1.0,
+      "recall_10": 1.0,
+      "mrr": 1.0,
+      "ndcg": 0.5935,
+      "avg_latency_ms": 4574.5
+    },
+    "numeric_trap": {
+      "answer_pass": 2,
+      "correct_block": 0,
+      "wrong_release": 0,
+      "wrong_block": 0,
+      "total": 2,
+      "accuracy": 1.0,
+      "hallucination_rate": 0.0,
+      "correct_refusal_rate": null,
+      "recall_3": 1.0,
+      "recall_5": 1.0,
+      "recall_10": 1.0,
+      "mrr": 0.75,
+      "ndcg": 0.3118,
+      "avg_latency_ms": 8188.0
+    },
+    "synonym_rewrite": {
+      "answer_pass": 1,
+      "correct_block": 0,
+      "wrong_release": 0,
+      "wrong_block": 0,
+      "total": 1,
+      "accuracy": 1.0,
+      "hallucination_rate": 0.0,
+      "correct_refusal_rate": null,
+      "recall_3": 1.0,
+      "recall_5": 1.0,
+      "recall_10": 1.0,
+      "mrr": 1.0,
+      "ndcg": 0.3679,
+      "avg_latency_ms": 4361.0
+    }
+  },
+  "per_case": [
+    {
+      "id": "hard-numeric-14",
+      "category": "numeric_trap",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.3995688713838975,
+        "first_rank": 1.0
+      },
+      "answer": "采用两台协作机器人。",
+      "grounded": true,
+      "latency_ms": 11250,
+      "citations": [
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        }
+      ]
+    },
+    {
+      "id": "hard-numeric-15",
+      "category": "numeric_trap",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 0.5,
+        "ndcg": 0.22400556151517553,
+        "first_rank": 2.0
+      },
+      "answer": "采用两套视觉系统。",
+      "grounded": true,
+      "latency_ms": 5126,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-3"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-02",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.8974416663360282,
+        "first_rank": 1.0
+      },
+      "answer": "AR502H网关还融合了网络摄像头和其他物联接入设备。",
+      "grounded": true,
+      "latency_ms": 5461,
+      "citations": [
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-multihop-04",
+      "category": "multi_hop",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.28952298823485745,
+        "first_rank": 1.0
+      },
+      "answer": "包括deepseek、通义千问和文心一言。；小模型示例包括OCR和语音识别",
+      "grounded": true,
+      "latency_ms": 3688,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-26"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-49"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-29"
+        }
+      ]
+    },
+    {
+      "id": "hard-synonym-07",
+      "category": "synonym_rewrite",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.3679212572135327,
+        "first_rank": 1.0
+      },
+      "answer": "采用两台协作机器人和两套视觉系统。",
+      "grounded": true,
+      "latency_ms": 4361,
+      "citations": [
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-long-04",
+      "category": "long_context_distraction",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 1.0,
+        "ndcg": 0.41528076708874123,
+        "first_rank": 1.0
+      },
+      "answer": "通用大模型包括deepseek、通义千问和文心一言。",
+      "grounded": true,
+      "latency_ms": 3655,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-26"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-49"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-7"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-7"
+        }
+      ]
+    }
+  ]
+}

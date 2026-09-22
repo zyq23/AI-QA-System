@@ -1,0 +1,224 @@
+{
+  "generated_at": "2026-09-14T23:44:28.726567+08:00",
+  "dataset": "data/evals/hard_eval_v1.json",
+  "targets": {
+    "recall_5": 0.85,
+    "recall_10": 0.92,
+    "accuracy": 0.9,
+    "correct_refusal_rate": 0.95,
+    "hallucination_rate": 0.05
+  },
+  "overall": {
+    "answer_pass": 2,
+    "correct_block": 0,
+    "wrong_release": 0,
+    "wrong_block": 1,
+    "total": 3,
+    "accuracy": 1.0,
+    "hallucination_rate": 0.0,
+    "correct_refusal_rate": null,
+    "recall_3": 0.3333,
+    "recall_5": 0.5,
+    "recall_10": 1.0,
+    "mrr": 0.3587,
+    "ndcg": 0.151,
+    "avg_latency_ms": 26857.3
+  },
+  "by_category": {
+    "cross_document": {
+      "answer_pass": 2,
+      "correct_block": 0,
+      "wrong_release": 0,
+      "wrong_block": 1,
+      "total": 3,
+      "accuracy": 1.0,
+      "hallucination_rate": 0.0,
+      "correct_refusal_rate": null,
+      "recall_3": 0.3333,
+      "recall_5": 0.5,
+      "recall_10": 1.0,
+      "mrr": 0.3587,
+      "ndcg": 0.151,
+      "avg_latency_ms": 26857.3
+    }
+  },
+  "per_case": [
+    {
+      "id": "hard-cross-01",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.5714285714285714,
+        "ndcg": 0.23332116087283317,
+        "first_rank": 1.0
+      },
+      "answer": "机械臂的核心设备是两台协作机器人和两套视觉系统 实训套件的核心设备是华为 AR502H 系列工业级边缘计算网关。",
+      "grounded": true,
+      "latency_ms": 50932,
+      "citations": [
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-21"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-02",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_block",
+      "retrieval": {
+        "recall_3": 0.0,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.17142857142857143,
+        "ndcg": 0.07925351987049051,
+        "first_rank": 5.0
+      },
+      "answer": "当前知识库中没有找到相关信息",
+      "grounded": false,
+      "latency_ms": 14263,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-6"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-15"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-03",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg": 0.1404407505255908,
+        "first_rank": 2.0
+      },
+      "answer": "机械臂的生产厂家是湖南比邻星科技有限公司 实训套件的核心网关是华为 AR502H 系列工业级边缘计算网关。",
+      "grounded": true,
+      "latency_ms": 15377,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    }
+  ]
+}

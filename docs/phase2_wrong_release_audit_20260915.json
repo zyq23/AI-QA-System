@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-09-15",
+  "policy": "no scoring changes; evidence audit only",
+  "cases": [
+    {
+      "source": "formal79",
+      "id": "ppt-company-p0-04",
+      "classification": "true_capability_defect__dataset_expected_block_conflicts_with_direct_grounded_answer",
+      "reason": "route_conflict",
+      "answer": "1. 战略定位：AI+产教融合服务商 内涵建设 聚焦课程、师资服务、实训平台、人才服务、成果打造等自身软实力持续打造 产教融合基地共建 建成首个产业学院、ICDT等专业建设、产教融合运营服务。 2. 产教融合运营能力建设 2023~至今 增加大数据专业建设 品牌‘领先的AI+产教融合服务商’ 开发大数据专业系列课程、教材、建大数据实验实训平台、大数据实验室建设。 3. 与新华三打造联合解决方案向学校提供大数据专业建设服务",
+      "grounded": true,
+      "citation_match": true,
+      "keyword_match": true,
+      "question_type_match": false,
+      "diagnosis": "题集要求 route_conflict 下拒答，但本地链路确实从目标 PPT 命中并释放了过长、偏题的内容；应修答案收口/路由质量，不改判分。"
+    },
+    {
+      "source": "formal79",
+      "id": "ppt-company-p0-05",
+      "classification": "true_capability_defect__dataset_expected_block_conflicts_with_direct_grounded_answer",
+      "reason": "route_conflict",
+      "answer": "包括数智技术实践中心、产业技术及应用展厅、AIGC实战平台、AIGC赋能中心",
+      "grounded": true,
+      "citation_match": true,
+      "keyword_match": true,
+      "question_type_match": true,
+      "diagnosis": "题集要求 route_conflict 下拒答，但本地链路命中目标 PPT 并给出四项事实；需修正式路由/答案契约，不能将其包装为判分假阴性。"
+    },
+    {
+      "source": "formal79",
+      "id": "ppt-company-p1-04",
+      "classification": "true_capability_defect",
+      "reason": "coverage_insufficient",
+      "answer": "包括物体识别与分类、电子产品识别、车牌识别、水果识别、OCR字符识别",
+      "grounded": true,
+      "citation_match": true,
+      "keyword_match": true,
+      "question_type_match": true,
+      "diagnosis": "答案来自感知案例列表，但题目要求基础模型页中的 OCR、语音识别、文档增强解析、知识元数据；主题虽相近，主张不一致，属于答案/证据 coverage 缺陷。"
+    },
+    {
+      "source": "formal79",
+      "id": "ppt-company-p1-07",
+      "classification": "true_capability_defect",
+      "reason": "coverage_insufficient",
+      "answer": "AI人才培养与素养提升 产教融合人才培养整体解决方案（1+1+N) 构建‘政-行-企-校’ 多元协同育人新生态。",
+      "grounded": true,
+      "citation_match": true,
+      "keyword_match": true,
+      "question_type_match": false,
+      "diagnosis": "答案只释放方案标题/协同生态，没有四项服务；目标服务 evidence 未进入有效答案。"
+    },
+    {
+      "source": "hard130",
+      "id": "hard-noanswer-01",
+      "classification": "true_capability_defect__irrelevant_evidence_released",
+      "reason": "no_answer must refuse but unrelated adjacent evidence was grounded",
+      "answer": "轩辕网络与全国多所高校专业教师及国内云计算厂商的一线工程师共同开发编写了7本云计算专业系列教材。",
+      "grounded": true,
+      "citations": [
+        {"file_name": "【公司介绍】轩辕网络公司介绍202606.pptx", "page_or_slide": "slide-33"},
+        {"file_name": "【公司介绍】轩辕网络公司介绍202606.pptx", "page_or_slide": "slide-33"},
+        {"file_name": "【公司介绍】轩辕网络公司介绍202606.pptx", "page_or_slide": "slide-44"}
+      ],
+      "diagnosis": "员工总数问题只命中相邻教材数量内容；需要 no-answer claim/value 相关性门，不能修改评分口径。"
+    }
+  ]
+}

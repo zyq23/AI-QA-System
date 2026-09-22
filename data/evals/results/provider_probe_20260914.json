@@ -1,0 +1,11 @@
+{
+  "generated_at": "2026-09-14T15:42:45.444559+00:00",
+  "provider": "openai_compatible",
+  "endpoint_host": "127.0.0.1",
+  "model": "qwen2.5:14b",
+  "completion_ok": true,
+  "json_object_ok": true,
+  "latency_ms": 4541,
+  "error_type": null,
+  "error_message": null
+}

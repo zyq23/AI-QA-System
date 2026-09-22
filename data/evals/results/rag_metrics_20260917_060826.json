@@ -1,0 +1,637 @@
+{
+  "generated_at": "2026-09-17T06:08:26.856140+08:00",
+  "dataset": "data/evals/harder_eval_v1.json",
+  "targets": {
+    "recall_5": 0.85,
+    "recall_10": 0.92,
+    "accuracy": 0.9,
+    "correct_refusal_rate": 0.95,
+    "hallucination_rate": 0.05
+  },
+  "overall": {
+    "answer_pass": 6,
+    "correct_block": 0,
+    "wrong_release": 4,
+    "wrong_block": 0,
+    "total": 10,
+    "accuracy": 0.6,
+    "hallucination_rate": 0.4,
+    "correct_refusal_rate": null,
+    "recall_3": 0.4,
+    "recall_5": 0.45,
+    "recall_10": 0.9,
+    "mrr": 0.3727,
+    "ndcg": 0.1432,
+    "avg_latency_ms": 190017.3
+  },
+  "by_category": {
+    "cross_document": {
+      "answer_pass": 6,
+      "correct_block": 0,
+      "wrong_release": 4,
+      "wrong_block": 0,
+      "total": 10,
+      "accuracy": 0.6,
+      "hallucination_rate": 0.4,
+      "correct_refusal_rate": null,
+      "recall_3": 0.4,
+      "recall_5": 0.45,
+      "recall_10": 0.9,
+      "mrr": 0.3727,
+      "ndcg": 0.1432,
+      "avg_latency_ms": 190017.3
+    }
+  },
+  "per_case": [
+    {
+      "id": "hard-cross-01",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.3214285714285714,
+        "ndcg": 0.19270649966057035,
+        "first_rank": 2.0
+      },
+      "answer": "机械臂的核心设备是两台协作机器人和两套视觉系统 实训套件的核心设备是华为 AR502H 系列工业级边缘计算网关。",
+      "grounded": true,
+      "latency_ms": 590610,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-21"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-02",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 0.0,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.17142857142857143,
+        "ndcg": 0.07925351987049051,
+        "first_rank": 5.0
+      },
+      "answer": "机械臂的教学方向是包、配件、实训套件四个类别; 因各种类人；实训套件的教学方向是包、配件、实训套件四个类别; 因各种类人",
+      "grounded": true,
+      "latency_ms": 148422,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-6"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-15"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-03",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.3333333333333333,
+        "ndcg": 0.10863035642611493,
+        "first_rank": 2.0
+      },
+      "answer": "机械臂的生产厂家是湖南比邻星科技有限公司 实训套件的核心网关是华为 AR502H 系列工业级边缘计算网关。",
+      "grounded": true,
+      "latency_ms": 163150,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-10"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "20 > 0 > 0 > 0 > 0"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-04",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.3125,
+        "ndcg": 0.15916977447968594,
+        "first_rank": 2.0
+      },
+      "answer": "机械臂的视觉系统配置是1套2D视觉系统、1套深度视觉系统；边缘套件的设备组成是企业真实场景中常",
+      "grounded": true,
+      "latency_ms": 246789,
+      "citations": [
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-3"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": ""
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-23"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "6 > 62 > 145 > 585 > 599"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-05",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.5833333333333334,
+        "ndcg": 0.2468395180337083,
+        "first_rank": 1.0
+      },
+      "answer": "轩辕的架构是双轮驱动；1+1+N的服务是人才培养服务",
+      "grounded": true,
+      "latency_ms": 129760,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-20"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-69"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-11"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-20"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-35"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-7"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-69"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-36"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-06",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 0.0,
+        "recall_5": 0.0,
+        "recall_10": 1.0,
+        "mrr": 0.12142857142857143,
+        "ndcg": 0.06849235514915589,
+        "first_rank": 7.0
+      },
+      "answer": "轩辕的模型家族是deepseek、通义千问、文心一言等 方案的产品是深度学习。",
+      "grounded": true,
+      "latency_ms": 150724,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-6"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-22"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-45"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-80"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-33"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-19"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-41"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-26"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-07",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 1.0,
+        "recall_5": 1.0,
+        "recall_10": 1.0,
+        "mrr": 0.75,
+        "ndcg": 0.17947710508581735,
+        "first_rank": 1.0
+      },
+      "answer": "产业学院的定位是理事会领导下的院长负责制；公司的定位是AI+产教融合服务商",
+      "grounded": true,
+      "latency_ms": 265339,
+      "citations": [
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-16"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-69"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-64"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-17"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-13"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-12"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": ""
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-08",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "wrong_release",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 0.5,
+        "mrr": 0.5,
+        "ndcg": 0.21615906613549737,
+        "first_rank": 1.0
+      },
+      "answer": "体验中心的文化主线是根技术筑基；产业学院的三位一体是根技术为核心，以“技术+师范”理念为统领 ，整",
+      "grounded": true,
+      "latency_ms": 165698,
+      "citations": [
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-89"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-88"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "slide-25"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-90"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "29 > 0 > 0 > 0 > 0"
+        },
+        {
+          "file_name": "根技术体验中心展厅内涵建设v2-cx.pptx",
+          "page_or_slide": "3 > 0 > 0 > 0 > 0"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": ""
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-09",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 0.0,
+        "recall_5": 0.0,
+        "recall_10": 0.5,
+        "mrr": 0.07142857142857142,
+        "ndcg": 0.03668196104968002,
+        "first_rank": 7.0
+      },
+      "answer": "实训套件的架构是端、边、云、应用四层架构；机械臂的实验环境是Jupyter Notebook",
+      "grounded": true,
+      "latency_ms": 33492,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-43"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "协作式机械臂（产品介绍）4-5B机器人大模型.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-8"
+        },
+        {
+          "file_name": "智能物联边缘计算实训套件用户手册V1.01 -20251.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-70"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-26"
+        },
+        {
+          "file_name": "华为ICT学院手册 2024-2025.pdf",
+          "page_or_slide": "page-6"
+        }
+      ]
+    },
+    {
+      "id": "hard-cross-10",
+      "category": "cross_document",
+      "expected_result_mode": "must_answer",
+      "bucket": "answer_pass",
+      "retrieval": {
+        "recall_3": 0.5,
+        "recall_5": 0.5,
+        "recall_10": 1.0,
+        "mrr": 0.5625,
+        "ndcg": 0.14476149411742872,
+        "first_rank": 1.0
+      },
+      "answer": "1. 通识课程 专业课程 AI+X课程 数字素养提升 专业化人才培养 AI+微专业课程体系 智能化 职业化 教学能力提升 核心应用 师资/社会培训课程体系 工程化人才培养 产学研能力提升 教材/数字化教学资源 AIGC通识教育平台 AIGC实战平台 轻量大模型 数智底座 通用算力资源 智能算力资源（训练/推理） 高性能存储资源 高速网络 基础环境 数智技术实践中心 （人工智能实训室/数据智能实训室/物联网实训室•••） 产业技术及应用展厅 2. AI科学计算平台 轩辕星轻量级大模型 智能体应用开发平台 算力资源设施 集群管理 容器引擎 镜像管理 任务调度 负载均衡 资源监控 通用算力资源 智能算力资源（训练/推理） 高性能存储资源 高速网络 基础环境 AI实训室 （AIGC实训室/人工智能综合实训室/数据智能实训室•••） 产业技术及应用展厅 AIGC赋能中心 3. 2020-2022年，梳理并形成了产业学院运营服务手册，构建运营服务体系",
+      "grounded": true,
+      "latency_ms": 6189,
+      "citations": [
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-18"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-21"
+        },
+        {
+          "file_name": "广东技术师范大学-根技术人才培养合作汇报-0.pptx",
+          "page_or_slide": "slide-12"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-89"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-80"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-70"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-69"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        },
+        {
+          "file_name": "【公司介绍】轩辕网络公司介绍202606.pptx",
+          "page_or_slide": "slide-64"
+        },
+        {
+          "file_name": "广东技术师范大学华为人工智能根技术产业学院运营实施方案（初稿-学校未确认）.docx",
+          "page_or_slide": "docx"
+        }
+      ]
+    }
+  ]
+}
