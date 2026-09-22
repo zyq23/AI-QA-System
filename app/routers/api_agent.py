@@ -43,12 +43,18 @@ def build_router() -> APIRouter:
             deterministic_evidence=result.deterministic_evidence,
             citations=[
                 CitationModel(
-                    document_id="",
+                    document_id=c.get("document_id", ""),
+                    version_id=c.get("version_id"),
+                    chunk_id=c.get("chunk_id"),
                     file_name=c.get("file_name", ""),
                     page_or_slide=c.get("page_or_slide", ""),
                     section_path=c.get("section_path", ""),
                     snippet=c.get("snippet", ""),
-                    trust_level="agent",
+                    plain_text=c.get("plain_text"),
+                    markdown_text=c.get("markdown_text"),
+                    trust_level=c.get("trust_level", "agent"),
+                    source_type=c.get("source_type"),
+                    ocr_quality=float(c.get("ocr_quality") or 0.0) if c.get("ocr_quality") is not None else None,
                     score=float(c.get("score", 0) or 0.0),
                 )
                 for c in result.citations

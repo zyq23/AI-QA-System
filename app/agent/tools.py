@@ -88,7 +88,7 @@ class KnowledgeSearchTool(BaseTool):
         query = str(args.get("query") or "").strip()
         if not query:
             return {"observation": "缺少检索词 query。", "payload": {"grounded": False}}
-        top_k = int(args.get("top_k") or 6)
+        top_k = int(args.get("top_k") or 10)
         llm = self.chat_service.llm_service
         analysis = QueryAnalysis(
             rewritten_query=query,
@@ -207,7 +207,7 @@ class MultiDocCompareTool(BaseTool):
         a = str(args.get("subject_a") or "").strip()
         b = str(args.get("subject_b") or "").strip()
         attribute = str(args.get("attribute") or "").strip()
-        top_k = int(args.get("top_k") or 4)
+        top_k = int(args.get("top_k") or 8)
         if not a or not b:
             return {"observation": "需要 subject_a 和 subject_b。", "payload": {}}
         llm = self.chat_service.llm_service
@@ -225,7 +225,7 @@ class MultiDocCompareTool(BaseTool):
                 "subject": subject,
                 "grounded": grounded,
                 "hits": _serialize_hits(hits, limit=top_k),
-                "combined": "\n".join(h.plain_text for h in hits[:4])[:1200],
+                "combined": "\n".join(h.plain_text for h in hits[:6])[:2000],
             }
         all_hits: list[dict[str, Any]] = []
         for side in sides.values():

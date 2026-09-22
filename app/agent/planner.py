@@ -135,7 +135,7 @@ def build_plan(
                 )
             )
         else:
-            steps.append(PlanStep(tool="knowledge_search", args={"query": question, "top_k": 6}))
+            steps.append(PlanStep(tool="knowledge_search", args={"query": question, "top_k": 10}))
     elif intent == "math":
         expr = re.search(r"([\d\s+\-*/().%]{3,})", question)
         steps.append(PlanStep(tool="calculator", args={"expression": expr.group(1).strip() if expr else "0"}))
@@ -144,13 +144,13 @@ def build_plan(
     elif intent == "document_detail":
         doc = re.search(r"(?:哪份|哪个)(?:资料|文档|文件)", question)
         _ = doc  # source-locating questions still start with a search step
-        steps.append(PlanStep(tool="knowledge_search", args={"query": question, "top_k": 6}))
+        steps.append(PlanStep(tool="knowledge_search", args={"query": question, "top_k": 10}))
         steps.append(PlanStep(tool="document_detail", args={"document": _guess_document(question)}))
     elif intent == "clarify":
         steps.append(PlanStep(tool="no_answer", args={"reason": f"问题「{question[:30]}」意图不明确，可补充上下文后再问。"}))
     else:  # knowledge_qa
-        steps.append(PlanStep(tool="knowledge_search", args={"query": question, "top_k": 6}))
-        if use_llm_planner and llm_service is not None and not llm_service.disabled and confidence < 0.8:
+        steps.append(PlanStep(tool="knowledge_search", args={"query": question, "top_k": 10}))
+        if use_llm_planner and llm_service is not None and not llm_service.disabled and confidence < 0.7:
             refined = refine_intent_with_llm(llm_service, question, tool_specs)
             if refined:
                 llm_intent = str(refined.get("intent") or "").strip()
@@ -172,30 +172,41 @@ def build_plan(
 
 
 def _split_subjects(question: str) -> list[str]:
-    """Split a compare question into its two subjects ('A和B的区别' -> [A, B]).
+    """Split a compare question into its two subject phrases.
 
-    The attribute tail (核心设备/价格/…) is stripped from each subject: the
-    multi_doc_compare tool receives the attribute separately.
+    The two sides may either share an attribute (``A和B的属性``) or carry
+    separate attributes (``A的属性和B的属性``). Only the subject is passed to
+    ``multi_doc_compare``; the planner extracts the shared attribute separately.
     """
-    head = re.split(r"(?:的)?(?:什么)?(?:区别|不同|对比)", question)[0]
-    segments = re.split(r"[，,、；;。？?]|和|与|跟|分别|还有|\s", head)
-    cleaned: list[str] = []
-    for seg in segments:
-        seg = seg.strip(" 的请把一起列出各自各是")
-        seg = re.sub(r"(什么|哪些|哪一|哪个|如何|怎么|是多少|有什么)", "", seg).strip()
-        if not seg or re.search(r"(区别|分别|对比|不同)", seg):
-            continue
-        if len(seg) >= 2 and seg not in cleaned:
-            cleaned.append(seg)
-    # Drop a trailing attribute tail (核心设备/厂家电话…) from each subject so
-    # multi_doc_compare queries stay clean; the attribute travels separately.
-    attr_tail = re.compile(r"(核心设备|主要设备|核心组件|设备组成|厂家电话|联系方式|配置|参数|价格|架构|定位|名称|指标)$")
-    stripped = []
-    for subject in cleaned:
-        subject = attr_tail.sub("", subject).strip()
-        if len(subject) >= 2 and subject not in stripped:
-            stripped.append(subject)
-    return stripped[:2]
+    text = re.sub(r"[？?。！!]$", "", question.strip())
+    text = re.sub(r"^(请把|把|请|请问)\s*", "", text)
+    connector = re.search(r"(?:和|与|跟|及|以及)", text)
+    if not connector:
+        return []
+    left = text[: connector.start()].strip(" 的，,、；; ")
+    right = text[connector.end():].strip(" 的，,、；; ")
+
+    # If a side explicitly has ``subject 的 attribute``, retain only the
+    # subject. For shared-attribute questions this removes the right-side tail;
+    # for per-side questions it removes each side's own attribute.
+    def clean_side(side: str) -> str:
+        side = re.sub(r"^(分别|各自|一起列出|同时给出)\s*", "", side)
+        side = re.sub(r"(?:采用|使用|提供|支持)$", "", side)
+        if "的" in side:
+            side = side.split("的", 1)[0]
+        side = re.sub(r"(?:采用|使用|提供|支持)$", "", side)
+        side = re.sub(
+            r"(?:核心设备|核心网关|主要设备|核心组件|设备组成|厂家电话|联系方式|生产厂家|制造商|配置|参数|价格|架构|定位|名称|指标|"
+            r"视觉系统|物联|实验环境|开放实验环境|模型家族|战略|治理模式|方案年份|年份|建设内容|建设路径|"
+            r"服务四项|三位一体|文化主线|算力资源|运营目标|技术方向|产品|各包含|各举|分别|有|是什么|是什么|各有哪些)$",
+            "",
+            side,
+        )
+        side = re.sub(r"(什么|哪些|哪一|哪个|如何|怎么|是多少|有什么|是|分别|分别是|分别为)$", "", side)
+        return side.strip(" 的，,、；; ")
+
+    subjects = [clean_side(left), clean_side(right)]
+    return [subject for subject in subjects if len(subject) >= 2][:2]
 
 
 def _build_date_args(question: str) -> dict[str, Any]:

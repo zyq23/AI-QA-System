@@ -253,6 +253,76 @@ def test_controller_bounded_replan():
     assert result.tools_used[-1] == "no_answer"
 
 
+def test_controller_timeout_reason_classification():
+    # A tool that sleeps past the wall-clock budget (triggers timeout, not step_budget)
+    class _SlowTool:
+        name = "knowledge_search"
+        description = "slow"
+        schema = {"properties": {}}
+
+        def to_spec(self):
+            return {"name": self.name, "description": "", "schema": {}}
+
+        def run(self, args):
+            time.sleep(0.5)
+            return {"observation": "slow", "payload": {"grounded": False}}
+
+    import time
+
+    ctrl = AgentController(
+        {"knowledge_search": _SlowTool()},
+        _StubLlm([]),
+        max_steps=20,
+        timeout_seconds=1,
+        use_llm_planner=False,
+    )
+    started = time.perf_counter()
+    result = ctrl.execute("慢问题", "conv1")
+    elapsed = time.perf_counter() - started
+    assert elapsed < 3.0  # respect timeout
+    # timeout_reason is populated when terminal status is timeout;
+    # for other terminal statuses it is None (by design)
+    if result.terminal_status == "timeout":
+        assert result.timeout_reason in ("wall_clock", "tool_internal", "step_budget")
+    assert result.plan_status["initial_steps"] >= 1
+    assert "intent" in result.plan_status
+    assert "confidence" in result.plan_status
+
+
+def test_controller_plan_status_records_replan():
+    llm = _StubLlm([{"steps": [{"tool": "knowledge_search", "args": {"query": "1"}}]}])
+    tools = {
+        "knowledge_search": _fake_tool("knowledge_search", {"grounded": False, "hits": []}),
+        "no_answer": _fake_tool("no_answer"),
+    }
+    ctrl = AgentController(tools, llm, max_steps=4, timeout_seconds=15, use_llm_planner=False)
+    result = ctrl.execute("需要再想一步的问题", "conv1")
+    assert isinstance(result.plan_status, dict)
+    assert "initial_steps" in result.plan_status
+    assert "replanned" in result.plan_status
+
+
+def test_controller_finalize_stage_and_guards():
+    # Use the real build_container path so chat_service is wired
+    container = build_container()
+    service = container.agent_service
+    result = service.query("轩辕网络的证券代码是多少？", persist=False)
+    # Routed path (fast_path) – check finalization fields exist
+    assert isinstance(result, AgentResult)
+    assert result.finalize_stage is not None
+    assert isinstance(result.guard_triggered, list)
+
+
+def test_controller_deterministic_evidence_in_finalize():
+    """When calculator answers a question, the evidence must be carried to finalize."""
+    container = build_container()
+    service = container.agent_service
+    # A deterministic-date question that calculator can answer
+    result = service.query("2026-09-10后3天是周几？", force_agent=True, persist=False)
+    assert isinstance(result, AgentResult)
+    assert result.deterministic_evidence or not result.grounded
+
+
 # ------------------------------------------------------------------- service
 
 @pytest.fixture()

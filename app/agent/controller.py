@@ -85,10 +85,12 @@ class AgentController:
                 break
 
         # One bounded re-plan: the initial plan was too small to conclude.
+        replanned_steps = 0
         if not self._has_conclusion(steps) and step_index < self.max_steps:
             if time.perf_counter() - started < self.timeout_seconds:
                 replanned = self._replan(question, steps)
                 if replanned is not None:
+                    replanned_steps = len(replanned.steps)
                     for planned in replanned.steps:
                         if step_index >= self.max_steps:
                             break
@@ -106,7 +108,36 @@ class AgentController:
         terminal_status = self._terminal_status(steps, step_index, started)
         result = self._finalize(question, conversation_id, plan, steps, citations, elapsed_ms)
         result.terminal_status = terminal_status
+        result.timeout_reason = self._timeout_reason(terminal_status, steps, step_index, started)
+        result.plan_status = {
+            "initial_steps": len(plan.steps),
+            "replanned": 1 if replanned_steps else 0,
+            "replan_steps": replanned_steps,
+            "intent": plan.intent,
+            "confidence": plan.confidence,
+        }
         return result
+
+    def _timeout_reason(
+        self,
+        terminal_status: str,
+        steps: list[ToolCall],
+        step_index: int,
+        started: float,
+    ) -> str | None:
+        """Classify why execution stopped when the terminal status was a timeout.
+
+        Distinguishes wall-clock exhaustion from step-budget exhaustion so
+        operators can tell a slow-but-correct run from one that was cut off
+        mid-flight. Returns None for non-timeout terminal statuses.
+        """
+        if terminal_status != "timeout":
+            return None
+        if step_index >= self.max_steps:
+            return "step_budget"
+        if steps and not steps[-1].ok:
+            return "tool_internal"
+        return "wall_clock"
 
     def _run_step(self, planned: PlanStep, conversation_id: str) -> ToolCall:
         tool = self.tools.get(planned.tool)
@@ -270,7 +301,7 @@ class AgentController:
             for hit in call.payload.get("hits", []):
                 if hit not in all_hits:
                     all_hits.append(hit)
-        pipeline_citations: list[dict[str, Any]] = []
+        pipeline_citations = []
         for call in knowledge_calls:
             if call.tool in {"knowledge_search", "multi_doc_compare"}:
                 for h in call.payload.get("hits", []):
@@ -279,6 +310,62 @@ class AgentController:
         if pipeline_citations:
             all_hits = pipeline_citations
 
+        if self.chat_service is not None and not self._has_conclusion(steps):
+            try:
+                from app.domain import RetrievalHit
+                raw_hits = self._collect_hits(steps)
+                if raw_hits:
+                    retrieval_hits = [
+                        RetrievalHit(
+                            chunk_id=raw.get("chunk_id") or f"agent-{index}",
+                            document_id=raw.get("document_id", ""),
+                            version_id=raw.get("version_id", ""),
+                            file_name=raw.get("file_name", ""),
+                            page_or_slide=raw.get("page_or_slide", ""),
+                            section_path=raw.get("section_path", ""),
+                            snippet=(raw.get("snippet") or "")[:400],
+                            markdown_text=raw.get("markdown_text") or (raw.get("snippet") or ""),
+                            plain_text=raw.get("plain_text") or (raw.get("snippet") or ""),
+                            trust_level=raw.get("trust_level", "agent"),
+                            source_type=raw.get("source_type", "agent"),
+                            fusion_score=float(raw.get("fusion_score") or 0.0),
+                            rerank_score=float(raw.get("score") or 0.0),
+                            ocr_quality=float(raw.get("ocr_quality") or 1.0),
+                        )
+                        for index, raw in enumerate(raw_hits, 1)
+                    ]
+                    if not retrieval_hits:
+                        return "", [], {}
+                    retrieval_hits = self.chat_service._augment_multi_part_evidence(
+                        question, retrieval_hits, 10,
+                    )
+                    payload = self.chat_service.finalize_from_evidence(
+                        question, conversation_id, retrieval_hits, skip_persist=True,
+                    )
+                    answer = str(payload.answer or "").strip()
+                    if payload.grounded and answer and not self._signals_insufficient(answer):
+                        pipeline_hits = [
+                            {
+                                "chunk_id": h.chunk_id, "document_id": h.document_id,
+                                "version_id": h.version_id, "file_name": h.file_name,
+                                "page_or_slide": h.page_or_slide, "section_path": h.section_path,
+                                "snippet": h.snippet, "plain_text": h.plain_text,
+                                "trust_level": h.trust_level, "source_type": h.source_type,
+                                "ocr_quality": round(float(getattr(h, "ocr_quality", 1.0) or 0.0), 3),
+                                "score": round(float(h.rerank_score or h.fusion_score or 0.0), 3),
+                            }
+                            for h in payload.citations
+                        ]
+                        finalize_payload = {
+                            "finalize_stage": payload.finalize_stage or "finalize",
+                            "guard_triggered": payload.guard_triggered or [],
+                            "answer_run_id": payload.answer_run_id,
+                        }
+                        return answer[:260], pipeline_hits, finalize_payload
+            except Exception:
+                pass
+
+        finalize_payload: dict[str, Any] = {}
         if followup:
             answer = followup
             grounded = False
@@ -292,7 +379,7 @@ class AgentController:
             grounded = False
             confidence_note = "no_grounded_evidence"
         else:
-            answer, pipeline_hits = self._compose_final_answer(question, conversation_id, steps, knowledge_calls)
+            answer, pipeline_hits, finalize_payload = self._compose_final_answer(question, conversation_id, steps, knowledge_calls)
             if pipeline_hits:
                 all_hits = pipeline_hits
             grounded = bool(answer) and not self._signals_insufficient(answer)
@@ -319,9 +406,11 @@ class AgentController:
                 if deterministic_call is not None
                 else {}
             ),
+            finalize_stage=finalize_payload.get("finalize_stage"),
+            guard_triggered=finalize_payload.get("guard_triggered", []),
         )
 
-    def _compose_final_answer(self, question: str, conversation_id: str, steps: list[ToolCall], knowledge_calls: list[ToolCall]) -> tuple[str, list[dict[str, Any]]]:
+    def _compose_final_answer(self, question: str, conversation_id: str, steps: list[ToolCall], knowledge_calls: list[ToolCall]) -> tuple[str, list[dict[str, Any]], dict[str, Any]]:
         """Compose the final answer from the agent's collected evidence.
 
         For knowledge QA the answer MUST come from the production answer
@@ -333,36 +422,68 @@ class AgentController:
         """
         if self.chat_service is not None:
             try:
-                payload = self.chat_service.answer(question, conversation_id=conversation_id, top_k=8)
+                from app.domain import RetrievalHit
+                raw_hits = self._collect_hits(steps)
+                retrieval_hits = [
+                    RetrievalHit(
+                        chunk_id=raw.get("chunk_id") or f"agent-{index}",
+                        document_id=raw.get("document_id", ""),
+                        version_id=raw.get("version_id", ""),
+                        file_name=raw.get("file_name", ""),
+                        page_or_slide=raw.get("page_or_slide", ""),
+                        section_path=raw.get("section_path", ""),
+                        snippet=(raw.get("snippet") or "")[:400],
+                        markdown_text=raw.get("markdown_text") or (raw.get("snippet") or ""),
+                        plain_text=raw.get("plain_text") or (raw.get("snippet") or ""),
+                        trust_level=raw.get("trust_level", "agent"),
+                        source_type=raw.get("source_type", "agent"),
+                        fusion_score=float(raw.get("fusion_score") or 0.0),
+                        rerank_score=float(raw.get("score") or 0.0),
+                        ocr_quality=float(raw.get("ocr_quality") or 1.0),
+                    )
+                    for index, raw in enumerate(raw_hits, 1)
+                ]
+                if not retrieval_hits:
+                    return "", [], {}
+                # Reuse the production claim-conditioned augmentation for
+                # multi-part questions. Agent tools deliberately keep their
+                # per-step scope, while finalize needs the union of evidence
+                # for every subject/attribute claim.
+                retrieval_hits = self.chat_service._augment_multi_part_evidence(
+                    question, retrieval_hits, 10,
+                )
+                payload = self.chat_service.finalize_from_evidence(
+                    question, conversation_id, retrieval_hits, skip_persist=True,
+                )
                 answer = str(payload.answer or "").strip()
                 if payload.grounded and answer and not self._signals_insufficient(answer):
                     pipeline_hits = [
                         {
-                            "chunk_id": h.chunk_id,
-                            "document_id": h.document_id,
-                            "version_id": h.version_id,
-                            "file_name": h.file_name,
-                            "page_or_slide": h.page_or_slide,
-                            "section_path": h.section_path,
-                            "snippet": h.snippet,
-                            "plain_text": h.plain_text,
-                            "trust_level": h.trust_level,
-                            "source_type": h.source_type,
+                            "chunk_id": h.chunk_id, "document_id": h.document_id,
+                            "version_id": h.version_id, "file_name": h.file_name,
+                            "page_or_slide": h.page_or_slide, "section_path": h.section_path,
+                            "snippet": h.snippet, "plain_text": h.plain_text,
+                            "trust_level": h.trust_level, "source_type": h.source_type,
                             "ocr_quality": round(float(getattr(h, "ocr_quality", 1.0) or 0.0), 3),
                             "score": round(float(h.rerank_score or h.fusion_score or 0.0), 3),
                         }
                         for h in payload.citations
                     ]
-                    return answer[:260], pipeline_hits
-                return "", []
+                    finalize_payload = {
+                        "finalize_stage": payload.finalize_stage or "finalize",
+                        "guard_triggered": payload.guard_triggered or [],
+                        "answer_run_id": payload.answer_run_id,
+                    }
+                    return answer[:260], pipeline_hits, finalize_payload
+                return "", [], {}
             except Exception:
-                pass
+                return "", [], {}
         # No chat pipeline wired (tests): fall back to a guarded local composition.
         from app.domain import QueryAnalysis, RetrievalHit
 
         hits = self._collect_hits(steps)
         if not hits:
-            return "", []
+            return "", [], {}
         llm = self.llm_service
         retrieval_hits = [
             RetrievalHit(
@@ -392,7 +513,7 @@ class AgentController:
             )
             effective_grounded = llm._can_ground_from_citations(question, analysis, retrieval_hits)
             if not effective_grounded:
-                return "", []
+                return "", [], {}
             draft = llm._fast_path_draft_answer(question, analysis, retrieval_hits, True) or llm._fallback_draft_answer(
                 question, analysis, retrieval_hits, True, "Agent 证据链压缩。"
             )
@@ -400,17 +521,22 @@ class AgentController:
             final = llm.finalize_answer(question, analysis, retrieval_hits, draft, review)
             answer = str(final.get("answer") or "").strip()
             if final.get("grounded") and answer and not self._signals_insufficient(answer):
-                return answer[:260], hits
-            return "", []
+                return answer[:260], hits, {
+                    "finalize_stage": final.get("finalize_stage") or "draft",
+                    "guard_triggered": final.get("guard_triggered") or [],
+                }
+            return "", [], {}
         except Exception:
-            return "", []
+            return "", [], {}
 
     def _collect_hits(self, steps: list[ToolCall]) -> list[Any]:
         hits: list[Any] = []
         seen = set()
         for call in steps:
             for raw in call.payload.get("hits", []):
-                key = (raw.get("file_name"), raw.get("page_or_slide"), raw.get("snippet"))
+                key = raw.get("chunk_id") or (
+                    raw.get("file_name"), raw.get("page_or_slide"), raw.get("snippet")
+                )
                 if key not in seen:
                     seen.add(key)
                     hits.append(raw)

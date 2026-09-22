@@ -109,6 +109,9 @@ class AgentService:
                 latency_ms=elapsed_ms,
                 confidence_note="single_turn_fast_path",
                 answer_run_id=payload.answer_run_id,
+                terminal_status="completed",
+                finalize_stage="fast_path",
+                guard_triggered=[],
             )
             if persist:
                 self.repository.add_message(conversation_id, "user", question)

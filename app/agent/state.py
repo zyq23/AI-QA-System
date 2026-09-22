@@ -53,3 +53,7 @@ class AgentResult:
     answer_run_id: str | None = None
     deterministic_evidence: dict[str, Any] = field(default_factory=dict)
     terminal_status: str | None = None
+    timeout_reason: str | None = None
+    plan_status: dict[str, Any] = field(default_factory=dict)
+    finalize_stage: str | None = None
+    guard_triggered: list[str] = field(default_factory=list)

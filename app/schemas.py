@@ -42,11 +42,17 @@ class DocumentRow(BaseModel):
 
 class CitationModel(BaseModel):
     document_id: str
+    version_id: str | None = None
+    chunk_id: str | None = None
     file_name: str
     page_or_slide: str
     section_path: str
     snippet: str
+    plain_text: str | None = None
+    markdown_text: str | None = None
     trust_level: str
+    source_type: str | None = None
+    ocr_quality: float | None = None
     score: float
 
 

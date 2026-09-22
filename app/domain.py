@@ -137,3 +137,7 @@ class AnswerPayload:
     review_issues: list[str] = field(default_factory=list)
     reviewer_intervened: bool = False
     fallback_used: bool = False
+    claims: list[dict[str, object]] = field(default_factory=list)
+    evidence_ids: list[str] = field(default_factory=list)
+    finalize_stage: str | None = None
+    guard_triggered: list[str] = field(default_factory=list)

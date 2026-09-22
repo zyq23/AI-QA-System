@@ -45,6 +45,63 @@ def latest_rag_metrics(output_dir: Path) -> dict | None:
     return best
 
 
+def _failure_stage(case: dict, record: dict) -> str:
+    """Attribute a failed case to one of the five pipeline stages.
+
+    The R16 requirement is that a single-question failure can be traced to
+    planning / retrieval / evidence-extraction / finalize-release / timeout.
+    This classifier reads only recorded observations (no re-execution), so the
+    attribution is reproducible from the report alone.
+
+    Returns "ok" for passing cases.
+    """
+    if record.get("bucket") in {"answer_pass", "correct_block"}:
+        return "ok"
+    terminal = record.get("terminal_status")
+    if terminal == "timeout":
+        return "timeout"
+    if terminal == "step_budget":
+        return "step_budget"
+    if terminal == "exhausted_error":
+        return "tool_error"
+    if terminal == "clarification":
+        return "planner_clarification"
+    citations = record.get("citations") or []
+    retrieval = record.get("retrieval") or {}
+    expected_evidence = case.get("expected_evidence") or []
+    if expected_evidence:
+        recall_10 = retrieval.get("recall_10")
+        if not citations or recall_10 == 0.0:
+            # Nothing usable retrieved at all: retrieval coverage gap.
+            return "retrieval_no_evidence"
+        if recall_10 is not None and recall_10 < 1.0:
+            # Partial evidence: the missing (subject, attribute) side is a
+            # claim-aggregation gap, not a finalize refusal.
+            return "evidence_incomplete"
+    if record.get("grounded") is False and citations:
+        # Evidence existed but the production finalize layer refused it.
+        if record.get("finalize_stage"):
+            return "finalize_rejected"
+        return "retrieval_no_evidence"
+    if record.get("bucket") == "wrong_release":
+        return "release_guard_missed"
+    return "unattributed"
+
+
+def _summarize_failure_stages(per_case: list[dict], cases: list[dict]) -> dict:
+    cases_by_id = {c.get("id"): c for c in cases}
+    counts: dict[str, int] = {}
+    per_category: dict[str, dict[str, int]] = {}
+    for record in per_case:
+        stage = record.get("failure_stage", "unattributed")
+        counts[stage] = counts.get(stage, 0) + 1
+        category = record.get("category") or "unknown"
+        per_category.setdefault(category, {})
+        per_category[category][stage] = per_category[category].get(stage, 0) + 1
+    _ = cases_by_id  # reserved for future per-case expected-evidence joins
+    return {"overall": counts, "by_category": per_category}
+
+
 def summarize(per_case: list[dict]) -> dict:
     buckets = {"answer_pass": 0, "correct_block": 0, "wrong_release": 0, "wrong_block": 0}
     for item in per_case:
@@ -85,12 +142,39 @@ def _retained_citation(c: dict) -> dict:
     return out
 
 
-def run(dataset_path: Path, output_dir: Path, limit: int | None = None, force_agent: bool = False) -> dict:
+def _filter_cases(
+    cases: list[dict],
+    *,
+    categories: list[str] | None = None,
+    case_ids: list[str] | None = None,
+    limit: int | None = None,
+) -> list[dict]:
+    category_set = {item.strip() for item in (categories or []) if item.strip()}
+    id_set = {item.strip() for item in (case_ids or []) if item.strip()}
+    selected = [
+        case for case in cases
+        if (not category_set or case.get("category") in category_set)
+        and (not id_set or str(case.get("id")) in id_set)
+    ]
+    return selected[:limit] if limit else selected
+
+
+def run(
+    dataset_path: Path,
+    output_dir: Path,
+    limit: int | None = None,
+    force_agent: bool = False,
+    categories: list[str] | None = None,
+    case_ids: list[str] | None = None,
+) -> dict:
     container = build_container()
     agent_service = container.agent_service
-    cases = json.loads(dataset_path.read_text(encoding="utf-8"))
-    if limit:
-        cases = cases[:limit]
+    cases = _filter_cases(
+        json.loads(dataset_path.read_text(encoding="utf-8")),
+        categories=categories,
+        case_ids=case_ids,
+        limit=limit,
+    )
 
     per_case: list[dict] = []
     started = time.perf_counter()
@@ -108,21 +192,28 @@ def run(dataset_path: Path, output_dir: Path, limit: int | None = None, force_ag
             citations, answer_text, grounded, latency, tools_used, steps = [], f"ERROR: {exc}", False, -1, [], []
         retrieval = judge_retrieval(citations, case.get("expected_evidence") or [])
         bucket = judge_answer(case, {"answer": answer_text, "grounded": grounded, "citations": citations})
-        per_case.append(
-            {
-                "id": case["id"],
-                "category": case.get("category"),
-                "expected_result_mode": case.get("expected_result_mode"),
-                "bucket": bucket,
-                "retrieval": retrieval,
-                "answer": answer_text,
-                "grounded": grounded,
-                "latency_ms": latency,
-                "tools_used": tools_used,
-                "steps": steps,
-                "citations": [_retained_citation(c) for c in citations[:10]],
-            }
-        )
+        record = {
+            "id": case["id"],
+            "category": case.get("category"),
+            "expected_result_mode": case.get("expected_result_mode"),
+            "bucket": bucket,
+            "retrieval": retrieval,
+            "answer": answer_text,
+            "grounded": grounded,
+            "latency_ms": latency,
+            "tools_used": tools_used,
+            "steps": steps,
+            "citations": [_retained_citation(c) for c in citations[:10]],
+            "terminal_status": getattr(result, "terminal_status", None),
+            "timeout_reason": getattr(result, "timeout_reason", None),
+            "plan_status": getattr(result, "plan_status", {}),
+            "finalize_stage": getattr(result, "finalize_stage", None),
+            "guard_triggered": getattr(result, "guard_triggered", []),
+            "answer_run_id": getattr(result, "answer_run_id", None),
+            "deterministic_evidence": getattr(result, "deterministic_evidence", {}),
+        }
+        record["failure_stage"] = _failure_stage(case, record)
+        per_case.append(record)
         print(
             f"[{index}/{len(cases)}] {case['id']} {bucket} tools={','.join(tools_used[:2])} "
             f"{latency}ms elapsed={int(time.perf_counter() - started)}s",
@@ -130,6 +221,7 @@ def run(dataset_path: Path, output_dir: Path, limit: int | None = None, force_ag
         )
 
     summary = summarize(per_case)
+    failure_summary = _summarize_failure_stages(per_case, cases)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_dir.mkdir(parents=True, exist_ok=True)
     out_path = output_dir / f"agent_eval_{timestamp}.json"
@@ -155,12 +247,13 @@ def run(dataset_path: Path, output_dir: Path, limit: int | None = None, force_ag
         "dataset": str(dataset_path),
         "mode": "agent_forced" if force_agent else "agent_routed",
         "summary": summary,
+        "failure_stages": failure_summary,
         "comparison_with_single_turn": comparison,
         "per_case": per_case,
     }
     out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     print("\n=== Agent Eval Summary ===")
-    print(json.dumps({"summary": summary, "comparison": comparison}, ensure_ascii=False, indent=2)[:3000])
+    print(json.dumps({"summary": summary, "comparison": comparison, "failure_stages": failure_summary}, ensure_ascii=False, indent=2)[:3000])
     print(f"saved: {out_path}")
     return report
 
@@ -170,9 +263,28 @@ def main() -> int:
     parser.add_argument("--dataset", default="data/evals/hard_eval_v1.json")
     parser.add_argument("--output-dir", default="data/evals/results")
     parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument(
+        "--category",
+        action="append",
+        dest="categories",
+        help="Only run cases in this category; repeat for multiple categories.",
+    )
+    parser.add_argument(
+        "--case-id",
+        action="append",
+        dest="case_ids",
+        help="Only run this case id; repeat for multiple ids.",
+    )
     parser.add_argument("--force-agent", action="store_true", help="Skip fast-path routing, run the agent loop for every question.")
     args = parser.parse_args()
-    run(Path(args.dataset), Path(args.output_dir), limit=args.limit, force_agent=args.force_agent)
+    run(
+        Path(args.dataset),
+        Path(args.output_dir),
+        limit=args.limit,
+        force_agent=args.force_agent,
+        categories=args.categories,
+        case_ids=args.case_ids,
+    )
     return 0
 
 

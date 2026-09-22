@@ -53,12 +53,25 @@ class ChatService:
         seen = {h.chunk_id for h in hits}
         extra: list[RetrievalHit] = []
         for subject, attribute in claims[:3]:
-            queries = subject_probe_queries(subject) or [f"{subject} {attribute}".strip()]
-            # Always include the natural claim query after alias-aware probes.
-            queries.append(f"{subject} {attribute}".strip())
-            # For experiment-environment-type attributes, also include the canonical
-            # keyword (e.g. 'Jupyter Notebook') to surface document-specific chunks.
-            for probe in queries[:6]:
+            # Always put the exact claim first. Alias probes are useful for
+            # paraphrases, but truncating them before this query caused the
+            # attribute-bearing evidence to disappear on cross-document asks.
+            queries = [f"{subject} {attribute}".strip()]
+            queries.extend(subject_probe_queries(subject) or [])
+            # Include the canonical subject as a final fallback when the user
+            # uses a shorthand alias (e.g. 学院 -> 产业学院).
+            from app.services.claim_matrix import _base_subject_key
+            base_subject = _base_subject_key(subject)
+            if base_subject != subject:
+                queries.append(f"{base_subject} {attribute}".strip())
+            # Also include the raw subject alone as a last probe so chunks that
+            # name the subject without the attribute's surface form still surface
+            # (e.g. the 机械臂 doc's "实验代码在Jupyter Notebook环境" chunk for a
+            # "机械臂 实验环境" claim whose attribute pattern is strict).
+            queries.append(subject)
+            # De-duplicate while preserving exact claim priority.
+            queries = list(dict.fromkeys(q for q in queries if q.strip()))
+            for probe in queries[:8]:
                 try:
                     sub = self.retrieval_service.retrieve(
                         probe,
@@ -213,7 +226,7 @@ class ChatService:
             )
             attribute = attr_match.group(1) if attr_match else ""
             # Split on comparison conjunctions and punctuation
-            segments = re.split(r"[，,、；;。？?]|和|与|跟|分别|的区别|的对比|还有", question)
+            segments = re.split(r"[，,、；;。？？\s]|和|与|跟|分别|还有|以及", question)
             for seg in segments:
                 seg = seg.strip(" 的请把一起列出各自")
                 if len(re.findall(r"[\u4e00-\u9fff]{2,}", seg)) >= 1 and len(seg) >= 2:
@@ -271,6 +284,82 @@ class ChatService:
                 if noun not in sub_queries:
                     sub_queries.append(f"{noun} 是什么")
         return [sq for sq in sub_queries if sq and len(sq) >= 3][:4]
+
+    def finalize_from_evidence(
+        self,
+        question: str,
+        conversation_id: str | None,
+        hits: list[RetrievalHit],
+        analysis: QueryAnalysis | None = None,
+        *,
+        skip_persist: bool = True,
+    ) -> AnswerPayload:
+        """Run generation/review/finalize over caller-provided evidence.
+
+        Agent requests use this explicit path to avoid a second independent
+        retrieval pass while retaining the production finalize guards.
+        """
+        started = time.perf_counter()
+        conversation_id = self.repository.ensure_conversation(conversation_id)
+        history_messages = self.repository.get_recent_turn_context(conversation_id, self.history_turns)
+        effective_analysis = analysis or self._heuristic_rewrite(question, history_messages)
+        generate_started = time.perf_counter()
+        draft = self.llm_service.generate_answer(question, effective_analysis, hits, True)
+        latency_generate_ms = int((time.perf_counter() - generate_started) * 1000)
+        review_started = time.perf_counter()
+        review = self.llm_service.review_answer(question, effective_analysis, hits, draft)
+        latency_review_ms = int((time.perf_counter() - review_started) * 1000)
+        final = self.llm_service.finalize_answer(question, effective_analysis, hits, draft, review)
+        latency_ms = int((time.perf_counter() - started) * 1000)
+        answer_run_id = self.repository.create_answer_run(
+            conversation_id=conversation_id,
+            question=question,
+            rewritten_query=effective_analysis.rewritten_query,
+            question_type=effective_analysis.question_type,
+            answer_focus=effective_analysis.answer_focus,
+            retrieval={"grounded": True, "hits": [self.repository.serialize_hit(hit) for hit in hits]},
+            draft={"answer": draft.answer, "grounded": draft.grounded, "raw_payload": draft.raw_payload},
+            review={"passed": review.passed, "issues": review.issues, "raw_payload": review.raw_payload},
+            final_answer=str(final["answer"]),
+            final_grounded_answer=str(final["grounded_answer"]),
+            final_inference_note=str(final["inference_note"]),
+            final_grounded=bool(final["grounded"]),
+            stage_status="completed",
+            failure_stage=None,
+            latency_total_ms=latency_ms,
+            latency_retrieval_ms=0,
+            latency_generate_ms=latency_generate_ms,
+            latency_review_ms=latency_review_ms,
+        )
+        if not skip_persist:
+            self.repository.add_message(conversation_id, "user", question)
+            self.repository.add_message(conversation_id, "assistant", str(final["answer"]), grounded=bool(final["grounded"]), citations=[self.repository.serialize_hit(hit) for hit in hits])
+
+        claims = []
+        if final.get("claims"):
+            claims = [dict(c) for c in final["claims"]]
+        evidence_ids = list(final.get("evidence_ids", []))
+
+        return AnswerPayload(
+            conversation_id=conversation_id,
+            answer=str(final["answer"]),
+            grounded_answer=str(final["grounded_answer"]),
+            inference_note=str(final["inference_note"]),
+            grounded=bool(final["grounded"]),
+            citations=hits,
+            rewritten_query=effective_analysis.rewritten_query,
+            latency_ms=latency_ms,
+            question_type=str(final.get("question_type", effective_analysis.question_type)),
+            answer_focus=str(final.get("answer_focus", effective_analysis.answer_focus)),
+            answer_run_id=answer_run_id,
+            review_issues=list(final.get("review_issues", [])),
+            reviewer_intervened=bool(final.get("reviewer_intervened", False)),
+            fallback_used=bool(final.get("fallback_used", False)),
+            claims=claims,
+            evidence_ids=evidence_ids,
+            finalize_stage=final.get("finalize_stage"),
+            guard_triggered=final.get("guard_triggered", []),
+        )
 
     def answer(
         self,
@@ -383,6 +472,10 @@ class ChatService:
             review_issues=list(llm_payload.get("review_issues", [])),
             reviewer_intervened=bool(llm_payload.get("reviewer_intervened", False)),
             fallback_used=bool(llm_payload.get("fallback_used", False)),
+            claims=[dict(c) for c in (llm_payload.get("claims") or [])],
+            evidence_ids=list(llm_payload.get("evidence_ids", [])),
+            finalize_stage=llm_payload.get("finalize_stage"),
+            guard_triggered=llm_payload.get("guard_triggered", []),
         )
 
     def _heuristic_rewrite(self, question: str, history_messages: list[dict]) -> QueryAnalysis:
